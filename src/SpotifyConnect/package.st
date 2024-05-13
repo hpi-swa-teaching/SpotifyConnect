@@ -1,4 +1,4 @@
 Package {
-	#'squeak_changestamp' : true,
-	#name : #SpotifyConnect
+	#name : #SpotifyConnect,
+	#'squeak_changestamp' : true
 }
