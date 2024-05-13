@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'randomState',
 		'accessToken',
-		'refreshToken'
+		'refreshToken',
+		'callbackServer'
 	],
 	#classVars : [
 		'ClientId',
@@ -164,7 +165,7 @@ SPOCAuthenticator >> refreshToken: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 20:43'
+	#'squeak_changestamp' : 'VE 5/13/2024 21:07'
 }
 SPOCAuthenticator >> retreiveAccessTokenWithAccessCode: anAccessCode [
 	
@@ -178,25 +179,27 @@ SPOCAuthenticator >> retreiveAccessTokenWithAccessCode: anAccessCode [
 	response := WebClient httpPost: url content: content type: 'application/x-www-form-urlencoded'.
 	response isSuccess ifFalse:[^self error: response status].
 	responseContent := Json readFrom: response content readStream.
- 	self access_token: (responseContent at: 'access_token').
-	self refresh_token: (responseContent at: 'refresh_token').
+ 	self accessToken: (responseContent at: 'access_token').
+	self refreshToken: (responseContent at: 'refresh_token').
 	
 
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 20:38'
+	#'squeak_changestamp' : 'VE 5/13/2024 21:04'
 }
 SPOCAuthenticator >> startCallbackEndpoint [
-	(WebServer reset default) listenOn: 8080.
-	WebServer default addService: '/callback' action: [:aRequest | self callback: aRequest]
+	callbackServer := WebServer new.
+	callbackServer listenOn: 8080.
+	callbackServer addService: '/callback' action: [:aRequest | self callback: aRequest]
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 20:40'
+	#'squeak_changestamp' : 'VE 5/13/2024 21:04'
 }
 SPOCAuthenticator >> stopCallbackEndpoint [
-	WebServer default destroy.
+	callbackServer destroy.
+	callbackServer := nil.
 ]
