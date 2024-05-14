@@ -7,11 +7,22 @@ Class {
 		'refreshToken'
 	],
 	#classVars : [
+		'CallbackServer',
 		'ClientId',
 		'ClientSecret'
 	],
 	#category : #SpotifyConnect
 }
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 5/14/2024 11:40'
+}
+SPOCAuthenticator class >> callbackServer [
+	CallbackServer ifNil: [CallbackServer := WebServer new].
+	CallbackServer listenOn: SPOCAuthenticator redirectPort.
+	^ CallbackServer 
+]
 
 {
 	#category : #'as yet unclassified',
@@ -88,11 +99,11 @@ SPOCAuthenticator >> accessToken: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 10:36'
+	#'squeak_changestamp' : 'VE 5/14/2024 11:45'
 }
 SPOCAuthenticator >> buildAuthenticationURL [
 	self nextRandomState.
-	self startCallbackServer.
+	self setupCallbackService.
 	^ 'https://accounts.spotify.com/authorize',
 		'?response_type=code',
 		'&scope=', SPOCAuthenticator scope,
@@ -103,17 +114,16 @@ SPOCAuthenticator >> buildAuthenticationURL [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 10:28'
+	#'squeak_changestamp' : 'VE 5/14/2024 11:49'
 }
 SPOCAuthenticator >> callback: aRequest [
 	| code state |
 	aRequest fields at: 'error' ifPresent: [aRequest send500Response: (aRequest fields at: 'error')].
 	code := aRequest fields at: 'code' ifAbsent: [aRequest send500Response: 'Error'].
 	state := aRequest fields at: 'state' ifAbsent: [aRequest send500Response: 'Error'].
-	"TODO: Check if request state and self randomState are the same. Problem: for this the authenticator has to be a singleton, cause the first ever started callback server serves the incoming request"
+	"TODO: Check if request state and self randomState are the same. Problem: this could fail if more than one auth session is active cause there is only one redirect service registered in callbackServer"
 	self retreiveAccessTokenWithAccessCode: code.
 	aRequest send200Response: 'Success, you are now logged in! Switch back to your Squeak'.
-	self stopCallbackServer.
 ]
 
 {
@@ -204,9 +214,9 @@ SPOCAuthenticator >> retreiveAccessTokenWithAccessCode: anAccessCode [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 10:35'
+	#'squeak_changestamp' : 'VE 5/14/2024 11:45'
 }
-SPOCAuthenticator >> startCallbackServer [
-	WebServer reset default listenOn: SPOCAuthenticator redirectPort.
-	WebServer default addService: ('/', SPOCAuthenticator redirectRoute) action: [:aRequest | self callback: aRequest]
+SPOCAuthenticator >> setupCallbackService [
+	SPOCAuthenticator callbackServer removeService: ('/', SPOCAuthenticator redirectRoute).
+	SPOCAuthenticator callbackServer addService: ('/', SPOCAuthenticator redirectRoute) action: [:aRequest | self callback: aRequest]
 ]

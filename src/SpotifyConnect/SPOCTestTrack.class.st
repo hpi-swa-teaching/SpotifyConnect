@@ -20,7 +20,7 @@ SPOCTestTrack >> setUp [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 17:10'
+	#'squeak_changestamp' : 'VE 5/14/2024 11:37'
 }
 SPOCTestTrack >> testInstanceVariables [
 	self assert: track id = '123'.
