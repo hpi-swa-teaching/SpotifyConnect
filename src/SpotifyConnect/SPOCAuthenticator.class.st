@@ -32,10 +32,26 @@ SPOCAuthenticator class >> clientSecret [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 19:38'
+	#'squeak_changestamp' : 'VE 5/14/2024 09:52'
+}
+SPOCAuthenticator class >> redirectPort [
+	^ 8080
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 5/14/2024 09:53'
+}
+SPOCAuthenticator class >> redirectRoute [
+	^ 'callback'
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 5/14/2024 09:53'
 }
 SPOCAuthenticator class >> redirectUri [
-	^ 'http://localhost:8080/callback'
+	^ 'http://localhost:', self redirectPort asString, '/', self redirectRoute
 ]
 
 {
@@ -73,39 +89,56 @@ SPOCAuthenticator >> accessToken: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 20:43'
+	#'squeak_changestamp' : 'VE 5/14/2024 10:18'
 }
 SPOCAuthenticator >> buildAuthenticationURL [
 	self nextRandomState.
+	self callbackServer ifNil: [self startCallbackServer].
 	^ 'https://accounts.spotify.com/authorize',
-	'?response_type=code',
-	'&scope=', SPOCAuthenticator scope,
-	'&redirect_uri=', SPOCAuthenticator redirectUri,
-	'&state=', self randomState,
-	'&client_id=', SPOCAuthenticator clientId.
+		'?response_type=code',
+		'&scope=', SPOCAuthenticator scope,
+		'&redirect_uri=', SPOCAuthenticator redirectUri,
+		'&state=', self randomState,
+		'&client_id=', SPOCAuthenticator clientId.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 20:44'
+	#'squeak_changestamp' : 'VE 5/14/2024 10:25'
 }
 SPOCAuthenticator >> callback: aRequest [
 	| code state |
-	aRequest fields at: 'error' ifPresent: [aRequest send500Response: 'Error'].
+	aRequest fields at: 'error' ifPresent: [aRequest send500Response: (aRequest fields at: 'error')].
 	code := aRequest fields at: 'code' ifAbsent: [aRequest send500Response: 'Error'].
 	state := aRequest fields at: 'state' ifAbsent: [aRequest send500Response: 'Error'].
+	"TODO: Check if request state and self randomState are the same. Problem: for this the self callbackServer or the authenticator has to be a singleton, cause the first ever started callback server serves the incoming request"
 	self retreiveAccessTokenWithAccessCode: code.
 	aRequest send200Response: 'Success, you are now logged in! Switch back to your Squeak'.
-	self stopCallbackEndpoint.
+	"self stopCallbackServer."
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/14/2024 09:48'
+}
+SPOCAuthenticator >> callbackServer [
+	^ callbackServer
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/14/2024 09:48'
+}
+SPOCAuthenticator >> callbackServer: anObject [
+	callbackServer := anObject
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 20:43'
+	#'squeak_changestamp' : 'VE 5/14/2024 10:10'
 }
 SPOCAuthenticator >> initialize [
 	super initialize.
-	self startCallbackEndpoint.
 	SPOCAuthenticator clientId.
 	SPOCAuthenticator clientSecret.
 ]
@@ -136,15 +169,16 @@ SPOCAuthenticator >> randomState: aState [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 20:35'
+	#'squeak_changestamp' : 'VE 5/14/2024 09:49'
 }
 SPOCAuthenticator >> randomString: aLength [
 	| chars randomString index |
-    chars := 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' asArray.
-    randomString := String new: aLength.
-    1 to: aLength do: [:i | index := (1 to: chars size) atRandom.
-        randomString at: i put: (chars at: index)].
-    ^ randomString
+    	chars := Character alphabet asArray.
+    	randomString := String new: aLength.
+    	1 to: aLength do: [:i | index := (1 to: chars size) atRandom.
+        	randomString at: i put: (chars at: index)].
+    	
+	^ randomString
 ]
 
 {
@@ -165,7 +199,7 @@ SPOCAuthenticator >> refreshToken: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 21:07'
+	#'squeak_changestamp' : 'VE 5/14/2024 10:01'
 }
 SPOCAuthenticator >> retreiveAccessTokenWithAccessCode: anAccessCode [
 	
@@ -187,19 +221,19 @@ SPOCAuthenticator >> retreiveAccessTokenWithAccessCode: anAccessCode [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 21:04'
+	#'squeak_changestamp' : 'VE 5/14/2024 09:54'
 }
-SPOCAuthenticator >> startCallbackEndpoint [
-	callbackServer := WebServer new.
-	callbackServer listenOn: 8080.
-	callbackServer addService: '/callback' action: [:aRequest | self callback: aRequest]
+SPOCAuthenticator >> startCallbackServer [
+	self callbackServer: WebServer new.
+	self callbackServer listenOn: SPOCAuthenticator redirectPort.
+	self callbackServer addService: ('/', SPOCAuthenticator redirectRoute) action: [:aRequest | self callback: aRequest]
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 21:04'
+	#'squeak_changestamp' : 'VE 5/14/2024 10:09'
 }
-SPOCAuthenticator >> stopCallbackEndpoint [
-	callbackServer destroy.
-	callbackServer := nil.
+SPOCAuthenticator >> stopCallbackServer [
+	self callbackServer destroy.
+	self callbackServer: nil.
 ]
