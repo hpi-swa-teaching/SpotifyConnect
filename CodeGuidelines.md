@@ -7,7 +7,8 @@
 - Syntax bei Methodenvariablen `| var |` (statt `|var|`)
 - Methodenvariablen vermeiden, wenn unnötig
 - Leerzeile nach `super initialize`
-- Einordnung in Kategorien nach Squeak-Standards, ansonsten eindeutige Benennung neuer Kategorien
+- accessors verwenden
+- Einordnung in Kategorien nach Squeak-Standards (z. B. accessors in accessing), ansonsten eindeutige Benennung neuer Kategorien
 - alles auf die Klassenseite schieben, was möglich/sinnvoll ist (vor allem Konstanten)
 
 ## Beispielmethoden
