@@ -9,7 +9,6 @@ Metacello new
   load.
 ```
 
-```
 ## ExternalWebBrowser 
 ![http://www.squeaksource.com/@7-eJgvTOeyYovTSM/B1s5wNGT](http://www.squeaksource.com/@7-eJgvTOeyYovTSM/B1s5wNGT)
 ```
