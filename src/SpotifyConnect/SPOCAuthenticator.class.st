@@ -75,10 +75,17 @@ SPOCAuthenticator class >> resetClient [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 19:46'
+	#'squeak_changestamp' : 'VE 5/14/2024 12:22'
 }
 SPOCAuthenticator class >> scope [
-	^ 'user-read-private user-read-email'
+	^ 'user-read-playback-state ',
+		'user-modify-playback-state ',
+		'user-read-currently-playing ',
+		'playlist-read-private ',
+		'playlist-read-collaborative ',
+		'user-read-playback-position ',
+		'user-read-email ',
+		'user-read-private'
 ]
 
 {
@@ -114,16 +121,17 @@ SPOCAuthenticator >> buildAuthenticationURL [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 11:49'
+	#'squeak_changestamp' : 'VE 5/14/2024 14:26'
 }
-SPOCAuthenticator >> callback: aRequest [
+SPOCAuthenticator >> callback: aRequest [ 
 	| code state |
 	aRequest fields at: 'error' ifPresent: [aRequest send500Response: (aRequest fields at: 'error')].
-	code := aRequest fields at: 'code' ifAbsent: [aRequest send500Response: 'Error'].
-	state := aRequest fields at: 'state' ifAbsent: [aRequest send500Response: 'Error'].
-	"TODO: Check if request state and self randomState are the same. Problem: this could fail if more than one auth session is active cause there is only one redirect service registered in callbackServer"
-	self retreiveAccessTokenWithAccessCode: code.
-	aRequest send200Response: 'Success, you are now logged in! Switch back to your Squeak'.
+	code := aRequest fields at: 'code' ifAbsent: [aRequest send400Response].
+	state := aRequest fields at: 'state' ifAbsent: [aRequest send400Response].
+	state = self randomState
+		ifTrue: [self retreiveAccessTokenWithAccessCode: code.
+			aRequest send200Response: 'Success, you are now logged in! Switch back to your Squeak']
+		ifFalse: [aRequest send500Response: 'Error: There was an error regarding the auth state.']
 ]
 
 {
@@ -172,6 +180,14 @@ SPOCAuthenticator >> randomString: aLength [
         	randomString at: i put: (chars at: index)].
     	
 	^ randomString
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/14/2024 14:40'
+}
+SPOCAuthenticator >> refreshAccessToken [
+	"TODO Refresh"
 ]
 
 {
