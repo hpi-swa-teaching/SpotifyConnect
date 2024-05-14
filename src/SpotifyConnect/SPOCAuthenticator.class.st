@@ -4,8 +4,7 @@ Class {
 	#instVars : [
 		'randomState',
 		'accessToken',
-		'refreshToken',
-		'callbackServer'
+		'refreshToken'
 	],
 	#classVars : [
 		'ClientId',
@@ -89,11 +88,11 @@ SPOCAuthenticator >> accessToken: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 10:18'
+	#'squeak_changestamp' : 'VE 5/14/2024 10:36'
 }
 SPOCAuthenticator >> buildAuthenticationURL [
 	self nextRandomState.
-	self callbackServer ifNil: [self startCallbackServer].
+	self startCallbackServer.
 	^ 'https://accounts.spotify.com/authorize',
 		'?response_type=code',
 		'&scope=', SPOCAuthenticator scope,
@@ -104,33 +103,17 @@ SPOCAuthenticator >> buildAuthenticationURL [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 10:25'
+	#'squeak_changestamp' : 'VE 5/14/2024 10:28'
 }
 SPOCAuthenticator >> callback: aRequest [
 	| code state |
 	aRequest fields at: 'error' ifPresent: [aRequest send500Response: (aRequest fields at: 'error')].
 	code := aRequest fields at: 'code' ifAbsent: [aRequest send500Response: 'Error'].
 	state := aRequest fields at: 'state' ifAbsent: [aRequest send500Response: 'Error'].
-	"TODO: Check if request state and self randomState are the same. Problem: for this the self callbackServer or the authenticator has to be a singleton, cause the first ever started callback server serves the incoming request"
+	"TODO: Check if request state and self randomState are the same. Problem: for this the authenticator has to be a singleton, cause the first ever started callback server serves the incoming request"
 	self retreiveAccessTokenWithAccessCode: code.
 	aRequest send200Response: 'Success, you are now logged in! Switch back to your Squeak'.
-	"self stopCallbackServer."
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/14/2024 09:48'
-}
-SPOCAuthenticator >> callbackServer [
-	^ callbackServer
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/14/2024 09:48'
-}
-SPOCAuthenticator >> callbackServer: anObject [
-	callbackServer := anObject
+	self stopCallbackServer.
 ]
 
 {
@@ -221,19 +204,9 @@ SPOCAuthenticator >> retreiveAccessTokenWithAccessCode: anAccessCode [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 09:54'
+	#'squeak_changestamp' : 'VE 5/14/2024 10:35'
 }
 SPOCAuthenticator >> startCallbackServer [
-	self callbackServer: WebServer new.
-	self callbackServer listenOn: SPOCAuthenticator redirectPort.
-	self callbackServer addService: ('/', SPOCAuthenticator redirectRoute) action: [:aRequest | self callback: aRequest]
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 10:09'
-}
-SPOCAuthenticator >> stopCallbackServer [
-	self callbackServer destroy.
-	self callbackServer: nil.
+	WebServer reset default listenOn: SPOCAuthenticator redirectPort.
+	WebServer default addService: ('/', SPOCAuthenticator redirectRoute) action: [:aRequest | self callback: aRequest]
 ]
