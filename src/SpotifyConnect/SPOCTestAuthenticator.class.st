@@ -18,6 +18,17 @@ SPOCTestAuthenticator >> setUp [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 5/14/2024 14:43'
+}
+SPOCTestAuthenticator >> testCallbackEndpoint [
+	
+	| response |
+	response := WebClient httpGet: SPOCAuthenticator redirectUri.
+	self assert: (response code = 404) not.
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 5/14/2024 14:29'
 }
 SPOCTestAuthenticator >> testCallbackErrors [
