@@ -1,5 +1,5 @@
 Class {
-	#name : #SPOCAuthenticator,
+	#name : #SPOCAuthorizer,
 	#superclass : #Object,
 	#instVars : [
 		'randomState',
@@ -17,7 +17,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 5/13/2024 19:59'
 }
-SPOCAuthenticator class >> clientId [
+SPOCAuthorizer class >> clientId [
    ^ ClientId ifNil: [ClientId := UIManager default request: 'Please enter client id']
 ]
 
@@ -25,7 +25,7 @@ SPOCAuthenticator class >> clientId [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 5/13/2024 19:15'
 }
-SPOCAuthenticator class >> clientSecret [
+SPOCAuthorizer class >> clientSecret [
    ^ ClientSecret ifNil: [ClientSecret := UIManager default request: 'Please enter client secret']
 ]
 
@@ -33,7 +33,7 @@ SPOCAuthenticator class >> clientSecret [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 5/14/2024 09:52'
 }
-SPOCAuthenticator class >> redirectPort [
+SPOCAuthorizer class >> redirectPort [
 	^ 8080
 ]
 
@@ -41,7 +41,7 @@ SPOCAuthenticator class >> redirectPort [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 5/15/2024 11:30'
 }
-SPOCAuthenticator class >> redirectRoute [
+SPOCAuthorizer class >> redirectRoute [
 	^ '/callback'
 ]
 
@@ -49,7 +49,7 @@ SPOCAuthenticator class >> redirectRoute [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 5/15/2024 11:30'
 }
-SPOCAuthenticator class >> redirectUri [
+SPOCAuthorizer class >> redirectUri [
 	^ 'http://localhost:', self redirectPort asString, self redirectRoute
 ]
 
@@ -57,7 +57,7 @@ SPOCAuthenticator class >> redirectUri [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 5/15/2024 11:12'
 }
-SPOCAuthenticator class >> resetClient [
+SPOCAuthorizer class >> resetClient [
 	ClientId := nil.
 	ClientSecret := nil
 ]
@@ -66,7 +66,7 @@ SPOCAuthenticator class >> resetClient [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 5/14/2024 12:22'
 }
-SPOCAuthenticator class >> scope [
+SPOCAuthorizer class >> scope [
 	^ 'user-read-playback-state ',
 		'user-modify-playback-state ',
 		'user-read-currently-playing ',
@@ -81,7 +81,7 @@ SPOCAuthenticator class >> scope [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VE 5/13/2024 20:42'
 }
-SPOCAuthenticator >> accessToken [
+SPOCAuthorizer >> accessToken [
 	^ accessToken
 ]
 
@@ -89,7 +89,7 @@ SPOCAuthenticator >> accessToken [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VE 5/13/2024 20:42'
 }
-SPOCAuthenticator >> accessToken: anObject [
+SPOCAuthorizer >> accessToken: anObject [
 	accessToken := anObject
 ]
 
@@ -97,7 +97,7 @@ SPOCAuthenticator >> accessToken: anObject [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 5/15/2024 11:11'
 }
-SPOCAuthenticator >> callback: aRequest [ 
+SPOCAuthorizer >> callback: aRequest [ 
 	| code state |
 	aRequest fields at: 'error' ifPresent: [aRequest send500Response: (aRequest fields at: 'error')].
 	code := aRequest fields at: 'code' ifAbsent: [aRequest send400Response].
@@ -111,20 +111,20 @@ SPOCAuthenticator >> callback: aRequest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 11:37'
+	#'squeak_changestamp' : 'VE 5/15/2024 16:48'
 }
-SPOCAuthenticator >> initialize [
+SPOCAuthorizer >> initialize [
 	super initialize.
-	SPOCAuthenticator clientId.
-	SPOCAuthenticator clientSecret.
-	WebServer reset default listenOn: SPOCAuthenticator redirectPort
+	SPOCAuthorizer clientId.
+	SPOCAuthorizer clientSecret.
+	WebServer reset default listenOn: SPOCAuthorizer redirectPort
 ]
 
 {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 5/13/2024 20:36'
 }
-SPOCAuthenticator >> nextRandomState [
+SPOCAuthorizer >> nextRandomState [
 	self randomState: (self randomString: 16).
 ]
 
@@ -132,7 +132,7 @@ SPOCAuthenticator >> nextRandomState [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VE 5/13/2024 20:35'
 }
-SPOCAuthenticator >> randomState [
+SPOCAuthorizer >> randomState [
 	^ randomState
 ]
 
@@ -140,7 +140,7 @@ SPOCAuthenticator >> randomState [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 5/13/2024 20:42'
 }
-SPOCAuthenticator >> randomState: aState [
+SPOCAuthorizer >> randomState: aState [
 	randomState := aState.
 ]
 
@@ -148,7 +148,7 @@ SPOCAuthenticator >> randomState: aState [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 5/14/2024 09:49'
 }
-SPOCAuthenticator >> randomString: aLength [
+SPOCAuthorizer >> randomString: aLength [
 	| chars randomString index |
     	chars := Character alphabet asArray.
     	randomString := String new: aLength.
@@ -162,7 +162,7 @@ SPOCAuthenticator >> randomString: aLength [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VE 5/14/2024 14:40'
 }
-SPOCAuthenticator >> refreshAccessToken [
+SPOCAuthorizer >> refreshAccessToken [
 	"TODO Refresh"
 ]
 
@@ -170,7 +170,7 @@ SPOCAuthenticator >> refreshAccessToken [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VE 5/13/2024 20:42'
 }
-SPOCAuthenticator >> refreshToken [
+SPOCAuthorizer >> refreshToken [
 	^ refreshToken
 ]
 
@@ -178,23 +178,23 @@ SPOCAuthenticator >> refreshToken [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VE 5/13/2024 20:42'
 }
-SPOCAuthenticator >> refreshToken: anObject [
+SPOCAuthorizer >> refreshToken: anObject [
 	refreshToken := anObject
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 10:01'
+	#'squeak_changestamp' : 'VE 5/15/2024 16:48'
 }
-SPOCAuthenticator >> retreiveAccessTokenWithAccessCode: anAccessCode [
+SPOCAuthorizer >> retreiveAccessTokenWithAccessCode: anAccessCode [
 	
 	| content response url responseContent |
 	url := 'https://accounts.spotify.com/api/token'.
 	content := 'grant_type=authorization_code',
 		'&code=', anAccessCode, 
-		'&redirect_uri=', SPOCAuthenticator redirectUri,
-		'&client_id=', SPOCAuthenticator clientId,
-		'&client_secret=', SPOCAuthenticator clientSecret.
+		'&redirect_uri=', SPOCAuthorizer redirectUri,
+		'&client_id=', SPOCAuthorizer clientId,
+		'&client_secret=', SPOCAuthorizer clientSecret.
 	response := WebClient httpPost: url content: content type: 'application/x-www-form-urlencoded'.
 	response isSuccess ifFalse:[^self error: response status].
 	responseContent := Json readFrom: response content readStream.
@@ -206,24 +206,24 @@ SPOCAuthenticator >> retreiveAccessTokenWithAccessCode: anAccessCode [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 11:37'
+	#'squeak_changestamp' : 'VE 5/15/2024 16:48'
 }
-SPOCAuthenticator >> setupCallbackService [
-	WebServer default removeService: SPOCAuthenticator redirectRoute.
-	WebServer default addService: SPOCAuthenticator redirectRoute action: [:aRequest | self callback: aRequest]
+SPOCAuthorizer >> setupCallbackService [
+	WebServer default removeService: SPOCAuthorizer redirectRoute.
+	WebServer default addService: SPOCAuthorizer redirectRoute action: [:aRequest | self callback: aRequest]
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 11:40'
+	#'squeak_changestamp' : 'VE 5/15/2024 16:48'
 }
-SPOCAuthenticator >> startAuthentication [
+SPOCAuthorizer >> startAuthorization [
 	self nextRandomState.
 	self setupCallbackService.
 	^ 'https://accounts.spotify.com/authorize',
 		'?response_type=code',
-		'&scope=', SPOCAuthenticator scope,
-		'&redirect_uri=', SPOCAuthenticator redirectUri,
+		'&scope=', SPOCAuthorizer scope,
+		'&redirect_uri=', SPOCAuthorizer redirectUri,
 		'&state=', self randomState,
-		'&client_id=', SPOCAuthenticator clientId.
+		'&client_id=', SPOCAuthorizer clientId.
 ]

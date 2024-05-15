@@ -9,12 +9,12 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 11:40'
+	#'squeak_changestamp' : 'VE 5/15/2024 16:48'
 }
 SPOCApp >> initialize [
 	super initialize.
-	auth := SPOCAuthenticator new.
-	Transcript showln: auth startAuthentication.
+	auth := SPOCAuthorizer new.
+	Transcript showln: auth startAuthorization.
 	"Copy url to browser and authenticate"
 	"Now use access tokens with"
 	"auth accessToken"
