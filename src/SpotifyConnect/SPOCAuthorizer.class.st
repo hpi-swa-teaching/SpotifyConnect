@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'randomState',
 		'accessToken',
-		'refreshToken'
+		'refreshToken',
+		'isAuthorized'
 	],
 	#classVars : [
 		'ClientId',
@@ -111,13 +112,30 @@ SPOCAuthorizer >> callback: aRequest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 16:48'
+	#'squeak_changestamp' : 'VE 5/15/2024 18:45'
 }
 SPOCAuthorizer >> initialize [
 	super initialize.
 	SPOCAuthorizer clientId.
 	SPOCAuthorizer clientSecret.
+	self isAuthorized: false.
 	WebServer reset default listenOn: SPOCAuthorizer redirectPort
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/15/2024 18:45'
+}
+SPOCAuthorizer >> isAuthorized [
+	^ isAuthorized
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/15/2024 18:45'
+}
+SPOCAuthorizer >> isAuthorized: anObject [
+	isAuthorized := anObject
 ]
 
 {
@@ -160,11 +178,12 @@ SPOCAuthorizer >> randomString: aLength [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'OW 5/15/2024 18:30'
+	#'squeak_changestamp' : 'VE 5/15/2024 18:45'
 }
 SPOCAuthorizer >> refreshAccessToken [
 	
 	| content response url responseContent |
+	self isAuthorized: false.
 	url := 'https://accounts.spotify.com/api/token'.
 	content := 'grant_type=refresh_token',
 		'&refresh_token=', self refreshToken, 
@@ -175,6 +194,7 @@ SPOCAuthorizer >> refreshAccessToken [
 	responseContent := Json readFrom: response content readStream.
  	self accessToken: (responseContent at: 'access_token').
 	self refreshToken: (responseContent at: 'refresh_token').
+	self isAuthorized: true.
 	
 
 ]
@@ -197,7 +217,7 @@ SPOCAuthorizer >> refreshToken: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 16:48'
+	#'squeak_changestamp' : 'VE 5/15/2024 18:45'
 }
 SPOCAuthorizer >> retreiveAccessTokenWithAccessCode: anAccessCode [
 	
@@ -213,6 +233,7 @@ SPOCAuthorizer >> retreiveAccessTokenWithAccessCode: anAccessCode [
 	responseContent := Json readFrom: response content readStream.
  	self accessToken: (responseContent at: 'access_token').
 	self refreshToken: (responseContent at: 'refresh_token').
+	self isAuthorized: true.
 	
 
 ]

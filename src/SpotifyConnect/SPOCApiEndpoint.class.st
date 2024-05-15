@@ -2,8 +2,8 @@ Class {
 	#name : #SPOCApiEndpoint,
 	#superclass : #Object,
 	#instVars : [
-		'authenticator',
-		'isInTestMode'
+		'authorizer',
+		'returnsTestContent'
 	],
 	#category : #SpotifyConnect
 }
@@ -18,18 +18,18 @@ SPOCApiEndpoint class >> apiHost [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/14/2024 14:59'
+	#'squeak_changestamp' : 'VE 5/15/2024 18:44'
 }
-SPOCApiEndpoint >> authenticator [
-	^ authenticator
+SPOCApiEndpoint >> authorizer [
+	^ authorizer
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/14/2024 14:59'
+	#'squeak_changestamp' : 'VE 5/15/2024 18:57'
 }
-SPOCApiEndpoint >> authenticator: anObject [
-	authenticator := anObject
+SPOCApiEndpoint >> authorizer: anAuthorizer [
+	authorizer := anAuthorizer
 ]
 
 {
@@ -58,20 +58,26 @@ SPOCApiEndpoint >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 18:15'
+	#'squeak_changestamp' : 'VE 5/15/2024 18:57'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
 	| response request contentStream |
-	self isInTestMode
+	self returnsTestContent
 		ifTrue: [^ self tinkerReponseContent: self executeTest]
-		ifFalse: [self authenticator
-				ifNil: [self error: 'Authenticator needed']
+		ifFalse: [self authorizer
+				ifNil: [self error: 'Authorizer needed']
 				ifNotNil: [request := self tinkerRequest.
 					response := self executeRequest: request withParams: aParamDictionary.
-					contentStream := response content readStream.
-					"Use for executeTest string"
-					"Transcript showln: (response content)."
-					^ self tinkerReponseContent: contentStream]]
+					response code = 401
+						ifTrue: [authorizer refreshAccessToken.
+							authorizer isAuthorized
+								ifTrue: [^ self execute: aParamDictionary]
+								ifFalse: [^ self error: 'Could not refresh access token']]
+						ifFalse: [
+							"Use for executeTest string"
+							"Transcript showln: (response content)."
+							contentStream := response content readStream.
+							^ self tinkerReponseContent: contentStream]]]
 ]
 
 {
@@ -93,28 +99,12 @@ SPOCApiEndpoint >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 18:00'
+	#'squeak_changestamp' : 'VE 5/15/2024 18:57'
 }
 SPOCApiEndpoint >> initialize [
 	super initialize.
 	
-	self isInTestMode: false.
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/15/2024 18:00'
-}
-SPOCApiEndpoint >> isInTestMode [
-	^ isInTestMode
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/15/2024 18:00'
-}
-SPOCApiEndpoint >> isInTestMode: anObject [
-	isInTestMode := anObject
+	self returnsTestContent: false.
 ]
 
 {
@@ -123,6 +113,22 @@ SPOCApiEndpoint >> isInTestMode: anObject [
 }
 SPOCApiEndpoint >> requestUri [
 	^ SPOCApiEndpoint apiHost, self endpoint
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/15/2024 18:57'
+}
+SPOCApiEndpoint >> returnsTestContent [
+	^ returnsTestContent
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/15/2024 18:57'
+}
+SPOCApiEndpoint >> returnsTestContent: aBoolean [
+	returnsTestContent := aBoolean
 ]
 
 {
@@ -135,13 +141,13 @@ SPOCApiEndpoint >> tinkerReponseContent: aContentStream [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 12:13'
+	#'squeak_changestamp' : 'VE 5/15/2024 18:44'
 }
 SPOCApiEndpoint >> tinkerRequest [
 	| request |
 	request := self client requestWithUrl: SPOCApiEndpoint apiHost, self endpoint.
 	request method: self endpointMethod.
-	request headerAt: 'Authorization' put: 'Bearer ', self authenticator accessToken.
+	request headerAt: 'Authorization' put: 'Bearer ', self authorizer accessToken.
 	request headerAt: 'Content-Type' put: 'application/json'.
 	^ request.
 ]
