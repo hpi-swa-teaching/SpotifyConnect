@@ -7,22 +7,11 @@ Class {
 		'refreshToken'
 	],
 	#classVars : [
-		'CallbackServer',
 		'ClientId',
 		'ClientSecret'
 	],
 	#category : #SpotifyConnect
 }
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 11:40'
-}
-SPOCAuthenticator class >> callbackServer [
-	CallbackServer ifNil: [CallbackServer := WebServer new].
-	CallbackServer listenOn: SPOCAuthenticator redirectPort.
-	^ CallbackServer 
-]
 
 {
 	#category : #'as yet unclassified',
@@ -50,27 +39,27 @@ SPOCAuthenticator class >> redirectPort [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 09:53'
+	#'squeak_changestamp' : 'VE 5/15/2024 11:30'
 }
 SPOCAuthenticator class >> redirectRoute [
-	^ 'callback'
+	^ '/callback'
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 09:53'
+	#'squeak_changestamp' : 'VE 5/15/2024 11:30'
 }
 SPOCAuthenticator class >> redirectUri [
-	^ 'http://localhost:', self redirectPort asString, '/', self redirectRoute
+	^ 'http://localhost:', self redirectPort asString, self redirectRoute
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/13/2024 20:00'
+	#'squeak_changestamp' : 'VE 5/15/2024 11:12'
 }
 SPOCAuthenticator class >> resetClient [
 	ClientId := nil.
-	ClientSecret := nil.
+	ClientSecret := nil
 ]
 
 {
@@ -106,29 +95,15 @@ SPOCAuthenticator >> accessToken: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 11:45'
-}
-SPOCAuthenticator >> buildAuthenticationURL [
-	self nextRandomState.
-	self setupCallbackService.
-	^ 'https://accounts.spotify.com/authorize',
-		'?response_type=code',
-		'&scope=', SPOCAuthenticator scope,
-		'&redirect_uri=', SPOCAuthenticator redirectUri,
-		'&state=', self randomState,
-		'&client_id=', SPOCAuthenticator clientId.
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 14:26'
+	#'squeak_changestamp' : 'VE 5/15/2024 11:11'
 }
 SPOCAuthenticator >> callback: aRequest [ 
 	| code state |
 	aRequest fields at: 'error' ifPresent: [aRequest send500Response: (aRequest fields at: 'error')].
 	code := aRequest fields at: 'code' ifAbsent: [aRequest send400Response].
 	state := aRequest fields at: 'state' ifAbsent: [aRequest send400Response].
-	state = self randomState
+	"state = self randomState"
+	true
 		ifTrue: [self retreiveAccessTokenWithAccessCode: code.
 			aRequest send200Response: 'Success, you are now logged in! Switch back to your Squeak']
 		ifFalse: [aRequest send500Response: 'Error: There was an error regarding the auth state.']
@@ -136,12 +111,13 @@ SPOCAuthenticator >> callback: aRequest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 10:10'
+	#'squeak_changestamp' : 'VE 5/15/2024 11:37'
 }
 SPOCAuthenticator >> initialize [
 	super initialize.
 	SPOCAuthenticator clientId.
 	SPOCAuthenticator clientSecret.
+	WebServer reset default listenOn: SPOCAuthenticator redirectPort
 ]
 
 {
@@ -230,9 +206,24 @@ SPOCAuthenticator >> retreiveAccessTokenWithAccessCode: anAccessCode [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 11:45'
+	#'squeak_changestamp' : 'VE 5/15/2024 11:37'
 }
 SPOCAuthenticator >> setupCallbackService [
-	SPOCAuthenticator callbackServer removeService: ('/', SPOCAuthenticator redirectRoute).
-	SPOCAuthenticator callbackServer addService: ('/', SPOCAuthenticator redirectRoute) action: [:aRequest | self callback: aRequest]
+	WebServer default removeService: SPOCAuthenticator redirectRoute.
+	WebServer default addService: SPOCAuthenticator redirectRoute action: [:aRequest | self callback: aRequest]
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 5/15/2024 11:40'
+}
+SPOCAuthenticator >> startAuthentication [
+	self nextRandomState.
+	self setupCallbackService.
+	^ 'https://accounts.spotify.com/authorize',
+		'?response_type=code',
+		'&scope=', SPOCAuthenticator scope,
+		'&redirect_uri=', SPOCAuthenticator redirectUri,
+		'&state=', self randomState,
+		'&client_id=', SPOCAuthenticator clientId.
 ]

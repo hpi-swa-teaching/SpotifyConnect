@@ -2,7 +2,6 @@ Class {
 	#name : #SPOCTestAuthenticator,
 	#superclass : #TestCase,
 	#instVars : [
-		'track',
 		'authenticator'
 	],
 	#category : #'SpotifyConnect-Tests'
@@ -10,7 +9,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 14:12'
+	#'squeak_changestamp' : 'VE 5/15/2024 11:39'
 }
 SPOCTestAuthenticator >> setUp [
 	authenticator := SPOCAuthenticator new.
@@ -18,22 +17,24 @@ SPOCTestAuthenticator >> setUp [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 14:43'
+	#'squeak_changestamp' : 'VE 5/15/2024 11:40'
 }
 SPOCTestAuthenticator >> testCallbackEndpoint [
 	
 	| response |
+	authenticator startAuthentication.
 	response := WebClient httpGet: SPOCAuthenticator redirectUri.
 	self assert: (response code = 404) not.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 14:29'
+	#'squeak_changestamp' : 'VE 5/15/2024 11:41'
 }
 SPOCTestAuthenticator >> testCallbackErrors [
 	
 	| response |
+	authenticator startAuthentication.
 	response := WebClient httpGet: (SPOCAuthenticator redirectUri, '?code=123').
 	self assert: response code = 400.
 	response := WebClient httpGet: (SPOCAuthenticator redirectUri, '?state=123').
