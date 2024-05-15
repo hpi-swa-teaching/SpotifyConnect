@@ -160,10 +160,23 @@ SPOCAuthorizer >> randomString: aLength [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/14/2024 14:40'
+	#'squeak_changestamp' : 'OW 5/15/2024 18:30'
 }
 SPOCAuthorizer >> refreshAccessToken [
-	"TODO Refresh"
+	
+	| content response url responseContent |
+	url := 'https://accounts.spotify.com/api/token'.
+	content := 'grant_type=refresh_token',
+		'&refresh_token=', self refreshToken, 
+		'&client_id=', SPOCAuthorizer clientId,
+		'&client_secret=', SPOCAuthorizer clientSecret.
+	response := WebClient httpPost: url content: content type: 'application/x-www-form-urlencoded'.
+	response isSuccess ifFalse:[^self error: response status].
+	responseContent := Json readFrom: response content readStream.
+ 	self accessToken: (responseContent at: 'access_token').
+	self refreshToken: (responseContent at: 'refresh_token').
+	
+
 ]
 
 {

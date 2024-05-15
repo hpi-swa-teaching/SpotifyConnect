@@ -9,7 +9,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 18:09'
+	#'squeak_changestamp' : 'VE 5/15/2024 18:31'
 }
 SPOCTestAuthenticator >> setUp [
 	authenticator := SPOCAuthorizer new.
