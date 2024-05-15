@@ -2,7 +2,8 @@ Class {
 	#name : #SPOCApiEndpoint,
 	#superclass : #Object,
 	#instVars : [
-		'authenticator'
+		'authenticator',
+		'isInTestMode'
 	],
 	#category : #SpotifyConnect
 }
@@ -57,15 +58,20 @@ SPOCApiEndpoint >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 12:45'
+	#'squeak_changestamp' : 'VE 5/15/2024 18:15'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
-	| response request |
-	self authenticator
-		ifNil: [self error: 'Authenticator needed']
-		ifNotNil: [request := self tinkerRequest.
-			response := self executeRequest: request withParams: aParamDictionary.
-			^ self tinkerReponseData: response]
+	| response request contentStream |
+	self isInTestMode
+		ifTrue: [^ self tinkerReponseContent: self executeTest]
+		ifFalse: [self authenticator
+				ifNil: [self error: 'Authenticator needed']
+				ifNotNil: [request := self tinkerRequest.
+					response := self executeRequest: request withParams: aParamDictionary.
+					contentStream := response content readStream.
+					"Use for executeTest string"
+					"Transcript showln: (response content)."
+					^ self tinkerReponseContent: contentStream]]
 ]
 
 {
@@ -79,15 +85,25 @@ SPOCApiEndpoint >> executeRequest: request withParams: aParameterDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 12:02'
+	#'squeak_changestamp' : 'VE 5/15/2024 18:00'
+}
+SPOCApiEndpoint >> executeTest [
+	^ self subclassResponsibility
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 5/15/2024 18:00'
 }
 SPOCApiEndpoint >> initialize [
 	super initialize.
+	
+	self isInTestMode: false.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/14/2024 14:53'
+	#'squeak_changestamp' : 'VE 5/15/2024 18:00'
 }
 SPOCApiEndpoint >> isInTestMode [
 	^ isInTestMode
@@ -95,7 +111,7 @@ SPOCApiEndpoint >> isInTestMode [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/14/2024 14:53'
+	#'squeak_changestamp' : 'VE 5/15/2024 18:00'
 }
 SPOCApiEndpoint >> isInTestMode: anObject [
 	isInTestMode := anObject
@@ -111,9 +127,9 @@ SPOCApiEndpoint >> requestUri [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/14/2024 14:58'
+	#'squeak_changestamp' : 'VE 5/15/2024 17:57'
 }
-SPOCApiEndpoint >> tinkerReponseData: aReponse [
+SPOCApiEndpoint >> tinkerReponseContent: aContentStream [
 	^ self subclassResponsibility
 ]
 
