@@ -496,13 +496,12 @@ SPOCApiSearch >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/17/2024 09:51'
+	#'squeak_changestamp' : 'RK 5/18/2024 21:20'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
 	| content tracks trackItems |
 	content := Json readFrom: aContentStream readStream.
-	Transcript showln: content.
 	tracks := OrderedCollection new.
 	trackItems := (content at: #tracks) at: #items.
 	trackItems do: [ :trackItem |

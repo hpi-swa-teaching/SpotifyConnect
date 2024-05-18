@@ -22,12 +22,11 @@ SPOCTextInput class >> newAt: aPoint withText: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/18/2024 19:35'
+	#'squeak_changestamp' : 'RK 5/18/2024 20:54'
 }
 SPOCTextInput >> handleEnterPressed [
 	
-	Transcript showln: 'Enter gedrückt'.
-	(lastEvt hand keyboardFocus ~~ self) ifTrue: [ Transcript showln: 'Enter nur im Fokus gedrückt' ]
+	(lastEvt hand keyboardFocus ~~ self) ifTrue: [ self owner searchTracks: text ]
 ]
 
 {
