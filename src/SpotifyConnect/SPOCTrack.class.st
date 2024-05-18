@@ -1,9 +1,15 @@
 Class {
 	#name : #SPOCTrack,
-	#superclass : #Object,
+	#superclass : #SPOCData,
 	#instVars : [
 		'id',
-		'name'
+		'name',
+		'artists',
+		'album',
+		'duration',
+		'explicit',
+		'popularity',
+		'trackNumber'
 	],
 	#category : #SpotifyConnect
 }
