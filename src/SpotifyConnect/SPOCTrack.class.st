@@ -10,6 +10,86 @@ Class {
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+}
+SPOCTrack >> album [
+	^ album
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+}
+SPOCTrack >> album: anAlbum [
+	album := anAlbum
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+}
+SPOCTrack >> artists [
+	^ artists
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/15/2024 16:29'
+}
+SPOCTrack >> artists: aOrderedCollection [
+	artists := aOrderedCollection
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/16/2024 23:44'
+}
+SPOCTrack >> duration [
+	"In seconds"
+	
+	^ duration
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/15/2024 16:29'
+}
+SPOCTrack >> duration: aNumber [
+	duration := aNumber
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/16/2024 23:45'
+}
+SPOCTrack >> durationAsFormattedTime [
+	"Converts milliseconds to 'mm:ss'"
+	
+	| min sec time |
+	min := duration // 60.
+	sec := duration \\ 60.
+	time := min asString, ':', sec asString.
+	^ time
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+}
+SPOCTrack >> explicit [
+	^ explicit
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/15/2024 16:29'
+}
+SPOCTrack >> explicit: aBoolean [
+	explicit := aBoolean
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'VE 5/13/2024 17:08'
 }
 SPOCTrack >> id [
@@ -38,4 +118,36 @@ SPOCTrack >> name [
 }
 SPOCTrack >> name: anObject [
 	name := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+}
+SPOCTrack >> popularity [
+	^ popularity
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/15/2024 16:30'
+}
+SPOCTrack >> popularity: aNumber [
+	popularity := aNumber
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+}
+SPOCTrack >> trackNumber [
+	^ trackNumber
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/15/2024 16:30'
+}
+SPOCTrack >> trackNumber: aNumber [
+	trackNumber := aNumber
 ]
