@@ -19,8 +19,16 @@ SPOCText class >> newAt: aPoint withText: aString [
 ]
 
 {
+	#category : #'event handling',
+	#'squeak_changestamp' : 'RK 5/21/2024 23:40'
+}
+SPOCText >> handlesMouseDown: anEvent [
+	^ false
+]
+
+{
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/18/2024 00:08'
+	#'squeak_changestamp' : 'RK 5/21/2024 23:38'
 }
 SPOCText >> initialize [
 	
