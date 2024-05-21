@@ -51,6 +51,17 @@ SPOCAlbum >> artists: anOrderedCollection [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/21/2024 17:20'
+}
+SPOCAlbum >> artistsAsString [
+	| result |
+	
+	self artists allButLastDo: [ :artist | result := result, artist name, ', '].
+	result := result, self artists last name
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'RK 5/15/2024 14:45'
 }
 SPOCAlbum >> genres [

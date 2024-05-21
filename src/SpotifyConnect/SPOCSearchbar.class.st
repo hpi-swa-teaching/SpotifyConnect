@@ -2,7 +2,8 @@ Class {
 	#name : #SPOCSearchbar,
 	#superclass : #RectangleMorph,
 	#instVars : [
-		'inputField'
+		'inputField',
+		'tracks'
 	],
 	#category : #SpotifyConnect
 }
@@ -17,10 +18,10 @@ SPOCSearchbar class >> baseLayer [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 5/17/2024 10:59'
+	#'squeak_changestamp' : 'RK 5/21/2024 16:28'
 }
-SPOCSearchbar class >> searchbarExtent [
-	^ 500@50
+SPOCSearchbar class >> searchbarHeight [
+	^ 50
 ]
 
 {
@@ -32,13 +33,53 @@ SPOCSearchbar class >> searchbarPosition [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/18/2024 21:51'
+	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 5/21/2024 16:28'
 }
-SPOCSearchbar >> buildComponents [
+SPOCSearchbar class >> searchbarWidth [
+	^ 500
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 5/21/2024 15:33'
+}
+SPOCSearchbar class >> trackLimit [
+	"Defines the number of search results displayed"
+	^ 10
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'RK 5/21/2024 17:03'
+}
+SPOCSearchbar >> buildResultMorphFrom: aTrack [
+	| searchbarHeight background image albumText artistText|
+	
+	searchbarHeight := SPOCSearchbar searchbarHeight.
+	background := RectangleMorph new
+		color: SPOCStyle spotifyGray;
+		extent: (SPOCSearchbar searchbarWidth@(2 * searchbarHeight));
+		morphicLayerNumber: SPOCSearchbar baseLayer.
+	image := (aTrack album) image.
+	image position: (background position + (searchbarHeight * 0.25@(searchbarHeight * 0.25)));
+		morphicLayerNumber: SPOCSearchbar baseLayer - 1.
+	albumText := SPOCText newAt: (image topRight + ((searchbarHeight * 0.25)@0)) withText: aTrack name.
+	artistText := SPOCText newAt: 0@0 withText: (aTrack artistsAsString).
+	^ Morph new
+		addMorph: background;
+		addMorph: image;
+		addMorph: albumText.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 5/21/2024 16:31'
+}
+SPOCSearchbar >> buildSearchbar [
 		
 	self color: SPOCStyle spotifyGray;
-		extent: SPOCSearchbar searchbarExtent;
+		extent: (SPOCSearchbar searchbarWidth@SPOCSearchbar searchbarHeight);
 		position: SPOCSearchbar searchbarPosition;
 		morphicLayerNumber: SPOCSearchbar baseLayer;
 		inputField: (SPOCTextInput newAt: (SPOCSearchbar searchbarPosition + (10@10)) withText: 'Was möchtest du wiedergeben?');
@@ -48,13 +89,21 @@ SPOCSearchbar >> buildComponents [
 ]
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 5/21/2024 15:52'
+}
+SPOCSearchbar >> displayResults: anOrderedCollection [
+	
+]
+
+{
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/18/2024 21:30'
+	#'squeak_changestamp' : 'RK 5/21/2024 15:30'
 }
 SPOCSearchbar >> initialize [
 	super initialize.
 	
-	self buildComponents
+	self buildSearchbar
 ]
 
 {
@@ -74,7 +123,7 @@ SPOCSearchbar >> inputField: aSPOCTextInput [
 ]
 
 {
-	#category : #accessing,
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'RK 5/18/2024 20:44'
 }
 SPOCSearchbar >> sanitizeInput: aString [
@@ -85,20 +134,23 @@ SPOCSearchbar >> sanitizeInput: aString [
 ]
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/18/2024 21:57'
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 5/21/2024 15:52'
 }
 SPOCSearchbar >> searchTracks: aString [
 
-	| dict apiEndpoint tracks artists |
+	| dict apiEndpoint artists |
 	dict := Dictionary new.
 	dict at: 'input' put: (self sanitizeInput: aString);
 		at: 'type' put: 'track';
-		at: 'limit' put: '8';
+		at: 'limit' put: SPOCSearchbar trackLimit;
 		yourself.
 	apiEndpoint := SPOCApiSearch new.
 	apiEndpoint authorizer: (Smalltalk at: #auth).
-	tracks := apiEndpoint execute: dict.
+	self tracks: (apiEndpoint execute: dict).
+	self displayResults: tracks.
+
+	"Ab hier Ausgabe"
 	tracks do: [ :track |
 		Transcript showln: 'Title:', String tab, track name;
 			showln: 'Album:', String tab, track album name;
@@ -108,4 +160,20 @@ SPOCSearchbar >> searchTracks: aString [
 			Transcript show: artist name;
 				show: ' ' ].
 		Transcript showln: ' ' ]
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/21/2024 15:47'
+}
+SPOCSearchbar >> tracks [
+	^ tracks
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/21/2024 15:47'
+}
+SPOCSearchbar >> tracks: anOrderedCollection [
+	tracks := anOrderedCollection
 ]

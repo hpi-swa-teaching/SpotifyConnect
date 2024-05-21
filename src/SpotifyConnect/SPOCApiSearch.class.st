@@ -496,7 +496,7 @@ SPOCApiSearch >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/19/2024 20:47'
+	#'squeak_changestamp' : 'RK 5/21/2024 15:46'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
@@ -520,7 +520,8 @@ SPOCApiSearch >> tinkerReponseContent: aContentStream [
 		albumItem := (trackItem at: #album).
 		album
 			id: (albumItem at: #id);
-			name: (albumItem at: #name).
+			name: (albumItem at: #name);
+			image: (SPOCImage newWithUrl: (((albumItem at: #images) at: 1) at: #url)).
 		track := SPOCTrack new.
 		track
 			id: (trackItem at: #id);
