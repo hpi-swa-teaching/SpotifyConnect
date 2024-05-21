@@ -51,10 +51,10 @@ SPOCSearchbar class >> trackLimit [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/21/2024 17:03'
+	#'squeak_changestamp' : 'RK 5/21/2024 17:43'
 }
 SPOCSearchbar >> buildResultMorphFrom: aTrack [
-	| searchbarHeight background image albumText artistText|
+	| searchbarHeight background image trackText artistText|
 	
 	searchbarHeight := SPOCSearchbar searchbarHeight.
 	background := RectangleMorph new
@@ -64,12 +64,13 @@ SPOCSearchbar >> buildResultMorphFrom: aTrack [
 	image := (aTrack album) image.
 	image position: (background position + (searchbarHeight * 0.25@(searchbarHeight * 0.25)));
 		morphicLayerNumber: SPOCSearchbar baseLayer - 1.
-	albumText := SPOCText newAt: (image topRight + ((searchbarHeight * 0.25)@0)) withText: aTrack name.
-	artistText := SPOCText newAt: 0@0 withText: (aTrack artistsAsString).
+	trackText := SPOCText newAt: (image topRight + ((searchbarHeight * 0.25)@0)) withText: aTrack name.
+	artistText := SPOCText newAt: (image bottomRight +  ((searchbarHeight * 0.25)@(self height negated * 0.5))) withText: (aTrack album artistsAsString).
 	^ Morph new
 		addMorph: background;
 		addMorph: image;
-		addMorph: albumText.
+		addMorph: trackText;
+		addMorph: artistText.
 ]
 
 {
