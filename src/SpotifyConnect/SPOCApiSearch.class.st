@@ -496,7 +496,7 @@ SPOCApiSearch >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/21/2024 15:46'
+	#'squeak_changestamp' : 'RK 5/21/2024 19:04'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
@@ -504,10 +504,14 @@ SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	content := Json readFrom: aContentStream readStream.
 	tracks := OrderedCollection new.
 	trackItems := (content at: #tracks) at: #items.
+	"For each track"
 	trackItems do: [ :trackItem |
 		| artists artistItems album albumItem track |
+		album := SPOCAlbum new.
+		albumItem := (trackItem at: #album).
 		artists := OrderedCollection new.
-		artistItems := (trackItem at: #artists).
+		artistItems := (albumItem at: #artists).
+		"For each artist"
 		artistItems do: [ :artistItem |
 			| artist |
 			artist := SPOCArtist new.
@@ -516,17 +520,15 @@ SPOCApiSearch >> tinkerReponseContent: aContentStream [
 				name: (artistItem at: #name).
 			artists add: artist			
 		].
-		album := SPOCAlbum new.
-		albumItem := (trackItem at: #album).
 		album
 			id: (albumItem at: #id);
 			name: (albumItem at: #name);
+			artists: artists;
 			image: (SPOCImage newWithUrl: (((albumItem at: #images) at: 1) at: #url)).
 		track := SPOCTrack new.
 		track
 			id: (trackItem at: #id);
 			name: (trackItem at: #name);
-			artists: artists;
 			album: album;
 			duration: (trackItem at: #duration_ms) // 1000;
 			explicit: (trackItem at: #explicit);

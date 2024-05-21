@@ -127,6 +127,14 @@ SPOCTrack >> name: anObject [
 ]
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 5/21/2024 20:28'
+}
+SPOCTrack >> playTrack [
+	"This method should do an API call that plays this song"
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
 }

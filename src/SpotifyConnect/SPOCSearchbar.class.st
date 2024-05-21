@@ -3,7 +3,8 @@ Class {
 	#superclass : #RectangleMorph,
 	#instVars : [
 		'inputField',
-		'tracks'
+		'tracks',
+		'trackMorphs'
 	],
 	#category : #SpotifyConnect
 }
@@ -18,7 +19,7 @@ SPOCSearchbar class >> baseLayer [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 5/21/2024 16:28'
+	#'squeak_changestamp' : 'RK 5/21/2024 17:58'
 }
 SPOCSearchbar class >> searchbarHeight [
 	^ 50
@@ -42,15 +43,15 @@ SPOCSearchbar class >> searchbarWidth [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 5/21/2024 15:33'
+	#'squeak_changestamp' : 'RK 5/21/2024 20:33'
 }
 SPOCSearchbar class >> trackLimit [
 	"Defines the number of search results displayed"
-	^ 10
+	^ 3
 ]
 
 {
-	#category : #initialization,
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'RK 5/21/2024 17:43'
 }
 SPOCSearchbar >> buildResultMorphFrom: aTrack [
@@ -91,20 +92,42 @@ SPOCSearchbar >> buildSearchbar [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/21/2024 15:52'
+	#'squeak_changestamp' : 'RK 5/21/2024 21:59'
 }
 SPOCSearchbar >> displayResults: anOrderedCollection [
+	| builder spec panel |
 	
+	self trackMorphs isEmpty ifFalse: [self trackMorphs removeAll].
+	anOrderedCollection do: [ :track |
+		self trackMorphs add: (self buildResultMorphFrom: track)].
+	"self trackMorphs do: [ :trackMorph |
+		trackMorph on: #mouseDown send: #chosen to: [trackMorph playTrack]]."
+	
+	builder := ToolBuilder default.
+	spec := builder pluggableScrollPaneSpec new
+		vScrollBarPolicy: #whenNeeded;
+		yourself.
+	panel := builder build: spec.
+	panel scroller
+		layoutPolicy: TableLayout new;
+		addAllMorphs: trackMorphs.
+	panel
+		position: self bottomLeft;
+		openInWorld
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/21/2024 15:30'
+	#'squeak_changestamp' : 'RK 5/21/2024 20:02'
 }
 SPOCSearchbar >> initialize [
 	super initialize.
 	
-	self buildSearchbar
+	self
+		trackMorphs: OrderedCollection new;
+		tracks: OrderedCollection new;
+		buildSearchbar;
+		yourself
 ]
 
 {
@@ -136,11 +159,11 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/21/2024 15:52'
+	#'squeak_changestamp' : 'RK 5/21/2024 19:05'
 }
 SPOCSearchbar >> searchTracks: aString [
 
-	| dict apiEndpoint artists |
+	| dict apiEndpoint |
 	dict := Dictionary new.
 	dict at: 'input' put: (self sanitizeInput: aString);
 		at: 'type' put: 'track';
@@ -149,18 +172,23 @@ SPOCSearchbar >> searchTracks: aString [
 	apiEndpoint := SPOCApiSearch new.
 	apiEndpoint authorizer: (Smalltalk at: #auth).
 	self tracks: (apiEndpoint execute: dict).
-	self displayResults: tracks.
+	self displayResults: tracks
+]
 
-	"Ab hier Ausgabe"
-	tracks do: [ :track |
-		Transcript showln: 'Title:', String tab, track name;
-			showln: 'Album:', String tab, track album name;
-			showln: 'Artists:', String tab.
-		artists := track artists.
-		artists do: [ :artist |
-			Transcript show: artist name;
-				show: ' ' ].
-		Transcript showln: ' ' ]
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/21/2024 19:59'
+}
+SPOCSearchbar >> trackMorphs [
+	^ trackMorphs
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/21/2024 20:00'
+}
+SPOCSearchbar >> trackMorphs: anOrderedCollection [
+	trackMorphs := anOrderedCollection
 ]
 
 {
