@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCArtist,
-	#superclass : #SPOCData,
+	#superclass : #Object,
 	#instVars : [
 		'id',
 		'name',

@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCTrack,
-	#superclass : #SPOCData,
+	#superclass : #Object,
 	#instVars : [
 		'id',
 		'name',

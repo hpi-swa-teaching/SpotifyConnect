@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCAlbum,
-	#superclass : #SPOCData,
+	#superclass : #Object,
 	#instVars : [
 		'id',
 		'name',
