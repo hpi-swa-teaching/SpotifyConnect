@@ -412,7 +412,7 @@ SPOCSearchbar >> exampleResponse [
 
 {
 	#category : #examples,
-	#'squeak_changestamp' : 'RK 5/22/2024 13:52'
+	#'squeak_changestamp' : 'RK 5/15/2024 12:31'
 }
 SPOCSearchbar >> exampleSearch [
 
@@ -428,5 +428,5 @@ SPOCSearchbar >> exampleSearch [
 
 	url := 'https://api.spotify.com/v1/search?q=flowers&type=track&market=DE&limit=5&offset=1', '?access_token=', accessToken.
 	"newurl := 'https://api.spotify.com/v1/search?q=flowers&type=track&market=DE&limit=5&offset=1'."
-	resp := WebClient httpGet: url.
+	resp := WebClient httpGet: url
 ]
