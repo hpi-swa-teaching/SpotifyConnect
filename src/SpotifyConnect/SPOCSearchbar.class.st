@@ -43,16 +43,16 @@ SPOCSearchbar class >> searchbarWidth [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 5/21/2024 20:33'
+	#'squeak_changestamp' : 'RK 5/22/2024 12:54'
 }
 SPOCSearchbar class >> trackLimit [
 	"Defines the number of search results displayed"
-	^ 3
+	^ 10
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/21/2024 17:43'
+	#'squeak_changestamp' : 'RK 5/22/2024 12:54'
 }
 SPOCSearchbar >> buildResultMorphFrom: aTrack [
 	| searchbarHeight background image trackText artistText|
@@ -71,7 +71,9 @@ SPOCSearchbar >> buildResultMorphFrom: aTrack [
 		addMorph: background;
 		addMorph: image;
 		addMorph: trackText;
-		addMorph: artistText.
+		addMorph: artistText;
+		vResizing: #shrinkWrap;
+		yourself
 ]
 
 {
