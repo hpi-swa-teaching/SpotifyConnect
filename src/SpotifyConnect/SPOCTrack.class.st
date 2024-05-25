@@ -104,10 +104,10 @@ SPOCTrack >> id [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/13/2024 17:08'
+	#'squeak_changestamp' : 'RK 5/25/2024 17:22'
 }
-SPOCTrack >> id: anObject [
-	id := anObject
+SPOCTrack >> id: aString [
+	id := aString
 ]
 
 {
