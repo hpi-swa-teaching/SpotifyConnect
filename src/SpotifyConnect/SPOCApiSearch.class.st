@@ -496,7 +496,7 @@ SPOCApiSearch >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/21/2024 19:04'
+	#'squeak_changestamp' : 'VK 5/25/2024 18:30'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
@@ -535,7 +535,7 @@ SPOCApiSearch >> tinkerReponseContent: aContentStream [
 			popularity: (trackItem at: #popularity);
 			trackNumber: (trackItem at: #track_number);
 			yourself.
-		tracks add: track
+		tracks add: track 
 	].
 	^ tracks
 ]
