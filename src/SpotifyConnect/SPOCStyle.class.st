@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCStyle,
-	#superclass : #Object,
+	#superclass : #Morph,
 	#category : #SpotifyConnect
 }
 

@@ -22,11 +22,12 @@ SPOCApiTrack >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 12:21'
+	#'squeak_changestamp' : 'MH 5/25/2024 14:05'
 }
 SPOCApiTrack >> executeRequest: request withParams: aParameterDictionary [
 
 	request rawUrl: (request rawUrl, (aParameterDictionary at: 'trackId')).
+	Transcript showln: request.
 	^ self client sendRequest: request
 	
 ]
