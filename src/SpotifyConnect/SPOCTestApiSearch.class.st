@@ -15,18 +15,18 @@ SPOCTestApiSearch >> setUp [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 18:47'
+	#'squeak_changestamp' : 'VK 5/25/2024 18:56'
 }
 SPOCTestApiSearch >> testExecute [
-	| dict res firstTrack |
+	| dict res track |
 	dict := Dictionary new.
 	res := apiEndpoint execute: dict.
-	firstTrack := res first.
-	self assert: firstTrack id = '45c4L5n0wh6KRv0SOf879S'.
-	self assert: firstTrack name = 'Morning Blue'.
-	self assert: firstTrack album class = SPOCAlbum.
-	self assert: firstTrack duration = 217.
-	self assert: firstTrack explicit = false.
-	self assert: firstTrack popularity = 59.
-	self assert: firstTrack trackNumber = 11.
+	track := res first.
+	self assert: track id = '45c4L5n0wh6KRv0SOf879S'.
+	self assert: track name = 'Morning Blue'.
+	self assert: track album class = SPOCAlbum.
+	self assert: track duration = 217.
+	self assert: track explicit = false.
+	self assert: track popularity = 59.
+	self assert: track trackNumber = 11.
 ]
