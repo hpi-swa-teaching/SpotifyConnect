@@ -6,10 +6,10 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 19:08'
+	#'squeak_changestamp' : 'VK 5/25/2024 21:01'
 }
 SPOCApiDevices >> endpoint [
-	^ 'v1/devices'
+	^ 'v1/me/player/devices'
 ]
 
 {
