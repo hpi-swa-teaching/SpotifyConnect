@@ -6,11 +6,11 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/25/2024 15:34'
+	#'squeak_changestamp' : 'MH 5/26/2024 13:05'
 }
 SPOCApiPlayer class >> getAccessToken [
 
-	^ 'BQDnV7sO6OZRzBsccOhlawP_3fDj_-dYJPqKihlTm1Ql3TzYwcUPxXOtkk-YLVQe1oZ3HWF3FML6GWkjmoPZp_XD7RUVcXQCX6ZnU1gegeWAjh5G6icJXMM-ry-z9QkXAD2mzslHiH3NQ6Q07TDaK5j6lHcMuUz0T12t141y4_GRy_bDOHiHJnT4raEJcCElQllBhDadpkNDl17NiUZiG0BZgtc8C6sUiSGjXc2U1Zd_'
+	^ 'BQBZXwtxc5yCEAznBT5QSwEklnLk04IOqnfUF1ScqWN4lPeR49qC8WUZzCNZnT_0O7suxLH69N-il5pNekHZXve1XQ6llqxxW0ktqHEy3bbNThD5WQDX86L5cCfPHJb9q-7Gs7yjvLlbvQ5LZOgYOaMFPIocfADeW6WZUgev3akszWVcqMeY22ej0G5jt-xLRudOdUYyQRAG9W5A48-ypg2VVadwiBQAW1BsyPyfvAha'
 ]
 
 {

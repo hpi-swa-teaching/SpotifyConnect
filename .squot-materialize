@@ -1,4 +1,20 @@
 [
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'asset',
+			'button',
+			'PlayPause.png'
+		],
+		#encoding : Class [ #PNGReadWriter ]
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'playPause',
+			'assets',
+			'button.png'
+		],
+		#encoding : @4
+	},
 	SquotTonelMapper {
 		#package : MCPackage {
 			#name : 'SpotifyConnect'

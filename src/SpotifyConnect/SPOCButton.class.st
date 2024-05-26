@@ -25,23 +25,25 @@ SPOCButton class >> color: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'MH 5/25/2024 14:34'
+	#'squeak_changestamp' : 'MH 5/26/2024 12:47'
 }
 SPOCButton class >> initialExtent [
 
-	^ 20 @ 20
+	^ 66 @ 44
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/25/2024 14:39'
+	#'squeak_changestamp' : 'MH 5/26/2024 12:45'
 }
 SPOCButton >> initialize [
 
 	super initialize.
 	
-	self initializeExtent; 
-		initializePosition
+	self initializePosition;
+		initializeExtent;
+		openInWorld;
+		initializeLook
 ]
 
 {
@@ -55,11 +57,29 @@ SPOCButton >> initializeExtent [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/25/2024 14:41'
+	#'squeak_changestamp' : 'MH 5/26/2024 12:50'
+}
+SPOCButton >> initializeLook [
+
+	|image loader|
+	
+	loader:= GitAssetLoader for: 'SpotifyConnect'.
+	loader loadAsset: '/asset/button/PlayPause.png'.
+	image:= ImageMorph new image: (loader loadAsset: '/asset/button/PlayPause.png').
+	image position: 5 @ 25.
+	image extent: 46 @ 24.
+	image openInWorld
+
+	
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'MH 5/26/2024 12:27'
 }
 SPOCButton >> initializePosition [
 
-	self position: (self width/2) @ 200
+	self position: 0 @ 0
 ]
 
 {
