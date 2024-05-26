@@ -114,14 +114,17 @@ SPOCAuthorizer >> accessToken: aToken [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 18:29'
+	#'squeak_changestamp' : 'OW 5/26/2024 18:45'
 }
 SPOCAuthorizer >> callback: aRequest [
 
 	| code state htmlResponse |
-	aRequest fields at: 'error' ifPresent: [aRequest send500Response: (aRequest fields at: 'error')].
-	code := aRequest fields at: 'code' ifAbsent: [aRequest send400Response].
-	state := aRequest fields at: 'state' ifAbsent: [aRequest send400Response].
+	aRequest fields at: 'error' ifPresent: 
+		[aRequest send500Response: (aRequest fields at: 'error')].
+	code := aRequest fields at: 'code' ifAbsent: 
+		[aRequest send400Response].
+	state := aRequest fields at: 'state' ifAbsent: 
+		[aRequest send400Response].
 	state = self randomState
 		ifTrue: [self retreiveAccessTokenWithAccessCode: code.
 			htmlResponse := ((GitAssetLoader for: 'SpotifyConnect') 
@@ -180,7 +183,7 @@ SPOCAuthorizer >> randomState [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #accessing,
 	#'squeak_changestamp' : 'OW 5/22/2024 18:38'
 }
 SPOCAuthorizer >> randomState: aState [
@@ -204,7 +207,7 @@ SPOCAuthorizer >> randomString: aLength [
 ]
 
 {
-	#category : #accessing,
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'OW 5/22/2024 22:34'
 }
 SPOCAuthorizer >> refreshAccessToken [
