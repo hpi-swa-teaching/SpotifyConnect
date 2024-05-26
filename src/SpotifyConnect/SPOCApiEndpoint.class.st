@@ -141,7 +141,7 @@ SPOCApiEndpoint >> tinkerReponseContent: aContentStream [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 18:44'
+	#'squeak_changestamp' : 'MH 5/26/2024 21:47'
 }
 SPOCApiEndpoint >> tinkerRequest [
 	| request |

@@ -1,32 +1,32 @@
 Class {
-	#name : #SPOCApiPlay,
+	#name : #SPOCApiNext,
 	#superclass : #SPOCApiEndpoint,
 	#category : #SpotifyConnect
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 15:41'
+	#'squeak_changestamp' : 'MH 5/26/2024 21:40'
 }
-SPOCApiPlay >> endpoint [ 
+SPOCApiNext >> endpoint [ 
 	
-	^ 'v1/me/player/play'
+	^ 'v1/me/player/next'
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 15:42'
+	#'squeak_changestamp' : 'MH 5/26/2024 21:40'
 }
-SPOCApiPlay >> endpointMethod [
+SPOCApiNext >> endpointMethod [
 	
-	^ 'PUT'
+	^ 'POST'
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 16:04'
+	#'squeak_changestamp' : 'MH 5/26/2024 21:41'
 }
-SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
+SPOCApiNext >> executeRequest: request withParams: aParamDictionary [
 
 	"device_id kann angegeben werden muss aber nicht, aber wichtig für mehrere Geräte"
 	request rawUrl: (request rawUrl, '?device_id=',(aParamDictionary at: #device_id)).
@@ -36,27 +36,28 @@ SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 20:59'
+	#'squeak_changestamp' : 'MH 5/26/2024 21:41'
 }
-SPOCApiPlay >> executeTest [
+SPOCApiNext >> executeTest [
 	
 	"Response code 204"
-	 ^ '{  "error": {
-
-    "status": 403,    "message": "Player command failed: Premium required",    "reason": "PREMIUM_REQUIRED"
-
-  }}' readStream
+	 ^ '{
+  "error": {
+    "status": 400,
+    "message": "string"
+  }
+}' readStream
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 20:58'
+	#'squeak_changestamp' : 'MH 5/26/2024 21:42'
 }
-SPOCApiPlay >> tinkerReponseContent: aContentStream [
+SPOCApiNext >> tinkerReponseContent: aContentStream [
 	
 	"wenn alles gut gelaufen ist kommt keine respons, nur bei Fehler"
 	aContentStream
 		ifNil: [Transcript showln: 'content is nil'].
-	"^ Json readFrom: aContentStream"
+	^ Json readFrom: aContentStream
 	
 ]

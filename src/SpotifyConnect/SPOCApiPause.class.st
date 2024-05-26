@@ -1,32 +1,32 @@
 Class {
-	#name : #SPOCApiPlay,
+	#name : #SPOCApiPause,
 	#superclass : #SPOCApiEndpoint,
 	#category : #SpotifyConnect
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 15:41'
+	#'squeak_changestamp' : 'MH 5/26/2024 21:26'
 }
-SPOCApiPlay >> endpoint [ 
+SPOCApiPause >> endpoint [ 
 	
-	^ 'v1/me/player/play'
+	^ 'v1/me/player/pause'
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 15:42'
+	#'squeak_changestamp' : 'MH 5/26/2024 21:26'
 }
-SPOCApiPlay >> endpointMethod [
+SPOCApiPause >> endpointMethod [
 	
 	^ 'PUT'
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 16:04'
+	#'squeak_changestamp' : 'MH 5/26/2024 21:27'
 }
-SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
+SPOCApiPause >> executeRequest: request withParams: aParamDictionary [
 
 	"device_id kann angegeben werden muss aber nicht, aber wichtig für mehrere Geräte"
 	request rawUrl: (request rawUrl, '?device_id=',(aParamDictionary at: #device_id)).
@@ -36,27 +36,28 @@ SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 20:59'
+	#'squeak_changestamp' : 'MH 5/26/2024 21:29'
 }
-SPOCApiPlay >> executeTest [
+SPOCApiPause >> executeTest [
 	
 	"Response code 204"
-	 ^ '{  "error": {
-
-    "status": 403,    "message": "Player command failed: Premium required",    "reason": "PREMIUM_REQUIRED"
-
-  }}' readStream
+	 ^ '{
+  "error": {
+    "status": 400,
+    "message": "string"
+  }
+}' readStream
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 20:58'
+	#'squeak_changestamp' : 'MH 5/26/2024 21:29'
 }
-SPOCApiPlay >> tinkerReponseContent: aContentStream [
+SPOCApiPause >> tinkerReponseContent: aContentStream [
 	
 	"wenn alles gut gelaufen ist kommt keine respons, nur bei Fehler"
 	aContentStream
 		ifNil: [Transcript showln: 'content is nil'].
-	"^ Json readFrom: aContentStream"
+	^ Json readFrom: aContentStream
 	
 ]
