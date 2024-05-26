@@ -114,20 +114,19 @@ SPOCAuthorizer >> accessToken: aToken [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/25/2024 17:12'
+	#'squeak_changestamp' : 'OW 5/26/2024 18:29'
 }
 SPOCAuthorizer >> callback: aRequest [
 
-	| code state fileStream htmlResponse |
+	| code state htmlResponse |
 	aRequest fields at: 'error' ifPresent: [aRequest send500Response: (aRequest fields at: 'error')].
 	code := aRequest fields at: 'code' ifAbsent: [aRequest send400Response].
 	state := aRequest fields at: 'state' ifAbsent: [aRequest send400Response].
 	state = self randomState
 		ifTrue: [self retreiveAccessTokenWithAccessCode: code.
-			fileStream := FileStream fileNamed: 'successResponse.html'.
-			htmlResponse := fileStream contents.
-			fileStream close.
-			aRequest send200Response: self successResponsePage contentType: 'text/html']
+			htmlResponse := ((GitAssetLoader for: 'SpotifyConnect') 
+								loadString: 'assets/successResponse.html').
+			aRequest send200Response: htmlResponse contentType: 'text/html']
 		ifFalse: [aRequest send500Response: 'Error: There was an error regarding the auth state.']
 ]
 
@@ -300,63 +299,4 @@ SPOCAuthorizer >> startAuthorization [
 	Clipboard default primitiveClipboardText: url.	
 	WebBrowser default openOnUrl: url.
 	^ url
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/22/2024 21:37'
-}
-SPOCAuthorizer >> successResponsePage [
-
-	^ '<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify Login Success</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1DB954;
-            color: white;
-            text-align: center;
-            padding: 50px;
-        }
-        .container {
-            background-color: #191414;
-            border-radius: 10px;
-            padding: 30px;
-            max-width: 500px;
-            margin: auto;
-        }
-        h1 {
-            font-size: 2.5em;
-        }
-        p {
-            font-size: 1.2em;
-        }
-        .button {
-            background-color: #1DB954;
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 20px 0;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Success</h1>
-        <p>You are now logged in! 
-			Switch back to your Squeak application.</p>
-        <a href="#" class="button">Go to Squeak</a>
-    </div>
-</body>
-</html>'
 ]
