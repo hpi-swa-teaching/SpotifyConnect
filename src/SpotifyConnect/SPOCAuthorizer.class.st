@@ -114,16 +114,19 @@ SPOCAuthorizer >> accessToken: aToken [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/22/2024 21:43'
+	#'squeak_changestamp' : 'OW 5/25/2024 17:12'
 }
 SPOCAuthorizer >> callback: aRequest [
 
-	| code state |
+	| code state fileStream htmlResponse |
 	aRequest fields at: 'error' ifPresent: [aRequest send500Response: (aRequest fields at: 'error')].
 	code := aRequest fields at: 'code' ifAbsent: [aRequest send400Response].
 	state := aRequest fields at: 'state' ifAbsent: [aRequest send400Response].
 	state = self randomState
 		ifTrue: [self retreiveAccessTokenWithAccessCode: code.
+			fileStream := FileStream fileNamed: 'successResponse.html'.
+			htmlResponse := fileStream contents.
+			fileStream close.
 			aRequest send200Response: self successResponsePage contentType: 'text/html']
 		ifFalse: [aRequest send500Response: 'Error: There was an error regarding the auth state.']
 ]
@@ -280,7 +283,7 @@ SPOCAuthorizer >> setupCallbackService [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/22/2024 18:57'
+	#'squeak_changestamp' : 'OW 5/25/2024 17:13'
 }
 SPOCAuthorizer >> startAuthorization [
 
@@ -293,7 +296,8 @@ SPOCAuthorizer >> startAuthorization [
 		'&redirect_uri=', SPOCAuthorizer redirectUri,
 		'&state=', self randomState,
 		'&client_id=', SPOCAuthorizer clientId.
-		
+	
+	Clipboard default primitiveClipboardText: url.	
 	WebBrowser default openOnUrl: url.
 	^ url
 ]
