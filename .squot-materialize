@@ -1,19 +1,11 @@
 [
 	SquotImageMapper {
 		#path : FSAbsolutePath [
-			'asset',
-			'button',
-			'PlayPause.png'
-		],
-		#encoding : Class [ #PNGReadWriter ]
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
 			'playPause',
 			'assets',
 			'button.png'
 		],
-		#encoding : @4
+		#encoding : Class [ #PNGReadWriter ]
 	},
 	SquotTonelMapper {
 		#package : MCPackage {
@@ -22,5 +14,21 @@
 		#path : FSAbsolutePath [
 			'src'
 		]
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'asset',
+			'button',
+			'skipNext.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'asset',
+			'button',
+			'PlayPause.png'
+		],
+		#encoding : @4
 	}
 ]

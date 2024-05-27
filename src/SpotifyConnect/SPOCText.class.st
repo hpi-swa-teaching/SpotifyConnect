@@ -1,5 +1,5 @@
 Class {
 	#name : #SPOCText,
 	#superclass : #SPOCStyle,
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-Utils'
 }
