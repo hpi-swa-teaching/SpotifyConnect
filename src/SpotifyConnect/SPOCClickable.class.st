@@ -47,12 +47,12 @@ SPOCClickable >> handlesMouseDown: anEvent [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 17:13'
+	#'squeak_changestamp' : 'VE 5/27/2024 19:50'
 }
 SPOCClickable >> initialize [
 	super initialize.
 	
-	self addMorph: self wrappee
+	self addMorph: self wrappee; extent: self wrappee extent; color: Color transparent.
 ]
 
 {
