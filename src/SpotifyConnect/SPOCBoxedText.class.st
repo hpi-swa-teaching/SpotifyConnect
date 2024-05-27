@@ -61,12 +61,12 @@ SPOCBoxedText >> attachRightBorderCircle [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:47'
+	#'squeak_changestamp' : 'VE 5/27/2024 21:10'
 }
 SPOCBoxedText >> attachText [
-	self text: TextMorph new.
-	self text contents: 'SPOCBoxedText'.
-	self addMorph: self text.
+	self label: TextMorph new.
+	self label contents: 'SPOCBoxedText'.
+	self addMorph: self label.
 ]
 
 {
@@ -110,10 +110,10 @@ SPOCBoxedText >> content [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:14'
+	#'squeak_changestamp' : 'VE 5/27/2024 21:11'
 }
 SPOCBoxedText >> content: aString [
-	self text contents: aString.
+	self label contents: aString.
 	self updateAlignments.
 ]
 
@@ -165,13 +165,13 @@ SPOCBoxedText >> rightBorderCircle [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:46'
+	#'squeak_changestamp' : 'VE 5/27/2024 21:11'
 }
 SPOCBoxedText >> updateAlignments [
-	self extent: (self text width + SPOCBoxedText horizontalSpacing + SPOCBoxedText height @ SPOCBoxedText height).
-	self centerBox extent: (self text width + SPOCBoxedText horizontalSpacing @ SPOCBoxedText height).
+	self extent: (self label width + SPOCBoxedText horizontalSpacing + SPOCBoxedText height @ SPOCBoxedText height).
+	self centerBox extent: (self label width + SPOCBoxedText horizontalSpacing @ SPOCBoxedText height).
 	self centerBox position: self topLeft + (SPOCBoxedText height / 2 @ 0).
-	self text position: self topLeft  + (SPOCBoxedText height + SPOCBoxedText horizontalSpacing @ (SPOCBoxedText height - self text height) / 2).
+	self label position: self topLeft  + (SPOCBoxedText height + SPOCBoxedText horizontalSpacing @ (SPOCBoxedText height - self label height) / 2).
 	self rightBorderCircle position: self topRight - (SPOCBoxedText height  @ 0).
 	
 	
