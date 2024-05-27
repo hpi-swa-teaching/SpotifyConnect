@@ -1,11 +1,20 @@
 Class {
 	#name : #SPOCPlayer,
-	#superclass : #Object,
+	#superclass : #Morph,
 	#category : #SpotifyConnect
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 5/27/2024 01:35'
+}
+SPOCPlayer class >> playPauseIconPath [
+
+	^ '/asset/button/PlayPause.png'
+]
+
+{
+	#category : #'dev-examples',
 	#'squeak_changestamp' : 'MH 5/26/2024 21:32'
 }
 SPOCPlayer >> currentDevice [
@@ -14,14 +23,53 @@ SPOCPlayer >> currentDevice [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 13:52'
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 5/27/2024 01:14'
+}
+SPOCPlayer >> initialize [
+
+	super initialize.
+	
+	self initializeLayout;
+		initializePlayPause
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 5/27/2024 01:51'
+}
+SPOCPlayer >> initializeLayout [
+
+	self extent: 500 @ 200;
+		position: 100 @ 100;
+		color: SPOCStyle spotifyWhite
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 5/27/2024 02:45'
+}
+SPOCPlayer >> initializePlayPause [
+
+	| icon playpause |
+
+	"icon := SPOCAssetImageMorph new 
+		assetPath: self class playPauseIconPath."
+	playpause := SPOCButton new
+		iconPath: self class playPauseIconPath.
+	self addMorphFront: playpause
+]
+
+{
+	#category : #'api-connection',
+	#'squeak_changestamp' : 'TL 5/27/2024 02:35'
 }
 SPOCPlayer >> isPlaying [
 
 	| apiEndpoint dict res |
-	dict := Dictionary new.
-	dict at: #additional_types put: 'track'.
+	
+	dict := Dictionary new
+		at: #additional_types put: 'track'.
 	apiEndpoint := SPOCApiPlayer new.
 	"TODO: authorizer aus temporären Variablen raus" 
 	apiEndpoint authorizer: SPOCApiPlayer getAccessToken.
@@ -32,7 +80,7 @@ SPOCPlayer >> isPlaying [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-connection',
 	#'squeak_changestamp' : 'MH 5/26/2024 21:33'
 }
 SPOCPlayer >> pause [
@@ -48,8 +96,8 @@ SPOCPlayer >> pause [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 21:33'
+	#category : #'api-connection',
+	#'squeak_changestamp' : 'TL 5/27/2024 02:39'
 }
 SPOCPlayer >> play [
 
@@ -58,12 +106,12 @@ SPOCPlayer >> play [
 	dict2 := Dictionary new.
 	dict2 at: #device_id put: self currentDevice.
 	apiEndpoint := SPOCApiPlay new.
-	apiEndpoint authorizer: auth.
+	apiEndpoint authorizer: SPOCApp auth.
 	res:= apiEndpoint execute: dict2.
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-connection',
 	#'squeak_changestamp' : 'MH 5/26/2024 21:39'
 }
 SPOCPlayer >> skipToNext [
@@ -77,7 +125,7 @@ SPOCPlayer >> skipToNext [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'MH 5/26/2024 13:51'
 }
 SPOCPlayer >> switchPlaybackState [

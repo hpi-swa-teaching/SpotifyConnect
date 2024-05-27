@@ -1,93 +1,75 @@
 Class {
 	#name : #SPOCButton,
 	#superclass : #SPOCStyle,
+	#instVars : [
+		'iconPath',
+		'button'
+	],
 	#classInstVars : [
 		'color'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-Utils'
 }
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'MH 5/25/2024 14:17'
+	#'squeak_changestamp' : 'TL 5/27/2024 02:05'
 }
-SPOCButton class >> color [
-	^ color
+SPOCButton >> iconPath [
+	^ iconPath
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'MH 5/25/2024 14:17'
+	#'squeak_changestamp' : 'TL 5/27/2024 02:05'
 }
-SPOCButton class >> color: anObject [
-	color := anObject
+SPOCButton >> iconPath: anObject [
+	iconPath := anObject
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'MH 5/26/2024 12:47'
-}
-SPOCButton class >> initialExtent [
-
-	^ 66 @ 44
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 12:45'
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 5/27/2024 02:28'
 }
 SPOCButton >> initialize [
 
 	super initialize.
 	
-	self initializePosition;
-		initializeExtent;
-		openInWorld;
-		initializeLook
+	self initializeLayout;
+		initializeIcon;
+		initializeButton
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/25/2024 14:35'
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 5/27/2024 01:58'
 }
-SPOCButton >> initializeExtent [
+SPOCButton >> initializeButton [
 
-	self extent: SPOCButton initialExtent.
+	button := SimpleButtonMorph new.
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 12:50'
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 5/27/2024 02:27'
 }
-SPOCButton >> initializeLook [
+SPOCButton >> initializeIcon [
 
-	|image loader|
+	| icon |
 	
-	loader:= GitAssetLoader for: 'SpotifyConnect'.
-	loader loadAsset: '/asset/button/PlayPause.png'.
-	image:= ImageMorph new image: (loader loadAsset: '/asset/button/PlayPause.png').
-	image position: 5 @ 25.
-	image extent: 46 @ 24.
-	image openInWorld
-
-	
+	icon := SPOCAssetImageMorph new 
+		assetPath: iconPath;
+		position: self position + (10 @ 10).
+	"iconPath position: self position + (10 @ 10)."
+	self addMorphFront: icon
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 12:27'
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 5/27/2024 01:19'
 }
-SPOCButton >> initializePosition [
+SPOCButton >> initializeLayout [
 
-	self position: 0 @ 0
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/25/2024 14:30'
-}
-SPOCButton >> setColor: aColor [
-
-	self color: aColor.
-	
+	self extent: 100 @ 100;
+		color: SPOCStyle spotifyGreen
 ]
