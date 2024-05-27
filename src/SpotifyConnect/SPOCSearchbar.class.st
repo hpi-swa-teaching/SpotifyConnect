@@ -78,7 +78,7 @@ SPOCSearchbar >> buildResultMorphFrom: aTrack [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/21/2024 16:31'
+	#'squeak_changestamp' : 'RK 5/27/2024 11:28'
 }
 SPOCSearchbar >> buildSearchbar [
 		
@@ -88,7 +88,6 @@ SPOCSearchbar >> buildSearchbar [
 		morphicLayerNumber: SPOCSearchbar baseLayer;
 		inputField: (SPOCTextInput newAt: (SPOCSearchbar searchbarPosition + (10@10)) withText: 'Was möchtest du wiedergeben?');
 		addMorph: self inputField;
-		openInWorld;
 		yourself
 ]
 
