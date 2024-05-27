@@ -24,14 +24,15 @@ SPOCApiPlay >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 16:04'
+	#'squeak_changestamp' : 'MH 5/27/2024 14:08'
 }
 SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 
 	"device_id kann angegeben werden muss aber nicht, aber wichtig für mehrere Geräte"
 	request rawUrl: (request rawUrl, '?device_id=',(aParamDictionary at: #device_id)).
 	Transcript showln: request.
-	^ self client sendRequest: request
+	request headerAt: 'Content-Length' put: 0.
+	^ self client sendRequest: request.
 ]
 
 {
@@ -50,13 +51,12 @@ SPOCApiPlay >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 20:58'
+	#'squeak_changestamp' : 'MH 5/27/2024 14:34'
 }
 SPOCApiPlay >> tinkerReponseContent: aContentStream [
 	
 	"wenn alles gut gelaufen ist kommt keine respons, nur bei Fehler"
 	aContentStream
 		ifNil: [Transcript showln: 'content is nil'].
-	"^ Json readFrom: aContentStream"
-	
+	"^ Json readFrom: aContentStream"	
 ]

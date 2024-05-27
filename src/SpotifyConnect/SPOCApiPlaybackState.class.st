@@ -1,5 +1,5 @@
 Class {
-	#name : #SPOCApiPlayer,
+	#name : #SPOCApiPlaybackState,
 	#superclass : #SPOCApiEndpoint,
 	#category : #SpotifyConnect
 }
@@ -8,7 +8,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'MH 5/26/2024 13:05'
 }
-SPOCApiPlayer class >> getAccessToken [
+SPOCApiPlaybackState class >> getAccessToken [
 
 	^ 'BQBZXwtxc5yCEAznBT5QSwEklnLk04IOqnfUF1ScqWN4lPeR49qC8WUZzCNZnT_0O7suxLH69N-il5pNekHZXve1XQ6llqxxW0ktqHEy3bbNThD5WQDX86L5cCfPHJb9q-7Gs7yjvLlbvQ5LZOgYOaMFPIocfADeW6WZUgev3akszWVcqMeY22ej0G5jt-xLRudOdUYyQRAG9W5A48-ypg2VVadwiBQAW1BsyPyfvAha'
 ]
@@ -17,7 +17,7 @@ SPOCApiPlayer class >> getAccessToken [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'MH 5/22/2024 13:49'
 }
-SPOCApiPlayer >> endpoint [
+SPOCApiPlaybackState >> endpoint [
 	^ 'v1/me/player/'
 ]
 
@@ -25,7 +25,7 @@ SPOCApiPlayer >> endpoint [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'MH 5/22/2024 13:50'
 }
-SPOCApiPlayer >> endpointMethod [
+SPOCApiPlaybackState >> endpointMethod [
 	^ 'GET'
 ]
 
@@ -33,7 +33,7 @@ SPOCApiPlayer >> endpointMethod [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'MH 5/25/2024 14:01'
 }
-SPOCApiPlayer >> executeRequest: request withParams: aParamDictionary [
+SPOCApiPlaybackState >> executeRequest: request withParams: aParamDictionary [
 
 	request rawUrl: (request rawUrl,'?additional_types=', (aParamDictionary at: 'additional_types')).
 	Transcript showln: request.
@@ -44,7 +44,7 @@ SPOCApiPlayer >> executeRequest: request withParams: aParamDictionary [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'MH 5/22/2024 14:10'
 }
-SPOCApiPlayer >> executeTest [
+SPOCApiPlaybackState >> executeTest [
 
 	^ '{
   "device": {
@@ -189,7 +189,7 @@ SPOCApiPlayer >> executeTest [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'MH 5/22/2024 14:06'
 }
-SPOCApiPlayer >> tinkerReponseContent: aContentStream [
+SPOCApiPlaybackState >> tinkerReponseContent: aContentStream [
 	
 	^ Json readFrom: aContentStream
 	
