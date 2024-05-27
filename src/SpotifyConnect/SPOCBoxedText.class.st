@@ -2,8 +2,9 @@ Class {
 	#name : #SPOCBoxedText,
 	#superclass : #Morph,
 	#instVars : [
-		'text',
-		'content'
+		'label',
+		'content',
+		'anObject'
 	],
 	#category : #'SpotifyConnect-Utils'
 }
@@ -89,7 +90,7 @@ SPOCBoxedText >> centerBox [
 ]
 
 {
-	#category : #accessing,
+	#category : #updating,
 	#'squeak_changestamp' : 'VE 5/27/2024 20:33'
 }
 SPOCBoxedText >> color: aColor [
@@ -108,7 +109,7 @@ SPOCBoxedText >> content [
 ]
 
 {
-	#category : #accessing,
+	#category : #updating,
 	#'squeak_changestamp' : 'VE 5/27/2024 20:14'
 }
 SPOCBoxedText >> content: aString [
@@ -132,6 +133,22 @@ SPOCBoxedText >> initialize [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/27/2024 21:01'
+}
+SPOCBoxedText >> label [
+	^ label
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/27/2024 21:01'
+}
+SPOCBoxedText >> label: anObject [
+	label := anObject
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'VE 5/27/2024 20:15'
 }
 SPOCBoxedText >> leftBorderCircle [
@@ -147,23 +164,7 @@ SPOCBoxedText >> rightBorderCircle [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:35'
-}
-SPOCBoxedText >> text [
-	^ text
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:03'
-}
-SPOCBoxedText >> text: anObject [
-	text := anObject
-]
-
-{
-	#category : #'as yet unclassified',
+	#category : #updating,
 	#'squeak_changestamp' : 'VE 5/27/2024 20:46'
 }
 SPOCBoxedText >> updateAlignments [

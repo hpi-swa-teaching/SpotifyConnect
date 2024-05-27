@@ -38,7 +38,7 @@ SPOCClickable >> action: anObject [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'VE 5/27/2024 16:54'
 }
 SPOCClickable >> handlesMouseDown: anEvent [
@@ -46,7 +46,7 @@ SPOCClickable >> handlesMouseDown: anEvent [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'VE 5/27/2024 19:50'
 }
 SPOCClickable >> initialize [
@@ -56,7 +56,7 @@ SPOCClickable >> initialize [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'event handling',
 	#'squeak_changestamp' : 'VE 5/27/2024 16:55'
 }
 SPOCClickable >> mouseDown: anEvent [
