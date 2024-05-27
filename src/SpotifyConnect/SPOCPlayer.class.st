@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCPlayer,
-	#superclass : #Morph,
+	#superclass : #SPOCUIComponent,
 	#category : #SpotifyConnect
 }
 
