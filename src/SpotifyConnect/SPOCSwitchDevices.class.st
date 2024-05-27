@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'devices',
 		'devicesMorphs',
-		'button'
+		'button',
+		'activeDevice'
 	],
 	#category : #SpotifyConnect
 }
@@ -43,12 +44,28 @@ SPOCSwitchDevices class >> buttonWidth [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 20:45'
+	#'squeak_changestamp' : 'VK 5/27/2024 11:45'
+}
+SPOCSwitchDevices >> activeDevice [
+	^ activeDevice
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 5/27/2024 11:45'
+}
+SPOCSwitchDevices >> activeDevice: anObject [
+	activeDevice := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 5/27/2024 13:42'
 }
 SPOCSwitchDevices >> buildButton [
 
 	button := SimpleButtonMorph new.
-    	button color: SPOCStyle spotifyGray.
+    	button color: SPOCStyle spotifyGreen.
     	button extent: (SPOCSwitchDevices buttonWidth @ SPOCSwitchDevices buttonHeight).
     	button position: SPOCSwitchDevices buttonPosition.
     	button morphicLayerNumber: SPOCSwitchDevices baseLayer.
@@ -61,22 +78,25 @@ SPOCSwitchDevices >> buildButton [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 21:18'
+	#'squeak_changestamp' : 'VK 5/27/2024 14:14'
 }
 SPOCSwitchDevices >> buildResultMorphFrom: aDevice [
-	|  background deviceText  typeText |
+	|  deviceButton |
 	
-	background := RectangleMorph new
+	deviceButton := SimpleButtonMorph new
 		color: SPOCStyle spotifyGray;
-		extent: (SPOCSwitchDevices buttonWidth@(2 *  SPOCSwitchDevices buttonHeight));
-		morphicLayerNumber: SPOCSwitchDevices baseLayer.
-	deviceText := SPOCText newAt: (background topLeft + ((SPOCSwitchDevices buttonHeight * 0.25)@0)) withText: aDevice name.
-	typeText := SPOCText newAt: ((background bottomLeft + background topLeft) / 2 +  ((SPOCSwitchDevices buttonHeight * 0.25)@(self height negated * 0.5))) withText: (aDevice  type).
+		morphicLayerNumber: SPOCSwitchDevices baseLayer;
+		label: 'Name: ', aDevice name, ' || Type: ', aDevice type;
+		extent: ((SPOCSwitchDevices buttonWidth * 2)@SPOCSwitchDevices buttonHeight);
+    		target: self;
+    		actionSelector: #switchDeviceClicked.
+		"TODO: switchDeviceClicked method"
+	aDevice isActive 
+		ifTrue: [deviceButton color: SPOCStyle spotifyGreen.
+			activeDevice := aDevice].
 	^ Morph new
-		addMorph: background;
-		addMorph: deviceText;
-		addMorph: typeText;
-		vResizing: #shrinkWrap;
+		addMorph: deviceButton;
+		vResizing: #shrinkWrap; 
 		yourself
 ]
 
@@ -128,7 +148,7 @@ SPOCSwitchDevices >> devicesMorphs: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 5/25/2024 21:08'
+	#'squeak_changestamp' : 'VK 5/27/2024 13:15'
 }
 SPOCSwitchDevices >> displayDevices: anOrderedCollection [
 	| builder spec panel |
@@ -136,14 +156,11 @@ SPOCSwitchDevices >> displayDevices: anOrderedCollection [
 	self devicesMorphs isEmpty ifFalse: [self devicesMorphs removeAll].
 	anOrderedCollection do: [ :device |
 		self devicesMorphs add: (self buildResultMorphFrom: device)].
-	"To do: Implement action handling on trackMorphs
-	self trackMorphs do: [ :trackMorph |
-		trackMorph on: #mouseDown send: #chosen to: [trackMorph playTrack]]."
 	
 	builder := ToolBuilder default.
 	spec := builder pluggableScrollPaneSpec new
 		vScrollBarPolicy: #whenNeeded;
-		hScrollBarPolicy: #never;
+		hScrollBarPolicy: #whenNeeded;
 		yourself.
 	panel := builder build: spec.
 	panel scroller
@@ -152,7 +169,7 @@ SPOCSwitchDevices >> displayDevices: anOrderedCollection [
 		
 	panel
 		position: button bottomLeft;
-		extent: (SPOCSwitchDevices buttonWidth)@(SPOCSwitchDevices buttonHeight * 4);
+		extent: (SPOCSwitchDevices buttonWidth * 2)@(SPOCSwitchDevices buttonHeight * 4);
 		openInWorld
 ]
 
@@ -168,4 +185,12 @@ SPOCSwitchDevices >> initialize [
 		devices: OrderedCollection new;
 		buildButton;
 		yourself
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VK 5/27/2024 14:14'
+}
+SPOCSwitchDevices >> switchDeviceClicked [
+	"TODO"
 ]
