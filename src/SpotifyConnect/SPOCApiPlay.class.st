@@ -24,39 +24,30 @@ SPOCApiPlay >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/27/2024 14:08'
+	#'squeak_changestamp' : 'TL 5/27/2024 15:54'
 }
 SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 
-	"device_id kann angegeben werden muss aber nicht, aber wichtig für mehrere Geräte"
-	request rawUrl: (request rawUrl, '?device_id=',(aParamDictionary at: #device_id)).
-	Transcript showln: request.
+	request rawUrl: (request rawUrl, '?device_id=', (aParamDictionary at: #device_id)).
 	request headerAt: 'Content-Length' put: 0.
 	^ self client sendRequest: request.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 20:59'
+	#'squeak_changestamp' : 'TL 5/27/2024 15:51'
 }
 SPOCApiPlay >> executeTest [
 	
 	"Response code 204"
-	 ^ '{  "error": {
-
-    "status": 403,    "message": "Player command failed: Premium required",    "reason": "PREMIUM_REQUIRED"
-
-  }}' readStream
+	 ^ ''
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/27/2024 14:34'
+	#'squeak_changestamp' : 'TL 5/27/2024 15:53'
 }
 SPOCApiPlay >> tinkerReponseContent: aContentStream [
 	
-	"wenn alles gut gelaufen ist kommt keine respons, nur bei Fehler"
-	aContentStream
-		ifNil: [Transcript showln: 'content is nil'].
-	"^ Json readFrom: aContentStream"	
+	"wenn alles gut gelaufen ist, kommt keine response, sondern nur bei Fehler"
 ]

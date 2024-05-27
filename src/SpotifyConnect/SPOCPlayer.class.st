@@ -57,32 +57,27 @@ SPOCPlayer >> initializeLayout [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 5/27/2024 15:28'
+	#'squeak_changestamp' : 'TL 5/27/2024 15:45'
 }
 SPOCPlayer >> initializePlayPause [
 
 	"TODO: implement usage of SPOCButton and SPOCAssetImageMorph"
 	
-	| background button icon |
-	
+	| background button icon |	
 	background := Morph new
 		color: SPOCStyle spotifyWhite;
-		position: self position + (10 @ 10).
-	
+		position: self position + (10 @ 10).	
 	icon := SPOCAssetImageMorph new 
 		assetPath: self class playPauseIconPath;
-		position: background position + (10 @ 10).
-	
+		position: background position + (10 @ 10).	
 	background extent: icon extent + (20 @ 20).
-
 	button := SimpleButtonMorph new
 		label: '';
 		color: Color transparent;
 		position: background position + (10 @ 10);
 		extent: icon extent;
 		target: self;
-		actionSelector: #switchPlaybackState.
-	
+		actionSelector: #switchPlaybackState.	
 	self addMorphFront: background;
 		addMorphFront: icon;
 		addMorphFront: button
@@ -90,23 +85,20 @@ SPOCPlayer >> initializePlayPause [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 5/27/2024 15:33'
+	#'squeak_changestamp' : 'TL 5/27/2024 15:45'
 }
 SPOCPlayer >> initializeSkipNext [
 
 	"TODO: implement usage of SPOCButton and SPOCAssetImageMorph"
 	
-	| background button |
-	
+	| background button |	
 	background := Morph new
 		color: SPOCStyle spotifyWhite;
-		position: self position + (10 @ 100).
-	
+		position: self position + (10 @ 100).	
 	"icon := SPOCAssetImageMorph new 
 		assetPath: self class skipNextIconPath;
 		position: background position + (10 @ 10).
 	self addMorphFront: icon."
-
 	button := SimpleButtonMorph new
 		label: 'Skip';
 		color: Color transparent;
@@ -114,68 +106,66 @@ SPOCPlayer >> initializeSkipNext [
 		extent: 70 @ 30;
 		target: self;
 		actionSelector: #skipToNext.
-		
 	background extent: button extent + (20 @ 20).
-		
 	self addMorphFront: background;
 		addMorphFront: button
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/27/2024 15:03'
+	#'squeak_changestamp' : 'TL 5/27/2024 15:41'
 }
 SPOCPlayer >> isPlaying [
 
-	| apiEndpoint dict res app |
-	dict := Dictionary new.
-	dict at: #additional_types put: 'track'.
-	apiEndpoint := SPOCApiPlaybackState new. 
-	apiEndpoint authorizer: app auth.
-	res := apiEndpoint execute: dict.
-	^ res at: 'is_playing'stream
+	| apiEndpoint paramDict response app |
+	paramDict := Dictionary new
+		at: #additional_types put: 'track'.
+	apiEndpoint := SPOCApiPlaybackState new
+		authorizer: app auth.
+	response := apiEndpoint execute: paramDict.
+	^ response at: 'is_playing' stream
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'MH 5/27/2024 15:04'
+	#'squeak_changestamp' : 'TL 5/27/2024 15:48'
 }
 SPOCPlayer >> pause [
 
-	|dict3 res apiEndpoint app |
-	dict3 := Dictionary new.
-	dict3 at: #device_id put: self currentDevice.
-	apiEndpoint := SPOCApiPause new.
-	apiEndpoint authorizer: app auth.
-	res:= apiEndpoint execute: dict3.
+	| paramDict response apiEndpoint app |
+	paramDict := Dictionary new
+		at: #device_id put: self currentDevice.
+	apiEndpoint := SPOCApiPause new
+		authorizer: app auth.
+	response := apiEndpoint execute: paramDict
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/27/2024 15:04'
+	#'squeak_changestamp' : 'TL 5/27/2024 15:48'
 }
 SPOCPlayer >> play [
 
-	|dict2 apiEndpoint res app |
-	dict2 := Dictionary new.
-	dict2 at: #device_id put: self currentDevice.
-	apiEndpoint := SPOCApiPlay new.
-	apiEndpoint authorizer: app auth.
-	res:= apiEndpoint execute: dict2.
+	| paramDict apiEndpoint response app |
+	paramDict := Dictionary new
+		at: #device_id put: self currentDevice.
+	apiEndpoint := SPOCApiPlay new
+		authorizer: app auth.
+	response := apiEndpoint execute: paramDict
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'MH 5/27/2024 15:04'
+	#'squeak_changestamp' : 'TL 5/27/2024 15:49'
 }
 SPOCPlayer >> skipToNext [
 
-	|dict4 apiEndpoint res app |
-	dict4 := Dictionary new.
-	dict4 at: #device_id put: self currentDevice.
-	apiEndpoint := SPOCApiNext new.
-	apiEndpoint authorizer: app auth.
-	res:= apiEndpoint execute: dict4.
+	| paramDict apiEndpoint response app |
+	paramDict := Dictionary new
+		at: #device_id put: self currentDevice.
+	apiEndpoint := SPOCApiNext new
+		authorizer: app auth.
+	response := apiEndpoint execute: paramDict
 ]
 
 {
