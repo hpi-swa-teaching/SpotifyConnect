@@ -33,14 +33,15 @@ SPOCPlayer >> currentDevice [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 5/27/2024 01:14'
+	#'squeak_changestamp' : 'TL 5/27/2024 14:40'
 }
 SPOCPlayer >> initialize [
 
 	super initialize.
 	
 	self initializeLayout;
-		initializePlayPause
+		initializePlayPause;
+		initializeSkipNext
 ]
 
 {
@@ -56,7 +57,7 @@ SPOCPlayer >> initializeLayout [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 5/27/2024 12:18'
+	#'squeak_changestamp' : 'TL 5/27/2024 15:28'
 }
 SPOCPlayer >> initializePlayPause [
 
@@ -65,40 +66,74 @@ SPOCPlayer >> initializePlayPause [
 	| background button icon |
 	
 	background := Morph new
-		color: SPOCStyle spotifyGreen;
-		position: self position + (10 @ 10);
-		extent: 100 @ 100.
-	self addMorphFront: background.
+		color: SPOCStyle spotifyWhite;
+		position: self position + (10 @ 10).
 	
 	icon := SPOCAssetImageMorph new 
 		assetPath: self class playPauseIconPath;
 		position: background position + (10 @ 10).
-	self addMorphFront: icon.
+	
+	background extent: icon extent + (20 @ 20).
 
 	button := SimpleButtonMorph new
-		label: 'Play';
+		label: '';
 		color: Color transparent;
 		position: background position + (10 @ 10);
 		extent: icon extent;
 		target: self;
 		actionSelector: #switchPlaybackState.
-	self addMorphFront: button
+	
+	self addMorphFront: background;
+		addMorphFront: icon;
+		addMorphFront: button
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 5/27/2024 15:33'
+}
+SPOCPlayer >> initializeSkipNext [
+
+	"TODO: implement usage of SPOCButton and SPOCAssetImageMorph"
+	
+	| background button |
+	
+	background := Morph new
+		color: SPOCStyle spotifyWhite;
+		position: self position + (10 @ 100).
+	
+	"icon := SPOCAssetImageMorph new 
+		assetPath: self class skipNextIconPath;
+		position: background position + (10 @ 10).
+	self addMorphFront: icon."
+
+	button := SimpleButtonMorph new
+		label: 'Skip';
+		color: Color transparent;
+		position: background position + (10 @ 10);
+		extent: 70 @ 30;
+		target: self;
+		actionSelector: #skipToNext.
+		
+	background extent: button extent + (20 @ 20).
+		
+	self addMorphFront: background;
+		addMorphFront: button
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 5/27/2024 02:35'
+	#'squeak_changestamp' : 'TL 5/27/2024 15:38'
 }
 SPOCPlayer >> isPlaying [
 
-	| apiEndpoint dict res |
+	| apiEndpoint paramDict res app |
 	
-	dict := Dictionary new
+	paramDict := Dictionary new
 		at: #additional_types put: 'track'.
 	apiEndpoint := SPOCApiPlayer new.
-	"TODO: authorizer aus temporären Variablen raus" 
-	apiEndpoint authorizer: SPOCApiPlayer getAccessToken.
-	res := apiEndpoint execute: dict.
+	apiEndpoint authorizer: app auth.
+	res := apiEndpoint execute: paramDict.
 	"TODO: leere Json => noch nix gespielt, das irgendwie in Pop up machen"
 	Transcript showln: res.
 	^ res at: 'is_playing'
@@ -122,16 +157,16 @@ SPOCPlayer >> pause [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 5/27/2024 02:39'
+	#'squeak_changestamp' : 'TL 5/27/2024 15:34'
 }
 SPOCPlayer >> play [
 
 	"Hier  noch Zeug implementieren: Anfrage für Play"
-	|dict2 apiEndpoint res|
+	|dict2 apiEndpoint res app |
 	dict2 := Dictionary new.
 	dict2 at: #device_id put: self currentDevice.
 	apiEndpoint := SPOCApiPlay new.
-	apiEndpoint authorizer: SPOCApp auth.
+	apiEndpoint authorizer: app auth.
 	res:= apiEndpoint execute: dict2.
 ]
 
