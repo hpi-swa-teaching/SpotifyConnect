@@ -61,10 +61,10 @@ SPOCBoxedText >> attachRightBorderCircle [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 21:10'
+	#'squeak_changestamp' : 'VE 5/27/2024 21:18'
 }
 SPOCBoxedText >> attachText [
-	self label: TextMorph new.
+	self label: SPOCPlainText new.
 	self label contents: 'SPOCBoxedText'.
 	self addMorph: self label.
 ]

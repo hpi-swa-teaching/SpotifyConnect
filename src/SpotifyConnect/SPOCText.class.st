@@ -28,11 +28,9 @@ SPOCText >> handlesMouseDown: anEvent [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/21/2024 23:38'
+	#'squeak_changestamp' : 'VE 5/27/2024 21:13'
 }
 SPOCText >> initialize [
 	
-	super initialize.
-	
-	self morphicLayerNumber: 1
+	super initialize
 ]
