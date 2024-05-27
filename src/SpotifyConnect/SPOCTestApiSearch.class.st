@@ -1,32 +1,38 @@
 Class {
 	#name : #SPOCTestApiSearch,
 	#superclass : #SPOCTestApiEndpoint,
+	#instVars : [
+		'track'
+	],
 	#category : #'SpotifyConnect-Tests'
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 18:05'
+	#'squeak_changestamp' : 'VK 5/27/2024 16:40'
 }
 SPOCTestApiSearch >> setUp [
 	apiEndpoint := SPOCApiSearch new.
-	apiEndpoint returnsTestContent: true.
+	track := SPOCTrack new.
+	track id: '45c4L5n0wh6KRv0SOf879S'.
+	track name: 'Morning Blue'.
+	track album: nil.
+	track duration: 217.
+	track explicit: false.
+	track popularity: 59.
+	track trackNumber: 11.
+	apiEndpoint returnsTestContent: true
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 18:56'
+	#'squeak_changestamp' : 'VK 5/27/2024 16:46'
 }
 SPOCTestApiSearch >> testExecute [
-	| dict res track |
+	| dict res resTrack |
 	dict := Dictionary new.
 	res := apiEndpoint execute: dict.
-	track := res first.
-	self assert: track id = '45c4L5n0wh6KRv0SOf879S'.
-	self assert: track name = 'Morning Blue'.
-	self assert: track album class = SPOCAlbum.
-	self assert: track duration = 217.
-	self assert: track explicit = false.
-	self assert: track popularity = 59.
-	self assert: track trackNumber = 11.
+	resTrack := res first.
+	resTrack album: nil.
+	self assert: (track equals: resTrack)
 ]

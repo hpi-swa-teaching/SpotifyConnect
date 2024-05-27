@@ -1,9 +1,7 @@
 Class {
 	#name : #SPOCAlbum,
-	#superclass : #Object,
+	#superclass : #SPOCDataModels,
 	#instVars : [
-		'id',
-		'name',
 		'albumType',
 		'totalTracks',
 		'image',
@@ -64,6 +62,25 @@ SPOCAlbum >> artistsAsString [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'VK 5/27/2024 16:29'
+}
+SPOCAlbum >> equals: anAlbum [
+
+    ^ (self id = anAlbum id) 
+        & (self name = anAlbum name) 
+        & (self albumType = anAlbum albumType)
+        & (self totalTracks = anAlbum totalTracks)
+        & (self image = anAlbum image)
+        & (self releaseDate = anAlbum releaseDate)
+        & (self releaseDatePrecision = anAlbum releaseDatePrecision)
+        & (self type = anAlbum type)
+        & (self artists = anAlbum artists)
+        & (self genres = anAlbum genres)
+        & (self popularity = anAlbum popularity)
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'RK 5/15/2024 14:45'
 }
 SPOCAlbum >> genres [
@@ -80,22 +97,6 @@ SPOCAlbum >> genres: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:42'
-}
-SPOCAlbum >> id [
-	^ id
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:53'
-}
-SPOCAlbum >> id: aString [
-	id := aString
-]
-
-{
-	#category : #accessing,
 	#'squeak_changestamp' : 'RK 5/15/2024 16:14'
 }
 SPOCAlbum >> image [
@@ -108,22 +109,6 @@ SPOCAlbum >> image [
 }
 SPOCAlbum >> image: anImage [
 	image := anImage
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:42'
-}
-SPOCAlbum >> name [
-	^ name
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:55'
-}
-SPOCAlbum >> name: aString [
-	name := aString
 ]
 
 {

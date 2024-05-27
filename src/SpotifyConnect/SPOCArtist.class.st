@@ -1,9 +1,7 @@
 Class {
 	#name : #SPOCArtist,
-	#superclass : #Object,
+	#superclass : #SPOCDataModels,
 	#instVars : [
-		'id',
-		'name',
 		'followers',
 		'genres',
 		'href',
@@ -12,6 +10,22 @@ Class {
 	],
 	#category : #SpotifyConnect
 }
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 5/27/2024 16:28'
+}
+SPOCArtist >> equals: anArtist [
+
+    ^ (self id = anArtist id) 
+        & (self name = anArtist name) 
+        & (self followers = anArtist followers)
+        & (self genres = anArtist genres)
+        & (self href = anArtist href)
+        & (self image = anArtist image)
+        & (self popularity = anArtist popularity)
+
+]
 
 {
 	#category : #accessing,
@@ -65,22 +79,6 @@ SPOCArtist >> href: aString [
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 5/15/2024 16:18'
 }
-SPOCArtist >> id [
-	^ id
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:20'
-}
-SPOCArtist >> id: aString [
-	id := aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:18'
-}
 SPOCArtist >> image [
 	^ image
 ]
@@ -91,22 +89,6 @@ SPOCArtist >> image [
 }
 SPOCArtist >> image: anImage [
 	image := anImage
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:18'
-}
-SPOCArtist >> name [
-	^ name
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:20'
-}
-SPOCArtist >> name: aString [
-	name := aString
 ]
 
 {

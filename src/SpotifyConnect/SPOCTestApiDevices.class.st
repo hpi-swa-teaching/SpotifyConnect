@@ -1,33 +1,38 @@
 Class {
 	#name : #SPOCTestApiDevices,
 	#superclass : #SPOCTestApiEndpoint,
+	#instVars : [
+		'device'
+	],
 	#category : #'SpotifyConnect-Tests'
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 21:36'
+	#'squeak_changestamp' : 'VK 5/27/2024 16:32'
 }
 SPOCTestApiDevices >> setUp [
 	apiEndpoint := SPOCApiDevices new.
+	device := SPOCDevice new.
+	device id: 'string'.
+	device name: 'Kitchen speaker'.
+	device isActive: false.
+	device isPrivateSession: false.
+	device isRestricted: false.
+	device type: 'computer'.
+	device volume: 59.
+	device supportsVolume: false.
 	apiEndpoint returnsTestContent: true.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 21:42'
+	#'squeak_changestamp' : 'VK 5/27/2024 16:36'
 }
 SPOCTestApiDevices >> testExecute [
-	| dict res devices |
+	| dict res resDevice |
 	dict := Dictionary new.
 	res := apiEndpoint execute: dict.
-	devices := res first.
-	self assert: devices id = 'string'.
-	self assert: devices name = 'Kitchen speaker'.
-	self assert: devices isActive = false.
-	self assert: devices isPrivateSession = false.
-	self assert: devices isRestricted = false.
-	self assert: devices type = 'computer'.
-	self assert: devices volume = 59.
-	self assert: devices supportsVolume = false
+	resDevice := res first.
+	self assert: (device equals: resDevice)
 ]

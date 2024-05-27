@@ -7,18 +7,11 @@
 			'src'
 		]
 	},
-	SquotPlaintextMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'successResponse.html'
-		],
-		#encoding : 'TXT'
-	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'asset',
 			'button',
-			'skipNext.png'
+			'PlayPause.png'
 		],
 		#encoding : Class [ #PNGReadWriter ]
 	},
@@ -28,14 +21,21 @@
 			'assets',
 			'button.png'
 		],
-		#encoding : @9
+		#encoding : @7
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'asset',
 			'button',
-			'PlayPause.png'
+			'skipNext.png'
 		],
-		#encoding : @9
+		#encoding : @7
+	},
+	SquotPlaintextMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'successResponse.html'
+		],
+		#encoding : 'TXT'
 	}
 ]
