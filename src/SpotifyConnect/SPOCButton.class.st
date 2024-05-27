@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCButton,
-	#superclass : #SPOCStyle,
+	#superclass : #Morph,
 	#instVars : [
 		'action',
 		'iconPath'
