@@ -24,11 +24,11 @@ SPOCApiVolume >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/27/2024 00:52'
+	#'squeak_changestamp' : 'MH 5/27/2024 01:10'
 }
 SPOCApiVolume >> executeRequest: request withParams: aParameterDictionary [
 
-	request rawUrl: (request rawUrl,'?volume_percent=', (aParameterDictionary at: 'volume_percent')).
+	request rawUrl: (request rawUrl,'?volume_percent=', (aParameterDictionary at: 'volume_percent'),'&device_id=',(aParameterDictionary at: 'device_id')).
 	Transcript showln: request.
 	^ self client sendRequest: request
 	
