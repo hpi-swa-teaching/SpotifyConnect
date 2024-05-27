@@ -1,4 +1,11 @@
 [
+	SquotPlaintextMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'successResponse.html'
+		],
+		#encoding : 'TXT'
+	},
 	SquotTonelMapper {
 		#package : MCPackage {
 			#name : 'SpotifyConnect'
