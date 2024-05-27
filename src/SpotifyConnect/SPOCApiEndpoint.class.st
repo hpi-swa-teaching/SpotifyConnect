@@ -58,7 +58,7 @@ SPOCApiEndpoint >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 18:57'
+	#'squeak_changestamp' : 'MH 5/27/2024 13:43'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
 	| response request contentStream |
@@ -76,6 +76,7 @@ SPOCApiEndpoint >> execute: aParamDictionary [
 						ifFalse: [
 							"Use for executeTest string"
 							"Transcript showln: (response content)."
+							response explore.
 							contentStream := response content readStream.
 							^ self tinkerReponseContent: contentStream]]]
 ]

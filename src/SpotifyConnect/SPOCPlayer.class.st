@@ -122,46 +122,40 @@ SPOCPlayer >> initializeSkipNext [
 ]
 
 {
-	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 5/27/2024 15:38'
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'MH 5/27/2024 15:03'
 }
 SPOCPlayer >> isPlaying [
 
-	| apiEndpoint paramDict res app |
-	
-	paramDict := Dictionary new
-		at: #additional_types put: 'track'.
-	apiEndpoint := SPOCApiPlayer new.
+	| apiEndpoint dict res app |
+	dict := Dictionary new.
+	dict at: #additional_types put: 'track'.
+	apiEndpoint := SPOCApiPlaybackState new. 
 	apiEndpoint authorizer: app auth.
-	res := apiEndpoint execute: paramDict.
-	"TODO: leere Json => noch nix gespielt, das irgendwie in Pop up machen"
-	Transcript showln: res.
-	^ res at: 'is_playing'
+	res := apiEndpoint execute: dict.
+	^ res at: 'is_playing'stream
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'MH 5/26/2024 21:33'
+	#'squeak_changestamp' : 'MH 5/27/2024 15:04'
 }
 SPOCPlayer >> pause [
 
-	"hier noch zeug implementieren: die Anfrage für Pausieren"
-	|dict3 res apiEndpoint|
+	|dict3 res apiEndpoint app |
 	dict3 := Dictionary new.
 	dict3 at: #device_id put: self currentDevice.
 	apiEndpoint := SPOCApiPause new.
-	apiEndpoint authorizer: auth.
+	apiEndpoint authorizer: app auth.
 	res:= apiEndpoint execute: dict3.
-
 ]
 
 {
-	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 5/27/2024 15:34'
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'MH 5/27/2024 15:04'
 }
 SPOCPlayer >> play [
 
-	"Hier  noch Zeug implementieren: Anfrage für Play"
 	|dict2 apiEndpoint res app |
 	dict2 := Dictionary new.
 	dict2 at: #device_id put: self currentDevice.
@@ -172,25 +166,24 @@ SPOCPlayer >> play [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'MH 5/26/2024 21:39'
+	#'squeak_changestamp' : 'MH 5/27/2024 15:04'
 }
 SPOCPlayer >> skipToNext [
 
-	|dict4 apiEndpoint res|
+	|dict4 apiEndpoint res app |
 	dict4 := Dictionary new.
 	dict4 at: #device_id put: self currentDevice.
 	apiEndpoint := SPOCApiNext new.
-	apiEndpoint authorizer: auth.
+	apiEndpoint authorizer: app auth.
 	res:= apiEndpoint execute: dict4.
 ]
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'MH 5/26/2024 13:51'
+	#'squeak_changestamp' : 'MH 5/27/2024 14:49'
 }
 SPOCPlayer >> switchPlaybackState [
 
-	"Hier check von is playing, jenachdem wird eine andere Funktion aufgerufen"
 	self isPlaying 
 		ifTrue: [self pause]
 		ifFalse: [self play]
