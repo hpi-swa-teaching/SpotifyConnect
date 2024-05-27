@@ -1,9 +1,7 @@
 Class {
 	#name : #SPOCTrack,
-	#superclass : #Object,
+	#superclass : #SPOCDataModels,
 	#instVars : [
-		'id',
-		'name',
 		'artists',
 		'album',
 		'duration',
@@ -80,6 +78,22 @@ SPOCTrack >> durationAsFormattedTime [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'VK 5/27/2024 16:27'
+}
+SPOCTrack >> equals: aTrack [
+
+    ^ (self id = aTrack id) 
+        & (self name = aTrack name) 
+        & (self artists = aTrack artists)
+        & (self album = aTrack album)
+        & (self duration = aTrack duration)
+        & (self explicit = aTrack explicit)
+        & (self popularity = aTrack popularity)
+        & (self trackNumber = aTrack trackNumber)
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
 }
 SPOCTrack >> explicit [
@@ -92,38 +106,6 @@ SPOCTrack >> explicit [
 }
 SPOCTrack >> explicit: aBoolean [
 	explicit := aBoolean
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/13/2024 17:08'
-}
-SPOCTrack >> id [
-	^ id
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/13/2024 17:08'
-}
-SPOCTrack >> id: anObject [
-	id := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/13/2024 17:08'
-}
-SPOCTrack >> name [
-	^ name
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/13/2024 17:08'
-}
-SPOCTrack >> name: anObject [
-	name := anObject
 ]
 
 {
