@@ -15,21 +15,21 @@ SPOCAssetImageMorph class >> gitRepoName [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 01:32'
+	#'squeak_changestamp' : 'TL 5/27/2024 12:12'
 }
 SPOCAssetImageMorph >> assetPath: anAssetPath [
 
-	self image: (self loadAssetForm: anAssetPath).
+	self image: (self loadAsset: anAssetPath).
 	self changed
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 01:32'
+	#'squeak_changestamp' : 'TL 5/27/2024 12:12'
 }
-SPOCAssetImageMorph >> loadAssetForm: anAssetPath [
+SPOCAssetImageMorph >> loadAsset: anAssetPath [
 
-	^ (GitAssetLoader for: self class gitRepoName) loadForm: anAssetPath
+	^ (GitAssetLoader for: self class gitRepoName) loadAsset: anAssetPath
 ]
 
 {

@@ -14,6 +14,15 @@ SPOCPlayer class >> playPauseIconPath [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 5/27/2024 12:07'
+}
+SPOCPlayer class >> skipNextIconPath [
+
+	^ 'asset/button/skipNext'
+]
+
+{
 	#category : #'dev-examples',
 	#'squeak_changestamp' : 'MH 5/26/2024 21:32'
 }
@@ -36,28 +45,44 @@ SPOCPlayer >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 5/27/2024 01:51'
+	#'squeak_changestamp' : 'TL 5/27/2024 11:56'
 }
 SPOCPlayer >> initializeLayout [
 
-	self extent: 500 @ 200;
+	self extent: 1000 @ 300;
 		position: 100 @ 100;
-		color: SPOCStyle spotifyWhite
+		color: SPOCStyle spotifyBlack
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 5/27/2024 02:45'
+	#'squeak_changestamp' : 'TL 5/27/2024 12:18'
 }
 SPOCPlayer >> initializePlayPause [
 
-	| icon playpause |
+	"TODO: implement usage of SPOCButton and SPOCAssetImageMorph"
+	
+	| background button icon |
+	
+	background := Morph new
+		color: SPOCStyle spotifyGreen;
+		position: self position + (10 @ 10);
+		extent: 100 @ 100.
+	self addMorphFront: background.
+	
+	icon := SPOCAssetImageMorph new 
+		assetPath: self class playPauseIconPath;
+		position: background position + (10 @ 10).
+	self addMorphFront: icon.
 
-	"icon := SPOCAssetImageMorph new 
-		assetPath: self class playPauseIconPath."
-	playpause := SPOCButton new
-		iconPath: self class playPauseIconPath.
-	self addMorphFront: playpause
+	button := SimpleButtonMorph new
+		label: 'Play';
+		color: Color transparent;
+		position: background position + (10 @ 10);
+		extent: icon extent;
+		target: self;
+		actionSelector: #switchPlaybackState.
+	self addMorphFront: button
 ]
 
 {

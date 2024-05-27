@@ -2,14 +2,30 @@ Class {
 	#name : #SPOCButton,
 	#superclass : #SPOCStyle,
 	#instVars : [
-		'iconPath',
-		'button'
+		'action',
+		'iconPath'
 	],
 	#classInstVars : [
 		'color'
 	],
 	#category : #'SpotifyConnect-Utils'
 }
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 5/27/2024 02:57'
+}
+SPOCButton >> action [
+	^ action
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 5/27/2024 02:57'
+}
+SPOCButton >> action: anObject [
+	action := anObject
+]
 
 {
 	#category : #accessing,
