@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'lastEvt'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-Utils'
 }
 
 {
