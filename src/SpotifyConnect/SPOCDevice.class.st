@@ -1,12 +1,10 @@
 Class {
 	#name : #SPOCDevice,
-	#superclass : #Object,
+	#superclass : #SPOCDataModels,
 	#instVars : [
-		'id',
 		'isActive',
 		'isPrivateSession',
 		'isRestricted',
-		'name',
 		'type',
 		'volume',
 		'supportsVolume'
@@ -16,18 +14,18 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:05'
+	#'squeak_changestamp' : 'VK 5/27/2024 16:25'
 }
-SPOCDevice >> id [
-	^ id
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:05'
-}
-SPOCDevice >> id: anObject [
-	id := anObject
+SPOCDevice >> equals: aDevice [
+	
+	^ (self id = aDevice id) 
+		& (self name = aDevice name) 
+		& (self isActive = aDevice isActive)
+		& (self isPrivateSession = aDevice isPrivateSession)
+		& (self isRestricted = aDevice isRestricted)
+		& (self supportsVolume = aDevice supportsVolume)
+		& (self type = aDevice type)
+		& (self volume = aDevice volume)
 ]
 
 {
@@ -76,22 +74,6 @@ SPOCDevice >> isRestricted [
 }
 SPOCDevice >> isRestricted: anObject [
 	isRestricted := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:06'
-}
-SPOCDevice >> name [
-	^ name
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:06'
-}
-SPOCDevice >> name: anObject [
-	name := anObject
 ]
 
 {

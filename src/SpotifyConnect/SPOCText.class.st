@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCText,
-	#superclass : #Morph,
+	#superclass : #TextMorph,
 	#category : #'SpotifyConnect-Utils'
 }
 

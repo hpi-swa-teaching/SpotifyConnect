@@ -1,5 +1,5 @@
 Class {
-	#name : #SPOCSwitchDevices,
+	#name : #SPOCSwitchDevice,
 	#superclass : #RectangleMorph,
 	#instVars : [
 		'devices',
@@ -14,7 +14,7 @@ Class {
 	#category : #'class variables',
 	#'squeak_changestamp' : 'VK 5/25/2024 20:29'
 }
-SPOCSwitchDevices class >> baseLayer [
+SPOCSwitchDevice class >> baseLayer [
 	^500
 ]
 
@@ -22,7 +22,7 @@ SPOCSwitchDevices class >> baseLayer [
 	#category : #'class variables',
 	#'squeak_changestamp' : 'VK 5/25/2024 20:28'
 }
-SPOCSwitchDevices class >> buttonHeight [
+SPOCSwitchDevice class >> buttonHeight [
 	^50
 ]
 
@@ -30,7 +30,7 @@ SPOCSwitchDevices class >> buttonHeight [
 	#category : #'class variables',
 	#'squeak_changestamp' : 'VK 5/25/2024 20:26'
 }
-SPOCSwitchDevices class >> buttonPosition [
+SPOCSwitchDevice class >> buttonPosition [
 	^ 100@500
 ]
 
@@ -38,7 +38,7 @@ SPOCSwitchDevices class >> buttonPosition [
 	#category : #'class variables',
 	#'squeak_changestamp' : 'VK 5/25/2024 20:28'
 }
-SPOCSwitchDevices class >> buttonWidth [
+SPOCSwitchDevice class >> buttonWidth [
 	^200
 ]
 
@@ -46,7 +46,7 @@ SPOCSwitchDevices class >> buttonWidth [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 5/27/2024 11:45'
 }
-SPOCSwitchDevices >> activeDevice [
+SPOCSwitchDevice >> activeDevice [
 	^ activeDevice
 ]
 
@@ -54,21 +54,21 @@ SPOCSwitchDevices >> activeDevice [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 5/27/2024 11:45'
 }
-SPOCSwitchDevices >> activeDevice: anObject [
+SPOCSwitchDevice >> activeDevice: anObject [
 	activeDevice := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/27/2024 13:42'
+	#'squeak_changestamp' : 'VK 5/27/2024 17:54'
 }
-SPOCSwitchDevices >> buildButton [
+SPOCSwitchDevice >> buildButton [
 
 	button := SimpleButtonMorph new.
     	button color: SPOCStyle spotifyGreen.
-    	button extent: (SPOCSwitchDevices buttonWidth @ SPOCSwitchDevices buttonHeight).
-    	button position: SPOCSwitchDevices buttonPosition.
-    	button morphicLayerNumber: SPOCSwitchDevices baseLayer.
+    	button extent: (SPOCSwitchDevice buttonWidth @ SPOCSwitchDevice buttonHeight).
+    	button position: SPOCSwitchDevice buttonPosition.
+    	button morphicLayerNumber: SPOCSwitchDevice baseLayer.
     	button label: 'show devices'.
     	button target: self.
     	button actionSelector: #currentDevices.
@@ -78,16 +78,16 @@ SPOCSwitchDevices >> buildButton [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/27/2024 14:14'
+	#'squeak_changestamp' : 'VK 5/27/2024 17:54'
 }
-SPOCSwitchDevices >> buildResultMorphFrom: aDevice [
+SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 	|  deviceButton |
 	
 	deviceButton := SimpleButtonMorph new
 		color: SPOCStyle spotifyGray;
-		morphicLayerNumber: SPOCSwitchDevices baseLayer;
+		morphicLayerNumber: SPOCSwitchDevice baseLayer;
 		label: 'Name: ', aDevice name, ' || Type: ', aDevice type;
-		extent: ((SPOCSwitchDevices buttonWidth * 2)@SPOCSwitchDevices buttonHeight);
+		extent: ((SPOCSwitchDevice buttonWidth * 2)@SPOCSwitchDevice buttonHeight);
     		target: self;
     		actionSelector: #switchDeviceClicked.
 		"TODO: switchDeviceClicked method"
@@ -102,23 +102,39 @@ SPOCSwitchDevices >> buildResultMorphFrom: aDevice [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 5/25/2024 21:00'
+	#'squeak_changestamp' : 'VK 5/27/2024 18:09'
 }
-SPOCSwitchDevices >> currentDevices [
+SPOCSwitchDevice >> currentDevices [
 	| dict apiEndpoint |
 	
 	dict := Dictionary new.
 	apiEndpoint := SPOCApiDevices new.
 	apiEndpoint authorizer: (Smalltalk at: #auth).
 	self devices: (apiEndpoint execute: dict).
-	self displayDevices: devices
+	self displayResults: devices
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 5/27/2024 17:55'
+}
+SPOCSwitchDevice >> deviceMorphs [
+	^ devicesMorphs
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 5/27/2024 17:55'
+}
+SPOCSwitchDevice >> deviceMorphs: anObject [
+	devicesMorphs := anObject
 ]
 
 {
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 5/25/2024 20:03'
 }
-SPOCSwitchDevices >> devices [
+SPOCSwitchDevice >> devices [
 	^ devices
 ]
 
@@ -126,62 +142,32 @@ SPOCSwitchDevices >> devices [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 5/25/2024 20:03'
 }
-SPOCSwitchDevices >> devices: anObject [
+SPOCSwitchDevice >> devices: anObject [
 	devices := anObject
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 20:03'
+	#category : #initialization,
+	#'squeak_changestamp' : 'VK 5/27/2024 18:09'
 }
-SPOCSwitchDevices >> devicesMorphs [
-	^ devicesMorphs
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 20:03'
-}
-SPOCSwitchDevices >> devicesMorphs: anObject [
-	devicesMorphs := anObject
+SPOCSwitchDevice >> displayResults: anOrderedCollection [
+	| deviceList |
+	
+	deviceList := SPOCList new.
+	deviceList items: anOrderedCollection.
+	deviceList buildItemMorphsWith: [ :value | self buildResultMorphFrom: value].
+	deviceList buildPanelAtPos: button bottomLeft withExtent: (SPOCSwitchDevice buttonWidth * 2)@(SPOCSwitchDevice buttonHeight * 4)
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 5/27/2024 13:15'
+	#'squeak_changestamp' : 'VK 5/27/2024 17:55'
 }
-SPOCSwitchDevices >> displayDevices: anOrderedCollection [
-	| builder spec panel |
-	
-	self devicesMorphs isEmpty ifFalse: [self devicesMorphs removeAll].
-	anOrderedCollection do: [ :device |
-		self devicesMorphs add: (self buildResultMorphFrom: device)].
-	
-	builder := ToolBuilder default.
-	spec := builder pluggableScrollPaneSpec new
-		vScrollBarPolicy: #whenNeeded;
-		hScrollBarPolicy: #whenNeeded;
-		yourself.
-	panel := builder build: spec.
-	panel scroller
-		layoutPolicy: TableLayout new;
-		addAllMorphs: devicesMorphs.
-		
-	panel
-		position: button bottomLeft;
-		extent: (SPOCSwitchDevices buttonWidth * 2)@(SPOCSwitchDevices buttonHeight * 4);
-		openInWorld
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'VK 5/25/2024 20:30'
-}
-SPOCSwitchDevices >> initialize [
+SPOCSwitchDevice >> initialize [
 	super initialize.
 	
 	self
-		devicesMorphs: OrderedCollection new;
+		deviceMorphs: OrderedCollection new;
 		devices: OrderedCollection new;
 		buildButton;
 		yourself
@@ -191,6 +177,6 @@ SPOCSwitchDevices >> initialize [
 	#category : #initialization,
 	#'squeak_changestamp' : 'VK 5/27/2024 14:14'
 }
-SPOCSwitchDevices >> switchDeviceClicked [
+SPOCSwitchDevice >> switchDeviceClicked [
 	"TODO"
 ]

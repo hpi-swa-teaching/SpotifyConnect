@@ -78,7 +78,7 @@ SPOCSearchbar >> buildResultMorphFrom: aTrack [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/21/2024 16:31'
+	#'squeak_changestamp' : 'VK 5/27/2024 18:16'
 }
 SPOCSearchbar >> buildSearchbar [
 		
@@ -94,32 +94,15 @@ SPOCSearchbar >> buildSearchbar [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/21/2024 23:33'
+	#'squeak_changestamp' : 'VK 5/27/2024 18:12'
 }
 SPOCSearchbar >> displayResults: anOrderedCollection [
-	| builder spec panel |
 	
-	self trackMorphs isEmpty ifFalse: [self trackMorphs removeAll].
-	anOrderedCollection do: [ :track |
-		self trackMorphs add: (self buildResultMorphFrom: track)].
-	"To do: Implement action handling on trackMorphs
-	self trackMorphs do: [ :trackMorph |
-		trackMorph on: #mouseDown send: #chosen to: [trackMorph playTrack]]."
-	
-	builder := ToolBuilder default.
-	spec := builder pluggableScrollPaneSpec new
-		vScrollBarPolicy: #whenNeeded;
-		hScrollBarPolicy: #never;
-		yourself.
-	panel := builder build: spec.
-	panel scroller
-		layoutPolicy: TableLayout new;
-		addAllMorphs: trackMorphs.
-		
-	panel
-		position: self bottomLeft;
-		extent: (SPOCSearchbar searchbarWidth)@(SPOCSearchbar searchbarHeight * 10);
-		openInWorld
+	| trackList |
+	trackList := SPOCList new.
+	trackList items: anOrderedCollection.
+	trackList buildItemMorphsWith: [ :value | self buildResultMorphFrom: value].
+	trackList buildPanelAtPos: self bottomLeft withExtent: (SPOCSearchbar searchbarWidth)@(SPOCSearchbar searchbarHeight * 10)
 ]
 
 {
