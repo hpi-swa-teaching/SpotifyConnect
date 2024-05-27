@@ -58,7 +58,7 @@ SPOCApiEndpoint >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 15:55'
+	#'squeak_changestamp' : 'VE 5/27/2024 16:44'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
 	| response request contentStream |
@@ -69,15 +69,11 @@ SPOCApiEndpoint >> execute: aParamDictionary [
 				ifNotNil: [request := self tinkerRequest.
 					response := self executeRequest: request withParams: aParamDictionary.
 					response code = 401
-						ifTrue: [authorizer refreshAccessToken.
-							authorizer isAuthorized
-								ifTrue: [^ self execute: aParamDictionary]
-								ifFalse: [^ self error: 'Could not refresh access token']]
-						ifFalse: [
-							"Use for executeTest string"
-							"Transcript showln: (response content)."
-							contentStream := response content readStream.
-							^ self tinkerReponseContent: contentStream]]]
+						ifTrue: [^ self refreshAccessTokenAndExecute: aParamDictionary]
+						ifFalse: [response code = 200
+								ifTrue: [contentStream := response content readStream.
+									^ self tinkerReponseContent: contentStream]
+								ifFalse: [^ nil]]]]
 ]
 
 {
@@ -105,6 +101,17 @@ SPOCApiEndpoint >> initialize [
 	super initialize.
 	
 	self returnsTestContent: false.
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 5/27/2024 16:39'
+}
+SPOCApiEndpoint >> refreshAccessTokenAndExecute: aParamDictionary [
+	authorizer refreshAccessToken.
+	authorizer isAuthorized
+		ifTrue: [^ self execute: aParamDictionary]
+		ifFalse: [^ self error: 'Could not refresh access token']
 ]
 
 {
