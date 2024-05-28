@@ -4,10 +4,19 @@ Class {
 	#instVars : [
 		'label',
 		'content',
-		'anObject'
+		'anObject',
+		'contents'
 	],
 	#category : #'SpotifyConnect-Utils'
 }
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 5/28/2024 13:28'
+}
+SPOCBoxedText class >> defaultContent [
+	^ 'SPOCBoxedText'
+]
 
 {
 	#category : #'as yet unclassified',
@@ -109,17 +118,25 @@ SPOCBoxedText >> content [
 ]
 
 {
-	#category : #updating,
-	#'squeak_changestamp' : 'VE 5/27/2024 21:11'
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 13:27'
 }
-SPOCBoxedText >> content: aString [
+SPOCBoxedText >> contents [
+	^ contents
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'VE 5/28/2024 13:27'
+}
+SPOCBoxedText >> contents: aString [
 	self label contents: aString.
 	self updateAlignments.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:34'
+	#'squeak_changestamp' : 'VE 5/28/2024 13:28'
 }
 SPOCBoxedText >> initialize [
 	super initialize.
@@ -128,6 +145,7 @@ SPOCBoxedText >> initialize [
 		attachRightBorderCircle; 
 		attachCenterBox;
 		attachText;
+		contents: SPOCBoxedText defaultContent;
 		color: SPOCStyle spotifyWhite.
 ]
 

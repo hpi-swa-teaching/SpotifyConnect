@@ -9,6 +9,14 @@ Class {
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 5/28/2024 13:37'
+}
+SPOCIcon class >> defaultAsset [
+	^ '/assets/play.png'
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 5/27/2024 19:41'
 }
 SPOCIcon class >> iconScaling [
@@ -51,21 +59,23 @@ SPOCIcon >> icon: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 19:41'
+	#'squeak_changestamp' : 'VE 5/28/2024 13:36'
 }
 SPOCIcon >> iconAsset: anAssetPath [
 	self icon assetPath: anAssetPath.
-	self icon magnifyBy: SPOCContainedIcon iconScaling.
+	self icon magnifyBy: SPOCIcon iconScaling.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 19:46'
+	#'squeak_changestamp' : 'VE 5/28/2024 13:36'
 }
 SPOCIcon >> initialize [
 	super initialize.
 	
-	self attachIcon; initializeStyle.
+	self attachIcon; 
+		initializeStyle;
+		iconAsset: SPOCIcon defaultAsset.
 ]
 
 {
