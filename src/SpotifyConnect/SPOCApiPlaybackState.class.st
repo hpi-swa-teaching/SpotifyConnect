@@ -15,11 +15,11 @@ SPOCApiPlaybackState class >> getAccessToken [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 15:49'
+	#'squeak_changestamp' : 'TL 5/27/2024 17:06'
 }
 SPOCApiPlaybackState >> endpoint [
 
-	^ 'v1/me/player/'
+	^ 'v1/me/player'
 ]
 
 {
@@ -33,11 +33,12 @@ SPOCApiPlaybackState >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 15:50'
+	#'squeak_changestamp' : 'TL 5/27/2024 16:54'
 }
 SPOCApiPlaybackState >> executeRequest: request withParams: aParamDictionary [
 
 	request rawUrl: (request rawUrl, '?additional_types=', (aParamDictionary at: 'additional_types')).
+	Transcript showln: request.
 	^ self client sendRequest: request
 ]
 

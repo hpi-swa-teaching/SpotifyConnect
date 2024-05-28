@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCPlayer,
-	#superclass : #Morph,
+	#superclass : #SPOCUIComponent,
 	#category : #SpotifyConnect
 }
 
@@ -113,58 +113,60 @@ SPOCPlayer >> initializeSkipNext [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 15:41'
+	#'squeak_changestamp' : 'TL 5/27/2024 17:48'
 }
 SPOCPlayer >> isPlaying [
 
-	| apiEndpoint paramDict response app |
-	paramDict := Dictionary new
-		at: #additional_types put: 'track'.
-	apiEndpoint := SPOCApiPlaybackState new
-		authorizer: app auth.
+	| apiEndpoint paramDict response |
+	paramDict := Dictionary new.
+	paramDict at: #additional_types put: 'track'.
+	apiEndpoint := SPOCApiPlaybackState new.
+	Transcript showln: app auth accessToken.
+	apiEndpoint authorizer: app auth.
 	response := apiEndpoint execute: paramDict.
-	^ response at: 'is_playing' stream
+	Transcript showln: response.
+	^ response at: 'is_playing'
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 5/27/2024 15:48'
+	#'squeak_changestamp' : 'TL 5/27/2024 16:40'
 }
 SPOCPlayer >> pause [
 
-	| paramDict response apiEndpoint app |
-	paramDict := Dictionary new
-		at: #device_id put: self currentDevice.
-	apiEndpoint := SPOCApiPause new
-		authorizer: app auth.
+	| paramDict response apiEndpoint |
+	paramDict := Dictionary new.
+	paramDict at: #device_id put: self currentDevice.
+	apiEndpoint := SPOCApiPause new.
+	apiEndpoint authorizer: app auth.
 	response := apiEndpoint execute: paramDict
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 15:48'
+	#'squeak_changestamp' : 'TL 5/27/2024 16:41'
 }
 SPOCPlayer >> play [
 
-	| paramDict apiEndpoint response app |
-	paramDict := Dictionary new
-		at: #device_id put: self currentDevice.
-	apiEndpoint := SPOCApiPlay new
-		authorizer: app auth.
+	| paramDict apiEndpoint response |
+	paramDict := Dictionary new.
+	paramDict at: #device_id put: self currentDevice.
+	apiEndpoint := SPOCApiPlay new.
+	apiEndpoint authorizer: app auth.
 	response := apiEndpoint execute: paramDict
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 5/27/2024 15:49'
+	#'squeak_changestamp' : 'TL 5/27/2024 16:41'
 }
 SPOCPlayer >> skipToNext [
 
-	| paramDict apiEndpoint response app |
-	paramDict := Dictionary new
-		at: #device_id put: self currentDevice.
-	apiEndpoint := SPOCApiNext new
-		authorizer: app auth.
+	| paramDict apiEndpoint response |
+	paramDict := Dictionary new.
+	paramDict 	at: #device_id put: self currentDevice.
+	apiEndpoint := SPOCApiNext new.
+	apiEndpoint authorizer: app auth.
 	response := apiEndpoint execute: paramDict
 ]
 
