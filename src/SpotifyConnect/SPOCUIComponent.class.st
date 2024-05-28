@@ -22,3 +22,22 @@ SPOCUIComponent >> app [
 SPOCUIComponent >> app: anObject [
 	app := anObject
 ]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 14:14'
+}
+SPOCUIComponent >> attachButton [
+	| txt |
+	txt := SPOCBoxedText new contents: 'Login'; yourself.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 14:13'
+}
+SPOCUIComponent >> initialize [
+	super initialize.
+	
+	self attachButton.
+]

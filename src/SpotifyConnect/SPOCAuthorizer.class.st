@@ -275,12 +275,12 @@ SPOCAuthorizer >> retreiveAccessTokenWithAccessCode: anAccessCode [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/22/2024 18:38'
+	#'squeak_changestamp' : 'VE 5/28/2024 14:47'
 }
 SPOCAuthorizer >> setupCallbackService [
 
 	WebServer default removeService: SPOCAuthorizer redirectRoute.
-	WebServer default addService: SPOCAuthorizer redirectRoute action: [:aRequest | self callback: aRequest]
+	WebServer default addService: SPOCAuthorizer redirectRoute action: [:aRequest | self callback: aRequest].
 ]
 
 {
