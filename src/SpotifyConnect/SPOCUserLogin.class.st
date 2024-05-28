@@ -1,27 +1,83 @@
 Class {
 	#name : #SPOCUserLogin,
 	#superclass : #SPOCUIComponent,
+	#instVars : [
+		'text',
+		'button',
+		'buttonLabel'
+	],
 	#category : #SpotifyConnect
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/28/2024 14:38'
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:59'
 }
 SPOCUserLogin >> attachButton [
-	| btn txt |
-	txt := SPOCBoxedText new contents: 'Login'; yourself.
-	btn := SPOCClickable newUsing: txt onClick: [:enEvent | self app auth startAuthorization].
-	self addMorph: btn.
+
+	self text: (SPOCBoxedText new contents: self buttonLabel; yourself);
+		button: ( SPOCClickable newUsing: text onClick: [:enEvent | self app auth startAuthorization]);
+		addMorph: self button.
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/28/2024 14:39'
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:59'
+}
+SPOCUserLogin >> button [
+	^ button
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:59'
+}
+SPOCUserLogin >> button: anObject [
+	button := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:58'
+}
+SPOCUserLogin >> buttonLabel [
+	^ buttonLabel
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:58'
+}
+SPOCUserLogin >> buttonLabel: anObject [
+	buttonLabel := anObject
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:58'
 }
 SPOCUserLogin >> initialize [
 	super initialize.
 	
 	self color: Color transparent;
-		attachButton.
+		buttonLabel: 'Login';
+		attachButton;
+		extendFully.
+		
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:59'
+}
+SPOCUserLogin >> text [
+	^ text
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:59'
+}
+SPOCUserLogin >> text: anObject [
+	text := anObject
 ]

@@ -3,38 +3,22 @@ Class {
 	#superclass : #Morph,
 	#instVars : [
 		'wrappee',
-		'action'
+		'onClick'
 	],
 	#category : #'SpotifyConnect-Utils'
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 17:12'
+	#'squeak_changestamp' : 'VE 5/28/2024 20:55'
 }
 SPOCClickable class >> newUsing: aWrappeeMorph onClick: aBlock [
 	| inst |
 	inst := self basicNew.
 	inst wrappee: aWrappeeMorph.
-	inst action: aBlock.
+	inst onClick: aBlock.
 	inst initialize.
 	^ inst
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 16:54'
-}
-SPOCClickable >> action [
-	^ action
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 16:54'
-}
-SPOCClickable >> action: anObject [
-	action := anObject
 ]
 
 {
@@ -47,20 +31,38 @@ SPOCClickable >> handlesMouseDown: anEvent [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 19:50'
+	#'squeak_changestamp' : 'VE 5/28/2024 20:56'
 }
 SPOCClickable >> initialize [
 	super initialize.
 	
-	self addMorph: self wrappee; extent: self wrappee extent; color: Color transparent.
+	self addMorph: self wrappee; 
+		extent: self wrappee extent; 
+		color: Color transparent.
 ]
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'VE 5/27/2024 16:55'
+	#'squeak_changestamp' : 'VE 5/28/2024 20:55'
 }
 SPOCClickable >> mouseDown: anEvent [
-	self action value: anEvent.
+	self onClick value: anEvent.
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:55'
+}
+SPOCClickable >> onClick [
+	^ onClick
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:55'
+}
+SPOCClickable >> onClick: aBlock [
+	onClick := aBlock
 ]
 
 {

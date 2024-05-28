@@ -2,7 +2,8 @@ Class {
 	#name : #SPOCApp,
 	#superclass : #Model,
 	#instVars : [
-		'auth'
+		'auth',
+		'userLogin'
 	],
 	#category : #SpotifyConnect
 }
@@ -13,6 +14,15 @@ Class {
 }
 SPOCApp class >> appName [
 	^ 'Spotify Connect'.
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:52'
+}
+SPOCApp class >> minimalPanelSize [ 
+	
+	^ 1008@591 
 ]
 
 {
@@ -50,21 +60,23 @@ SPOCApp >> auth: anObject [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
+	#category : #ui,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:23'
 }
 SPOCApp >> buildLoginPanel: aBuilder [
-
+	| proportionalSize |
+	proportionalSize := self proportionalPanelSizeOf: self userLogin.
 	^ aBuilder pluggablePanelSpec new
 		model: self;
 		children: #loginPanelContent;
-		frame: (Rectangle origin: (0.9@0) corner: (1@0.05));
+		layout: #proportional;
+		frame: (LayoutFrame fractions: ((1-proportionalSize x)@0 corner: 1@proportionalSize y));
 		yourself
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
+	#category : #ui,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:25'
 }
 SPOCApp >> buildWindow: aBuilder [
 
@@ -73,12 +85,11 @@ SPOCApp >> buildWindow: aBuilder [
 		label: #windowTitle;
 		minimumExtent: SPOCApp minimumExtent;
 		children: {self buildLoginPanel: aBuilder};
-		defaultFocus: nil;
 		yourself.
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #ui,
 	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
 }
 SPOCApp >> buildWith: aBuilder [
@@ -87,29 +98,31 @@ SPOCApp >> buildWith: aBuilder [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/28/2024 14:55'
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:00'
 }
 SPOCApp >> initialize [
 
 	super initialize.
 	
-	self auth: SPOCAuthorizer new; registerOpenCommand.
+	self auth: SPOCAuthorizer new; 
+		registerOpenCommand;
+		userLogin: (SPOCUserLogin new app: self; yourself).
 
 
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
+	#category : #ui,
+	#'squeak_changestamp' : 'VE 5/28/2024 19:59'
 }
 SPOCApp >> loginPanelContent [
 
-	^ { SPOCUserLogin new app: self; yourself}
+	^ {self userLogin}
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #ui,
 	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
 }
 SPOCApp >> open [
@@ -118,7 +131,16 @@ SPOCApp >> open [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #ui,
+	#'squeak_changestamp' : 'VE 5/28/2024 20:26'
+}
+SPOCApp >> proportionalPanelSizeOf: aMorph [
+
+	^ aMorph extent / SPOCApp minimalPanelSize
+]
+
+{
+	#category : #ui,
 	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
 }
 SPOCApp >> registerOpenCommand [
@@ -128,7 +150,23 @@ SPOCApp >> registerOpenCommand [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 19:59'
+}
+SPOCApp >> userLogin [
+	^ userLogin
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 19:59'
+}
+SPOCApp >> userLogin: anObject [
+	userLogin := anObject
+]
+
+{
+	#category : #ui,
 	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
 }
 SPOCApp >> windowTitle [
