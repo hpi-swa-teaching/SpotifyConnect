@@ -11,11 +11,11 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:59'
+	#'squeak_changestamp' : 'VE 5/28/2024 21:36'
 }
 SPOCUserLogin >> attachButton [
 
-	self text: (SPOCBoxedText new contents: self buttonLabel; yourself);
+	self text: (SPOCBoxedText new contents: ''; yourself);
 		button: ( SPOCClickable newUsing: text onClick: [:enEvent | self app auth startAuthorization]);
 		addMorph: self button.
 ]
@@ -46,22 +46,24 @@ SPOCUserLogin >> buttonLabel [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:58'
+	#'squeak_changestamp' : 'VE 5/28/2024 21:36'
 }
-SPOCUserLogin >> buttonLabel: anObject [
-	buttonLabel := anObject
+SPOCUserLogin >> buttonLabel: aString [
+
+	buttonLabel := aString.
+	self text contents: aString.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:58'
+	#'squeak_changestamp' : 'VE 5/28/2024 21:36'
 }
 SPOCUserLogin >> initialize [
 	super initialize.
-	
+
 	self color: Color transparent;
-		buttonLabel: 'Login';
 		attachButton;
+		buttonLabel: 'Login';
 		extendFully.
 		
 ]
@@ -80,4 +82,24 @@ SPOCUserLogin >> text [
 }
 SPOCUserLogin >> text: anObject [
 	text := anObject
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 5/28/2024 21:33'
+}
+SPOCUserLogin >> toggleLogin [
+	
+	self buttonLabel: 'Login'.
+	self button onClick: [:anEvent | self app auth startAuthorization]
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 5/28/2024 21:37'
+}
+SPOCUserLogin >> toggleLogout [
+	
+	self buttonLabel: 'Logout'.
+	self button onClick: [:anEvent | self app auth logout. self toggleLogin]
 ]

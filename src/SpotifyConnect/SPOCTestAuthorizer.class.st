@@ -65,6 +65,19 @@ SPOCTestAuthorizer >> testCallbackErrors [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 5/28/2024 21:19'
+}
+SPOCTestAuthorizer >> testOnAuthorizationSuccessCallbacks [
+	
+	| tmp |
+	tmp := 0.
+	authorizer registerSuccessCallback: [tmp := 1].
+	authorizer callSuccessCallbacks.
+	self assert: tmp = 1.
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'OW 5/26/2024 21:48'
 }
 SPOCTestAuthorizer >> testRandomState [

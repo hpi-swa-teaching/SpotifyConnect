@@ -5,7 +5,8 @@ Class {
 		'randomState',
 		'accessToken',
 		'refreshToken',
-		'isAuthorized'
+		'isAuthorized',
+		'successCallbacks'
 	],
 	#classVars : [
 		'ClientId',
@@ -114,6 +115,15 @@ SPOCAuthorizer >> accessToken: aToken [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 5/28/2024 21:19'
+}
+SPOCAuthorizer >> callSuccessCallbacks [
+
+	successCallbacks do: [:aBlock | aBlock value]
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'OW 5/26/2024 18:45'
 }
 SPOCAuthorizer >> callback: aRequest [
@@ -135,14 +145,15 @@ SPOCAuthorizer >> callback: aRequest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/22/2024 18:38'
+	#'squeak_changestamp' : 'VE 5/28/2024 21:20'
 }
 SPOCAuthorizer >> initialize [
 
 	super initialize.
 	SPOCAuthorizer clientId.
 	SPOCAuthorizer clientSecret.
-	self isAuthorized: false.
+	self isAuthorized: false;
+		successCallbacks: OrderedCollection new.
 	WebServer reset default listenOn: SPOCAuthorizer redirectPort
 ]
 
@@ -162,6 +173,15 @@ SPOCAuthorizer >> isAuthorized [
 SPOCAuthorizer >> isAuthorized: aBoolean [
 
 	isAuthorized := aBoolean
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 21:37'
+}
+SPOCAuthorizer >> logout [
+
+	self accessToken: nil
 ]
 
 {
@@ -252,7 +272,15 @@ SPOCAuthorizer >> refreshToken: aToken [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/22/2024 22:30'
+	#'squeak_changestamp' : 'VE 5/28/2024 21:20'
+}
+SPOCAuthorizer >> registerSuccessCallback: aBlock [
+	self successCallbacks add: aBlock
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 5/28/2024 21:27'
 }
 SPOCAuthorizer >> retreiveAccessTokenWithAccessCode: anAccessCode [
 	
@@ -266,9 +294,10 @@ SPOCAuthorizer >> retreiveAccessTokenWithAccessCode: anAccessCode [
 	response := WebClient httpPost: url content: content type: 'application/x-www-form-urlencoded'.
 	response isSuccess ifFalse:[^self error: response status].
 	responseContent := Json readFrom: response content readStream.
- 	self accessToken: (responseContent at: 'access_token').
-	self refreshToken: (responseContent at: 'refresh_token').
-	self isAuthorized: true
+ 	self accessToken: (responseContent at: 'access_token');
+		refreshToken: (responseContent at: 'refresh_token');
+		isAuthorized: true;
+		callSuccessCallbacks.
 	
 
 ]
@@ -302,4 +331,20 @@ SPOCAuthorizer >> startAuthorization [
 	Clipboard default primitiveClipboardText: url.	
 	WebBrowser default openOnUrl: url.
 	^ url
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 21:17'
+}
+SPOCAuthorizer >> successCallbacks [
+	^ successCallbacks
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 5/28/2024 21:17'
+}
+SPOCAuthorizer >> successCallbacks: anObject [
+	successCallbacks := anObject
 ]

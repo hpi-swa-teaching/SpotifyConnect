@@ -61,7 +61,7 @@ SPOCApp >> auth: anObject [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:23'
+	#'squeak_changestamp' : 'VE 5/28/2024 21:38'
 }
 SPOCApp >> buildLoginPanel: aBuilder [
 	| proportionalSize |
@@ -70,7 +70,7 @@ SPOCApp >> buildLoginPanel: aBuilder [
 		model: self;
 		children: #loginPanelContent;
 		layout: #proportional;
-		frame: (LayoutFrame fractions: ((1-proportionalSize x)@0 corner: 1@proportionalSize y));
+		frame: (LayoutFrame fractions: (0.9@0 corner: 1@proportionalSize y));
 		yourself
 ]
 
@@ -99,7 +99,7 @@ SPOCApp >> buildWith: aBuilder [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:00'
+	#'squeak_changestamp' : 'VE 5/28/2024 21:24'
 }
 SPOCApp >> initialize [
 
@@ -107,7 +107,7 @@ SPOCApp >> initialize [
 	
 	self auth: SPOCAuthorizer new; 
 		registerOpenCommand;
-		userLogin: (SPOCUserLogin new app: self; yourself).
+		setupUserLogin.
 
 
 ]
@@ -146,6 +146,18 @@ SPOCApp >> proportionalPanelSizeOf: aMorph [
 SPOCApp >> registerOpenCommand [
 
 	TheWorldMenu registerOpenCommand: {'Spotify Connect'. {self. #open}}.
+
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 5/28/2024 21:34'
+}
+SPOCApp >> setupUserLogin [
+
+	self userLogin: (SPOCUserLogin new app: self; yourself).
+	self auth registerSuccessCallback: [self userLogin toggleLogout].
+
 
 ]
 
