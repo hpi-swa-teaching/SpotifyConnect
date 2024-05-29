@@ -99,7 +99,7 @@ SPOCApp >> buildWith: aBuilder [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/28/2024 21:24'
+	#'squeak_changestamp' : 'TL 5/29/2024 20:17'
 }
 SPOCApp >> initialize [
 
@@ -108,6 +108,9 @@ SPOCApp >> initialize [
 	self auth: SPOCAuthorizer new; 
 		registerOpenCommand;
 		setupUserLogin.
+	SPOCPlayer new
+		app: self;
+		openInWorld.
 
 
 ]
