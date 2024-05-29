@@ -35,17 +35,12 @@ SPOCApiNext >> executeRequest: request withParams: aParamDictionary [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 21:41'
+	#'squeak_changestamp' : 'TL 5/29/2024 20:02'
 }
 SPOCApiNext >> executeTest [
 	
 	"Response code 204"
-	 ^ '{
-  "error": {
-    "status": 400,
-    "message": "string"
-  }
-}' readStream
+	 ^ ''
 ]
 
 {
