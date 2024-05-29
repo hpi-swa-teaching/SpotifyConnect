@@ -24,11 +24,11 @@ SPOCPlayer class >> skipNextIconPath [
 
 {
 	#category : #'dev-examples',
-	#'squeak_changestamp' : 'MH 5/26/2024 21:32'
+	#'squeak_changestamp' : 'TL 5/29/2024 19:55'
 }
 SPOCPlayer >> currentDevice [
 
-	^ '4f5f10b92aa75f5973a9b7f888c91b18ed232ca3'
+	^ 'b704b454bce64526992a3f207723032f5f91e635'
 ]
 
 {
@@ -113,7 +113,7 @@ SPOCPlayer >> initializeSkipNext [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 17:48'
+	#'squeak_changestamp' : 'TL 5/29/2024 20:02'
 }
 SPOCPlayer >> isPlaying [
 
@@ -121,10 +121,8 @@ SPOCPlayer >> isPlaying [
 	paramDict := Dictionary new.
 	paramDict at: #additional_types put: 'track'.
 	apiEndpoint := SPOCApiPlaybackState new.
-	Transcript showln: app auth accessToken.
 	apiEndpoint authorizer: app auth.
 	response := apiEndpoint execute: paramDict.
-	Transcript showln: response.
 	^ response at: 'is_playing'
 ]
 

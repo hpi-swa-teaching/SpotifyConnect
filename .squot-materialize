@@ -9,7 +9,7 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'next.png'
+			'play.png'
 		],
 		#encoding : @4
 	},
@@ -17,6 +17,13 @@
 		#path : FSAbsolutePath [
 			'assets',
 			'previous.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'next.png'
 		],
 		#encoding : @4
 	},
@@ -34,12 +41,5 @@
 		#path : FSAbsolutePath [
 			'src'
 		]
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'play.png'
-		],
-		#encoding : @4
 	}
 ]
