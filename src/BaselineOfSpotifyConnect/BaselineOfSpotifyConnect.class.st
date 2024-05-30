@@ -19,7 +19,7 @@ BaselineOfSpotifyConnect >> baseline: spec [
                      package: 'SpotifyConnect-Tests' with: [spec requires: #('default')];
                      yourself.
                  spec
-                     group: 'default' with: #('SpotifyConnect', 'SpotifyConnect-Utils');
+                     group: 'default' with: #('SpotifyConnect' 'SpotifyConnect-Utils');
                      group: 'tests' with: #('SpotifyConnect-Tests');
                      yourself].
 ]
