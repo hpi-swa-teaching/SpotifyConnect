@@ -9,9 +9,11 @@ SmalltalkCISpec {
     }
   ],
   #testing : {
-    #packages : ['SpotifyConnect'],
+    #include : {
+      #packages : ['SpotifyConnect']
+    },
     #exclude : {
-          #classes : [ #SPOCTestAuthorizer #SPOCTestTokens ]
-        }
+      #classes : [ #SPOCTestAuthorizer #SPOCTestTokens ]
+    }
   }
 }
