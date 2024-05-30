@@ -1,0 +1,16 @@
+SmalltalkCISpec {
+  #name : 'SpotifyCOnnect CI',
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'SpotifyConnect',
+      #directory : 'src/SpotifyConnect',
+      #load : 'Tests',
+      #platforms : [ #squeak ]
+    }
+  ],
+  #testing : {
+    #coverage : {
+      #packages : [ 'SpotifyConnect', 'SpotifyConnect-Utils' ]
+    }
+}
+}
