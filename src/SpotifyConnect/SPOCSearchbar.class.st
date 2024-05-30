@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCSearchbar,
-	#superclass : #RectangleMorph,
+	#superclass : #SPOCUIComponent,
 	#instVars : [
 		'inputField',
 		'tracks',
@@ -19,26 +19,26 @@ SPOCSearchbar class >> baseLayer [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 5/21/2024 17:58'
+	#'squeak_changestamp' : 'RK 5/30/2024 22:46'
 }
 SPOCSearchbar class >> searchbarHeight [
-	^ 50
+	^ 32
 ]
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 5/21/2024 22:17'
+	#'squeak_changestamp' : 'RK 5/30/2024 22:16'
 }
 SPOCSearchbar class >> searchbarPosition [
-	^ 100@500
+	^ 0@0
 ]
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 5/21/2024 22:22'
+	#'squeak_changestamp' : 'RK 5/30/2024 22:48'
 }
 SPOCSearchbar class >> searchbarWidth [
-	^ 600
+	^ 800
 ]
 
 {
@@ -52,7 +52,7 @@ SPOCSearchbar class >> trackLimit [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/22/2024 12:54'
+	#'squeak_changestamp' : 'RK 5/30/2024 23:17'
 }
 SPOCSearchbar >> buildResultMorphFrom: aTrack [
 	| searchbarHeight background image trackText artistText|
@@ -68,6 +68,7 @@ SPOCSearchbar >> buildResultMorphFrom: aTrack [
 	trackText := SPOCText newAt: (image topRight + ((searchbarHeight * 0.25)@0)) withText: aTrack name.
 	artistText := SPOCText newAt: (image bottomRight +  ((searchbarHeight * 0.25)@(self height negated * 0.5))) withText: (aTrack album artistsAsString).
 	^ Morph new
+		color: Color transparent;
 		addMorph: background;
 		addMorph: image;
 		addMorph: trackText;
@@ -78,44 +79,62 @@ SPOCSearchbar >> buildResultMorphFrom: aTrack [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/27/2024 18:16'
+	#'squeak_changestamp' : 'RK 5/30/2024 23:10'
 }
 SPOCSearchbar >> buildSearchbar [
-		
-	self color: SPOCStyle spotifyGray;
+
+	| leftCircle center rightCircle |
+	leftCircle := CircleMorph new
+		extent: SPOCSearchbar searchbarHeight asPoint;
+		borderWidth: 0;
+		color: SPOCStyle spotifyGray.
+	center := RectangleMorph new
+		color: SPOCStyle spotifyGray;
 		extent: (SPOCSearchbar searchbarWidth@SPOCSearchbar searchbarHeight);
-		position: SPOCSearchbar searchbarPosition;
+		position: self topLeft + ((SPOCSearchbar searchbarHeight / 2)@0);
+		borderWidth: 0;
 		morphicLayerNumber: SPOCSearchbar baseLayer;
-		inputField: (SPOCTextInput newAt: (SPOCSearchbar searchbarPosition + (10@10)) withText: 'Was möchtest du wiedergeben?');
+		yourself.
+	rightCircle := CircleMorph new
+		extent: SPOCSearchbar searchbarHeight asPoint;
+		position: self topLeft + (SPOCSearchbar searchbarWidth@0);
+		borderWidth: 0;
+		color: SPOCStyle spotifyGray.
+	self inputField: (SPOCTextInput newAt: (self position + (SPOCSearchbar searchbarHeight@0)) withText: 'Was möchtest du wiedergeben?');
+		addMorph: leftCircle;
+		addMorph: center;
+		addMorph: rightCircle;
 		addMorph: self inputField;
-		openInWorld;
-		yourself
+		yourself.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/27/2024 18:12'
+	#'squeak_changestamp' : 'RK 5/30/2024 21:19'
 }
 SPOCSearchbar >> displayResults: anOrderedCollection [
-	
 	| trackList |
-	trackList := SPOCList new.
-	trackList items: anOrderedCollection.
-	trackList buildItemMorphsWith: [ :value | self buildResultMorphFrom: value].
-	trackList buildPanelAtPos: self bottomLeft withExtent: (SPOCSearchbar searchbarWidth)@(SPOCSearchbar searchbarHeight * 10)
+	
+	trackList := SPOCScrollablePanel new.
+	trackList items: anOrderedCollection;
+		buildItemMorphsWith: [ :value | self buildResultMorphFrom: value];
+		buildPanelAtPos: self bottomLeft withExtent: (SPOCSearchbar searchbarWidth)@(SPOCSearchbar searchbarHeight * 10);
+		yourself.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/21/2024 20:02'
+	#'squeak_changestamp' : 'RK 5/30/2024 22:08'
 }
 SPOCSearchbar >> initialize [
 	super initialize.
 	
 	self
+		color: Color transparent;
 		trackMorphs: OrderedCollection new;
 		tracks: OrderedCollection new;
 		buildSearchbar;
+		extendFully;
 		yourself
 ]
 
@@ -148,11 +167,11 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 18:03'
+	#'squeak_changestamp' : 'RK 5/30/2024 21:03'
 }
 SPOCSearchbar >> searchTracks: aString [
-
 	| dict apiEndpoint |
+	
 	dict := Dictionary new.
 	dict at: 'input' put: (self sanitizeInput: aString);
 		at: 'type' put: 'track';

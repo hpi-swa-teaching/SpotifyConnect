@@ -3,7 +3,8 @@ Class {
 	#superclass : #Model,
 	#instVars : [
 		'auth',
-		'userLogin'
+		'userLogin',
+		'searchbar'
 	],
 	#category : #SpotifyConnect
 }
@@ -76,7 +77,22 @@ SPOCApp >> buildLoginPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:25'
+	#'squeak_changestamp' : 'RK 5/30/2024 22:17'
+}
+SPOCApp >> buildSearchbarPanel: aBuilder [
+	| proportionalSize |
+	proportionalSize := self proportionalPanelSizeOf: self searchbar.
+	^ aBuilder pluggablePanelSpec new
+		model: self;
+		children: #searchbarPanelContent;
+		layout: #proportional;
+		frame: (LayoutFrame fractions: (0.1@0 corner: 1@proportionalSize y));
+		yourself
+]
+
+{
+	#category : #ui,
+	#'squeak_changestamp' : 'RK 5/30/2024 22:12'
 }
 SPOCApp >> buildWindow: aBuilder [
 
@@ -84,7 +100,8 @@ SPOCApp >> buildWindow: aBuilder [
 		model: self;
 		label: #windowTitle;
 		minimumExtent: SPOCApp minimumExtent;
-		children: {self buildLoginPanel: aBuilder};
+		children: {self buildLoginPanel: aBuilder.
+			self buildSearchbarPanel: aBuilder};
 		yourself.
 ]
 
@@ -99,7 +116,7 @@ SPOCApp >> buildWith: aBuilder [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/28/2024 21:24'
+	#'squeak_changestamp' : 'RK 5/30/2024 21:57'
 }
 SPOCApp >> initialize [
 
@@ -107,7 +124,8 @@ SPOCApp >> initialize [
 	
 	self auth: SPOCAuthorizer new; 
 		registerOpenCommand;
-		setupUserLogin.
+		setupUserLogin;
+		setupSearchbar.
 
 
 ]
@@ -147,6 +165,40 @@ SPOCApp >> registerOpenCommand [
 
 	TheWorldMenu registerOpenCommand: {'Spotify Connect'. {self. #open}}.
 
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/30/2024 21:27'
+}
+SPOCApp >> searchbar [
+	^ searchbar
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/30/2024 21:34'
+}
+SPOCApp >> searchbar: aSPOCSearchbar [
+	searchbar := aSPOCSearchbar
+]
+
+{
+	#category : #ui,
+	#'squeak_changestamp' : 'RK 5/30/2024 22:03'
+}
+SPOCApp >> searchbarPanelContent [
+
+	^ {self searchbar}
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'RK 5/30/2024 21:34'
+}
+SPOCApp >> setupSearchbar [
+
+	self searchbar: (SPOCSearchbar new app: self; yourself)
 ]
 
 {

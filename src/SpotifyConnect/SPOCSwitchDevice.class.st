@@ -148,12 +148,12 @@ SPOCSwitchDevice >> devices: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 5/27/2024 18:09'
+	#'squeak_changestamp' : 'RK 5/30/2024 21:00'
 }
 SPOCSwitchDevice >> displayResults: anOrderedCollection [
 	| deviceList |
 	
-	deviceList := SPOCList new.
+	deviceList := SPOCScrollablePanel new.
 	deviceList items: anOrderedCollection.
 	deviceList buildItemMorphsWith: [ :value | self buildResultMorphFrom: value].
 	deviceList buildPanelAtPos: button bottomLeft withExtent: (SPOCSwitchDevice buttonWidth * 2)@(SPOCSwitchDevice buttonHeight * 4)

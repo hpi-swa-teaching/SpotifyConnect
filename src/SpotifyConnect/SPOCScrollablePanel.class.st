@@ -1,5 +1,5 @@
 Class {
-	#name : #SPOCList,
+	#name : #SPOCScrollablePanel,
 	#superclass : #ImageMorph,
 	#instVars : [
 		'items',
@@ -15,7 +15,7 @@ Class {
 	#category : #initialization,
 	#'squeak_changestamp' : 'VK 5/27/2024 17:31'
 }
-SPOCList >> buildItemMorphsWith: aBlock [
+SPOCScrollablePanel >> buildItemMorphsWith: aBlock [
 
 	itemMorphs isEmpty ifFalse: [itemMorphs removeAll].
 	items do: [ :item |
@@ -26,7 +26,7 @@ SPOCList >> buildItemMorphsWith: aBlock [
 	#category : #initialization,
 	#'squeak_changestamp' : 'VK 5/27/2024 17:35'
 }
-SPOCList >> buildPanelAtPos: aPosition withExtent: anExtent [
+SPOCScrollablePanel >> buildPanelAtPos: aPosition withExtent: anExtent [
 
 	panel := builder build: spec.
 	panel scroller
@@ -40,14 +40,14 @@ SPOCList >> buildPanelAtPos: aPosition withExtent: anExtent [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 5/27/2024 18:07'
+	#'squeak_changestamp' : 'RK 5/30/2024 23:11'
 }
-SPOCList >> initialize [
+SPOCScrollablePanel >> initialize [
 	
 	builder := ToolBuilder default.
 	spec := builder pluggableScrollPaneSpec new
 		vScrollBarPolicy: #whenNeeded;
-		hScrollBarPolicy: #whenNeeded;
+		hScrollBarPolicy: #never;
 		yourself.
 	itemMorphs := OrderedCollection new
 ]
@@ -56,7 +56,7 @@ SPOCList >> initialize [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 5/27/2024 17:10'
 }
-SPOCList >> items [
+SPOCScrollablePanel >> items [
 	^ items
 ]
 
@@ -64,6 +64,6 @@ SPOCList >> items [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 5/27/2024 17:10'
 }
-SPOCList >> items: anOrderedCollection [
+SPOCScrollablePanel >> items: anOrderedCollection [
 	items := anOrderedCollection
 ]

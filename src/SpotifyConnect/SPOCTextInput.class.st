@@ -9,13 +9,12 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/18/2024 14:34'
+	#'squeak_changestamp' : 'RK 5/30/2024 23:01'
 }
 SPOCTextInput class >> newAt: aPoint withText: aString [
 	^ SPOCTextInput new
 		position: aPoint;
 		contents: aString;
-		backgroundColor: SPOCStyle spotifyGray;
 		textColor: SPOCStyle spotifyWhite;
 		yourself
 ]
