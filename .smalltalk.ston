@@ -3,7 +3,7 @@ SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'SpotifyConnect',
-      #directory : 'src/SpotifyConnect',
+      #directory : 'src',
       #load : 'Tests',
       #platforms : [ #squeak ]
     }
