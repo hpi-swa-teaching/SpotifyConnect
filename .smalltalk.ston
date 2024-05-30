@@ -3,8 +3,9 @@ SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'SpotifyConnect',
+      #repository: 'https://github.com/hpi-swa-teaching/SpotifyConnect',
       #directory : 'src',
-      #load : 'Tests',
+      #load : 'tests',
       #platforms : [ #squeak ]
     }
   ],
