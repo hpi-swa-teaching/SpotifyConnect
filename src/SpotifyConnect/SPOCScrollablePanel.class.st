@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCScrollablePanel,
-	#superclass : #ImageMorph,
+	#superclass : #Morph,
 	#instVars : [
 		'items',
 		'builder',
@@ -40,10 +40,13 @@ SPOCScrollablePanel >> buildPanelAtPos: aPosition withExtent: anExtent [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/30/2024 23:11'
+	#'squeak_changestamp' : 'RK 5/31/2024 00:39'
 }
 SPOCScrollablePanel >> initialize [
 	
+	super initialize.
+	
+	self color: Color transparent.
 	builder := ToolBuilder default.
 	spec := builder pluggableScrollPaneSpec new
 		vScrollBarPolicy: #whenNeeded;
