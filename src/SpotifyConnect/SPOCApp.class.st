@@ -3,6 +3,7 @@ Class {
 	#superclass : #Model,
 	#instVars : [
 		'auth',
+		'player',
 		'userLogin'
 	],
 	#category : #SpotifyConnect
@@ -99,7 +100,7 @@ SPOCApp >> buildWith: aBuilder [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 5/29/2024 20:17'
+	#'squeak_changestamp' : 'TL 5/30/2024 23:56'
 }
 SPOCApp >> initialize [
 
@@ -107,21 +108,19 @@ SPOCApp >> initialize [
 	
 	self auth: SPOCAuthorizer new; 
 		registerOpenCommand;
-		setupUserLogin.
-	SPOCPlayer new
-		app: self;
-		openInWorld.
+		setupUserLogin;
+		setupPlayer
 
 
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/28/2024 19:59'
+	#'squeak_changestamp' : 'TL 5/31/2024 00:03'
 }
 SPOCApp >> loginPanelContent [
 
-	^ {self userLogin}
+	^ {self userLogin, self player}
 ]
 
 {
@@ -131,6 +130,22 @@ SPOCApp >> loginPanelContent [
 SPOCApp >> open [
 
 	^ ToolBuilder open: self
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 5/30/2024 11:49'
+}
+SPOCApp >> player [
+	^ player
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 5/30/2024 11:49'
+}
+SPOCApp >> player: anObject [
+	player := anObject
 ]
 
 {
@@ -150,6 +165,16 @@ SPOCApp >> registerOpenCommand [
 
 	TheWorldMenu registerOpenCommand: {'Spotify Connect'. {self. #open}}.
 
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 5/30/2024 12:23'
+}
+SPOCApp >> setupPlayer [
+
+	self player: (SPOCPlayer new app: self; yourself).
+	self auth registerSuccessCallback: [self player enableButtons].
 ]
 
 {

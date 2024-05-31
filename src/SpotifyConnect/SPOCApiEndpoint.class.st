@@ -58,7 +58,7 @@ SPOCApiEndpoint >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/29/2024 20:24'
+	#'squeak_changestamp' : 'TL 5/30/2024 11:48'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
 	| response request contentStream |
@@ -68,7 +68,6 @@ SPOCApiEndpoint >> execute: aParamDictionary [
 				ifNil: [self error: 'Authorizer needed']
 				ifNotNil: [request := self tinkerRequest.
 					response := self executeRequest: request withParams: aParamDictionary.
-					response explore.
 					response code = 401
 						ifTrue: [^ self refreshAccessTokenAndExecute: aParamDictionary]
 						ifFalse: [response code = 200
