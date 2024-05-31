@@ -144,7 +144,7 @@ SPOCPlayer >> initialize [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/30/2024 12:19'
+	#'squeak_changestamp' : 'TL 5/31/2024 17:33'
 }
 SPOCPlayer >> isPlaying [
 
@@ -152,7 +152,7 @@ SPOCPlayer >> isPlaying [
 	paramDict := Dictionary new.
 	paramDict at: #additional_types put: 'track'.
 	apiEndpoint := SPOCApiPlaybackState new.
-	apiEndpoint authorizer: app auth.
+	apiEndpoint authorizer: self app auth.
 	response := apiEndpoint execute: paramDict.
 	Transcript showln: response.
 	"self deviceID: (response at: 'device')."

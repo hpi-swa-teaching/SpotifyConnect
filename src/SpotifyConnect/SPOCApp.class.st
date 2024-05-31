@@ -77,7 +77,23 @@ SPOCApp >> buildLoginPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:25'
+	#'squeak_changestamp' : 'TL 5/31/2024 17:29'
+}
+SPOCApp >> buildPlayerPanel: aBuilder [
+
+	| proportionalSize |
+	proportionalSize := self proportionalPanelSizeOf: self player.
+	^ aBuilder pluggablePanelSpec new
+		model: self;
+		children: #playerPanelContent;
+		layout: #proportional;
+		frame: (LayoutFrame fractions: (0.1@0 corner: 1@proportionalSize y));
+		yourself
+]
+
+{
+	#category : #ui,
+	#'squeak_changestamp' : 'TL 5/31/2024 17:29'
 }
 SPOCApp >> buildWindow: aBuilder [
 
@@ -85,7 +101,8 @@ SPOCApp >> buildWindow: aBuilder [
 		model: self;
 		label: #windowTitle;
 		minimumExtent: SPOCApp minimumExtent;
-		children: {self buildLoginPanel: aBuilder};
+		children: {self buildLoginPanel: aBuilder.
+			self buildPlayerPanel: aBuilder};
 		yourself.
 ]
 
@@ -146,6 +163,15 @@ SPOCApp >> player [
 }
 SPOCApp >> player: anObject [
 	player := anObject
+]
+
+{
+	#category : #ui,
+	#'squeak_changestamp' : 'TL 5/31/2024 17:32'
+}
+SPOCApp >> playerPanelContent [
+
+	^ {self player}
 ]
 
 {
