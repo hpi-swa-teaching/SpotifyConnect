@@ -2,28 +2,22 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'pause.png'
+			'previous.png'
 		],
 		#encoding : Class [ #PNGReadWriter ]
+	},
+	SquotTonelMapper {
+		#package : MCPackage {
+			#name : 'SpotifyConnect'
+		},
+		#path : FSAbsolutePath [
+			'src'
+		]
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
 			'play.png'
-		],
-		#encoding : @4
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'previous.png'
-		],
-		#encoding : @4
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'next.png'
 		],
 		#encoding : @4
 	},
@@ -36,10 +30,22 @@
 	},
 	SquotTonelMapper {
 		#package : MCPackage {
-			#name : 'SpotifyConnect'
+			#name : 'BaselineOfSpotifyConnect'
 		},
+		#path : @7
+	},
+	SquotImageMapper {
 		#path : FSAbsolutePath [
-			'src'
-		]
+			'assets',
+			'next.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'pause.png'
+		],
+		#encoding : @4
 	}
 ]
