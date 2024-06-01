@@ -6,23 +6,29 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/28/2024 17:26'
+	#'squeak_changestamp' : 'VK 6/1/2024 12:24'
 }
 SPOCApiTrackHistory >> endpoint [
+
+	^ 'v1/me/player/recently-played'
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/28/2024 17:26'
+	#'squeak_changestamp' : 'VK 6/1/2024 12:25'
 }
 SPOCApiTrackHistory >> endpointMethod [	
+
+	^ 'GET'
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/28/2024 17:28'
+	#'squeak_changestamp' : 'VK 6/1/2024 12:23'
 }
 SPOCApiTrackHistory >> executeRequest: request withParams: aParameterDictionary [
+
+	^ self client sendRequest: request
 ]
 
 {
@@ -503,7 +509,47 @@ SPOCApiTrackHistory >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/28/2024 17:27'
+	#'squeak_changestamp' : 'VK 6/1/2024 12:30'
 }
 SPOCApiTrackHistory >> tinkerReponseContent: aContentStream [
+	
+	| content tracks trackItems |
+	content := Json readFrom: aContentStream readStream.
+	tracks := OrderedCollection new.
+	trackItems := content at: #items.
+	"For each track"
+	trackItems do: [ :wholeItem |
+		| artists artistItems album albumItem track trackItem |
+		trackItem := wholeItem at: #track.
+		album := SPOCAlbum new.
+		albumItem := (trackItem at: #album).
+		artists := OrderedCollection new.
+		artistItems := (albumItem at: #artists).
+		"For each artist"
+		artistItems do: [ :artistItem |
+			| artist |
+			artist := SPOCArtist new.
+			artist
+				id: (artistItem at: #id);
+				name: (artistItem at: #name).
+			artists add: artist			
+		].
+		album
+			id: (albumItem at: #id);
+			name: (albumItem at: #name);
+			artists: artists;
+			image: (SPOCImage newWithUrl: (((albumItem at: #images) at: 1) at: #url)).
+		track := SPOCTrack new.
+		track
+			id: (trackItem at: #id);
+			name: (trackItem at: #name);
+			album: album;
+			duration: (trackItem at: #duration_ms) // 1000;
+			explicit: (trackItem at: #explicit);
+			popularity: (trackItem at: #popularity);
+			trackNumber: (trackItem at: #track_number);
+			yourself.
+		tracks add: track 
+	].
+	^ tracks
 ]

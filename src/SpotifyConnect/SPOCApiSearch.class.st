@@ -14,7 +14,7 @@ SPOCApiSearch >> endpoint [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/16/2024 18:51'
+	#'squeak_changestamp' : 'VK 6/1/2024 12:25'
 }
 SPOCApiSearch >> endpointMethod [
 	^ 'GET'
