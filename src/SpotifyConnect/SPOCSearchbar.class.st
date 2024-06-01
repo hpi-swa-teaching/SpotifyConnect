@@ -20,18 +20,26 @@ SPOCSearchbar class >> baseLayer [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 5/30/2024 22:46'
+	#'squeak_changestamp' : 'RK 6/1/2024 14:35'
 }
-SPOCSearchbar class >> searchbarHeight [
-	^ 32
+SPOCSearchbar class >> resultBorder [
+	^ 10
 ]
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 5/30/2024 22:16'
+	#'squeak_changestamp' : 'RK 6/1/2024 15:46'
 }
-SPOCSearchbar class >> searchbarPosition [
-	^ 0@0
+SPOCSearchbar class >> searchbarHeight [
+	^ 42
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 6/1/2024 15:27'
+}
+SPOCSearchbar class >> searchbarToResultRatio [
+	^ 2
 ]
 
 {
@@ -52,22 +60,48 @@ SPOCSearchbar class >> trackLimit [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/30/2024 23:17'
+	#category : #building,
+	#'squeak_changestamp' : 'RK 6/1/2024 11:58'
+}
+SPOCSearchbar >> buildCircle [
+	^ CircleMorph new
+		extent: SPOCSearchbar searchbarHeight asPoint;
+		borderWidth: 0;
+		color: SPOCStyle spotifyGray.
+]
+
+{
+	#category : #building,
+	#'squeak_changestamp' : 'RK 6/1/2024 15:41'
+}
+SPOCSearchbar >> buildResultDisplay [
+
+	^ SPOCScrollablePanel new
+		buildPanelAtPos: (self topLeft + (0@SPOCSearchbar searchbarHeight)) withExtent: (SPOCSearchbar searchbarWidth + SPOCSearchbar searchbarHeight)@(SPOCSearchbar searchbarHeight * 10);
+		hide
+]
+
+{
+	#category : #building,
+	#'squeak_changestamp' : 'RK 6/1/2024 15:47'
 }
 SPOCSearchbar >> buildResultMorphFrom: aTrack [
-	| searchbarHeight background image trackText artistText|
+	| height width border ratio background image trackText artistText|
 	
-	searchbarHeight := SPOCSearchbar searchbarHeight.
+	height := SPOCSearchbar searchbarHeight.
+	width := SPOCSearchbar searchbarWidth.
+	border := SPOCSearchbar resultBorder.
+	ratio := SPOCSearchbar searchbarToResultRatio.
+	
 	background := RectangleMorph new
 		color: SPOCStyle spotifyGray;
-		extent: (SPOCSearchbar searchbarWidth@(2 * searchbarHeight));
+		extent: (width + (2 * height)@(ratio * height));
 		morphicLayerNumber: SPOCSearchbar baseLayer.
-	image := (aTrack album) image.
-	image position: (background position + (searchbarHeight * 0.25@(searchbarHeight * 0.25)));
+	image := (aTrack album) image scaledTo: (ratio * (height - border)).
+	image position: (background topLeft + (border@border));
 		morphicLayerNumber: SPOCSearchbar baseLayer - 1.
-	trackText := SPOCText newAt: (image topRight + ((searchbarHeight * 0.25)@0)) withText: aTrack name.
-	artistText := SPOCText newAt: (image bottomRight +  ((searchbarHeight * 0.25)@(self height negated * 0.5))) withText: (aTrack album artistsAsString).
+	trackText := SPOCText newAt: (image topRight + (border@0)) withText: aTrack name.
+	artistText := SPOCText newAt: (image bottomRight +  (border@(SPOCText defaultHeight negated))) withText: (aTrack album artistsAsString).
 	^ Morph new
 		color: Color transparent;
 		addMorph: background;
@@ -79,32 +113,19 @@ SPOCSearchbar >> buildResultMorphFrom: aTrack [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/31/2024 01:14'
+	#category : #building,
+	#'squeak_changestamp' : 'RK 6/1/2024 14:03'
 }
 SPOCSearchbar >> buildSearchbar [
 
-	| leftCircle center rightCircle |
-	leftCircle := CircleMorph new
-		extent: SPOCSearchbar searchbarHeight asPoint;
-		borderWidth: 0;
-		color: SPOCStyle spotifyGray.
-	center := RectangleMorph new
-		color: SPOCStyle spotifyGray;
-		extent: (SPOCSearchbar searchbarWidth@SPOCSearchbar searchbarHeight);
-		position: self topLeft + ((SPOCSearchbar searchbarHeight / 2)@0);
-		borderWidth: 0;
-		morphicLayerNumber: SPOCSearchbar baseLayer;
-		yourself.
-	rightCircle := CircleMorph new
-		extent: SPOCSearchbar searchbarHeight asPoint;
-		position: self topLeft + (SPOCSearchbar searchbarWidth@0);
-		borderWidth: 0;
-		color: SPOCStyle spotifyGray.
-	self inputField: (SPOCTextInput newAt: (self position + (SPOCSearchbar searchbarHeight@0)) withText: 'Was möchtest du wiedergeben?');
-		resultDisplay: SPOCScrollablePanel new;
+	| leftCircle text rightCircle display |
+	leftCircle := self buildCircle.
+	text := self buildTextInputField.
+	rightCircle := (self buildCircle) position: self topLeft + (SPOCSearchbar searchbarWidth@0).
+	display := self buildResultDisplay.
+	self inputField: text;
+		resultDisplay: display;
 		addMorph: leftCircle;
-		addMorph: center;
 		addMorph: rightCircle;
 		addMorph: self inputField;
 		addMorph: resultDisplay;
@@ -112,25 +133,30 @@ SPOCSearchbar >> buildSearchbar [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/1/2024 10:43'
+	#category : #building,
+	#'squeak_changestamp' : 'RK 6/1/2024 15:44'
 }
-SPOCSearchbar >> displayResults: anOrderedCollection [
-	
-	"To do: Scrollable Panel als Teil der Searchbar anzeigen lassen"
-	self resultDisplay: SPOCScrollablePanel new.
-	self resultDisplay items: anOrderedCollection;
-		buildItemMorphsWith: [ :value | self buildResultMorphFrom: value];
-		buildPanelAtPos: self bottomLeft withExtent: (SPOCSearchbar searchbarWidth + SPOCSearchbar searchbarHeight)@(SPOCSearchbar searchbarHeight * 10);
+SPOCSearchbar >> buildTextInputField [
+
+	| textField |
+	textField := PluggableTextMorphPlus new
+		extent: SPOCSearchbar searchbarWidth@SPOCSearchbar searchbarHeight;
+		position: self topLeft + ((SPOCSearchbar searchbarHeight / 2)@0);
+		color: SPOCStyle spotifyGray;
+		borderWidth: 0;
+		hScrollBarPolicy: #never;
+		vScrollBarPolicy: #never;
+		morphicLayerNumber: SPOCSearchbar baseLayer;
+		balloonText: 'Was möchtest du wiedergeben?';
+		acceptOnCR: true;
+		acceptAction: [:text | self searchTracks: 'Giant Rooks']; "Hier müsste eigentlich text übergeben werden"
 		yourself.
-	self addMorph: resultDisplay;
-		extendFully;
-		yourself
+	^ textField
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/30/2024 22:08'
+	#'squeak_changestamp' : 'RK 6/1/2024 13:14'
 }
 SPOCSearchbar >> initialize [
 	super initialize.
@@ -189,7 +215,7 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/30/2024 21:03'
+	#'squeak_changestamp' : 'RK 6/1/2024 13:25'
 }
 SPOCSearchbar >> searchTracks: aString [
 	| dict apiEndpoint |
@@ -202,7 +228,8 @@ SPOCSearchbar >> searchTracks: aString [
 	apiEndpoint := SPOCApiSearch new.
 	apiEndpoint authorizer: (Smalltalk at: #auth).
 	self tracks: (apiEndpoint execute: dict).
-	self displayResults: tracks.
+	Transcript showln: 'suchen...', tracks.
+	self updateResultDisplay: tracks.
 ]
 
 {
@@ -235,4 +262,21 @@ SPOCSearchbar >> tracks [
 }
 SPOCSearchbar >> tracks: anOrderedCollection [
 	tracks := anOrderedCollection
+]
+
+{
+	#category : #building,
+	#'squeak_changestamp' : 'RK 6/1/2024 14:20'
+}
+SPOCSearchbar >> updateResultDisplay: anOrderedCollection [
+	
+	anOrderedCollection ifNil: [resultDisplay hide.
+			^ self].
+	Transcript showln: 'updaten...'.
+	resultDisplay items: anOrderedCollection;
+		buildItemMorphsWith: [:value | self buildResultMorphFrom: value];
+		updatePanel;
+		show;
+		yourself.
+	self extendFully
 ]

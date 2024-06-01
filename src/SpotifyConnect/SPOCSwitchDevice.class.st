@@ -102,7 +102,7 @@ SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 5/27/2024 18:09'
+	#'squeak_changestamp' : 'RK 6/1/2024 13:16'
 }
 SPOCSwitchDevice >> currentDevices [
 	| dict apiEndpoint |
@@ -111,7 +111,7 @@ SPOCSwitchDevice >> currentDevices [
 	apiEndpoint := SPOCApiDevices new.
 	apiEndpoint authorizer: (Smalltalk at: #auth).
 	self devices: (apiEndpoint execute: dict).
-	self displayResults: devices
+	self updateResultDisplay: devices
 ]
 
 {
@@ -148,19 +148,6 @@ SPOCSwitchDevice >> devices: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/30/2024 21:00'
-}
-SPOCSwitchDevice >> displayResults: anOrderedCollection [
-	| deviceList |
-	
-	deviceList := SPOCScrollablePanel new.
-	deviceList items: anOrderedCollection.
-	deviceList buildItemMorphsWith: [ :value | self buildResultMorphFrom: value].
-	deviceList buildPanelAtPos: button bottomLeft withExtent: (SPOCSwitchDevice buttonWidth * 2)@(SPOCSwitchDevice buttonHeight * 4)
-]
-
-{
-	#category : #initialization,
 	#'squeak_changestamp' : 'VK 5/27/2024 17:55'
 }
 SPOCSwitchDevice >> initialize [
@@ -179,4 +166,17 @@ SPOCSwitchDevice >> initialize [
 }
 SPOCSwitchDevice >> switchDeviceClicked [
 	"TODO"
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'RK 6/1/2024 13:16'
+}
+SPOCSwitchDevice >> updateResultDisplay: anOrderedCollection [
+	| deviceList |
+	
+	deviceList := SPOCScrollablePanel new.
+	deviceList items: anOrderedCollection.
+	deviceList buildItemMorphsWith: [ :value | self buildResultMorphFrom: value].
+	deviceList buildPanelAtPos: button bottomLeft withExtent: (SPOCSwitchDevice buttonWidth * 2)@(SPOCSwitchDevice buttonHeight * 4)
 ]

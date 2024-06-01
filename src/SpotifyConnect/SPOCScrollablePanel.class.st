@@ -12,18 +12,17 @@ Class {
 }
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'VK 5/27/2024 17:31'
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/1/2024 14:08'
 }
 SPOCScrollablePanel >> buildItemMorphsWith: aBlock [
 
 	itemMorphs isEmpty ifFalse: [itemMorphs removeAll].
-	items do: [ :item |
-		itemMorphs add: (aBlock value: item)].
+	items do: [ :item | itemMorphs add: (aBlock value: item)]
 ]
 
 {
-	#category : #initialization,
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'RK 6/1/2024 10:43'
 }
 SPOCScrollablePanel >> buildPanelAtPos: aPosition withExtent: anExtent [
@@ -69,4 +68,13 @@ SPOCScrollablePanel >> items [
 }
 SPOCScrollablePanel >> items: anOrderedCollection [
 	items := anOrderedCollection
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/1/2024 15:25'
+}
+SPOCScrollablePanel >> updatePanel [
+	panel scroller removeAllMorphs;
+		addAllMorphs: itemMorphs
 ]
