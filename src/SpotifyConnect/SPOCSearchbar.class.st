@@ -240,7 +240,7 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/1/2024 18:21'
+	#'squeak_changestamp' : 'RK 6/1/2024 19:36'
 }
 SPOCSearchbar >> searchTracks: aString [
 	| dict apiEndpoint |
@@ -251,7 +251,7 @@ SPOCSearchbar >> searchTracks: aString [
 		at: 'limit' put: SPOCSearchbar trackLimit;
 		yourself.
 	apiEndpoint := SPOCApiSearch new.
-	apiEndpoint authorizer: (Smalltalk at: #auth).
+	apiEndpoint authorizer: self app auth.
 	self tracks: (apiEndpoint execute: dict).
 	self updateResultDisplay: tracks.
 ]

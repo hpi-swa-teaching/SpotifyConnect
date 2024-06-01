@@ -77,7 +77,7 @@ SPOCApp >> buildLoginPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 5/30/2024 22:17'
+	#'squeak_changestamp' : 'RK 6/1/2024 19:31'
 }
 SPOCApp >> buildSearchbarPanel: aBuilder [
 	| proportionalSize |
@@ -86,7 +86,7 @@ SPOCApp >> buildSearchbarPanel: aBuilder [
 		model: self;
 		children: #searchbarPanelContent;
 		layout: #proportional;
-		frame: (LayoutFrame fractions: (0.1@0 corner: 1@proportionalSize y));
+		frame: (LayoutFrame fractions: (0.1@0 corner: 0.85@proportionalSize y));
 		yourself
 ]
 
