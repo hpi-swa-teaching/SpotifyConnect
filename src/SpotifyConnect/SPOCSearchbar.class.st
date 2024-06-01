@@ -85,10 +85,10 @@ SPOCSearchbar >> buildResultDisplay [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 18:44'
+	#'squeak_changestamp' : 'RK 6/1/2024 18:58'
 }
 SPOCSearchbar >> buildResultMorphFrom: aTrack [
-	| height width border ratio background image trackText artistText result clickResult |
+	| height width border ratio background image trackText artistText durationText result clickResult |
 	
 	height := SPOCSearchbar searchbarHeight.
 	width := SPOCSearchbar searchbarWidth.
@@ -97,19 +97,22 @@ SPOCSearchbar >> buildResultMorphFrom: aTrack [
 	
 	background := RectangleMorph new
 		color: SPOCStyle spotifyGray;
-		extent: (width + (2 * height)@(ratio * height));
+		extent: (width +  height@(ratio * height));
 		morphicLayerNumber: SPOCSearchbar baseLayer.
 	image := (aTrack album) image scaledTo: (ratio * (height - border)).
 	image position: (background topLeft + (border@border));
 		morphicLayerNumber: SPOCSearchbar baseLayer - 1.
 	trackText := SPOCText newAt: (image topRight + (border@0)) withText: aTrack name.
 	artistText := SPOCText newAt: (image bottomRight +  (border@(SPOCText defaultHeight negated))) withText: (aTrack album artistsAsString).
+	durationText := SPOCText newAt: (background bottomRight - (10 * border@(height + (SPOCText defaultHeight / 2)))) withText: aTrack durationAsFormattedTime.
 	
 	result := Morph new color: Color transparent;
 		addMorph: background;
 		addMorph: image;
 		addMorph: trackText;
 		addMorph: artistText;
+		addMorph: durationText;
+		borderWidth: 1;
 		vResizing: #shrinkWrap;
 		yourself.
 	clickResult := SPOCClickable newUsing: result onClick: [:evt | self playTrack: aTrack id].
