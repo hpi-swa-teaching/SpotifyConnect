@@ -24,7 +24,7 @@ SPOCList >> buildItemMorphsWith: aBlock [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 5/27/2024 17:35'
+	#'squeak_changestamp' : 'VK 6/1/2024 13:57'
 }
 SPOCList >> buildPanelAtPos: aPosition withExtent: anExtent [
 
@@ -34,8 +34,7 @@ SPOCList >> buildPanelAtPos: aPosition withExtent: anExtent [
 		addAllMorphs: itemMorphs.
 	panel
 		position: aPosition;
-		extent: anExtent;
-		openInWorld
+		extent: anExtent.
 ]
 
 {
