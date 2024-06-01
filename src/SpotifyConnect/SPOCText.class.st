@@ -6,6 +6,14 @@ Class {
 
 {
 	#category : #'instance creation',
+	#'squeak_changestamp' : 'RK 6/1/2024 15:38'
+}
+SPOCText class >> defaultHeight [
+	^ 30
+]
+
+{
+	#category : #'instance creation',
 	#'squeak_changestamp' : 'RK 5/18/2024 00:10'
 }
 SPOCText class >> newAt: aPoint withText: aString [
