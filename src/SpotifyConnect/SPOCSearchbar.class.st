@@ -165,9 +165,9 @@ SPOCSearchbar >> buildTextInputField [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 19:07'
+	#'squeak_changestamp' : 'VK 6/1/2024 20:26'
 }
-SPOCSearchbar >> hideResults [
+SPOCSearchbar >> hideHistory [
 	self resultDisplay hide
 ]
 
@@ -290,11 +290,11 @@ SPOCSearchbar >> tracks: anOrderedCollection [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 19:07'
+	#'squeak_changestamp' : 'VK 6/1/2024 20:26'
 }
 SPOCSearchbar >> updateResultDisplay: anOrderedCollection [
 	
-	anOrderedCollection ifNil: [self hideResults.
+	anOrderedCollection ifNil: [self hideHistory.
 		^ self].
 	resultDisplay items: anOrderedCollection;
 		buildItemMorphsWith: [:value | self buildResultMorphFrom: value];
