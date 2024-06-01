@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'inputField',
 		'tracks',
-		'trackMorphs'
+		'trackMorphs',
+		'resultDisplay'
 	],
 	#category : #SpotifyConnect
 }
@@ -79,7 +80,7 @@ SPOCSearchbar >> buildResultMorphFrom: aTrack [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/30/2024 23:10'
+	#'squeak_changestamp' : 'RK 5/31/2024 01:14'
 }
 SPOCSearchbar >> buildSearchbar [
 
@@ -101,25 +102,30 @@ SPOCSearchbar >> buildSearchbar [
 		borderWidth: 0;
 		color: SPOCStyle spotifyGray.
 	self inputField: (SPOCTextInput newAt: (self position + (SPOCSearchbar searchbarHeight@0)) withText: 'Was möchtest du wiedergeben?');
+		resultDisplay: SPOCScrollablePanel new;
 		addMorph: leftCircle;
 		addMorph: center;
 		addMorph: rightCircle;
 		addMorph: self inputField;
+		addMorph: resultDisplay;
 		yourself.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/30/2024 21:19'
+	#'squeak_changestamp' : 'RK 6/1/2024 10:43'
 }
 SPOCSearchbar >> displayResults: anOrderedCollection [
-	| trackList |
 	
-	trackList := SPOCScrollablePanel new.
-	trackList items: anOrderedCollection;
+	"To do: Scrollable Panel als Teil der Searchbar anzeigen lassen"
+	self resultDisplay: SPOCScrollablePanel new.
+	self resultDisplay items: anOrderedCollection;
 		buildItemMorphsWith: [ :value | self buildResultMorphFrom: value];
-		buildPanelAtPos: self bottomLeft withExtent: (SPOCSearchbar searchbarWidth)@(SPOCSearchbar searchbarHeight * 10);
+		buildPanelAtPos: self bottomLeft withExtent: (SPOCSearchbar searchbarWidth + SPOCSearchbar searchbarHeight)@(SPOCSearchbar searchbarHeight * 10);
 		yourself.
+	self addMorph: resultDisplay;
+		extendFully;
+		yourself
 ]
 
 {
@@ -152,6 +158,22 @@ SPOCSearchbar >> inputField [
 }
 SPOCSearchbar >> inputField: aSPOCTextInput [
 	inputField := aSPOCTextInput
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/31/2024 01:02'
+}
+SPOCSearchbar >> resultDisplay [
+	^ resultDisplay
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/31/2024 01:12'
+}
+SPOCSearchbar >> resultDisplay: aMorph [
+	resultDisplay := aMorph
 ]
 
 {
