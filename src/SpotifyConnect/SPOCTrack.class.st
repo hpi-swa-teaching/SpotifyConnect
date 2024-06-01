@@ -109,6 +109,14 @@ SPOCTrack >> explicit: aBoolean [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 5/25/2024 17:22'
+}
+SPOCTrack >> id: aString [
+	id := aString
+]
+
+{
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'RK 5/21/2024 20:28'
 }

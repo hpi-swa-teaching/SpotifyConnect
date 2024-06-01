@@ -11,7 +11,9 @@
 		#package : MCPackage {
 			#name : 'BaselineOfSpotifyConnect'
 		},
-		#path : @4
+		#path : FSAbsolutePath [
+			'src'
+		]
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
@@ -25,14 +27,14 @@
 			'assets',
 			'play.png'
 		],
-		#encoding : @9
+		#encoding : @10
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
 			'next.png'
 		],
-		#encoding : @9
+		#encoding : @10
 	},
 	SquotPlaintextMapper {
 		#path : FSAbsolutePath [
@@ -46,6 +48,6 @@
 			'assets',
 			'pause.png'
 		],
-		#encoding : @9
+		#encoding : @10
 	}
 ]
