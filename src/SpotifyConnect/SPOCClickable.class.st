@@ -30,6 +30,14 @@ SPOCClickable >> handlesMouseDown: anEvent [
 ]
 
 {
+	#category : #'event handling',
+	#'squeak_changestamp' : 'RK 6/1/2024 22:58'
+}
+SPOCClickable >> handlesMouseOver: anEvent [
+	^ true
+]
+
+{
 	#category : #initialization,
 	#'squeak_changestamp' : 'VE 5/28/2024 20:56'
 }
@@ -47,6 +55,22 @@ SPOCClickable >> initialize [
 }
 SPOCClickable >> mouseDown: anEvent [
 	self onClick value: anEvent.
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'RK 6/1/2024 23:13'
+}
+SPOCClickable >> mouseEnter: anEvent [
+	Cursor webLink show
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'RK 6/1/2024 23:10'
+}
+SPOCClickable >> mouseLeave: anEvent [
+	Cursor normal show
 ]
 
 {

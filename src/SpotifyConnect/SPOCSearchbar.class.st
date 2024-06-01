@@ -3,6 +3,7 @@ Class {
 	#superclass : #SPOCUIComponent,
 	#instVars : [
 		'inputField',
+		'inputText',
 		'tracks',
 		'trackMorphs',
 		'resultDisplay'
@@ -29,7 +30,7 @@ SPOCSearchbar class >> resultBorder [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 6/1/2024 15:46'
+	#'squeak_changestamp' : 'RK 6/1/2024 22:48'
 }
 SPOCSearchbar class >> searchbarHeight [
 	^ 42
@@ -46,7 +47,7 @@ SPOCSearchbar class >> searchbarToResultRatio [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 5/30/2024 22:48'
+	#'squeak_changestamp' : 'RK 6/1/2024 22:49'
 }
 SPOCSearchbar class >> searchbarWidth [
 	^ 800
@@ -142,25 +143,32 @@ SPOCSearchbar >> buildSearchbar [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 19:06'
+	#'squeak_changestamp' : 'RK 6/1/2024 22:41'
 }
 SPOCSearchbar >> buildTextInputField [
 
-	| textField |
-	textField := PluggableTextMorphPlus new
-		extent: SPOCSearchbar searchbarWidth@SPOCSearchbar searchbarHeight;
+	| builder spec textField |
+	
+	builder := ToolBuilder default.
+	spec := builder pluggableTextSpec new
+		model: self;
+		plainTextOnly: true;
+		getText: #inputText;
+		setText: #searchTracks:;
+		indicateUnacceptedChanges: false;
+		help: 'Was möchtest du wiedergeben?';
+		yourself.
+	textField := builder build: spec.
+	textField extent: SPOCSearchbar searchbarWidth@SPOCSearchbar searchbarHeight;
 		position: self topLeft + ((SPOCSearchbar searchbarHeight / 2)@0);
 		color: SPOCStyle spotifyGray;
 		borderWidth: 0;
 		hScrollBarPolicy: #never;
 		vScrollBarPolicy: #never;
 		morphicLayerNumber: SPOCSearchbar baseLayer;
-		balloonText: 'Was möchtest du wiedergeben?';
 		acceptOnCR: true;
-		acceptAction: [:text | self searchTracks: 'Giant Rooks']; "Hier müsste eigentlich text übergeben werden"
 		yourself.
-	textField textMorph centered.
-	^ textField
+	 ^ textField
 ]
 
 {
@@ -201,6 +209,23 @@ SPOCSearchbar >> inputField [
 }
 SPOCSearchbar >> inputField: aSPOCTextInput [
 	inputField := aSPOCTextInput
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/1/2024 22:34'
+}
+SPOCSearchbar >> inputText [
+	^ inputText
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/1/2024 22:34'
+}
+SPOCSearchbar >> inputText: aString [
+	inputText:= aString.
+	self changed: #inputText
 ]
 
 {
