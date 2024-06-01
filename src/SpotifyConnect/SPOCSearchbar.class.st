@@ -142,7 +142,7 @@ SPOCSearchbar >> buildSearchbar [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 15:44'
+	#'squeak_changestamp' : 'RK 6/1/2024 19:06'
 }
 SPOCSearchbar >> buildTextInputField [
 
@@ -159,7 +159,16 @@ SPOCSearchbar >> buildTextInputField [
 		acceptOnCR: true;
 		acceptAction: [:text | self searchTracks: 'Giant Rooks']; "Hier müsste eigentlich text übergeben werden"
 		yourself.
+	textField textMorph centered.
 	^ textField
+]
+
+{
+	#category : #building,
+	#'squeak_changestamp' : 'RK 6/1/2024 19:07'
+}
+SPOCSearchbar >> hideResults [
+	self resultDisplay hide
 ]
 
 {
@@ -219,7 +228,7 @@ SPOCSearchbar >> resultDisplay: aMorph [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #formatting,
 	#'squeak_changestamp' : 'RK 5/18/2024 20:44'
 }
 SPOCSearchbar >> sanitizeInput: aString [
@@ -281,12 +290,12 @@ SPOCSearchbar >> tracks: anOrderedCollection [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 18:21'
+	#'squeak_changestamp' : 'RK 6/1/2024 19:07'
 }
 SPOCSearchbar >> updateResultDisplay: anOrderedCollection [
 	
-	anOrderedCollection ifNil: [resultDisplay hide.
-			^ self].
+	anOrderedCollection ifNil: [self hideResults.
+		^ self].
 	resultDisplay items: anOrderedCollection;
 		buildItemMorphsWith: [:value | self buildResultMorphFrom: value];
 		updatePanel;

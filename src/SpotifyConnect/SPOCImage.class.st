@@ -21,7 +21,7 @@ SPOCImage class >> newWithUrl: aString [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #formatting,
 	#'squeak_changestamp' : 'RK 6/1/2024 15:21'
 }
 SPOCImage >> scaledTo: aNumber [
