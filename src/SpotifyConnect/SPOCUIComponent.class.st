@@ -25,19 +25,17 @@ SPOCUIComponent >> app: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 14:14'
+	#'squeak_changestamp' : 'VE 5/28/2024 20:44'
 }
-SPOCUIComponent >> attachButton [
-	| txt |
-	txt := SPOCBoxedText new contents: 'Login'; yourself.
+SPOCUIComponent >> extendFully [
+	self extent: 0@0.
+	self extent: self fullBounds extent
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 14:13'
+	#'squeak_changestamp' : 'VE 5/28/2024 19:48'
 }
 SPOCUIComponent >> initialize [
 	super initialize.
-	
-	self attachButton.
 ]

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'authorizer'
 	],
-	#category : #'SpotifyConnect-Tests'
+	#category : #'SpotifyConnect-Auth-Tests'
 }
 
 {

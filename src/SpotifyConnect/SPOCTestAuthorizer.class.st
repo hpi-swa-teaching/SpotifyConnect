@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'authorizer'
 	],
-	#category : #'SpotifyConnect-Tests'
+	#category : #'SpotifyConnect-Auth-Tests'
 }
 
 {
@@ -61,6 +61,19 @@ SPOCTestAuthorizer >> testCallbackErrors [
 	self assert: response code = 400.
 	response := WebClient httpGet: (SPOCAuthorizer redirectUri, '?error=error').
 	self assert: response code = 500
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 5/28/2024 21:19'
+}
+SPOCTestAuthorizer >> testOnAuthorizationSuccessCallbacks [
+	
+	| tmp |
+	tmp := 0.
+	authorizer registerSuccessCallback: [tmp := 1].
+	authorizer callSuccessCallbacks.
+	self assert: tmp = 1.
 ]
 
 {
