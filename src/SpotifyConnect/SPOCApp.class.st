@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'auth',
 		'userLogin',
-		'searchbar'
+		'searchbar',
+		'trackHistory'
 	],
 	#category : #SpotifyConnect
 }
@@ -92,7 +93,22 @@ SPOCApp >> buildSearchbarPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 5/30/2024 22:12'
+	#'squeak_changestamp' : 'VK 6/1/2024 21:17'
+}
+SPOCApp >> buildTrackHistoryPanel: aBuilder [
+	| proportionalSize |
+	proportionalSize := self proportionalPanelSizeOf: self trackHistory.
+	^ aBuilder pluggablePanelSpec new
+		model: self;
+		children: #trackHistoryPanelContent;
+		layout: #proportional;
+		frame: (LayoutFrame fractions: (0.8@0.9 corner: 1@proportionalSize y));
+		yourself
+]
+
+{
+	#category : #ui,
+	#'squeak_changestamp' : 'VK 6/1/2024 21:12'
 }
 SPOCApp >> buildWindow: aBuilder [
 
@@ -101,7 +117,8 @@ SPOCApp >> buildWindow: aBuilder [
 		label: #windowTitle;
 		minimumExtent: SPOCApp minimumExtent;
 		children: {self buildLoginPanel: aBuilder.
-			self buildSearchbarPanel: aBuilder};
+			self buildSearchbarPanel: aBuilder.
+			self buildTrackHistoryPanel: aBuilder};
 		yourself.
 ]
 
@@ -116,7 +133,7 @@ SPOCApp >> buildWith: aBuilder [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/30/2024 21:57'
+	#'squeak_changestamp' : 'VK 6/1/2024 21:09'
 }
 SPOCApp >> initialize [
 
@@ -125,7 +142,8 @@ SPOCApp >> initialize [
 	self auth: SPOCAuthorizer new; 
 		registerOpenCommand;
 		setupUserLogin;
-		setupSearchbar.
+		setupSearchbar;
+		setupTrackHistory
 
 
 ]
@@ -203,6 +221,15 @@ SPOCApp >> setupSearchbar [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'VK 6/1/2024 21:08'
+}
+SPOCApp >> setupTrackHistory [
+
+	self trackHistory: (SPOCTrackHistory new app: self; yourself)
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'VE 5/28/2024 21:34'
 }
 SPOCApp >> setupUserLogin [
@@ -211,6 +238,31 @@ SPOCApp >> setupUserLogin [
 	self auth registerSuccessCallback: [self userLogin toggleLogout].
 
 
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/1/2024 21:08'
+}
+SPOCApp >> trackHistory [
+	^ trackHistory
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/1/2024 21:08'
+}
+SPOCApp >> trackHistory: anObject [
+	trackHistory := anObject
+]
+
+{
+	#category : #ui,
+	#'squeak_changestamp' : 'VK 6/1/2024 21:09'
+}
+SPOCApp >> trackHistoryPanelContent [
+
+	^ {self trackHistory}
 ]
 
 {

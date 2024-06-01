@@ -6,7 +6,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/1/2024 12:24'
+	#'squeak_changestamp' : 'VK 6/1/2024 22:32'
 }
 SPOCApiTrackHistory >> endpoint [
 
@@ -24,10 +24,11 @@ SPOCApiTrackHistory >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/1/2024 12:23'
+	#'squeak_changestamp' : 'VK 6/1/2024 22:30'
 }
 SPOCApiTrackHistory >> executeRequest: request withParams: aParameterDictionary [
 
+	request rawUrl: (request rawUrl, '?limit=', (aParameterDictionary at: 'limit'), '&after=', (aParameterDictionary at: 'after')).
 	^ self client sendRequest: request
 ]
 

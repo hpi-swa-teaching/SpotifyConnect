@@ -12,36 +12,55 @@ Class {
 }
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VK 6/1/2024 22:10'
+}
+SPOCTrackHistory class >> afterTimestamp [
+
+	^ 1484811043508
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VK 6/1/2024 22:08'
+}
+SPOCTrackHistory class >> trackLimit [
+
+	^10
+]
+
+{
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:52'
+	#'squeak_changestamp' : 'VK 6/1/2024 21:12'
 }
 SPOCTrackHistory >> attachButton [
 
-	self text: (SPOCBoxedText new contents: 'Song History'; yourself).
-	self text position: self topLeft;
+	self text: (SPOCBoxedText new contents: 'Song History'; yourself);
 		button: ( SPOCClickable newUsing: text onClick: [:anEvent | self getTrackHistory]);
 		addMorph: self button
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:29'
+	#'squeak_changestamp' : 'VK 6/1/2024 21:23'
 }
 SPOCTrackHistory >> buildDisplay [
 
 	^ SPOCScrollablePanel new
-		buildPanelAtPos: (self bottomLeft) withExtent: (600)@(500);
+		buildPanelAtPos: (self topLeft + 100) withExtent: (600)@(500);
 		hide
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:38'
+	#'squeak_changestamp' : 'VK 6/1/2024 21:49'
 }
 SPOCTrackHistory >> buildTrackHistory [
 
+	| builtDisplay |
+	builtDisplay := self buildDisplay.
 	self 
-		display: self buildDisplay;
+		display: builtDisplay;
 		addMorph: display;
 		yourself
 ]
@@ -107,16 +126,19 @@ SPOCTrackHistory >> display: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:34'
+	#'squeak_changestamp' : 'VK 6/1/2024 22:08'
 }
 SPOCTrackHistory >> getTrackHistory [
 
 	| dict apiEndpoint |
 	dict := Dictionary new.
+	dict at: 'limit' put: SPOCTrackHistory trackLimit;
+		at: 'after' put: SPOCTrackHistory afterTimestamp;
+		yourself.
 	apiEndpoint := SPOCApiTrackHistory new.
-	apiEndpoint authorizer: self auth.
+	apiEndpoint authorizer: self app auth.
 	self tracks: (apiEndpoint execute: dict).
-	self updateDisplay: self tracks
+	self updateDisplay: tracks
 ]
 
 {
@@ -203,7 +225,7 @@ SPOCTrackHistory >> tracks: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:33'
+	#'squeak_changestamp' : 'VK 6/1/2024 22:37'
 }
 SPOCTrackHistory >> updateDisplay: anOrderedCollection [
 	
