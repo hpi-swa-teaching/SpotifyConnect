@@ -13,7 +13,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/1/2024 14:08'
+	#'squeak_changestamp' : 'RK 6/1/2024 18:31'
 }
 SPOCScrollablePanel >> buildItemMorphsWith: aBlock [
 
@@ -72,7 +72,7 @@ SPOCScrollablePanel >> items: anOrderedCollection [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/1/2024 15:25'
+	#'squeak_changestamp' : 'RK 6/1/2024 18:39'
 }
 SPOCScrollablePanel >> updatePanel [
 	panel scroller removeAllMorphs;

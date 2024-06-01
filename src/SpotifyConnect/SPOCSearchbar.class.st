@@ -20,9 +20,10 @@ SPOCSearchbar class >> baseLayer [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 6/1/2024 14:35'
+	#'squeak_changestamp' : 'RK 6/1/2024 18:12'
 }
 SPOCSearchbar class >> resultBorder [
+	"Defines the thickness of the inner border that appears in a resultMorph"
 	^ 10
 ]
 
@@ -36,9 +37,10 @@ SPOCSearchbar class >> searchbarHeight [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 6/1/2024 15:27'
+	#'squeak_changestamp' : 'RK 6/1/2024 18:13'
 }
 SPOCSearchbar class >> searchbarToResultRatio [
+	"Defines the ratio between the height of the searchbar and the height of a resultMorph"
 	^ 2
 ]
 
@@ -83,10 +85,10 @@ SPOCSearchbar >> buildResultDisplay [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 15:47'
+	#'squeak_changestamp' : 'RK 6/1/2024 18:44'
 }
 SPOCSearchbar >> buildResultMorphFrom: aTrack [
-	| height width border ratio background image trackText artistText|
+	| height width border ratio background image trackText artistText result clickResult |
 	
 	height := SPOCSearchbar searchbarHeight.
 	width := SPOCSearchbar searchbarWidth.
@@ -102,14 +104,17 @@ SPOCSearchbar >> buildResultMorphFrom: aTrack [
 		morphicLayerNumber: SPOCSearchbar baseLayer - 1.
 	trackText := SPOCText newAt: (image topRight + (border@0)) withText: aTrack name.
 	artistText := SPOCText newAt: (image bottomRight +  (border@(SPOCText defaultHeight negated))) withText: (aTrack album artistsAsString).
-	^ Morph new
-		color: Color transparent;
+	
+	result := Morph new color: Color transparent;
 		addMorph: background;
 		addMorph: image;
 		addMorph: trackText;
 		addMorph: artistText;
 		vResizing: #shrinkWrap;
-		yourself
+		yourself.
+	clickResult := SPOCClickable newUsing: result onClick: [:evt | self playTrack: aTrack id].
+	clickResult vResizing: #shrinkWrap.
+	^ clickResult
 ]
 
 {
@@ -187,6 +192,14 @@ SPOCSearchbar >> inputField: aSPOCTextInput [
 ]
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/1/2024 18:38'
+}
+SPOCSearchbar >> playTrack: aString [
+	"In this method, the track is to be played according to the given ID"
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 5/31/2024 01:02'
 }
@@ -215,7 +228,7 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/1/2024 13:25'
+	#'squeak_changestamp' : 'RK 6/1/2024 18:21'
 }
 SPOCSearchbar >> searchTracks: aString [
 	| dict apiEndpoint |
@@ -228,7 +241,6 @@ SPOCSearchbar >> searchTracks: aString [
 	apiEndpoint := SPOCApiSearch new.
 	apiEndpoint authorizer: (Smalltalk at: #auth).
 	self tracks: (apiEndpoint execute: dict).
-	Transcript showln: 'suchen...', tracks.
 	self updateResultDisplay: tracks.
 ]
 
@@ -266,13 +278,12 @@ SPOCSearchbar >> tracks: anOrderedCollection [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 14:20'
+	#'squeak_changestamp' : 'RK 6/1/2024 18:21'
 }
 SPOCSearchbar >> updateResultDisplay: anOrderedCollection [
 	
 	anOrderedCollection ifNil: [resultDisplay hide.
 			^ self].
-	Transcript showln: 'updaten...'.
 	resultDisplay items: anOrderedCollection;
 		buildItemMorphsWith: [:value | self buildResultMorphFrom: value];
 		updatePanel;
