@@ -11,13 +11,13 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/30/2024 22:10'
+	#'squeak_changestamp' : 'TL 6/3/2024 23:22'
 }
 SPOCUserLogin >> attachButton [
 
 	self text: (SPOCBoxedText new contents: ''; yourself);
 		button: ( SPOCClickable newUsing: text onClick: [:anEvent | self app auth startAuthorization]);
-		addMorph: self button.
+		addMorph: self button
 ]
 
 {
