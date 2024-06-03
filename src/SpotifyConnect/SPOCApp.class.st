@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'auth',
 		'userLogin',
-		'searchbar'
+		'searchbar',
+		'player'
 	],
 	#category : #SpotifyConnect
 }
@@ -53,10 +54,10 @@ SPOCApp >> auth: anObject [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/3/2024 09:35'
+	#'squeak_changestamp' : 'VE 6/3/2024 13:58'
 }
 SPOCApp >> bottomPanelContent [
-	^ {SPOCIcon new. SPOCIcon new. SPOCIcon new. SPOCIcon new.}
+	^ {self player}
 ]
 
 {
@@ -110,22 +111,6 @@ SPOCApp >> buildMainTable: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 5/31/2024 17:29'
-}
-SPOCApp >> buildPlayerPanel: aBuilder [
-
-	| proportionalSize |
-	proportionalSize := self proportionalPanelSizeOf: self player.
-	^ aBuilder pluggablePanelSpec new
-		model: self;
-		children: #playerPanelContent;
-		layout: #proportional;
-		frame: (LayoutFrame fractions: (0.1@0 corner: 1@proportionalSize y));
-		yourself
-]
-
-{
-	#category : #ui,
 	#'squeak_changestamp' : 'VE 6/3/2024 10:29'
 }
 SPOCApp >> buildTopPanel: aBuilder [
@@ -166,7 +151,7 @@ SPOCApp >> buildWith: aBuilder [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/30/2024 21:57'
+	#'squeak_changestamp' : 'VE 6/3/2024 13:57'
 }
 SPOCApp >> initialize [
 
@@ -175,7 +160,8 @@ SPOCApp >> initialize [
 	self auth: SPOCAuthorizer new; 
 		registerOpenCommand;
 		setupUserLogin;
-		setupSearchbar.
+		setupSearchbar;
+		setupPlayer.
 
 
 ]
@@ -242,12 +228,12 @@ SPOCApp >> searchbar: aSPOCSearchbar [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 5/30/2024 12:23'
+	#'squeak_changestamp' : 'VE 6/3/2024 14:04'
 }
 SPOCApp >> setupPlayer [
 
 	self player: (SPOCPlayer new app: self; yourself).
-	self auth registerSuccessCallback: [self player enableButtons].
+	self auth registerSuccessCallback: [self player updateIsPlaying].
 ]
 
 {

@@ -58,7 +58,7 @@ SPOCApiEndpoint >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/30/2024 11:48'
+	#'squeak_changestamp' : 'VE 6/3/2024 14:34'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
 	| response request contentStream |
@@ -73,7 +73,7 @@ SPOCApiEndpoint >> execute: aParamDictionary [
 						ifFalse: [response code = 200
 								ifTrue: [contentStream := response content readStream.
 									^ self tinkerReponseContent: contentStream]
-								ifFalse: [^ nil]]]]
+								ifFalse: [^ 'null Object ', response code asString]]]]
 ]
 
 {
