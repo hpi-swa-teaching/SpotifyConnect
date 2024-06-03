@@ -1,5 +1,5 @@
 Class {
-	#name : #SPOCPluggableTablePanel,
+	#name : #SPOCPluggableTablePanelSpec,
 	#superclass : #PluggablePanelSpec,
 	#instVars : [
 		'tableLayoutProperties'
@@ -9,26 +9,30 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'VE 5/30/2024 23:56'
+	#'squeak_changestamp' : 'VE 6/3/2024 09:51'
 }
-SPOCPluggableTablePanel class >> fullFrame [
+SPOCPluggableTablePanelSpec class >> fullFrame [
 	^ LayoutFrame new topFraction: 0; leftFraction: 0; rightFraction: 1; bottomFraction: 1
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 5/30/2024 23:57'
+	#'squeak_changestamp' : 'VE 6/3/2024 10:32'
 }
-SPOCPluggableTablePanel >> buildWith: aBuilder [
+SPOCPluggableTablePanelSpec >> buildWith: aBuilder [
 	
-	| widget |
+	| widget hResizing vResizing |
 	widget := aBuilder buildPluggablePanel: self.
+	hResizing := self tableLayoutProperties hResizing.
+	vResizing := self tableLayoutProperties vResizing.
 	widget layoutPolicy: TableLayout new;
 		layoutProperties: self tableLayoutProperties.
-	self frame: SPOCPluggableTablePanel fullFrame.
+	self frame ifNil: [self frame: SPOCPluggableTablePanelSpec fullFrame].
 	aBuilder setFrame: self frame in: widget.
-	widget submorphsDo: [:m | m class = PluggablePanelMorph ifFalse: [m hResizing: #rigid]].
-	widget submorphsDo: [:m | m class = PluggablePanelMorph ifFalse: [m vResizing: #rigid]].
+	widget hResizing: hResizing;
+		 vResizing: vResizing.
+	widget submorphsDo: [:m | m class = PluggablePanelMorph ifFalse: [m hResizing: #rigid]];
+		 submorphsDo: [:m | m class = PluggablePanelMorph ifFalse: [m vResizing: #rigid]].
 	^ widget.
 ]
 
@@ -36,7 +40,7 @@ SPOCPluggableTablePanel >> buildWith: aBuilder [
 	#category : #initialization,
 	#'squeak_changestamp' : 'VE 5/30/2024 23:04'
 }
-SPOCPluggableTablePanel >> initialize [
+SPOCPluggableTablePanelSpec >> initialize [
 	super initialize.
 	
 	self tableLayoutProperties: TableLayoutProperties new
@@ -46,7 +50,7 @@ SPOCPluggableTablePanel >> initialize [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VE 5/30/2024 22:59'
 }
-SPOCPluggableTablePanel >> tableLayoutProperties [
+SPOCPluggableTablePanelSpec >> tableLayoutProperties [
 	^ tableLayoutProperties
 ]
 
@@ -54,6 +58,6 @@ SPOCPluggableTablePanel >> tableLayoutProperties [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VE 5/30/2024 22:59'
 }
-SPOCPluggableTablePanel >> tableLayoutProperties: anObject [
+SPOCPluggableTablePanelSpec >> tableLayoutProperties: anObject [
 	tableLayoutProperties := anObject
 ]

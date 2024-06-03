@@ -18,17 +18,8 @@ SPOCApp class >> appName [
 ]
 
 {
-	#category : #constants,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:52'
-}
-SPOCApp class >> minimalPanelSize [ 
-	
-	^ 1008@591 
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'VE 5/28/2024 14:17'
+	#category : #start,
+	#'squeak_changestamp' : 'VE 6/3/2024 09:12'
 }
 SPOCApp class >> minimumExtent [
 	^ 1080 @ 720
@@ -62,40 +53,81 @@ SPOCApp >> auth: anObject [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/31/2024 00:03'
+	#'squeak_changestamp' : 'VE 6/3/2024 09:35'
+}
+SPOCApp >> bottomPanelContent [
+	^ {SPOCIcon new. SPOCIcon new. SPOCIcon new. SPOCIcon new.}
+]
+
+{
+	#category : #ui,
+	#'squeak_changestamp' : 'VE 6/3/2024 10:13'
+}
+SPOCApp >> buildBottomPanel: aBuilder [
+
+	^ SPOCPluggableTablePanelSpec new
+		model: self;
+		tableLayoutProperties: (TableLayoutProperties new
+			listDirection: #leftToRight;
+			listCentering: #center;
+			wrapDirection: #bottomToTop;
+			cellInset: SPOCStyle defaultMargin;
+			hResizing: #spaceFill;
+			vResizing: #shrinkWrap);
+		children: #bottomPanelContent
+]
+
+{
+	#category : #ui,
+	#'squeak_changestamp' : 'VE 6/3/2024 10:10'
+}
+SPOCApp >> buildCenterPanel: aBuilder [
+
+	^ SPOCPluggableTablePanelSpec new
+		model: self;
+		tableLayoutProperties: (TableLayoutProperties new
+			hResizing: #spaceFill;
+			vResizing: #spaceFill)
+]
+
+{
+	#category : #ui,
+	#'squeak_changestamp' : 'VE 6/3/2024 10:24'
 }
 SPOCApp >> buildMainTable: aBuilder [
 	
-	^ SPOCPluggableTablePanel new
+	^ SPOCPluggableTablePanelSpec new
 		model: self;
 		tableLayoutProperties: (TableLayoutProperties new
-			listDirection: #topToBottom);
-		children: {SPOCPluggableTablePanel new
-			model: self;
-			tableLayoutProperties: (TableLayoutProperties new
-				listDirection: #rightToLeft;
-				layoutInset: 15);
-			children: #loginPanelContent}.
+			listDirection: #topToBottom;
+			cellInset: SPOCStyle defaultMargin;
+			hResizing: #spaceFill;
+			vResizing: #spaceFill);
+		children: {self buildTopPanel: aBuilder.
+			self buildCenterPanel: aBuilder.
+			self buildBottomPanel: aBuilder.}.
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 6/1/2024 19:31'
+	#'squeak_changestamp' : 'VE 6/3/2024 10:29'
 }
-SPOCApp >> buildSearchbarPanel: aBuilder [
-	| proportionalSize |
-	proportionalSize := self proportionalPanelSizeOf: self searchbar.
-	^ aBuilder pluggablePanelSpec new
+SPOCApp >> buildTopPanel: aBuilder [
+		
+	 ^ SPOCPluggableTablePanelSpec new
 		model: self;
-		children: #searchbarPanelContent;
-		layout: #proportional;
-		frame: (LayoutFrame fractions: (0.1@0 corner: 0.85@proportionalSize y));
-		yourself
+		tableLayoutProperties: (TableLayoutProperties new
+			hResizing: #spaceFill;
+			vResizing: #shrinkWrap;
+			listDirection: #leftToRight;
+			listCentering: #justified;
+			cellPositioning: #topLeft);
+		children: #topPanelContent
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 5/30/2024 22:12'
+	#'squeak_changestamp' : 'VE 6/3/2024 08:57'
 }
 SPOCApp >> buildWindow: aBuilder [
 
@@ -103,8 +135,7 @@ SPOCApp >> buildWindow: aBuilder [
 		model: self;
 		label: #windowTitle;
 		minimumExtent: SPOCApp minimumExtent;
-		children: {self buildLoginPanel: aBuilder.
-			self buildSearchbarPanel: aBuilder};
+		children: {self buildMainTable: aBuilder};
 		yourself.
 ]
 
@@ -131,15 +162,6 @@ SPOCApp >> initialize [
 		setupSearchbar.
 
 
-]
-
-{
-	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/31/2024 00:07'
-}
-SPOCApp >> loginPanelContent [
-
-	^ {self userLogin. SPOCSearchbar new}
 ]
 
 {
@@ -178,15 +200,6 @@ SPOCApp >> searchbar: aSPOCSearchbar [
 ]
 
 {
-	#category : #ui,
-	#'squeak_changestamp' : 'RK 5/30/2024 22:03'
-}
-SPOCApp >> searchbarPanelContent [
-
-	^ {self searchbar}
-]
-
-{
 	#category : #initialization,
 	#'squeak_changestamp' : 'RK 5/30/2024 21:34'
 }
@@ -205,6 +218,15 @@ SPOCApp >> setupUserLogin [
 	self auth registerSuccessCallback: [self userLogin toggleLogout].
 
 
+]
+
+{
+	#category : #ui,
+	#'squeak_changestamp' : 'VE 6/3/2024 10:23'
+}
+SPOCApp >> topPanelContent [
+
+	^ { self searchbar. self userLogin}
 ]
 
 {

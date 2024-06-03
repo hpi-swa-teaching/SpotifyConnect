@@ -30,10 +30,10 @@ SPOCSearchbar class >> resultBorder [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 6/1/2024 22:48'
+	#'squeak_changestamp' : 'VE 6/3/2024 10:31'
 }
 SPOCSearchbar class >> searchbarHeight [
-	^ 42
+	^ 32
 ]
 
 {
