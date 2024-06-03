@@ -61,22 +61,25 @@ SPOCApp >> auth: anObject [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/28/2024 21:38'
+	#'squeak_changestamp' : 'VE 5/31/2024 00:03'
 }
-SPOCApp >> buildLoginPanel: aBuilder [
-	| proportionalSize |
-	proportionalSize := self proportionalPanelSizeOf: self userLogin.
-	^ aBuilder pluggablePanelSpec new
+SPOCApp >> buildMainTable: aBuilder [
+	
+	^ SPOCPluggableTablePanel new
 		model: self;
-		children: #loginPanelContent;
-		layout: #proportional;
-		frame: (LayoutFrame fractions: (0.9@0 corner: 1@proportionalSize y));
-		yourself
+		tableLayoutProperties: (TableLayoutProperties new
+			listDirection: #topToBottom);
+		children: {SPOCPluggableTablePanel new
+			model: self;
+			tableLayoutProperties: (TableLayoutProperties new
+				listDirection: #rightToLeft;
+				layoutInset: 15);
+			children: #loginPanelContent}.
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:25'
+	#'squeak_changestamp' : 'VE 5/30/2024 23:50'
 }
 SPOCApp >> buildWindow: aBuilder [
 
@@ -84,7 +87,7 @@ SPOCApp >> buildWindow: aBuilder [
 		model: self;
 		label: #windowTitle;
 		minimumExtent: SPOCApp minimumExtent;
-		children: {self buildLoginPanel: aBuilder};
+		children: {self buildMainTable: aBuilder};
 		yourself.
 ]
 
@@ -114,11 +117,11 @@ SPOCApp >> initialize [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/28/2024 19:59'
+	#'squeak_changestamp' : 'VE 5/31/2024 00:07'
 }
 SPOCApp >> loginPanelContent [
 
-	^ {self userLogin}
+	^ {self userLogin. SPOCSearchbar new}
 ]
 
 {
@@ -128,15 +131,6 @@ SPOCApp >> loginPanelContent [
 SPOCApp >> open [
 
 	^ ToolBuilder open: self
-]
-
-{
-	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:26'
-}
-SPOCApp >> proportionalPanelSizeOf: aMorph [
-
-	^ aMorph extent / SPOCApp minimalPanelSize
 ]
 
 {
