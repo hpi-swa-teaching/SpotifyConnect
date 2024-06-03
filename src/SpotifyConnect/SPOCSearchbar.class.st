@@ -38,11 +38,11 @@ SPOCSearchbar class >> searchbarHeight [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 6/1/2024 18:13'
+	#'squeak_changestamp' : 'OW 6/3/2024 13:15'
 }
 SPOCSearchbar class >> searchbarToResultRatio [
 	"Defines the ratio between the height of the searchbar and the height of a resultMorph"
-	^ 2
+	^ 3
 ]
 
 {
