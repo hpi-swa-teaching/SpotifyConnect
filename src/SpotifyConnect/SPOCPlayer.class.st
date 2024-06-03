@@ -1,119 +1,150 @@
 Class {
 	#name : #SPOCPlayer,
 	#superclass : #SPOCUIComponent,
+	#instVars : [
+		'button',
+		'deviceID',
+		'icon'
+	],
 	#category : #SpotifyConnect
 }
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'TL 5/27/2024 01:35'
+	#'squeak_changestamp' : 'TL 5/30/2024 12:02'
 }
-SPOCPlayer class >> playPauseIconPath [
+SPOCPlayer class >> pauseIconPath [
 
-	^ '/asset/button/PlayPause.png'
+	^ '/assets/pause.png'
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'TL 5/27/2024 12:07'
+	#'squeak_changestamp' : 'TL 5/30/2024 12:02'
 }
-SPOCPlayer class >> skipNextIconPath [
+SPOCPlayer class >> playIconPath [
 
-	^ 'asset/button/skipNext'
+	^ '/assets/play.png'
 ]
 
 {
-	#category : #'dev-examples',
-	#'squeak_changestamp' : 'MH 5/26/2024 21:32'
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 5/30/2024 12:02'
 }
-SPOCPlayer >> currentDevice [
+SPOCPlayer class >> skipNextIconPath [
 
-	^ '4f5f10b92aa75f5973a9b7f888c91b18ed232ca3'
+	^ '/assets/next.png'
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 5/27/2024 14:40'
+	#'squeak_changestamp' : 'TL 5/30/2024 12:08'
+}
+SPOCPlayer >> attachPlayPauseButton [
+	
+	| iconPath |
+	self isPlaying
+		ifTrue: [iconPath := SPOCPlayer pauseIconPath]
+		ifFalse: [iconPath := SPOCPlayer playIconPath].
+	self icon: (SPOCIcon new iconAsset: iconPath; yourself);
+		button: (SPOCClickable newUsing: icon onClick: [:enEvent | self switchPlaybackState]);
+		addMorph: self button
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 5/30/2024 12:09'
+}
+SPOCPlayer >> attachSkipNextButton [
+	
+	self icon: (SPOCIcon new iconAsset: SPOCPlayer skipNextIconPath; yourself);
+		button: (SPOCClickable newUsing: icon onClick: [:enEvent | self skipToNext]);
+		addMorph: self button
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 5/30/2024 12:03'
+}
+SPOCPlayer >> button [
+	^ button
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 5/30/2024 12:03'
+}
+SPOCPlayer >> button: anObject [
+	button := anObject
+]
+
+{
+	#category : #'dev-examples',
+	#'squeak_changestamp' : 'TL 5/29/2024 19:55'
+}
+SPOCPlayer >> currentDevice [
+
+	^ 'b704b454bce64526992a3f207723032f5f91e635'
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 5/30/2024 12:16'
+}
+SPOCPlayer >> deviceID [
+	^ deviceID
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 5/30/2024 12:16'
+}
+SPOCPlayer >> deviceID: anObject [
+	deviceID := anObject
+]
+
+{
+	#category : #actions,
+	#'squeak_changestamp' : 'TL 5/30/2024 11:54'
+}
+SPOCPlayer >> enableButtons [
+
+	"enable buttons only if user is logged in"
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 5/30/2024 12:00'
+}
+SPOCPlayer >> icon [
+	^ icon
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 5/30/2024 12:00'
+}
+SPOCPlayer >> icon: anObject [
+	icon := anObject
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 5/30/2024 12:10'
 }
 SPOCPlayer >> initialize [
 
 	super initialize.
 	
-	self initializeLayout;
-		initializePlayPause;
-		initializeSkipNext
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'TL 5/27/2024 11:56'
-}
-SPOCPlayer >> initializeLayout [
-
-	self extent: 1000 @ 300;
-		position: 100 @ 100;
-		color: SPOCStyle spotifyBlack
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'TL 5/27/2024 15:45'
-}
-SPOCPlayer >> initializePlayPause [
-
-	"TODO: implement usage of SPOCButton and SPOCAssetImageMorph"
-	
-	| background button icon |	
-	background := Morph new
-		color: SPOCStyle spotifyWhite;
-		position: self position + (10 @ 10).	
-	icon := SPOCAssetImageMorph new 
-		assetPath: self class playPauseIconPath;
-		position: background position + (10 @ 10).	
-	background extent: icon extent + (20 @ 20).
-	button := SimpleButtonMorph new
-		label: '';
-		color: Color transparent;
-		position: background position + (10 @ 10);
-		extent: icon extent;
-		target: self;
-		actionSelector: #switchPlaybackState.	
-	self addMorphFront: background;
-		addMorphFront: icon;
-		addMorphFront: button
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'TL 5/27/2024 15:45'
-}
-SPOCPlayer >> initializeSkipNext [
-
-	"TODO: implement usage of SPOCButton and SPOCAssetImageMorph"
-	
-	| background button |	
-	background := Morph new
-		color: SPOCStyle spotifyWhite;
-		position: self position + (10 @ 100).	
-	"icon := SPOCAssetImageMorph new 
-		assetPath: self class skipNextIconPath;
-		position: background position + (10 @ 10).
-	self addMorphFront: icon."
-	button := SimpleButtonMorph new
-		label: 'Skip';
-		color: Color transparent;
-		position: background position + (10 @ 10);
-		extent: 70 @ 30;
-		target: self;
-		actionSelector: #skipToNext.
-	background extent: button extent + (20 @ 20).
-	self addMorphFront: background;
-		addMorphFront: button
+	self color: Color transparent;
+		attachPlayPauseButton;
+		attachSkipNextButton;
+		extendFully
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 17:48'
+	#'squeak_changestamp' : 'TL 5/31/2024 17:33'
 }
 SPOCPlayer >> isPlaying [
 
@@ -121,22 +152,23 @@ SPOCPlayer >> isPlaying [
 	paramDict := Dictionary new.
 	paramDict at: #additional_types put: 'track'.
 	apiEndpoint := SPOCApiPlaybackState new.
-	Transcript showln: app auth accessToken.
-	apiEndpoint authorizer: app auth.
+	apiEndpoint authorizer: self app auth.
 	response := apiEndpoint execute: paramDict.
 	Transcript showln: response.
+	"self deviceID: (response at: 'device')."
+	self deviceID: 'b704b454bce64526992a3f207723032f5f91e635'.
 	^ response at: 'is_playing'
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 5/27/2024 16:40'
+	#'squeak_changestamp' : 'TL 5/30/2024 12:16'
 }
 SPOCPlayer >> pause [
 
 	| paramDict response apiEndpoint |
 	paramDict := Dictionary new.
-	paramDict at: #device_id put: self currentDevice.
+	paramDict at: #device_id put: self deviceID.
 	apiEndpoint := SPOCApiPause new.
 	apiEndpoint authorizer: app auth.
 	response := apiEndpoint execute: paramDict
@@ -144,13 +176,13 @@ SPOCPlayer >> pause [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 16:41'
+	#'squeak_changestamp' : 'TL 5/30/2024 12:16'
 }
 SPOCPlayer >> play [
 
 	| paramDict apiEndpoint response |
 	paramDict := Dictionary new.
-	paramDict at: #device_id put: self currentDevice.
+	paramDict at: #device_id put: self deviceID.
 	apiEndpoint := SPOCApiPlay new.
 	apiEndpoint authorizer: app auth.
 	response := apiEndpoint execute: paramDict
@@ -158,13 +190,13 @@ SPOCPlayer >> play [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 5/27/2024 16:41'
+	#'squeak_changestamp' : 'TL 5/30/2024 12:16'
 }
 SPOCPlayer >> skipToNext [
 
 	| paramDict apiEndpoint response |
 	paramDict := Dictionary new.
-	paramDict 	at: #device_id put: self currentDevice.
+	paramDict 	at: #device_id put: self deviceID.
 	apiEndpoint := SPOCApiNext new.
 	apiEndpoint authorizer: app auth.
 	response := apiEndpoint execute: paramDict

@@ -58,7 +58,7 @@ SPOCApiEndpoint >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 16:44'
+	#'squeak_changestamp' : 'TL 5/30/2024 11:48'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
 	| response request contentStream |

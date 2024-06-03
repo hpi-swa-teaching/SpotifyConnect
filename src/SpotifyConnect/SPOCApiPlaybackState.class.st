@@ -33,12 +33,11 @@ SPOCApiPlaybackState >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 16:54'
+	#'squeak_changestamp' : 'TL 5/29/2024 20:03'
 }
 SPOCApiPlaybackState >> executeRequest: request withParams: aParamDictionary [
 
 	request rawUrl: (request rawUrl, '?additional_types=', (aParamDictionary at: 'additional_types')).
-	Transcript showln: request.
 	^ self client sendRequest: request
 ]
 

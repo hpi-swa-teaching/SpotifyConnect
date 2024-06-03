@@ -110,6 +110,22 @@ SPOCApp >> buildMainTable: aBuilder [
 
 {
 	#category : #ui,
+	#'squeak_changestamp' : 'TL 5/31/2024 17:29'
+}
+SPOCApp >> buildPlayerPanel: aBuilder [
+
+	| proportionalSize |
+	proportionalSize := self proportionalPanelSizeOf: self player.
+	^ aBuilder pluggablePanelSpec new
+		model: self;
+		children: #playerPanelContent;
+		layout: #proportional;
+		frame: (LayoutFrame fractions: (0.1@0 corner: 1@proportionalSize y));
+		yourself
+]
+
+{
+	#category : #ui,
 	#'squeak_changestamp' : 'VE 6/3/2024 10:29'
 }
 SPOCApp >> buildTopPanel: aBuilder [
@@ -174,6 +190,31 @@ SPOCApp >> open [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 5/30/2024 11:49'
+}
+SPOCApp >> player [
+	^ player
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 5/30/2024 11:49'
+}
+SPOCApp >> player: anObject [
+	player := anObject
+]
+
+{
+	#category : #ui,
+	#'squeak_changestamp' : 'TL 5/31/2024 17:32'
+}
+SPOCApp >> playerPanelContent [
+
+	^ {self player}
+]
+
+{
 	#category : #ui,
 	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
 }
@@ -197,6 +238,16 @@ SPOCApp >> searchbar [
 }
 SPOCApp >> searchbar: aSPOCSearchbar [
 	searchbar := aSPOCSearchbar
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 5/30/2024 12:23'
+}
+SPOCApp >> setupPlayer [
+
+	self player: (SPOCPlayer new app: self; yourself).
+	self auth registerSuccessCallback: [self player enableButtons].
 ]
 
 {
