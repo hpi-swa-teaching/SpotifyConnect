@@ -9,13 +9,12 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/18/2024 14:34'
+	#'squeak_changestamp' : 'RK 6/1/2024 10:59'
 }
 SPOCTextInput class >> newAt: aPoint withText: aString [
 	^ SPOCTextInput new
 		position: aPoint;
 		contents: aString;
-		backgroundColor: SPOCStyle spotifyGray;
 		textColor: SPOCStyle spotifyWhite;
 		yourself
 ]
@@ -49,13 +48,14 @@ SPOCTextInput >> handlesMouseDown: anEvent [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/21/2024 23:38'
+	#'squeak_changestamp' : 'RK 6/1/2024 11:10'
 }
 SPOCTextInput >> initialize [
 	
 	super initialize.
 	
-	self setProperty: #crAction toValue: [ self handleEnterPressed ]
+	self setProperty: #crAction toValue: [ self handleEnterPressed ];
+		hResizing: #spaceFill
 ]
 
 {

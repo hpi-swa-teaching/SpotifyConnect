@@ -63,7 +63,7 @@ SPOCTrack >> duration: aNumber [
 ]
 
 {
-	#category : #accessing,
+	#category : #formatting,
 	#'squeak_changestamp' : 'RK 5/16/2024 23:45'
 }
 SPOCTrack >> durationAsFormattedTime [
@@ -106,14 +106,6 @@ SPOCTrack >> explicit [
 }
 SPOCTrack >> explicit: aBoolean [
 	explicit := aBoolean
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/21/2024 20:28'
-}
-SPOCTrack >> playTrack [
-	"This method should do an API call that plays this song"
 ]
 
 {

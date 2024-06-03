@@ -6,13 +6,12 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'RK 5/18/2024 00:10'
+	#'squeak_changestamp' : 'RK 5/30/2024 23:00'
 }
 SPOCPlainText class >> newAt: aPoint withText: aString [
 	^ SPOCText new
 		position: aPoint;
 		contents: aString;
-		backgroundColor: SPOCStyle spotifyGray;
 		textColor: SPOCStyle spotifyWhite;
 		yourself
 	
