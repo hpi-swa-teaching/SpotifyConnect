@@ -58,22 +58,17 @@ SPOCApiEndpoint >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/3/2024 14:34'
+	#'squeak_changestamp' : 'VE 6/3/2024 16:15'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
-	| response request contentStream |
-	self returnsTestContent
-		ifTrue: [^ self tinkerReponseContent: self executeTest]
-		ifFalse: [self authorizer
-				ifNil: [self error: 'Authorizer needed']
-				ifNotNil: [request := self tinkerRequest.
-					response := self executeRequest: request withParams: aParamDictionary.
-					response code = 401
-						ifTrue: [^ self refreshAccessTokenAndExecute: aParamDictionary]
-						ifFalse: [response code = 200
-								ifTrue: [contentStream := response content readStream.
-									^ self tinkerReponseContent: contentStream]
-								ifFalse: [^ 'null Object ', response code asString]]]]
+	| response contentStream |
+	self returnsTestContent ifTrue: [^ self tinkerReponseContent: self executeTest].
+	self authorizer ifNil: [^ SPOCApiEndpointResult new error: 'Authorizer needed'; yourself].
+	response := self executeRequest: (self tinkerRequest) withParams: aParamDictionary.
+	response code = 401 ifTrue: [^ self refreshAccessTokenAndExecute: aParamDictionary].
+	response code = 200 ifTrue: [contentStream := response content readStream.
+		^ self tinkerReponseContent: contentStream].
+	^ SPOCApiEndpointResult new response: response; yourself
 ]
 
 {
@@ -105,13 +100,13 @@ SPOCApiEndpoint >> initialize [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 16:39'
+	#'squeak_changestamp' : 'VE 6/3/2024 16:16'
 }
 SPOCApiEndpoint >> refreshAccessTokenAndExecute: aParamDictionary [
 	authorizer refreshAccessToken.
 	authorizer isAuthorized
 		ifTrue: [^ self execute: aParamDictionary]
-		ifFalse: [^ self error: 'Could not refresh access token']
+		ifFalse: [^ SPOCApiEndpointResult new error: 'Access Token Refresh Faild'; yourself]
 ]
 
 {
