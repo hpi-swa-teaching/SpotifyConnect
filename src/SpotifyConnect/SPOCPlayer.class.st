@@ -128,7 +128,7 @@ SPOCPlayer >> icon: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/3/2024 14:18'
+	#'squeak_changestamp' : 'VE 6/3/2024 14:46'
 }
 SPOCPlayer >> initialize [
 
@@ -136,9 +136,11 @@ SPOCPlayer >> initialize [
 	
 	self color: Color transparent;
 		isPlaying: false;
-		attachPlayPauseButton;
 		attachSkipNextButton;
+		attachPlayPauseButton;
 		layoutPolicy: TableLayout new;
+		listDirection: #leftToRight;
+		cellInset: 10;
 		extendFully
 ]
 
