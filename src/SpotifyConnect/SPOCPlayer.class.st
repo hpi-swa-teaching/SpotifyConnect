@@ -39,12 +39,12 @@ SPOCPlayer class >> skipNextIconPath [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/3/2024 14:08'
+	#'squeak_changestamp' : 'TL 6/3/2024 16:14'
 }
 SPOCPlayer >> attachPlayPauseButton [
 	
 	self icon: (SPOCIcon new iconAsset: SPOCPlayer playIconPath; yourself);
-		button: (SPOCClickable newUsing: icon onClick: [:enEvent | self switchPlaybackState]);
+		button: (SPOCClickable newUsing: icon onClick: [:anEvent | self switchPlaybackState]);
 		addMorph: self button;
 		updatePlayPauseIcon.
 ]
@@ -155,15 +155,16 @@ SPOCPlayer >> isPlaying [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 6/3/2024 14:01'
+	#'squeak_changestamp' : 'TL 6/3/2024 16:08'
 }
 SPOCPlayer >> isPlaying: anObject [
+
 	isPlaying := anObject
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 5/30/2024 12:16'
+	#'squeak_changestamp' : 'TL 6/3/2024 16:08'
 }
 SPOCPlayer >> pause [
 
@@ -171,56 +172,57 @@ SPOCPlayer >> pause [
 	paramDict := Dictionary new.
 	paramDict at: #device_id put: self deviceID.
 	apiEndpoint := SPOCApiPause new.
-	apiEndpoint authorizer: app auth.
+	apiEndpoint authorizer: self app auth.
 	response := apiEndpoint execute: paramDict
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/3/2024 14:31'
+	#'squeak_changestamp' : 'TL 6/3/2024 16:12'
 }
 SPOCPlayer >> play [
 
-	| paramDict apiEndpoint response |
+	| apiEndpoint paramDict response |
 	paramDict := Dictionary new.
 	paramDict at: #device_id put: self deviceID.
-	Transcript showln: self deviceID.
 	apiEndpoint := SPOCApiPlay new.
 	apiEndpoint authorizer: app auth.
-	response := apiEndpoint execute: paramDict.
-	response explore.
+	response := apiEndpoint execute: paramDict
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 5/30/2024 12:16'
+	#'squeak_changestamp' : 'TL 6/3/2024 16:09'
 }
 SPOCPlayer >> skipToNext [
 
-	| paramDict apiEndpoint response |
+	| apiEndpoint paramDict response |
 	paramDict := Dictionary new.
-	paramDict 	at: #device_id put: self deviceID.
+	paramDict at: #device_id put: self deviceID.
 	apiEndpoint := SPOCApiNext new.
-	apiEndpoint authorizer: app auth.
+	apiEndpoint authorizer: self app auth.
 	response := apiEndpoint execute: paramDict
 ]
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'MH 5/27/2024 14:49'
+	#'squeak_changestamp' : 'TL 6/3/2024 16:22'
 }
 SPOCPlayer >> switchPlaybackState [
 
+	self updateIsPlaying.
 	self isPlaying 
-		ifTrue: [self pause]
-		ifFalse: [self play]
+		ifTrue: [self pause.
+			icon iconAsset: SPOCPlayer playIconPath]
+		ifFalse: [self play.
+			icon iconAsset: SPOCPlayer pauseIconPath]
 		
 		
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/3/2024 14:32'
+	#'squeak_changestamp' : 'TL 6/3/2024 16:31'
 }
 SPOCPlayer >> updateIsPlaying [
 
@@ -228,9 +230,9 @@ SPOCPlayer >> updateIsPlaying [
 	paramDict := Dictionary new.
 	paramDict at: #additional_types put: 'track'.
 	apiEndpoint := SPOCApiPlaybackState new.
-	apiEndpoint authorizer: self app auth.
+	apiEndpoint authorizer: app auth.
 	response := apiEndpoint execute: paramDict.
-	self deviceID: ((response at: #device) at: #id).
+	self deviceID: ((response at: 'device') at: 'id').
 	self isPlaying: (response at: 'is_playing')
 ]
 
