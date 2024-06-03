@@ -72,7 +72,7 @@ SPOCAuthorizer class >> resetClient [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/22/2024 18:44'
+	#'squeak_changestamp' : 'VK 6/3/2024 11:58'
 }
 SPOCAuthorizer class >> scope [
 
@@ -83,7 +83,8 @@ SPOCAuthorizer class >> scope [
 		'playlist-read-collaborative ',
 		'user-read-playback-position ',
 		'user-read-email ',
-		'user-read-private'
+		'user-read-private ',
+		'user-read-recently-played'
 ]
 
 {

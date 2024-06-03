@@ -67,20 +67,26 @@ SPOCTrackHistory >> buildTrackHistory [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/1/2024 20:21'
+	#'squeak_changestamp' : 'VK 6/3/2024 12:03'
 }
 SPOCTrackHistory >> buildTrackMorphFrom: aTrack [
 
-	| background image trackText artistText finishedMorph clickResult |
+	| background image trackText artistText finishedMorph clickResult border durationText height ratio width |
+	height := SPOCSearchbar searchbarHeight.
+	width := SPOCSearchbar searchbarWidth.
+	border := SPOCSearchbar resultBorder.
+	ratio := SPOCSearchbar searchbarToResultRatio.
+	
 	background := RectangleMorph new
 		color: SPOCStyle spotifyGray;
-		extent: (600@2*50);
-		morphicLayerNumber: 300.
-	image := (aTrack album) image.
-	image position: (background position + (50 * 0.25@(50 * 0.25)));
-		morphicLayerNumber: 300 - 1.
-	trackText := SPOCText newAt: (image topRight + ((50 * 0.25)@0)) withText: aTrack name.
-	artistText := SPOCText newAt: (image bottomRight +  ((50 * 0.25)@(self height negated * 0.5))) withText: (aTrack album artistsAsString).
+		extent: (width +  height@(ratio * height));
+		morphicLayerNumber: SPOCSearchbar baseLayer.
+	image := (aTrack album) image scaledTo: (ratio * (height - border)).
+	image position: (background topLeft + (border@border));
+		morphicLayerNumber: SPOCSearchbar baseLayer - 1.
+	trackText := SPOCText newAt: (image topRight + (border@0)) withText: aTrack name.
+	artistText := SPOCText newAt: (image bottomRight +  (border@(SPOCText defaultHeight negated))) withText: (aTrack album artistsAsString).
+	durationText := SPOCText newAt: (background bottomRight - (10 * border@(height + (SPOCText defaultHeight / 2)))) withText: aTrack durationAsFormattedTime.
 	finishedMorph := Morph new color: Color transparent;
 		addMorph: background;
 		addMorph: image;
@@ -169,7 +175,7 @@ SPOCTrackHistory >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:19'
+	#'squeak_changestamp' : 'VK 6/3/2024 12:05'
 }
 SPOCTrackHistory >> playTrack: aString [
 	"In this method, the track is to be played according to the given ID"
