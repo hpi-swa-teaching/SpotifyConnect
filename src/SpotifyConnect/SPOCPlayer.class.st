@@ -1,6 +1,9 @@
 Class {
 	#name : #SPOCPlayer,
 	#superclass : #SPOCUIComponent,
+	#instVars : [
+		'data'
+	],
 	#category : #SpotifyConnect
 }
 
@@ -23,12 +26,51 @@ SPOCPlayer class >> skipNextIconPath [
 ]
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'MH 6/3/2024 01:09'
+}
+SPOCPlayer >> DataDict [
+
+	^data
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'MH 6/3/2024 01:09'
+}
+SPOCPlayer >> DataDict: data [
+
+	^data
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'MH 6/3/2024 01:08'
+}
+SPOCPlayer >> buildDataDict: data [
+
+	^data
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'MH 6/3/2024 00:44'
+}
+SPOCPlayer >> buildEmptyDataDict [
+
+	|data|
+	data:= Dictionary new.
+	
+	^data
+]
+
+{
 	#category : #'dev-examples',
-	#'squeak_changestamp' : 'TL 5/29/2024 19:55'
+	#'squeak_changestamp' : 'MH 5/30/2024 11:44'
 }
 SPOCPlayer >> currentDevice [
 
-	^ 'b704b454bce64526992a3f207723032f5f91e635'
+	^ '89e8e4ef4f0d524cc4cb948a35c04bc50a21db8b'
 ]
 
 {
@@ -142,7 +184,7 @@ SPOCPlayer >> pause [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 16:41'
+	#'squeak_changestamp' : 'MH 6/3/2024 14:57'
 }
 SPOCPlayer >> play [
 
@@ -151,7 +193,26 @@ SPOCPlayer >> play [
 	paramDict at: #device_id put: self currentDevice.
 	apiEndpoint := SPOCApiPlay new.
 	apiEndpoint authorizer: app auth.
+	response := apiEndpoint execute: paramDict.
+	Transcript showln: response
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'MH 6/3/2024 14:16'
+}
+SPOCPlayer >> playSong: aString [
+
+	| paramDict apiEndpoint response|
+	paramDict := Dictionary new.
+	paramDict at: #device_id put: self currentDevice.
+	paramDict at: #uri put: '"spotify:track:', aString,'"'.
+	paramDict	at: #offset put: '{"position": 0}'.
+	paramDict at: #position_ms put: '"0"'.
+	apiEndpoint := SPOCApiPlay new.
+	apiEndpoint authorizer: app auth.
 	response := apiEndpoint execute: paramDict
+
 ]
 
 {
@@ -170,13 +231,13 @@ SPOCPlayer >> skipToNext [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'MH 5/27/2024 14:49'
+	#'squeak_changestamp' : 'MH 6/3/2024 00:01'
 }
 SPOCPlayer >> switchPlaybackState [
 
 	self isPlaying 
 		ifTrue: [self pause]
-		ifFalse: [self play]
+		ifFalse: [self playSong: '1hYilXtoru2HU5WFC4c6Hb']
 		
 		
 ]
