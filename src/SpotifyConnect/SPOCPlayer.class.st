@@ -50,36 +50,48 @@ SPOCPlayer class >> previousIconPath [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/3/2024 23:35'
+	#'squeak_changestamp' : 'TL 6/4/2024 11:52'
 }
 SPOCPlayer >> attachNextButton [
-	
-	self nextIcon: (SPOCIcon new iconAsset: SPOCPlayer nextIconPath; yourself);
-		button: (SPOCClickable newUsing: self nextIcon onClick: [:anEvent | self skipToNext]);
-		addMorph: self button
+
+	self nextIcon: (SPOCIcon new
+				iconAsset: SPOCPlayer nextIconPath;
+			 	yourself);		
+		button: (SPOCClickable
+				newUsing: self nextIcon
+				onClick: [:anEvent | self skipToNext]);
+		 addMorph: self button
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/3/2024 23:35'
+	#'squeak_changestamp' : 'TL 6/4/2024 11:51'
 }
 SPOCPlayer >> attachPlayPauseButton [
-	
-	self playPauseIcon: (SPOCIcon new iconAsset: SPOCPlayer playIconPath; yourself);
-		button: (SPOCClickable newUsing: self playPauseIcon onClick: [:anEvent | self switchPlaybackState]);
-		addMorph: self button;
-		updatePlayPauseIcon
+
+	self playPauseIcon: (SPOCIcon new
+				iconAsset: SPOCPlayer playIconPath;
+			 	yourself);		
+		button: (SPOCClickable
+				newUsing: self playPauseIcon
+				onClick: [:anEvent | self switchPlaybackState]);
+		 addMorph: self button;
+		 updatePlayPauseIcon
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/3/2024 23:35'
+	#'squeak_changestamp' : 'TL 6/4/2024 11:51'
 }
 SPOCPlayer >> attachPreviousButton [
-	
-	self previousIcon: (SPOCIcon new iconAsset: SPOCPlayer previousIconPath; yourself);
-		button: (SPOCClickable newUsing: self previousIcon onClick: [:anEvent | self skipToPrevious]);
-		addMorph: self button
+
+	self previousIcon: (SPOCIcon new 
+				iconAsset: SPOCPlayer previousIconPath;
+			 	yourself);		
+		button: (SPOCClickable
+				newUsing: self previousIcon
+				onClick: [:anEvent | self skipToPrevious]);
+		 addMorph: self button
 ]
 
 {
@@ -116,15 +128,6 @@ SPOCPlayer >> deviceID [
 SPOCPlayer >> deviceID: anObject [
 
 	deviceID := anObject
-]
-
-{
-	#category : #actions,
-	#'squeak_changestamp' : 'TL 5/30/2024 11:54'
-}
-SPOCPlayer >> enableButtons [
-
-	"enable buttons only if user is logged in"
 ]
 
 {
@@ -184,30 +187,33 @@ SPOCPlayer >> nextIcon: anObject [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/3/2024 23:28'
+	#'squeak_changestamp' : 'TL 6/4/2024 11:46'
 }
 SPOCPlayer >> pause [
 
-	| apiEndpoint paramDict |
-	paramDict := Dictionary new.
-	paramDict at: #device_id put: self deviceID.
-	apiEndpoint := SPOCApiPause new.
-	apiEndpoint authorizer: self app auth;
-		execute: paramDict
+	| paramDict |
+	paramDict := Dictionary new
+		at: #device_id put: self deviceID;
+		yourself.
+	SPOCApiPause new authorizer: self app auth;
+		execute: paramDict;
+		yourself
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/3/2024 23:28'
+	#'squeak_changestamp' : 'TL 6/4/2024 11:46'
 }
 SPOCPlayer >> play [
 
-	| apiEndpoint paramDict |
-	paramDict := Dictionary new.
-	paramDict at: #device_id put: self deviceID.
-	apiEndpoint := SPOCApiPlay new.
-	apiEndpoint authorizer: self app auth;
-		execute: paramDict
+	| paramDict |
+	paramDict := Dictionary new
+		at: #device_id put: self deviceID;
+		yourself.
+	SPOCApiPlay new
+		authorizer: self app auth;
+		execute: paramDict;
+		yourself
 ]
 
 {
@@ -248,30 +254,34 @@ SPOCPlayer >> previousIcon: anObject [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/3/2024 23:28'
+	#'squeak_changestamp' : 'TL 6/4/2024 11:46'
 }
 SPOCPlayer >> skipToNext [
 
-	| apiEndpoint paramDict |
-	paramDict := Dictionary new.
-	paramDict at: #device_id put: self deviceID.
-	apiEndpoint := SPOCApiNext new.
-	apiEndpoint authorizer: self app auth;
-		execute: paramDict
+	| paramDict |
+	paramDict := Dictionary new
+		at: #device_id put: self deviceID;
+		yourself.
+	SPOCApiNext new
+		authorizer: self app auth;
+		execute: paramDict;
+		yourself
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/3/2024 23:12'
+	#'squeak_changestamp' : 'TL 6/4/2024 11:46'
 }
 SPOCPlayer >> skipToPrevious [
 
-	| apiEndpoint paramDict |
-	paramDict := Dictionary new.
-	paramDict at: #device_id put: self deviceID.
-	apiEndpoint := SPOCApiPrevious new.
-	apiEndpoint authorizer: self app auth;
-		execute: paramDict
+	| paramDict |
+	paramDict := Dictionary new
+		at: #device_id put: self deviceID;
+		yourself.
+	SPOCApiPrevious new
+		authorizer: self app auth;
+		execute: paramDict;
+		yourself
 ]
 
 {
@@ -292,18 +302,20 @@ SPOCPlayer >> switchPlaybackState [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/3/2024 23:28'
+	#'squeak_changestamp' : 'TL 6/4/2024 11:48'
 }
 SPOCPlayer >> updateIsPlaying [
 
-	| apiEndpoint paramDict response |
-	paramDict := Dictionary new.
-	paramDict at: #additional_types put: 'track'.
-	apiEndpoint := SPOCApiPlaybackState new.
-	apiEndpoint authorizer: self app auth.
-	response := apiEndpoint execute: paramDict.
-	self deviceID: ((response at: 'device') at: 'id').
-	self isPlaying: (response at: 'is_playing')
+	| apiEndpoint paramDict res |
+	paramDict := Dictionary new
+		at: #additional_types put: 'track';
+		yourself.
+	apiEndpoint := SPOCApiPlaybackState new
+		authorizer: self app auth;
+		yourself.
+	res := apiEndpoint execute: paramDict.
+	self deviceID: ((res at: 'device') at: 'id').
+	self isPlaying: (res at: 'is_playing')
 ]
 
 {
