@@ -46,12 +46,13 @@ SPOCUserLogin >> buttonLabel [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 21:36'
+	#'squeak_changestamp' : 'VE 6/4/2024 10:10'
 }
 SPOCUserLogin >> buttonLabel: aString [
 
 	buttonLabel := aString.
-	self text contents: aString.
+	self text contents: aString;
+		extendFully.
 ]
 
 {
@@ -96,7 +97,7 @@ SPOCUserLogin >> toggleLogin [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/28/2024 21:37'
+	#'squeak_changestamp' : 'VE 6/4/2024 10:09'
 }
 SPOCUserLogin >> toggleLogout [
 	
