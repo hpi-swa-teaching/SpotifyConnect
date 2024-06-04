@@ -110,11 +110,11 @@ SPOCTrack >> explicit: aBoolean [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/4/2024 14:54'
+	#'squeak_changestamp' : 'MH 6/4/2024 15:30'
 }
-SPOCTrack >> playTrack [
-	"This method should do an API call that plays this song"
-
+SPOCTrack >> playTrack: aString [
+	
+	self app player playSong: aString
 ]
 
 {
