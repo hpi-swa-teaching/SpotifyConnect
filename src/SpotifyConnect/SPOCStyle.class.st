@@ -14,6 +14,62 @@ SPOCStyle class >> defaultMargin [
 
 {
 	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 6/4/2024 23:45'
+}
+SPOCStyle class >> resultListHeight [
+	^ 800
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 6/4/2024 22:53'
+}
+SPOCStyle class >> resultListItemHeight [
+	^ 96
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 6/5/2024 00:41'
+}
+SPOCStyle class >> resultListItemPadding [
+	^ 95
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 6/4/2024 22:51'
+}
+SPOCStyle class >> resultListLimit [
+	^ 20
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 6/4/2024 23:45'
+}
+SPOCStyle class >> resultListWidth [
+	^ 600
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 6/4/2024 22:50'
+}
+SPOCStyle class >> searchbarHeight [
+	^ 32
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 6/4/2024 22:50'
+}
+SPOCStyle class >> searchbarWidth [
+	^ 600
+]
+
+{
+	#category : #'class variables',
 	#'squeak_changestamp' : 'RK 5/14/2024 18:02'
 }
 SPOCStyle class >> spotifyBlack [
@@ -42,4 +98,12 @@ SPOCStyle class >> spotifyGreen [
 }
 SPOCStyle class >> spotifyWhite [
 	^ Color r: 255/255 g: 255/255 b: 255/255
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 6/5/2024 00:31'
+}
+SPOCStyle class >> textHeight [
+	^ 30
 ]

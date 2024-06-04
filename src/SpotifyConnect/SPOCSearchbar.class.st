@@ -75,10 +75,10 @@ SPOCSearchbar >> buildCircle [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/4/2024 14:53'
+	#'squeak_changestamp' : 'RK 6/4/2024 23:46'
 }
 SPOCSearchbar >> buildResultDisplay [
-	"Refactor"
+	"Done"
 
 	^ SPOCScrollablePanel new
 		buildPanelAtPos: (self topLeft + (0@SPOCSearchbar searchbarHeight)) withExtent: (SPOCSearchbar searchbarWidth + SPOCSearchbar searchbarHeight)@(SPOCSearchbar searchbarHeight * 10);
@@ -87,10 +87,10 @@ SPOCSearchbar >> buildResultDisplay [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/4/2024 14:53'
+	#'squeak_changestamp' : 'RK 6/5/2024 01:12'
 }
 SPOCSearchbar >> buildResultMorphFrom: aTrack [
-	"Refactor"
+	"Done"
 	| height width border ratio background image trackText artistText durationText result clickResult |
 	
 	height := SPOCSearchbar searchbarHeight.
@@ -126,15 +126,15 @@ SPOCSearchbar >> buildResultMorphFrom: aTrack [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/4/2024 15:00'
+	#'squeak_changestamp' : 'RK 6/5/2024 01:13'
 }
 SPOCSearchbar >> buildSearchbar [
 
 	| leftCircle rightCircle |
 	leftCircle := self buildCircle.
-	rightCircle := (self buildCircle) position: self topLeft + (SPOCSearchbar searchbarWidth@0).
+	rightCircle := (self buildCircle) position: self topLeft + (SPOCStyle searchbarWidth@0).
 	self inputField: self buildTextInputField;
-		resultList: self buildResultDisplay. "Hier umbenennen?"
+		resultList: self buildResultDisplay. "Kann weg, weil resultList nicht mehr Submorph"
 	self addMorph: leftCircle;
 		addMorph: rightCircle;
 		addMorph: inputField;
@@ -144,10 +144,10 @@ SPOCSearchbar >> buildSearchbar [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/4/2024 15:00'
+	#'squeak_changestamp' : 'RK 6/4/2024 23:57'
 }
 SPOCSearchbar >> buildTextInputField [
-	"builder in klasse auslagern"
+	"To do: specification irgendwie auslagern, damit Methode kürzer"
 	| builder spec textField |
 	
 	builder := ToolBuilder default.
@@ -170,14 +170,6 @@ SPOCSearchbar >> buildTextInputField [
 		acceptOnCR: true;
 		yourself.
 	 ^ textField
-]
-
-{
-	#category : #building,
-	#'squeak_changestamp' : 'RK 6/4/2024 12:02'
-}
-SPOCSearchbar >> hideResults [
-	self resultList hide
 ]
 
 {
@@ -235,14 +227,6 @@ SPOCSearchbar >> inputText: aString [
 }
 SPOCSearchbar >> playTrack: aString [
 	"self app player playSong: aString"
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/4/2024 12:01'
-}
-SPOCSearchbar >> resultDisplay: aMorph [
-	resultList := aMorph
 ]
 
 {
@@ -324,12 +308,10 @@ SPOCSearchbar >> tracks: anOrderedCollection [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/4/2024 12:01'
+	#'squeak_changestamp' : 'RK 6/4/2024 23:58'
 }
 SPOCSearchbar >> updateResultDisplay: anOrderedCollection [
 	
-	anOrderedCollection ifNil: [self hideResults.
-		^ self].
 	resultList items: anOrderedCollection;
 		buildItemMorphsWith: [:value | self buildResultMorphFrom: value];
 		updatePanel;
