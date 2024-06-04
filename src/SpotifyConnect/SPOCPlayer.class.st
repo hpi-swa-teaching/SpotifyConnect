@@ -26,45 +26,6 @@ SPOCPlayer class >> skipNextIconPath [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/3/2024 01:09'
-}
-SPOCPlayer >> DataDict [
-
-	^data
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/3/2024 01:09'
-}
-SPOCPlayer >> DataDict: data [
-
-	^data
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/3/2024 01:08'
-}
-SPOCPlayer >> buildDataDict: data [
-
-	^data
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'MH 6/3/2024 00:44'
-}
-SPOCPlayer >> buildEmptyDataDict [
-
-	|data|
-	data:= Dictionary new.
-	
-	^data
-]
-
-{
 	#category : #'dev-examples',
 	#'squeak_changestamp' : 'MH 5/30/2024 11:44'
 }
@@ -184,7 +145,7 @@ SPOCPlayer >> pause [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/3/2024 14:57'
+	#'squeak_changestamp' : 'MH 6/4/2024 14:55'
 }
 SPOCPlayer >> play [
 
@@ -194,21 +155,19 @@ SPOCPlayer >> play [
 	apiEndpoint := SPOCApiPlay new.
 	apiEndpoint authorizer: app auth.
 	response := apiEndpoint execute: paramDict.
-	Transcript showln: response
+
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/3/2024 14:16'
+	#'squeak_changestamp' : 'MH 6/4/2024 14:55'
 }
 SPOCPlayer >> playSong: aString [
 
 	| paramDict apiEndpoint response|
 	paramDict := Dictionary new.
 	paramDict at: #device_id put: self currentDevice.
-	paramDict at: #uri put: '"spotify:track:', aString,'"'.
-	paramDict	at: #offset put: '{"position": 0}'.
-	paramDict at: #position_ms put: '"0"'.
+	paramDict at: #uris put: '"spotify:track:', aString,'"'.
 	apiEndpoint := SPOCApiPlay new.
 	apiEndpoint authorizer: app auth.
 	response := apiEndpoint execute: paramDict
@@ -231,13 +190,13 @@ SPOCPlayer >> skipToNext [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'MH 6/3/2024 00:01'
+	#'squeak_changestamp' : 'MH 6/4/2024 14:56'
 }
 SPOCPlayer >> switchPlaybackState [
 
 	self isPlaying 
 		ifTrue: [self pause]
-		ifFalse: [self playSong: '1hYilXtoru2HU5WFC4c6Hb']
+		ifFalse: [self play]
 		
 		
 ]

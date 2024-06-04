@@ -6,13 +6,12 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/3/2024 14:54'
+	#'squeak_changestamp' : 'MH 6/4/2024 14:48'
 }
 SPOCApiPlay >> buildData: aString [
 
 	|data|
-	data:= '{"uri":', aString,',"offset": {"position": 0},"position_ms": 0}'.
-	Transcript showln: data.
+	data:= '{"uris":[', aString,'],"offset": {"uri":', aString,'},"position_ms": 0}'.
 	^data
 ]
 
@@ -48,7 +47,7 @@ SPOCApiPlay >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/3/2024 16:08'
+	#'squeak_changestamp' : 'MH 6/4/2024 14:44'
 }
 SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 
@@ -58,7 +57,7 @@ SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 	request rawUrl: (request rawUrl, '?device_id=', (aParamDictionary at: #device_id)).
 	(aParamDictionary size = 1)
 		ifTrue: [data:= self buildEmptyData.]
-		ifFalse: [data:= self buildData: (aParamDictionary at: 'uri').].
+		ifFalse: [data:= self buildData: (aParamDictionary at: #uris).].
 	Transcript showln: data.
 	request headerAt: 'Content-Length' put: data size.
 
