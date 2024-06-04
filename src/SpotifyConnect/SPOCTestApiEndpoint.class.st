@@ -17,9 +17,11 @@ SPOCTestApiEndpoint >> setUp [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 12:49'
+	#'squeak_changestamp' : 'VE 6/4/2024 09:09'
 }
 SPOCTestApiEndpoint >> testNoAuthenticator [
 	
-	self should: [apiEndpoint execute: (Dictionary new)] raise: Error.
+	| res |
+	res := apiEndpoint execute: (Dictionary new).
+	self assert: res class = SPOCApiEndpointResult
 ]
