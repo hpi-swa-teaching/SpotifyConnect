@@ -1,5 +1,5 @@
 Class {
-	#name : #SPOCDataModels,
+	#name : #SPOCDataModel,
 	#superclass : #Object,
 	#instVars : [
 		'id',
@@ -12,7 +12,7 @@ Class {
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 5/27/2024 16:01'
 }
-SPOCDataModels >> equals: aDataModel [
+SPOCDataModel >> equals: aDataModel [
 
 	^ self subclassResponsibility
 	
@@ -22,7 +22,7 @@ SPOCDataModels >> equals: aDataModel [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 5/27/2024 15:20'
 }
-SPOCDataModels >> id [
+SPOCDataModel >> id [
 	^ id
 ]
 
@@ -30,7 +30,7 @@ SPOCDataModels >> id [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 5/27/2024 15:20'
 }
-SPOCDataModels >> id: anObject [
+SPOCDataModel >> id: anObject [
 	id := anObject
 ]
 
@@ -38,7 +38,7 @@ SPOCDataModels >> id: anObject [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 5/27/2024 15:21'
 }
-SPOCDataModels >> name [
+SPOCDataModel >> name [
 	^ name
 ]
 
@@ -46,6 +46,6 @@ SPOCDataModels >> name [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 5/27/2024 15:21'
 }
-SPOCDataModels >> name: anObject [
+SPOCDataModel >> name: anObject [
 	name := anObject
 ]

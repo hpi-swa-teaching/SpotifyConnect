@@ -5,8 +5,8 @@ Class {
 		'inputField',
 		'inputText',
 		'tracks',
-		'trackMorphs',
-		'resultDisplay'
+		'resultList',
+		'trackItems'
 	],
 	#category : #SpotifyConnect
 }
@@ -75,9 +75,10 @@ SPOCSearchbar >> buildCircle [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 15:41'
+	#'squeak_changestamp' : 'RK 6/4/2024 14:53'
 }
 SPOCSearchbar >> buildResultDisplay [
+	"Refactor"
 
 	^ SPOCScrollablePanel new
 		buildPanelAtPos: (self topLeft + (0@SPOCSearchbar searchbarHeight)) withExtent: (SPOCSearchbar searchbarWidth + SPOCSearchbar searchbarHeight)@(SPOCSearchbar searchbarHeight * 10);
@@ -86,9 +87,10 @@ SPOCSearchbar >> buildResultDisplay [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 18:58'
+	#'squeak_changestamp' : 'RK 6/4/2024 14:53'
 }
 SPOCSearchbar >> buildResultMorphFrom: aTrack [
+	"Refactor"
 	| height width border ratio background image trackText artistText durationText result clickResult |
 	
 	height := SPOCSearchbar searchbarHeight.
@@ -104,6 +106,7 @@ SPOCSearchbar >> buildResultMorphFrom: aTrack [
 	image position: (background topLeft + (border@border));
 		morphicLayerNumber: SPOCSearchbar baseLayer - 1.
 	trackText := SPOCText newAt: (image topRight + (border@0)) withText: aTrack name.
+	trackText text addAttribute: TextEmphasis bold.
 	artistText := SPOCText newAt: (image bottomRight +  (border@(SPOCText defaultHeight negated))) withText: (aTrack album artistsAsString).
 	durationText := SPOCText newAt: (background bottomRight - (10 * border@(height + (SPOCText defaultHeight / 2)))) withText: aTrack durationAsFormattedTime.
 	
@@ -123,30 +126,28 @@ SPOCSearchbar >> buildResultMorphFrom: aTrack [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 14:03'
+	#'squeak_changestamp' : 'RK 6/4/2024 15:00'
 }
 SPOCSearchbar >> buildSearchbar [
 
-	| leftCircle text rightCircle display |
+	| leftCircle rightCircle |
 	leftCircle := self buildCircle.
-	text := self buildTextInputField.
 	rightCircle := (self buildCircle) position: self topLeft + (SPOCSearchbar searchbarWidth@0).
-	display := self buildResultDisplay.
-	self inputField: text;
-		resultDisplay: display;
-		addMorph: leftCircle;
+	self inputField: self buildTextInputField;
+		resultList: self buildResultDisplay. "Hier umbenennen?"
+	self addMorph: leftCircle;
 		addMorph: rightCircle;
-		addMorph: self inputField;
-		addMorph: resultDisplay;
+		addMorph: inputField;
+		addMorph: resultList;
 		yourself.
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 22:41'
+	#'squeak_changestamp' : 'RK 6/4/2024 15:00'
 }
 SPOCSearchbar >> buildTextInputField [
-
+	"builder in klasse auslagern"
 	| builder spec textField |
 	
 	builder := ToolBuilder default.
@@ -173,22 +174,22 @@ SPOCSearchbar >> buildTextInputField [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 19:07'
+	#'squeak_changestamp' : 'RK 6/4/2024 12:02'
 }
 SPOCSearchbar >> hideResults [
-	self resultDisplay hide
+	self resultList hide
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/1/2024 13:14'
+	#'squeak_changestamp' : 'RK 6/4/2024 12:14'
 }
 SPOCSearchbar >> initialize [
 	super initialize.
 	
 	self
 		color: Color transparent;
-		trackMorphs: OrderedCollection new;
+		trackItems: OrderedCollection new;
 		tracks: OrderedCollection new;
 		buildSearchbar;
 		extendFully;
@@ -230,26 +231,34 @@ SPOCSearchbar >> inputText: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/1/2024 18:38'
+	#'squeak_changestamp' : 'RK 6/4/2024 14:55'
 }
 SPOCSearchbar >> playTrack: aString [
-	"In this method, the track is to be played according to the given ID"
+	"self app player playSong: aString"
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/31/2024 01:02'
-}
-SPOCSearchbar >> resultDisplay [
-	^ resultDisplay
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/31/2024 01:12'
+	#'squeak_changestamp' : 'RK 6/4/2024 12:01'
 }
 SPOCSearchbar >> resultDisplay: aMorph [
-	resultDisplay := aMorph
+	resultList := aMorph
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/4/2024 12:01'
+}
+SPOCSearchbar >> resultList [
+	^ resultList
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/4/2024 12:02'
+}
+SPOCSearchbar >> resultList: aMorph [
+	resultList := aMorph
 ]
 
 {
@@ -265,7 +274,7 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/1/2024 19:36'
+	#'squeak_changestamp' : 'RK 6/4/2024 14:43'
 }
 SPOCSearchbar >> searchTracks: aString [
 	| dict apiEndpoint |
@@ -278,23 +287,23 @@ SPOCSearchbar >> searchTracks: aString [
 	apiEndpoint := SPOCApiSearch new.
 	apiEndpoint authorizer: self app auth.
 	self tracks: (apiEndpoint execute: dict).
-	self updateResultDisplay: tracks.
+	self updateResultDisplay: tracks. "auf resultList updateResults: tracks"
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/21/2024 19:59'
+	#'squeak_changestamp' : 'RK 6/4/2024 12:14'
 }
-SPOCSearchbar >> trackMorphs [
-	^ trackMorphs
+SPOCSearchbar >> trackItems [
+	^ trackItems
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/21/2024 20:00'
+	#'squeak_changestamp' : 'RK 6/4/2024 12:14'
 }
-SPOCSearchbar >> trackMorphs: anOrderedCollection [
-	trackMorphs := anOrderedCollection
+SPOCSearchbar >> trackItems: anOrderedCollection [
+	trackItems := anOrderedCollection
 ]
 
 {
@@ -315,13 +324,13 @@ SPOCSearchbar >> tracks: anOrderedCollection [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/1/2024 19:07'
+	#'squeak_changestamp' : 'RK 6/4/2024 12:01'
 }
 SPOCSearchbar >> updateResultDisplay: anOrderedCollection [
 	
 	anOrderedCollection ifNil: [self hideResults.
 		^ self].
-	resultDisplay items: anOrderedCollection;
+	resultList items: anOrderedCollection;
 		buildItemMorphsWith: [:value | self buildResultMorphFrom: value];
 		updatePanel;
 		show;

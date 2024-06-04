@@ -148,10 +148,10 @@ SPOCSwitchDevice >> devices: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/3/2024 12:58'
+	#'squeak_changestamp' : 'RK 6/4/2024 12:02'
 }
 SPOCSwitchDevice >> hideResults [
-	self resultDisplay hide
+	self resultList hide
 ]
 
 {

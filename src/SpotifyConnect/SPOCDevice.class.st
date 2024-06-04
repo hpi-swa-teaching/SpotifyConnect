@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCDevice,
-	#superclass : #SPOCDataModels,
+	#superclass : #SPOCDataModel,
 	#instVars : [
 		'isActive',
 		'isPrivateSession',
