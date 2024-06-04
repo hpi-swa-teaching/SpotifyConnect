@@ -33,7 +33,7 @@ SPOCApiPlaybackState >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/29/2024 20:03'
+	#'squeak_changestamp' : 'TL 6/3/2024 16:35'
 }
 SPOCApiPlaybackState >> executeRequest: request withParams: aParamDictionary [
 

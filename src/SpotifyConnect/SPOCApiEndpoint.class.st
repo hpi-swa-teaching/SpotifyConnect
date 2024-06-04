@@ -33,7 +33,7 @@ SPOCApiEndpoint >> authorizer: anAuthorizer [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VE 5/15/2024 12:18'
 }
 SPOCApiEndpoint >> client [
@@ -41,7 +41,7 @@ SPOCApiEndpoint >> client [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'VE 5/15/2024 11:53'
 }
 SPOCApiEndpoint >> endpoint [
@@ -49,7 +49,7 @@ SPOCApiEndpoint >> endpoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'VE 5/15/2024 11:52'
 }
 SPOCApiEndpoint >> endpointMethod [
@@ -57,28 +57,22 @@ SPOCApiEndpoint >> endpointMethod [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/4/2024 14:56'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'VE 6/3/2024 16:15'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
-	| response request contentStream |
-	self returnsTestContent
-		ifTrue: [^ self tinkerReponseContent: self executeTest]
-		ifFalse: [self authorizer
-				ifNil: [self error: 'Authorizer needed']
-				ifNotNil: [request := self tinkerRequest.
-					response := self executeRequest: request withParams: aParamDictionary.
-					"response explore."
-					response code = 401
-						ifTrue: [^ self refreshAccessTokenAndExecute: aParamDictionary]
-						ifFalse: [response code = 200
-								ifTrue: [contentStream := response content readStream.
-									^ self tinkerReponseContent: contentStream]
-								ifFalse: [^ nil]]]]
+	| response contentStream |
+	self returnsTestContent ifTrue: [^ self tinkerReponseContent: self executeTest].
+	self authorizer ifNil: [^ SPOCApiEndpointResult new error: 'Authorizer needed'; yourself].
+	response := self executeRequest: (self tinkerRequest) withParams: aParamDictionary.
+	response code = 401 ifTrue: [^ self refreshAccessTokenAndExecute: aParamDictionary].
+	response code = 200 ifTrue: [contentStream := response content readStream.
+		^ self tinkerReponseContent: contentStream].
+	^ SPOCApiEndpointResult new response: response; yourself
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VE 5/15/2024 11:56'
 }
 SPOCApiEndpoint >> executeRequest: request withParams: aParameterDictionary [
@@ -87,7 +81,7 @@ SPOCApiEndpoint >> executeRequest: request withParams: aParameterDictionary [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VE 5/15/2024 18:00'
 }
 SPOCApiEndpoint >> executeTest [
@@ -95,7 +89,7 @@ SPOCApiEndpoint >> executeTest [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'VE 5/15/2024 18:57'
 }
 SPOCApiEndpoint >> initialize [
@@ -105,18 +99,18 @@ SPOCApiEndpoint >> initialize [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 16:39'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'VE 6/3/2024 16:16'
 }
 SPOCApiEndpoint >> refreshAccessTokenAndExecute: aParamDictionary [
 	authorizer refreshAccessToken.
 	authorizer isAuthorized
 		ifTrue: [^ self execute: aParamDictionary]
-		ifFalse: [^ self error: 'Could not refresh access token']
+		ifFalse: [^ SPOCApiEndpointResult new error: 'Access Token Refresh Faild'; yourself]
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'VE 5/15/2024 12:13'
 }
 SPOCApiEndpoint >> requestUri [
@@ -140,7 +134,7 @@ SPOCApiEndpoint >> returnsTestContent: aBoolean [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #response,
 	#'squeak_changestamp' : 'VE 5/15/2024 17:57'
 }
 SPOCApiEndpoint >> tinkerReponseContent: aContentStream [
@@ -148,7 +142,7 @@ SPOCApiEndpoint >> tinkerReponseContent: aContentStream [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'MH 5/26/2024 21:47'
 }
 SPOCApiEndpoint >> tinkerRequest [

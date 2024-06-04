@@ -6,6 +6,14 @@ Class {
 
 {
 	#category : #'class variables',
+	#'squeak_changestamp' : 'VE 6/3/2024 09:22'
+}
+SPOCStyle class >> defaultMargin [
+	^ 10
+]
+
+{
+	#category : #'class variables',
 	#'squeak_changestamp' : 'RK 5/14/2024 18:02'
 }
 SPOCStyle class >> spotifyBlack [

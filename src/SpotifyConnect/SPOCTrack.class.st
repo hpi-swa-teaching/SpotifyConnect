@@ -63,7 +63,7 @@ SPOCTrack >> duration: aNumber [
 ]
 
 {
-	#category : #accessing,
+	#category : #formatting,
 	#'squeak_changestamp' : 'RK 5/16/2024 23:45'
 }
 SPOCTrack >> durationAsFormattedTime [

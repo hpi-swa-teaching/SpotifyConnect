@@ -1,16 +1,48 @@
 Class {
 	#name : #SPOCImage,
 	#superclass : #ImageMorph,
+	#instVars : [
+		'url'
+	],
 	#category : #SpotifyConnect
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/21/2024 16:37'
+	#'squeak_changestamp' : 'RK 6/1/2024 15:10'
 }
 SPOCImage class >> newWithUrl: aString [
-	| form |
 	
-	form := (Form fromBinaryStream: (HTTPSocket httpGet: aString)) scaledToSize: (SPOCSearchbar searchbarHeight * 1.5).
-	^ ImageMorph new image: form
+	| img |
+	img := SPOCImage new url: aString;
+		image: (Form fromBinaryStream: (HTTPSocket httpGet: aString));
+		yourself.
+	^ img
+]
+
+{
+	#category : #formatting,
+	#'squeak_changestamp' : 'RK 6/1/2024 15:21'
+}
+SPOCImage >> scaledTo: aNumber [
+	
+	"form := (Form fromBinaryStream: (HTTPSocket httpGet: url)) scaledToSize: aNumber."
+	
+	^ SPOCImage new image: ((Form fromBinaryStream: (HTTPSocket httpGet: url)) scaledToSize: aNumber)
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/1/2024 14:50'
+}
+SPOCImage >> url [
+	^ url
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/1/2024 15:08'
+}
+SPOCImage >> url: aString [
+	url := aString
 ]
