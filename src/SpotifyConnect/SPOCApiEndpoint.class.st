@@ -33,7 +33,7 @@ SPOCApiEndpoint >> authorizer: anAuthorizer [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VE 5/15/2024 12:18'
 }
 SPOCApiEndpoint >> client [
@@ -41,7 +41,7 @@ SPOCApiEndpoint >> client [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'VE 5/15/2024 11:53'
 }
 SPOCApiEndpoint >> endpoint [
@@ -49,7 +49,7 @@ SPOCApiEndpoint >> endpoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'VE 5/15/2024 11:52'
 }
 SPOCApiEndpoint >> endpointMethod [
@@ -57,7 +57,7 @@ SPOCApiEndpoint >> endpointMethod [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VE 6/3/2024 16:15'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
@@ -72,7 +72,7 @@ SPOCApiEndpoint >> execute: aParamDictionary [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VE 5/15/2024 11:56'
 }
 SPOCApiEndpoint >> executeRequest: request withParams: aParameterDictionary [
@@ -81,7 +81,7 @@ SPOCApiEndpoint >> executeRequest: request withParams: aParameterDictionary [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VE 5/15/2024 18:00'
 }
 SPOCApiEndpoint >> executeTest [
@@ -89,7 +89,7 @@ SPOCApiEndpoint >> executeTest [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'VE 5/15/2024 18:57'
 }
 SPOCApiEndpoint >> initialize [
@@ -99,7 +99,7 @@ SPOCApiEndpoint >> initialize [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VE 6/3/2024 16:16'
 }
 SPOCApiEndpoint >> refreshAccessTokenAndExecute: aParamDictionary [
@@ -110,7 +110,7 @@ SPOCApiEndpoint >> refreshAccessTokenAndExecute: aParamDictionary [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'VE 5/15/2024 12:13'
 }
 SPOCApiEndpoint >> requestUri [
@@ -134,7 +134,7 @@ SPOCApiEndpoint >> returnsTestContent: aBoolean [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #response,
 	#'squeak_changestamp' : 'VE 5/15/2024 17:57'
 }
 SPOCApiEndpoint >> tinkerReponseContent: aContentStream [
@@ -142,7 +142,7 @@ SPOCApiEndpoint >> tinkerReponseContent: aContentStream [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'MH 5/26/2024 21:47'
 }
 SPOCApiEndpoint >> tinkerRequest [
