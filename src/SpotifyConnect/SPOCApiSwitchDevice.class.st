@@ -24,14 +24,13 @@ SPOCApiSwitchDevice >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/4/2024 16:06'
+	#'squeak_changestamp' : 'VK 6/4/2024 17:15'
 }
 SPOCApiSwitchDevice >> executeRequest: request withParams: aParameterDictionary [
 
 	| data |
 	data := 
 	'{"device_ids": ["', (aParameterDictionary at: #deviceID), '"]}'.
-	Transcript show: data.
 	request headerAt: 'Content-Length' put: data size.
 	^ self client sendRequest: request content: data readStream size: data size
 ]
