@@ -22,9 +22,10 @@ SPOCApiDevices >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 19:14'
+	#'squeak_changestamp' : 'VK 6/3/2024 13:23'
 }
 SPOCApiDevices >> executeRequest: request withParams: aParameterDictionary [
+	
 	^ self client sendRequest: request
 ]
 
@@ -51,7 +52,7 @@ SPOCApiDevices >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 19:25'
+	#'squeak_changestamp' : 'VK 6/3/2024 13:30'
 }
 SPOCApiDevices >> tinkerReponseContent: aContentStream [
 	
