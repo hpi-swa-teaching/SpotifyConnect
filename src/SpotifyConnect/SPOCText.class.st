@@ -14,13 +14,12 @@ SPOCText class >> defaultHeight [
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'RK 5/18/2024 00:10'
+	#'squeak_changestamp' : 'RK 6/5/2024 22:14'
 }
 SPOCText class >> newAt: aPoint withText: aString [
 	^ SPOCText new
 		position: aPoint;
 		contents: aString;
-		backgroundColor: SPOCStyle spotifyGray;
 		textColor: SPOCStyle spotifyWhite;
 		yourself
 	

@@ -5,32 +5,19 @@ Class {
 		'items',
 		'builder',
 		'spec',
-		'panel',
-		'itemMorphs'
+		'panel'
 	],
 	#category : #'SpotifyConnect-Utils'
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/1/2024 18:31'
-}
-SPOCScrollablePanel >> buildItemMorphsWith: aBlock [
-
-	itemMorphs isEmpty ifFalse: [itemMorphs removeAll].
-	items do: [ :item | itemMorphs add: (aBlock value: item)]
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/1/2024 10:43'
+	#'squeak_changestamp' : 'RK 6/5/2024 21:23'
 }
 SPOCScrollablePanel >> buildPanelAtPos: aPosition withExtent: anExtent [
 
 	panel := builder build: spec.
-	panel scroller
-		layoutPolicy: TableLayout new;
-		addAllMorphs: itemMorphs.
+	panel scroller layoutPolicy: TableLayout new.
 	panel
 		position: aPosition;
 		extent: anExtent.
@@ -39,19 +26,20 @@ SPOCScrollablePanel >> buildPanelAtPos: aPosition withExtent: anExtent [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 5/31/2024 00:39'
+	#'squeak_changestamp' : 'RK 6/5/2024 22:34'
 }
 SPOCScrollablePanel >> initialize [
 	
 	super initialize.
 	
-	self color: Color transparent.
+	self color: Color transparent;
+		items: OrderedCollection new;
+		yourself.
 	builder := ToolBuilder default.
 	spec := builder pluggableScrollPaneSpec new
 		vScrollBarPolicy: #whenNeeded;
 		hScrollBarPolicy: #never;
-		yourself.
-	itemMorphs := OrderedCollection new
+		yourself
 ]
 
 {
@@ -72,9 +60,12 @@ SPOCScrollablePanel >> items: anOrderedCollection [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/1/2024 18:39'
+	#'squeak_changestamp' : 'RK 6/5/2024 21:23'
 }
-SPOCScrollablePanel >> updatePanel [
+SPOCScrollablePanel >> updatePanel: anOrderedCollection [
+	
+	self items: anOrderedCollection.
 	panel scroller removeAllMorphs;
-		addAllMorphs: itemMorphs
+		addAllMorphs: items;
+		yourself
 ]

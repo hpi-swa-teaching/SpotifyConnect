@@ -5,6 +5,7 @@ Class {
 		'auth',
 		'userLogin',
 		'searchbar',
+		'resultList',
 		'player'
 	],
 	#category : #SpotifyConnect
@@ -80,7 +81,7 @@ SPOCApp >> buildBottomPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/3/2024 10:10'
+	#'squeak_changestamp' : 'RK 6/5/2024 21:30'
 }
 SPOCApp >> buildCenterPanel: aBuilder [
 
@@ -88,7 +89,8 @@ SPOCApp >> buildCenterPanel: aBuilder [
 		model: self;
 		tableLayoutProperties: (TableLayoutProperties new
 			hResizing: #spaceFill;
-			vResizing: #spaceFill)
+			vResizing: #spaceFill);
+		children: #centerPanelContent
 ]
 
 {
@@ -150,8 +152,16 @@ SPOCApp >> buildWith: aBuilder [
 ]
 
 {
+	#category : #ui,
+	#'squeak_changestamp' : 'RK 6/5/2024 21:30'
+}
+SPOCApp >> centerPanelContent [
+	^ {self resultList}
+]
+
+{
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/3/2024 13:57'
+	#'squeak_changestamp' : 'RK 6/5/2024 21:31'
 }
 SPOCApp >> initialize [
 
@@ -161,6 +171,7 @@ SPOCApp >> initialize [
 		registerOpenCommand;
 		setupUserLogin;
 		setupSearchbar;
+		setUpResultList;
 		setupPlayer.
 
 
@@ -212,6 +223,22 @@ SPOCApp >> registerOpenCommand [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/5/2024 21:29'
+}
+SPOCApp >> resultList [
+	^ resultList
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/5/2024 21:29'
+}
+SPOCApp >> resultList: aSPOCResultList [
+	resultList := aSPOCResultList
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'RK 5/30/2024 21:27'
 }
 SPOCApp >> searchbar [
@@ -224,6 +251,17 @@ SPOCApp >> searchbar [
 }
 SPOCApp >> searchbar: aSPOCSearchbar [
 	searchbar := aSPOCSearchbar
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'RK 6/5/2024 21:52'
+}
+SPOCApp >> setUpResultList [
+
+	self resultList: (SPOCResultList new app: self;
+		updateTitle: 'Your Results';
+		yourself)
 ]
 
 {

@@ -14,10 +14,10 @@ SPOCStyle class >> defaultMargin [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 6/4/2024 23:45'
+	#'squeak_changestamp' : 'RK 6/5/2024 22:16'
 }
 SPOCStyle class >> resultListHeight [
-	^ 800
+	^ 550
 ]
 
 {
@@ -46,10 +46,10 @@ SPOCStyle class >> resultListLimit [
 
 {
 	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 6/4/2024 23:45'
+	#'squeak_changestamp' : 'RK 6/5/2024 22:17'
 }
 SPOCStyle class >> resultListWidth [
-	^ 600
+	^ 1150
 ]
 
 {

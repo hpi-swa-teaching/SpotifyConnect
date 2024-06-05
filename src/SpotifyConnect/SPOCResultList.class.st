@@ -12,17 +12,6 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/4/2024 23:35'
-}
-SPOCResultList class >> newWithTitle: aString [
-
-	^ (SPOCResultList new title: aString;
-		buildResultList;
-		yourself)
-]
-
-{
 	#category : #building,
 	#'squeak_changestamp' : 'RK 6/4/2024 23:25'
 }
@@ -46,7 +35,7 @@ SPOCResultList >> buildScrollablePanel [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/4/2024 23:36'
+	#'squeak_changestamp' : 'RK 6/5/2024 21:27'
 }
 SPOCResultList >> buildTitle [
 	
@@ -57,13 +46,18 @@ SPOCResultList >> buildTitle [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/4/2024 23:35'
+	#'squeak_changestamp' : 'RK 6/5/2024 22:30'
 }
 SPOCResultList >> initialize [
 
 	super initialize.
 	
-	self color: Color transparent.
+	self color: Color transparent;
+		title: '';
+		results: OrderedCollection new;
+		items: OrderedCollection new;
+		buildResultList;
+		yourself
 ]
 
 {
@@ -174,4 +168,13 @@ SPOCResultList >> updateResults: anOrderedCollection [
 }
 SPOCResultList >> updateScrollablePanel [
 	"methode von panel aufrufen: entferne items aus panel, füge items neu ein"
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/5/2024 21:52'
+}
+SPOCResultList >> updateTitle: aString [
+	self title: aString.
+	self titleMorph contents: self title
 ]

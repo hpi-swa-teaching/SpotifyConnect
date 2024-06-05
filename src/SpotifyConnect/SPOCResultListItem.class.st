@@ -14,10 +14,13 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/5/2024 00:45'
+	#'squeak_changestamp' : 'RK 6/5/2024 22:32'
 }
 SPOCResultListItem class >> newWith: aDataModel [
-	^ SPOCResultListItem new dataModel: aDataModel.
+	^ (SPOCResultListItem new dataModel: aDataModel;
+		buildItem;
+		yourself)
+		
 ]
 
 {
@@ -72,7 +75,7 @@ SPOCResultListItem >> buildImage [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:52'
+	#'squeak_changestamp' : 'RK 6/5/2024 21:11'
 }
 SPOCResultListItem >> buildItem [
 	self buildBackground;
@@ -223,4 +226,12 @@ SPOCResultListItem >> tertiaryText [
 }
 SPOCResultListItem >> tertiaryText: aSPOCText [
 	tertiaryText := aSPOCText
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/5/2024 21:03'
+}
+SPOCResultListItem >> toggleTextColor [
+	"To do: If item gets selected, its texts should change color, e.g. to spotifyGreen"
 ]
