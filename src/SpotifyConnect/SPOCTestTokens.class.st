@@ -1,48 +1,43 @@
 Class {
 	#name : #SPOCTestTokens,
-	#superclass : #TestCase,
-	#instVars : [
-		'authorizer'
-	],
+	#superclass : #SPOCTestCaseWithAuth,
 	#category : #'SpotifyConnect-Auth-Tests'
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 21:55'
+	#'squeak_changestamp' : 'OW 6/4/2024 12:17'
 }
 SPOCTestTokens >> setUp [
-	authorizer := SPOCAuthorizer new.
-	(Delay forSeconds: 1) wait.
-	authorizer startAuthorization.
-	(Delay forSeconds: 2) wait.
+
+	super setUp.
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 21:49'
+	#'squeak_changestamp' : 'OW 6/5/2024 18:33'
 }
 SPOCTestTokens >> testAccAndRefToken [
 
-	self assert: authorizer accessToken notNil.
-	self assert: authorizer refreshToken notNil
+	self assert: self auth accessToken notNil.
+	self assert: self auth refreshToken notNil
 	
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 21:51'
+	#'squeak_changestamp' : 'OW 6/5/2024 18:34'
 }
 SPOCTestTokens >> testRefreshAccessToken [
 
 	| oldAccToken |
-	oldAccToken := authorizer accessToken.
+	oldAccToken := self auth accessToken.
 	
-	authorizer refreshAccessToken.
+	self auth refreshAccessToken.
 	
-	self assert: authorizer accessToken notNil.
-	self assert: authorizer refreshToken notNil.
-	self assert: authorizer isAuthorized.
-	self assert: (oldAccToken = authorizer accessToken) not
+	self assert: self auth accessToken notNil.
+	self assert: self auth refreshToken notNil.
+	self assert: self auth isAuthorized.
+	self assert: (oldAccToken = self auth accessToken) not
 	"undocumented: You dont get a new refresh token every time so no test for that"
 ]
