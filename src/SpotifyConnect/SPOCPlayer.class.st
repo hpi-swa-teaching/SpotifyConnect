@@ -114,7 +114,7 @@ SPOCPlayer >> button: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/3/2024 23:37'
+	#'squeak_changestamp' : 'MH 6/5/2024 14:32'
 }
 SPOCPlayer >> deviceID [
 
@@ -236,17 +236,18 @@ SPOCPlayer >> playPauseIcon: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/4/2024 14:55'
+	#'squeak_changestamp' : 'MH 6/5/2024 14:31'
 }
 SPOCPlayer >> playSong: aString [
 
 	| paramDict apiEndpoint response|
 	paramDict := Dictionary new.
-	paramDict at: #device_id put: self currentDevice.
+	paramDict at: #device_id put: self deviceID.
 	paramDict at: #uris put: '"spotify:track:', aString,'"'.
 	apiEndpoint := SPOCApiPlay new.
 	apiEndpoint authorizer: app auth.
-	response := apiEndpoint execute: paramDict
+	response := apiEndpoint execute: paramDict.
+	self playPauseIcon iconAsset: SPOCPlayer pauseIconPath
 
 ]
 

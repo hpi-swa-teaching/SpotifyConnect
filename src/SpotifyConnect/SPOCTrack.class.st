@@ -110,11 +110,12 @@ SPOCTrack >> explicit: aBoolean [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/4/2024 15:30'
+	#'squeak_changestamp' : 'MH 6/4/2024 15:48'
 }
 SPOCTrack >> playTrack: aString [
 	
-	self app player playSong: aString
+	self app player playSong: aString.
+	Transcript showln: aString
 ]
 
 {
