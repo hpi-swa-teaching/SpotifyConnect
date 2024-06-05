@@ -23,24 +23,22 @@ SPOCResultList >> buildResultList [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/4/2024 22:56'
+	#'squeak_changestamp' : 'RK 6/6/2024 00:23'
 }
 SPOCResultList >> buildScrollablePanel [
-	self scrollablePanel: (SPOCScrollablePanel new
-		buildPanelAtPos: (self titleMorph bottomLeft + (0@SPOCStyle defaultMargin))
-		withExtent: SPOCStyle resultListWidth@SPOCStyle resultListHeight);
-		addMorph: scrollablePanel;
-		yourself
+	self scrollablePanel: (SPOCScrollablePanel newWithExtent: SPOCStyle resultListWidth@SPOCStyle resultListHeight).
+	scrollablePanel position: (self titleMorph bottomLeft + (0@SPOCStyle defaultMargin)).
+	self addMorph: scrollablePanel
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/5/2024 21:27'
+	#'squeak_changestamp' : 'RK 6/6/2024 01:45'
 }
 SPOCResultList >> buildTitle [
 	
-	self titleMorph: (SPOCText newAt: self position withText: self title);
-		addMorph: titleMorph;
+	self titleMorph: (SPOCBoldText newAt: self position withText: 'Your Results');
+		addMorph: self titleMorph;
 		yourself
 ]
 
@@ -142,12 +140,17 @@ SPOCResultList >> titleMorph: anObject [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/5/2024 01:12'
+	#'squeak_changestamp' : 'RK 6/6/2024 00:37'
 }
 SPOCResultList >> updateItems [
 
 	items isEmpty ifFalse: [items removeAll].
-	results do: [ :result | items add: (SPOCClickable newUsing: (SPOCResultListItem newWith: result) onClick: [ :evt | "playTrack: id bei SPOCTrack, show: id bei SPOCAlbum oder Artist"])]
+	results do: [ :result |
+		| item |
+		item := SPOCClickable newUsing: (SPOCResultListItem newWith: result)
+			onClick: [ :evt | "playTrack: id bei SPOCTrack, show: id bei SPOCAlbum oder Artist"].
+		item vResizing: #shrinkWrap.
+		items add: item]
 ]
 
 {
@@ -164,17 +167,18 @@ SPOCResultList >> updateResults: anOrderedCollection [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/5/2024 01:09'
+	#'squeak_changestamp' : 'RK 6/6/2024 00:10'
 }
 SPOCResultList >> updateScrollablePanel [
-	"methode von panel aufrufen: entferne items aus panel, füge items neu ein"
+	self scrollablePanel updatePanel: items
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 21:52'
+	#'squeak_changestamp' : 'RK 6/6/2024 01:43'
 }
 SPOCResultList >> updateTitle: aString [
+
 	self title: aString.
-	self titleMorph contents: self title
+	self titleMorph: (SPOCBoldText newAt: self position withText: self title)
 ]

@@ -5,7 +5,6 @@ Class {
 		'followers',
 		'genres',
 		'href',
-		'image',
 		'popularity'
 	],
 	#category : #SpotifyConnect
@@ -73,22 +72,6 @@ SPOCArtist >> href [
 }
 SPOCArtist >> href: aString [
 	href := aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:18'
-}
-SPOCArtist >> image [
-	^ image
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:20'
-}
-SPOCArtist >> image: anImage [
-	image := anImage
 ]
 
 {

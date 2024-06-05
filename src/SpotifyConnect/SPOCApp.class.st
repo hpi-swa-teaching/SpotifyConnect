@@ -255,13 +255,12 @@ SPOCApp >> searchbar: aSPOCSearchbar [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/5/2024 21:52'
+	#'squeak_changestamp' : 'RK 6/6/2024 01:40'
 }
 SPOCApp >> setUpResultList [
 
-	self resultList: (SPOCResultList new app: self;
-		updateTitle: 'Your Results';
-		yourself)
+	self resultList: (SPOCResultList new app: self).
+	self resultList updateTitle: 'Your Results'
 ]
 
 {

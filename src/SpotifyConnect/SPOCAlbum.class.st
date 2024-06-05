@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'albumType',
 		'totalTracks',
-		'image',
 		'releaseDate',
 		'releaseDatePrecision',
 		'type',
@@ -62,7 +61,7 @@ SPOCAlbum >> artistsAsString [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/27/2024 16:29'
+	#'squeak_changestamp' : 'RK 6/6/2024 00:47'
 }
 SPOCAlbum >> equals: anAlbum [
 
@@ -70,7 +69,6 @@ SPOCAlbum >> equals: anAlbum [
         & (self name = anAlbum name) 
         & (self albumType = anAlbum albumType)
         & (self totalTracks = anAlbum totalTracks)
-        & (self image = anAlbum image)
         & (self releaseDate = anAlbum releaseDate)
         & (self releaseDatePrecision = anAlbum releaseDatePrecision)
         & (self type = anAlbum type)
@@ -93,22 +91,6 @@ SPOCAlbum >> genres [
 }
 SPOCAlbum >> genres: anObject [
 	genres := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:14'
-}
-SPOCAlbum >> image [
-	^ image
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:15'
-}
-SPOCAlbum >> image: anImage [
-	image := anImage
 ]
 
 {

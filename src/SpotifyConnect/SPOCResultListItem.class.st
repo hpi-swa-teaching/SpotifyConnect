@@ -56,21 +56,18 @@ SPOCResultListItem >> buildBackground [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:54'
+	#'squeak_changestamp' : 'RK 6/6/2024 00:53'
 }
 SPOCResultListItem >> buildImage [
 
 	| image |
-	(dataModel isKindOf: SPOCTrack)
-		ifTrue: [image := (dataModel album) image].
-	((dataModel isKindOf: SPOCAlbum) or: (dataModel isKindOf: SPOCArtist))
-		ifTrue: [image := dataModel image].
-	image := image scaledTo: SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin);
-		position: self topLeft + SPOCStyle defaultMargin asPoint;
-		yourself.
+	image := dataModel image scaledTo: SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin).
+	image position: self topLeft + SPOCStyle defaultMargin asPoint.
 	self image: image;
 		addMorph: image;
 		yourself
+
+
 ]
 
 {
@@ -89,14 +86,12 @@ SPOCResultListItem >> buildItem [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:55'
+	#'squeak_changestamp' : 'RK 6/6/2024 01:24'
 }
 SPOCResultListItem >> buildPrimaryText [
 
 	| text |
-	text := SPOCText newAt: image topRight + (SPOCStyle defaultMargin@0) withText: dataModel name.
-	text text addAttribute: TextEmphasis bold.
-	"To do: Resizing damit Text nicht abgeschnitten"
+	text := SPOCBoldText newAt: image topRight + (SPOCStyle defaultMargin@0) withText: dataModel name.
 	self primaryText: text;
 		addMorph: primaryText;
 		yourself
@@ -171,13 +166,15 @@ SPOCResultListItem >> image: aSPOCImage [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:05'
+	#'squeak_changestamp' : 'RK 6/6/2024 00:31'
 }
 SPOCResultListItem >> initialize [
 
 	super initialize.
 
-	self color: Color transparent
+	self color: Color transparent;
+		vResizing: #shrinkWrap;
+		yourself
 ]
 
 {

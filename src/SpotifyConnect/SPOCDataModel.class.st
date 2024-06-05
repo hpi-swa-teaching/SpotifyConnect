@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'id',
-		'name'
+		'name',
+		'image'
 	],
 	#category : #SpotifyConnect
 }
@@ -32,6 +33,22 @@ SPOCDataModel >> id [
 }
 SPOCDataModel >> id: anObject [
 	id := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/6/2024 00:48'
+}
+SPOCDataModel >> image [
+	^ image
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/6/2024 00:48'
+}
+SPOCDataModel >> image: aSPOCImage [
+	image := aSPOCImage
 ]
 
 {
