@@ -81,7 +81,7 @@ SPOCAuthorizer class >> resetClient [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'OW 5/22/2024 18:44'
+	#'squeak_changestamp' : 'VK 6/4/2024 16:52'
 }
 SPOCAuthorizer class >> scope [
 
@@ -92,7 +92,8 @@ SPOCAuthorizer class >> scope [
 		'playlist-read-collaborative ',
 		'user-read-playback-position ',
 		'user-read-email ',
-		'user-read-private'
+		'user-read-private ',
+		'user-read-recently-played'
 ]
 
 {
