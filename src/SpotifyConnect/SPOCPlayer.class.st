@@ -50,48 +50,51 @@ SPOCPlayer class >> previousIconPath [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/4/2024 11:52'
+	#'squeak_changestamp' : 'TL 6/4/2024 13:35'
+}
+SPOCPlayer >> attachButton: anIcon [
+
+	self button: (SPOCClickable
+				newUsing: anIcon
+				onClick: [:anEvent | self checkLoginFor: anIcon]);
+		 addMorph: self button
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 6/4/2024 13:35'
 }
 SPOCPlayer >> attachNextButton [
 
 	self nextIcon: (SPOCIcon new
 				iconAsset: SPOCPlayer nextIconPath;
 			 	yourself);		
-		button: (SPOCClickable
-				newUsing: self nextIcon
-				onClick: [:anEvent | self skipToNext]);
-		 addMorph: self button
+		attachButton: self nextIcon
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/4/2024 11:51'
+	#'squeak_changestamp' : 'TL 6/4/2024 13:34'
 }
 SPOCPlayer >> attachPlayPauseButton [
 
 	self playPauseIcon: (SPOCIcon new
 				iconAsset: SPOCPlayer playIconPath;
 			 	yourself);		
-		button: (SPOCClickable
-				newUsing: self playPauseIcon
-				onClick: [:anEvent | self switchPlaybackState]);
-		 addMorph: self button;
-		 updatePlayPauseIcon
+		attachButton: self playPauseIcon;
+		updatePlayPauseIcon
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/4/2024 11:51'
+	#'squeak_changestamp' : 'TL 6/4/2024 13:34'
 }
 SPOCPlayer >> attachPreviousButton [
 
 	self previousIcon: (SPOCIcon new 
 				iconAsset: SPOCPlayer previousIconPath;
 			 	yourself);		
-		button: (SPOCClickable
-				newUsing: self previousIcon
-				onClick: [:anEvent | self skipToPrevious]);
-		 addMorph: self button
+		attachButton: self previousIcon
 ]
 
 {
@@ -113,6 +116,29 @@ SPOCPlayer >> button: anObject [
 ]
 
 {
+	#category : #'error-handling',
+	#'squeak_changestamp' : 'TL 6/4/2024 12:13'
+}
+SPOCPlayer >> checkDeviceActive [
+
+	"to use Spotify Connect, you first have to play music on your device"
+
+	"(self app auth accessToken equals: nil)
+		ifTrue: [Transcript showln: 'Please log in first!']"
+]
+
+{
+	#category : #'error-handling',
+	#'squeak_changestamp' : 'TL 6/6/2024 22:52'
+}
+SPOCPlayer >> checkLoginFor: anIcon [
+
+	self app auth accessToken
+		ifNil: [UIManager inform: 'Please log in first!']
+		ifNotNil: [self executeButtonFunction: anIcon]
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/3/2024 23:37'
 }
@@ -128,6 +154,20 @@ SPOCPlayer >> deviceID [
 SPOCPlayer >> deviceID: anObject [
 
 	deviceID := anObject
+]
+
+{
+	#category : #actions,
+	#'squeak_changestamp' : 'TL 6/4/2024 13:42'
+}
+SPOCPlayer >> executeButtonFunction: anIcon [
+	
+	(anIcon == self previousIcon)
+		ifTrue: [self skipToPrevious].
+	(anIcon == self playPauseIcon)
+		ifTrue: [self switchPlaybackState].
+	(anIcon == self nextIcon)
+		ifTrue: [self skipToNext]	
 ]
 
 {
@@ -319,7 +359,7 @@ SPOCPlayer >> updateIsPlaying [
 ]
 
 {
-	#category : #actions,
+	#category : #initialization,
 	#'squeak_changestamp' : 'TL 6/3/2024 23:36'
 }
 SPOCPlayer >> updatePlayPauseIcon [
