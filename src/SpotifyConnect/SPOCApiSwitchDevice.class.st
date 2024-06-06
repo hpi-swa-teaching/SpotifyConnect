@@ -24,12 +24,14 @@ SPOCApiSwitchDevice >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/3/2024 14:28'
+	#'squeak_changestamp' : 'VK 6/4/2024 17:15'
 }
 SPOCApiSwitchDevice >> executeRequest: request withParams: aParameterDictionary [
 
 	| data |
-	data := '{"device_ids": ["', (aParameterDictionary at: #deviceID), '"]}'.
+	data := 
+	'{"device_ids": ["', (aParameterDictionary at: #deviceID), '"]}'.
+	request headerAt: 'Content-Length' put: data size.
 	^ self client sendRequest: request content: data readStream size: data size
 ]
 
@@ -44,7 +46,7 @@ SPOCApiSwitchDevice >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/3/2024 12:21'
+	#'squeak_changestamp' : 'VK 6/4/2024 16:01'
 }
 SPOCApiSwitchDevice >> tinkerReponseContent: aContentStream [
 	

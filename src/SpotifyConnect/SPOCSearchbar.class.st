@@ -230,10 +230,12 @@ SPOCSearchbar >> inputText: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/1/2024 18:38'
+	#'squeak_changestamp' : 'MH 6/5/2024 14:24'
 }
 SPOCSearchbar >> playTrack: aString [
-	"In this method, the track is to be played according to the given ID"
+
+	self app player playSong: aString.
+	Transcript showln: aString
 ]
 
 {
