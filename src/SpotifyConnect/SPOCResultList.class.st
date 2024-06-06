@@ -140,15 +140,15 @@ SPOCResultList >> titleMorph: anObject [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/6/2024 00:37'
+	#'squeak_changestamp' : 'RK 6/6/2024 11:16'
 }
 SPOCResultList >> updateItems [
-
+	"To do: isKindOf ergänzen, sobald auch Alben/Playlists angeklickt werden können"
 	items isEmpty ifFalse: [items removeAll].
 	results do: [ :result |
 		| item |
 		item := SPOCClickable newUsing: (SPOCResultListItem newWith: result)
-			onClick: [ :evt | "playTrack: id bei SPOCTrack, show: id bei SPOCAlbum oder Artist"].
+			onClick: [ :evt | self app player playSong: result id].
 		item vResizing: #shrinkWrap.
 		items add: item]
 ]
