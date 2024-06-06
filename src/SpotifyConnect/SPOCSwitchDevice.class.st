@@ -189,7 +189,7 @@ SPOCSwitchDevice >> resultDisplay: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/3/2024 14:30'
+	#'squeak_changestamp' : 'VK 6/4/2024 16:13'
 }
 SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	
@@ -199,6 +199,7 @@ SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	apiEndpoint := SPOCApiSwitchDevice new.
 	apiEndpoint authorizer: self app auth.
 	apiEndpoint execute: dict.
+	(Delay forMilliseconds: 1000) wait.
 	self currentDevices
 ]
 

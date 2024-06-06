@@ -1,17 +1,18 @@
 Class {
-	#name : #SPOCTestApiPlaybackState,
-	#superclass : #SPOCTestApiEndpoint,
+	#name : #SPOCMockTestApiPlaybackState,
+	#superclass : #TestCase,
 	#instVars : [
-		'requestParts'
+		'requestParts',
+		'apiEndpoint'
 	],
-	#category : #'SpotifyConnect-Tests'
+	#category : #'SpotifyConnect-Mock-Tests'
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/2/2024 21:50'
+	#'squeak_changestamp' : 'VE 6/5/2024 19:37'
 }
-SPOCTestApiPlaybackState >> setUp [
+SPOCMockTestApiPlaybackState >> setUp [
 
 	apiEndpoint := SPOCApiPlaybackState new.
 	requestParts := {'device'. 'repeat_state'. 'shuffle_state'. 'context'. 'timestamp'. 'progress_ms'. 'is_playing'. 'item'. 'currently_playing_type'. 'actions'}.
@@ -20,9 +21,9 @@ SPOCTestApiPlaybackState >> setUp [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/2/2024 19:53'
+	#'squeak_changestamp' : 'VE 6/5/2024 19:43'
 }
-SPOCTestApiPlaybackState >> testExecute [
+SPOCMockTestApiPlaybackState >> testMockApiPlaybackExecute [
 
 	| paramDict response |
     	paramDict := Dictionary new.

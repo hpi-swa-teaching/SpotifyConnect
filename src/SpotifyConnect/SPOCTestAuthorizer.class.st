@@ -17,9 +17,9 @@ SPOCTestAuthorizer >> setUp [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 21:04'
+	#'squeak_changestamp' : 'OW 6/5/2024 20:07'
 }
-SPOCTestAuthorizer >> testAuthorisationUrl [
+SPOCTestAuthorizer >> testAuthorizationUrl [
 	
 	| responseUrl targetUrl clipboardText | 
 	responseUrl := authorizer startAuthorization.

@@ -510,7 +510,7 @@ SPOCApiTrackHistory >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/1/2024 12:30'
+	#'squeak_changestamp' : 'VK 6/4/2024 16:43'
 }
 SPOCApiTrackHistory >> tinkerReponseContent: aContentStream [
 	
