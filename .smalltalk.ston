@@ -9,6 +9,9 @@ SmalltalkCISpec {
     }
   ],
   #testing : {
-    #categories : [ 'SpotifyConnect-Tests' ]
+    #categories : [ 'SpotifyConnect-Tests' ],
+    #coverage : { 
+      #categories : [ 'SpotifyConnect-Tests' ] 
+    }
   }
 }
