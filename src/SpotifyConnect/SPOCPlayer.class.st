@@ -311,7 +311,7 @@ SPOCPlayer >> previousIcon: anObject [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/4/2024 11:46'
+	#'squeak_changestamp' : 'TL 6/6/2024 23:57'
 }
 SPOCPlayer >> skipToNext [
 
@@ -322,12 +322,13 @@ SPOCPlayer >> skipToNext [
 	SPOCApiNext new
 		authorizer: self app auth;
 		execute: paramDict;
-		yourself
+		yourself.
+	self updatePlayPauseIcon
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/4/2024 11:46'
+	#'squeak_changestamp' : 'TL 6/6/2024 23:57'
 }
 SPOCPlayer >> skipToPrevious [
 
@@ -338,7 +339,8 @@ SPOCPlayer >> skipToPrevious [
 	SPOCApiPrevious new
 		authorizer: self app auth;
 		execute: paramDict;
-		yourself
+		yourself.
+	self updatePlayPauseIcon
 ]
 
 {
@@ -359,7 +361,7 @@ SPOCPlayer >> switchPlaybackState [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/4/2024 11:48'
+	#'squeak_changestamp' : 'TL 6/6/2024 23:57'
 }
 SPOCPlayer >> updateIsPlaying [
 
@@ -371,8 +373,9 @@ SPOCPlayer >> updateIsPlaying [
 		authorizer: self app auth;
 		yourself.
 	res := apiEndpoint execute: paramDict.
-	self deviceID: ((res at: 'device') at: 'id').
-	self isPlaying: (res at: 'is_playing')
+	self deviceID: ((res at: 'device') at: 'id');
+		isPlaying: (res at: 'is_playing');
+		updatePlayPauseIcon
 ]
 
 {
