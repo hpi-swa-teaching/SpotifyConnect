@@ -2,7 +2,7 @@
 - Leerzeile nach Methodenname
 - Kaskaden nutzen, wenn möglich
 - Punkt am Ende einer Methode weglassen, ebenso innerhalb Klammern
-- bei return: `^ var` (statt `^var`) und Leerzeile davor
+- bei return: `^ var` (statt `^var`) ohne Leerzeile davor
 - Leerzeichen um Rechenoperationen, z. B. `a + b` (statt `a+b`)
 - Syntax bei Methodenvariablen `| var |` (statt `|var|`)
 - Methodenvariablen vermeiden, wenn unnötig
