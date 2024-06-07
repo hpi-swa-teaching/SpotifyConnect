@@ -14,28 +14,29 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/5/2024 22:32'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:09'
 }
 SPOCResultListItem class >> newWith: aDataModel [
 	^ (SPOCResultListItem new dataModel: aDataModel;
 		buildItem;
 		yourself)
-		
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:03'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
 }
 SPOCResultListItem >> background [
+
 	^ background
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:06'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
 }
 SPOCResultListItem >> background: aRectangleMorph [
+
 	background := aRectangleMorph
 ]
 
@@ -72,9 +73,10 @@ SPOCResultListItem >> buildImage [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/5/2024 21:11'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
 }
 SPOCResultListItem >> buildItem [
+
 	self buildBackground;
 		buildImage;
 		buildPrimaryText;
@@ -134,44 +136,47 @@ SPOCResultListItem >> buildTertiaryText [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:06'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
 }
 SPOCResultListItem >> dataModel [
+
 	^ dataModel
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:06'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
 }
 SPOCResultListItem >> dataModel: aDataModel [
+
 	dataModel := aDataModel
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:03'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
 }
 SPOCResultListItem >> image [
+
 	^ image
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:07'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
 }
 SPOCResultListItem >> image: aSPOCImage [
+
 	image := aSPOCImage
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/6/2024 00:31'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
 }
 SPOCResultListItem >> initialize [
 
 	super initialize.
-
 	self color: Color transparent;
 		vResizing: #shrinkWrap;
 		yourself
@@ -179,49 +184,55 @@ SPOCResultListItem >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:03'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
 }
 SPOCResultListItem >> primaryText [
+
 	^ primaryText
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:47'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
 }
 SPOCResultListItem >> primaryText: aSPOCText [
+
 	primaryText := aSPOCText
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:03'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
 }
 SPOCResultListItem >> secondaryText [
+
 	^ secondaryText
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:48'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
 }
 SPOCResultListItem >> secondaryText: aSPOCText [
+
 	secondaryText := aSPOCText
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:03'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
 }
 SPOCResultListItem >> tertiaryText [
+
 	^ tertiaryText
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:48'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:09'
 }
 SPOCResultListItem >> tertiaryText: aSPOCText [
+
 	tertiaryText := aSPOCText
 ]
 

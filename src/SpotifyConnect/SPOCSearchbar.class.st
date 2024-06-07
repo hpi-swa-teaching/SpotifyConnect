@@ -12,18 +12,20 @@ Class {
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/5/2024 22:20'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:02'
 }
 SPOCSearchbar >> buildCircle [
+
 	^ CircleMorph new
 		extent: SPOCStyle searchbarHeight asPoint;
 		borderWidth: 0;
-		color: SPOCStyle spotifyGray.
+		color: SPOCStyle spotifyGray;
+		yourself
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/5/2024 22:18'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:02'
 }
 SPOCSearchbar >> buildSearchbar [
 
@@ -34,17 +36,17 @@ SPOCSearchbar >> buildSearchbar [
 		addMorph: leftCircle;
 		addMorph: rightCircle;
 		addMorph: inputField;
-		yourself.
+		yourself
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/5/2024 22:25'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:02'
 }
 SPOCSearchbar >> buildTextInputField [
 	"To do: specification irgendwie auslagern, damit Methode kürzer"
-	| builder spec textField |
 	
+	| builder spec textField |
 	builder := ToolBuilder default.
 	spec := builder pluggableTextSpec new
 		model: self;
@@ -68,11 +70,11 @@ SPOCSearchbar >> buildTextInputField [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/4/2024 12:14'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:03'
 }
 SPOCSearchbar >> initialize [
+
 	super initialize.
-	
 	self
 		color: Color transparent;
 		trackItems: OrderedCollection new;
@@ -84,43 +86,39 @@ SPOCSearchbar >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/17/2024 11:15'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:03'
 }
 SPOCSearchbar >> inputField [
+
 	^ inputField
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/18/2024 00:51'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:03'
 }
 SPOCSearchbar >> inputField: aSPOCTextInput [
+
 	inputField := aSPOCTextInput
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/1/2024 22:34'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:03'
 }
 SPOCSearchbar >> inputText [
+
 	^ inputText
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/1/2024 22:34'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:03'
 }
 SPOCSearchbar >> inputText: aString [
+
 	inputText:= aString.
 	self changed: #inputText
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/4/2024 14:55'
-}
-SPOCSearchbar >> playTrack: aString [
-	"self app player playSong: aString"
 ]
 
 {
@@ -135,12 +133,12 @@ SPOCSearchbar >> sanitizeInput: aString [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/5/2024 22:27'
+	#category : #actions,
+	#'squeak_changestamp' : 'RK 6/7/2024 11:25'
 }
 SPOCSearchbar >> searchTracks: aString [
+
 	| dict apiEndpoint |
-	
 	dict := Dictionary new.
 	dict at: 'input' put: (self sanitizeInput: aString);
 		at: 'type' put: 'track';
@@ -149,37 +147,42 @@ SPOCSearchbar >> searchTracks: aString [
 	apiEndpoint := SPOCApiSearch new.
 	apiEndpoint authorizer: self app auth.
 	self tracks: (apiEndpoint execute: dict).
-	self app resultList updateResults: tracks
+	self app resultList updateResults: tracks.
+	self app resultList updateTitle: 'Your Results'
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/4/2024 12:14'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:03'
 }
 SPOCSearchbar >> trackItems [
+
 	^ trackItems
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/4/2024 12:14'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:04'
 }
 SPOCSearchbar >> trackItems: anOrderedCollection [
+
 	trackItems := anOrderedCollection
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/21/2024 15:47'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:04'
 }
 SPOCSearchbar >> tracks [
+
 	^ tracks
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/21/2024 15:47'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:04'
 }
 SPOCSearchbar >> tracks: anOrderedCollection [
+
 	tracks := anOrderedCollection
 ]

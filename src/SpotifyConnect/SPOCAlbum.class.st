@@ -2,7 +2,6 @@ Class {
 	#name : #SPOCAlbum,
 	#superclass : #SPOCDataModel,
 	#instVars : [
-		'albumType',
 		'totalTracks',
 		'releaseDate',
 		'releaseDatePrecision',
@@ -16,47 +15,42 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:41'
-}
-SPOCAlbum >> albumType [
-	^ albumType
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:43'
-}
-SPOCAlbum >> albumType: aString [
-	albumType := aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:45'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:52'
 }
 SPOCAlbum >> artists [
+
 	^ artists
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:58'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:52'
 }
 SPOCAlbum >> artists: anOrderedCollection [
+
 	artists := anOrderedCollection
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/21/2024 17:27'
+	#category : #formatting,
+	#'squeak_changestamp' : 'RK 6/7/2024 10:52'
 }
 SPOCAlbum >> artistsAsString [
+
 	| result |
-	
 	result := ''.
 	self artists allButLastDo: [ :artist | result := result, artist name, ', '].
 	result := result, self artists last name.
 	^ result
+]
+
+{
+	#category : #formatting,
+	#'squeak_changestamp' : 'RK 6/7/2024 11:18'
+}
+SPOCAlbum >> clickAction [
+
+	^ ["To do: show all tracks from this album in resultList"]
 ]
 
 {
@@ -79,96 +73,108 @@ SPOCAlbum >> equals: anAlbum [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:45'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:52'
 }
 SPOCAlbum >> genres [
+
 	^ genres
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:45'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
-SPOCAlbum >> genres: anObject [
-	genres := anObject
+SPOCAlbum >> genres: anOrderedCollection [
+
+	genres := anOrderedCollection
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:46'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
 SPOCAlbum >> popularity [
+
 	^ popularity
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:46'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
-SPOCAlbum >> popularity: anObject [
-	popularity := anObject
+SPOCAlbum >> popularity: aNumber [
+
+	popularity := aNumber
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:44'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
 SPOCAlbum >> releaseDate [
+
 	^ releaseDate
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:56'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
 SPOCAlbum >> releaseDate: aString [
+
 	releaseDate := aString
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:44'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
 SPOCAlbum >> releaseDatePrecision [
+
 	^ releaseDatePrecision
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:56'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
 SPOCAlbum >> releaseDatePrecision: aString [
+
 	releaseDatePrecision := aString
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:41'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
 SPOCAlbum >> totalTracks [
+
 	^ totalTracks
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:47'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
 SPOCAlbum >> totalTracks: aNumber [
+
 	totalTracks := aNumber
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:44'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
 SPOCAlbum >> type [
+
 	^ type
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:57'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
 SPOCAlbum >> type: aString [
+
 	type := aString
 ]

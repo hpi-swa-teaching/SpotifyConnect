@@ -10,9 +10,10 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/28/2024 20:55'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
 }
 SPOCClickable class >> newUsing: aWrappeeMorph onClick: aBlock [
+
 	| inst |
 	inst := self basicNew.
 	inst wrappee: aWrappeeMorph.
@@ -23,84 +24,93 @@ SPOCClickable class >> newUsing: aWrappeeMorph onClick: aBlock [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'VE 5/27/2024 16:54'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:06'
 }
 SPOCClickable >> handlesMouseDown: anEvent [
+
 	^ true
 ]
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 6/1/2024 22:58'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:06'
 }
 SPOCClickable >> handlesMouseOver: anEvent [
+
 	^ true
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:56'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
 }
 SPOCClickable >> initialize [
+
 	super initialize.
-	
 	self addMorph: self wrappee; 
 		extent: self wrappee extent; 
-		color: Color transparent.
+		color: Color transparent
 ]
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'VE 5/28/2024 20:55'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
 }
 SPOCClickable >> mouseDown: anEvent [
+
 	self onClick value: anEvent.
 ]
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 6/1/2024 23:13'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
 }
 SPOCClickable >> mouseEnter: anEvent [
+
 	Cursor webLink show
 ]
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 6/1/2024 23:10'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
 }
 SPOCClickable >> mouseLeave: anEvent [
+
 	Cursor normal show
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:55'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
 }
 SPOCClickable >> onClick [
+
 	^ onClick
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:55'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
 }
 SPOCClickable >> onClick: aBlock [
+
 	onClick := aBlock
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 17:11'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
 }
 SPOCClickable >> wrappee [
+
 	^ wrappee
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 17:11'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
 }
 SPOCClickable >> wrappee: anObject [
+
 	wrappee := anObject
 ]

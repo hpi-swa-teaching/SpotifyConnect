@@ -22,27 +22,27 @@ SPOCImage class >> newWithUrl: aString [
 
 {
 	#category : #formatting,
-	#'squeak_changestamp' : 'RK 6/1/2024 15:21'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:59'
 }
 SPOCImage >> scaledTo: aNumber [
-	
-	"form := (Form fromBinaryStream: (HTTPSocket httpGet: url)) scaledToSize: aNumber."
 	
 	^ SPOCImage new image: ((Form fromBinaryStream: (HTTPSocket httpGet: url)) scaledToSize: aNumber)
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/1/2024 14:50'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:59'
 }
 SPOCImage >> url [
+
 	^ url
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/1/2024 15:08'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:59'
 }
 SPOCImage >> url: aString [
+
 	url := aString
 ]

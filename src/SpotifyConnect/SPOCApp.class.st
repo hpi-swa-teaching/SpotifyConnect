@@ -13,25 +13,28 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'VE 5/28/2024 14:50'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:51'
 }
 SPOCApp class >> appName [
-	^ 'Spotify Connect'.
+
+	^ 'Spotify Connect'
 ]
 
 {
 	#category : #start,
-	#'squeak_changestamp' : 'VE 6/3/2024 09:12'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:51'
 }
 SPOCApp class >> minimumExtent [
+
 	^ 1080 @ 720
 ]
 
 {
 	#category : #start,
-	#'squeak_changestamp' : 'VE 5/28/2024 14:53'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:51'
 }
 SPOCApp class >> open [
+
 	self new open
 ]
 
@@ -55,9 +58,10 @@ SPOCApp >> auth: anObject [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/3/2024 13:58'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:50'
 }
 SPOCApp >> bottomPanelContent [
+
 	^ {self player}
 ]
 
@@ -95,7 +99,7 @@ SPOCApp >> buildCenterPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/3/2024 10:24'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:50'
 }
 SPOCApp >> buildMainTable: aBuilder [
 	
@@ -108,7 +112,7 @@ SPOCApp >> buildMainTable: aBuilder [
 			vResizing: #spaceFill);
 		children: {self buildTopPanel: aBuilder.
 			self buildCenterPanel: aBuilder.
-			self buildBottomPanel: aBuilder.}.
+			self buildBottomPanel: aBuilder.}
 ]
 
 {
@@ -130,7 +134,7 @@ SPOCApp >> buildTopPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/3/2024 08:57'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:50'
 }
 SPOCApp >> buildWindow: aBuilder [
 
@@ -139,7 +143,7 @@ SPOCApp >> buildWindow: aBuilder [
 		label: #windowTitle;
 		minimumExtent: SPOCApp minimumExtent;
 		children: {self buildMainTable: aBuilder};
-		yourself.
+		yourself
 ]
 
 {
@@ -153,9 +157,10 @@ SPOCApp >> buildWith: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 6/5/2024 21:30'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:50'
 }
 SPOCApp >> centerPanelContent [
+
 	^ {self resultList}
 ]
 
@@ -213,11 +218,11 @@ SPOCApp >> playerPanelContent [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:51'
 }
 SPOCApp >> registerOpenCommand [
 
-	TheWorldMenu registerOpenCommand: {'Spotify Connect'. {self. #open}}.
+	TheWorldMenu registerOpenCommand: {'Spotify Connect'. {self. #open}}
 
 ]
 
@@ -255,12 +260,11 @@ SPOCApp >> searchbar: aSPOCSearchbar [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/6/2024 01:40'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:25'
 }
 SPOCApp >> setUpResultList [
 
-	self resultList: (SPOCResultList new app: self).
-	self resultList updateTitle: 'Your Results'
+	self resultList: (SPOCResultList new app: self)
 ]
 
 {

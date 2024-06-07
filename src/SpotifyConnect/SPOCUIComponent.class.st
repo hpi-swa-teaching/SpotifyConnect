@@ -9,33 +9,37 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 5/27/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:00'
 }
 SPOCUIComponent >> app [
+
 	^ app
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 5/27/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:00'
 }
-SPOCUIComponent >> app: anObject [
-	app := anObject
+SPOCUIComponent >> app: aSPOCApp [
+
+	app := aSPOCApp
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:44'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:00'
 }
 SPOCUIComponent >> extendFully [
+
 	self extent: 0@0.
 	self extent: self fullBounds extent
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 19:48'
+	#category : #initialization,
+	#'squeak_changestamp' : 'RK 6/7/2024 11:00'
 }
 SPOCUIComponent >> initialize [
+
 	super initialize.
 ]

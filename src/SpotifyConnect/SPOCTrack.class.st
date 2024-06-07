@@ -14,34 +14,47 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:55'
 }
 SPOCTrack >> album [
+
 	^ album
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:55'
 }
 SPOCTrack >> album: anAlbum [
+
 	album := anAlbum
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:55'
 }
 SPOCTrack >> artists [
+
 	^ artists
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:29'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
 }
 SPOCTrack >> artists: aOrderedCollection [
+
 	artists := aOrderedCollection
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/7/2024 11:22'
+}
+SPOCTrack >> clickAction [
+
+	^ ["self app player playSong: self id"]
 ]
 
 {
@@ -56,23 +69,27 @@ SPOCTrack >> duration [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:29'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
 }
 SPOCTrack >> duration: aNumber [
+
 	duration := aNumber
 ]
 
 {
 	#category : #formatting,
-	#'squeak_changestamp' : 'RK 5/16/2024 23:45'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:38'
 }
 SPOCTrack >> durationAsFormattedTime [
 	"Converts milliseconds to 'mm:ss'"
 	
-	| min sec time |
+	| min sec filler time |
 	min := duration // 60.
 	sec := duration \\ 60.
-	time := min asString, ':', sec asString.
+	sec < 10 
+		ifTrue: [filler := '0']
+		ifFalse: [filler := ''].
+	time := min asString, ':', filler, sec asString.
 	^ time
 ]
 
@@ -95,58 +112,63 @@ SPOCTrack >> equals: aTrack [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
 }
 SPOCTrack >> explicit [
+
 	^ explicit
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:29'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
 }
 SPOCTrack >> explicit: aBoolean [
+
 	explicit := aBoolean
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/4/2024 15:48'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
 }
 SPOCTrack >> playTrack: aString [
 	
-	self app player playSong: aString.
-	Transcript showln: aString
+	self app player playSong: aString
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
 }
 SPOCTrack >> popularity [
+
 	^ popularity
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:30'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:57'
 }
 SPOCTrack >> popularity: aNumber [
+
 	popularity := aNumber
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:57'
 }
 SPOCTrack >> trackNumber [
+
 	^ trackNumber
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:30'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:57'
 }
 SPOCTrack >> trackNumber: aNumber [
+
 	trackNumber := aNumber
 ]

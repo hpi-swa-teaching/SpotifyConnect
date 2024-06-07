@@ -13,9 +13,10 @@ Class {
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/4/2024 23:25'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:00'
 }
 SPOCResultList >> buildResultList [
+
 	self buildTitle;
 		buildScrollablePanel;
 		extendFully
@@ -23,21 +24,22 @@ SPOCResultList >> buildResultList [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/6/2024 00:23'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:00'
 }
 SPOCResultList >> buildScrollablePanel [
+
 	self scrollablePanel: (SPOCScrollablePanel newWithExtent: SPOCStyle resultListWidth@SPOCStyle resultListHeight).
-	scrollablePanel position: (self titleMorph bottomLeft + (0@SPOCStyle defaultMargin)).
+	self scrollablePanel position: (self titleMorph bottomLeft + (0@SPOCStyle defaultMargin)).
 	self addMorph: scrollablePanel
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/6/2024 01:45'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:18'
 }
 SPOCResultList >> buildTitle [
 	
-	self titleMorph: (SPOCBoldText newAt: self position withText: 'Your Results');
+	self titleMorph: (SPOCBoldText newAt: self position withText: 'Welcome!');
 		addMorph: self titleMorph;
 		yourself
 ]
@@ -60,90 +62,101 @@ SPOCResultList >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/4/2024 12:19'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:01'
 }
 SPOCResultList >> items [
+
 	^ items
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/4/2024 12:20'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:01'
 }
 SPOCResultList >> items: anOrderedCollection [
+
 	items := anOrderedCollection
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 01:03'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:01'
 }
 SPOCResultList >> results [
+
 	^ results
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 01:03'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:01'
 }
-SPOCResultList >> results: anObject [
-	results := anObject
+SPOCResultList >> results: anOrderedCollection [
+
+	results := anOrderedCollection
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/4/2024 12:19'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:01'
 }
 SPOCResultList >> scrollablePanel [
+
 	^ scrollablePanel
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/4/2024 12:20'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:01'
 }
 SPOCResultList >> scrollablePanel: aSPOCScrollablePanel [
+
 	scrollablePanel := aSPOCScrollablePanel
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/4/2024 12:18'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:01'
 }
 SPOCResultList >> title [
+
 	^ title
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/4/2024 12:20'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:01'
 }
 SPOCResultList >> title: aString [
+
 	title := aString
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/4/2024 22:44'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:01'
 }
 SPOCResultList >> titleMorph [
+
 	^ titleMorph
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/4/2024 22:44'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:01'
 }
-SPOCResultList >> titleMorph: anObject [
-	titleMorph := anObject
+SPOCResultList >> titleMorph: aSPOCBoldText [
+
+	titleMorph := aSPOCBoldText
 ]
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/6/2024 11:16'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:23'
 }
 SPOCResultList >> updateItems [
-	"To do: isKindOf ergänzen, sobald auch Alben/Playlists angeklickt werden können"
+	"To do: clickAction in SPOCTrack, SPOCAlbum etc. setzen und hier benutzen"
+	
 	items isEmpty ifFalse: [items removeAll].
 	results do: [ :result |
 		| item |
@@ -167,18 +180,19 @@ SPOCResultList >> updateResults: anOrderedCollection [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/6/2024 00:10'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:02'
 }
 SPOCResultList >> updateScrollablePanel [
+
 	self scrollablePanel updatePanel: items
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/6/2024 01:43'
+	#category : #updating,
+	#'squeak_changestamp' : 'RK 6/7/2024 10:27'
 }
 SPOCResultList >> updateTitle: aString [
 
 	self title: aString.
-	self titleMorph: (SPOCBoldText newAt: self position withText: self title)
+	self titleMorph contents: (title asText addAttribute: TextEmphasis bold)
 ]

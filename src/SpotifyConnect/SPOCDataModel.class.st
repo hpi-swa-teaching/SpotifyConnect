@@ -4,10 +4,20 @@ Class {
 	#instVars : [
 		'id',
 		'name',
-		'image'
+		'image',
+		'clickAction'
 	],
 	#category : #SpotifyConnect
 }
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/7/2024 11:17'
+}
+SPOCDataModel >> clickAction [
+
+	^ self subclassResponsibility
+]
 
 {
 	#category : #accessing,
@@ -21,48 +31,54 @@ SPOCDataModel >> equals: aDataModel [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/27/2024 15:20'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:14'
 }
 SPOCDataModel >> id [
+
 	^ id
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/27/2024 15:20'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:14'
 }
-SPOCDataModel >> id: anObject [
-	id := anObject
+SPOCDataModel >> id: aString [
+
+	id := aString
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/6/2024 00:48'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:14'
 }
 SPOCDataModel >> image [
+
 	^ image
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/6/2024 00:48'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:51'
 }
 SPOCDataModel >> image: aSPOCImage [
+
 	image := aSPOCImage
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/27/2024 15:21'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:52'
 }
 SPOCDataModel >> name [
+
 	^ name
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/27/2024 15:21'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:52'
 }
-SPOCDataModel >> name: anObject [
-	name := anObject
+SPOCDataModel >> name: aString [
+
+	name := aString
 ]

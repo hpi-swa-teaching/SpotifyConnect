@@ -6,9 +6,10 @@ Class {
 
 {
 	#category : #'instance creation',
-	#'squeak_changestamp' : 'RK 6/5/2024 22:14'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCText class >> newAt: aPoint withText: aString [
+
 	^ SPOCText new
 		position: aPoint;
 		contents: aString;
@@ -19,25 +20,28 @@ SPOCText class >> newAt: aPoint withText: aString [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 5/21/2024 23:40'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCText >> handlesMouseDown: anEvent [
+
 	^ false
 ]
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 6/6/2024 01:16'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCText >> handlesMouseMove: anEvent [
+
 	^ false
 ]
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 6/6/2024 01:16'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCText >> handlesMouseOver: anEvent [
+
 	^ false
 ]
 
@@ -52,40 +56,45 @@ SPOCText >> initialize [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 6/6/2024 01:16'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCText >> mouseDown: anEvent [
+
 	^ nil
 ]
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 6/6/2024 01:16'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCText >> mouseEnter: anEvent [
+
 	^ nil
 ]
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 6/6/2024 01:17'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCText >> mouseLeave: anEvent [
+
 	^ nil
 ]
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 6/6/2024 01:17'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCText >> mouseMove: anEvent [
+
 	^ nil
 ]
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 6/6/2024 01:17'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCText >> mouseUp: anEvent [
+
 	^ nil
 ]
