@@ -20,6 +20,12 @@
 		],
 		#encoding : @4
 	},
+	SquotPlaintextMapper {
+		#path : FSAbsolutePath [
+			'README.md'
+		],
+		#encoding : 'TXT'
+	},
 	SquotTonelMapper {
 		#package : MCPackage {
 			#name : 'BaselineOfSpotifyConnect'
@@ -48,6 +54,12 @@
 		],
 		#encoding : 'TXT'
 	},
+	SquotTonelMapper {
+		#package : MCPackage {
+			#name : 'SpotifyConnect'
+		},
+		#path : @13
+	},
 	SquotPlaintextMapper {
 		#path : FSAbsolutePath [
 			'.github',
@@ -55,12 +67,6 @@
 			'ci.yml'
 		],
 		#encoding : 'TXT'
-	},
-	SquotTonelMapper {
-		#package : MCPackage {
-			#name : 'SpotifyConnect'
-		},
-		#path : @11
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [

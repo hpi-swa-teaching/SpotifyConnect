@@ -48,22 +48,22 @@ SPOCBoxedText >> attachCenterBox [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:32'
+	#'squeak_changestamp' : 'VE 6/6/2024 20:37'
 }
 SPOCBoxedText >> attachLeftBorderCircle [
 	| tmp |
-	tmp := self borderCircleMorph.
+	tmp := self circleMorph.
 	tmp name: 'left'.
 	self addMorph: tmp.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:32'
+	#'squeak_changestamp' : 'VE 6/6/2024 20:37'
 }
 SPOCBoxedText >> attachRightBorderCircle [
 	| tmp |
-	tmp := self borderCircleMorph.
+	tmp := self circleMorph.
 	tmp name: 'right'.
 	self addMorph: tmp.
 ]
@@ -79,23 +79,23 @@ SPOCBoxedText >> attachText [
 ]
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:21'
-}
-SPOCBoxedText >> borderCircleMorph [
-	| circle |
-	circle := CircleMorph new.
-	circle extent: SPOCBoxedText height asPoint;
-		borderWidth: 0.
-	^ circle
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'VE 5/27/2024 20:30'
 }
 SPOCBoxedText >> centerBox [
 	^ self submorphNamed: 'center'
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 6/6/2024 20:37'
+}
+SPOCBoxedText >> circleMorph [
+	| circle |
+	circle := CircleMorph new.
+	circle extent: SPOCBoxedText height asPoint;
+		borderWidth: 0.
+	^ circle
 ]
 
 {
