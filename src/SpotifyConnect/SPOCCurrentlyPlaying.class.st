@@ -9,13 +9,26 @@ Class {
 }
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/8/2024 23:00'
+}
+SPOCCurrentlyPlaying >> getPlayingTrack [
+
+	| apiEndpoint dict res |
+	dict := Dictionary new at: #additional_types put: 'track'.
+	apiEndpoint := (SPOCApiPlaybackState new authorizer: self app auth).
+	res := apiEndpoint execute: dict.
+	^ res track
+]
+
+{
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/8/2024 22:16'
+	#'squeak_changestamp' : 'RK 6/8/2024 23:08'
 }
 SPOCCurrentlyPlaying >> initialize [
 
 	super initialize.
-	self track: SPOCApp testTrack;
+	self track: self getPlayingTrack;
 		item: (SPOCResultListItem newWith: self track);
 		addMorph: item;
 		yourself.
@@ -53,4 +66,12 @@ SPOCCurrentlyPlaying >> track [
 }
 SPOCCurrentlyPlaying >> track: anObject [
 	track := anObject
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/8/2024 23:02'
+}
+SPOCCurrentlyPlaying >> updateTrack [
+
 ]

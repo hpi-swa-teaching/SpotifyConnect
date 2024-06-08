@@ -584,11 +584,14 @@ SPOCApp >> searchbar: aSPOCSearchbar [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/8/2024 22:14'
+	#'squeak_changestamp' : 'RK 6/8/2024 23:02'
 }
 SPOCApp >> setUpCurrentlyPlaying [
 
-	self currentlyPlaying: (SPOCCurrentlyPlaying new app: self)
+	self currentlyPlaying: (SPOCCurrentlyPlaying new
+		app: self;
+		updateTrack;
+		yourself)
 ]
 
 {
