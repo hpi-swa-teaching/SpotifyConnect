@@ -361,7 +361,7 @@ SPOCPlayer >> switchPlaybackState [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/6/2024 23:57'
+	#'squeak_changestamp' : 'TL 6/7/2024 19:50'
 }
 SPOCPlayer >> updateIsPlaying [
 
@@ -373,8 +373,10 @@ SPOCPlayer >> updateIsPlaying [
 		authorizer: self app auth;
 		yourself.
 	res := apiEndpoint execute: paramDict.
-	self deviceID: ((res at: 'device') at: 'id');
-		isPlaying: (res at: 'is_playing');
+	"self deviceID: apiEndpoint device id;
+		isPlaying: apiEndpoint isPlaying;"
+	self deviceID: ((res at: #device) at: #id);
+		isPlaying: (res at: #is_playing);
 		updatePlayPauseIcon
 ]
 
