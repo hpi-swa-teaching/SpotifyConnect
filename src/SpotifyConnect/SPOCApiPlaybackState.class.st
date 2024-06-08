@@ -188,10 +188,60 @@ SPOCApiPlaybackState >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/8/2024 00:07'
+	#'squeak_changestamp' : 'RK 6/8/2024 22:40'
 }
 SPOCApiPlaybackState >> tinkerReponseContent: aContentStream [
-
-	^ Json readFrom: aContentStream
+	
+	| artists artistItems album albumItem content device deviceItem playbackState track trackItem |
+	Transcript showln: aContentStream asString.
+	content := Json readFrom: aContentStream readStream.
+	deviceItem := content at: #device.
+	device := SPOCDevice new
+		id: (deviceItem at: #id);
+		isActive: (deviceItem at: #is_active);
+		isPrivateSession: (deviceItem at: #is_private_session);
+		isRestricted: (deviceItem at: #is_restricted);
+		name: (deviceItem at: #name);
+		type: (deviceItem at: #type);
+		volume: (deviceItem at: #volume_percent);
+		supportsVolume: (deviceItem at: #supports_volume);
+		yourself.
+	((content at: #currently_playing_type) = 'track')
+		ifTrue: [trackItem := (content at: #item).
+			albumItem := (trackItem at: #album).
+			artists := OrderedCollection new.
+			artistItems := (albumItem at: #artists).
+			artistItems do: [ :artistItem |
+				| artist |
+				artist := SPOCArtist new
+					id: (artistItem at: #id);
+					name: (artistItem at: #name);
+					yourself.
+				artists add: artist			
+			].
+			album := SPOCAlbum new
+				id: (albumItem at: #id);
+				name: (albumItem at: #name);
+				artists: artists;
+				image: (SPOCImage newWithUrl: (((albumItem at: #images) at: 1) at: #url));
+				yourself.
+			track := SPOCTrack new
+				id: (trackItem at: #id);
+				name: (trackItem at: #name);
+				album: album;
+				duration: (trackItem at: #duration_ms) // 1000;
+				explicit: (trackItem at: #explicit);
+				popularity: (trackItem at: #popularity);
+				trackNumber: (trackItem at: #track_number);
+				yourself.]
+		ifFalse: [track := nil].
+	playbackState := SPOCPlaybackState new
+		device: device;
+		progressMS: (content at: #progress_ms);
+		isPlaying: (content at: #is_playing);
+		track: track;
+		yourself.
+	^ playbackState
+	"^ Json readFrom: aContentStream readStream"
 	
 ]
