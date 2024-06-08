@@ -188,10 +188,10 @@ SPOCApiPlaybackState >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/22/2024 14:06'
+	#'squeak_changestamp' : 'RK 6/8/2024 00:07'
 }
 SPOCApiPlaybackState >> tinkerReponseContent: aContentStream [
-	
+
 	^ Json readFrom: aContentStream
 	
 ]

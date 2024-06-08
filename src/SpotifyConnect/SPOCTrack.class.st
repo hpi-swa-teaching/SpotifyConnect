@@ -50,11 +50,11 @@ SPOCTrack >> artists: aOrderedCollection [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/7/2024 11:22'
+	#'squeak_changestamp' : 'RK 6/7/2024 12:22'
 }
 SPOCTrack >> clickAction [
 
-	^ ["self app player playSong: self id"]
+	^ [self owner app player playSong: self id]
 ]
 
 {

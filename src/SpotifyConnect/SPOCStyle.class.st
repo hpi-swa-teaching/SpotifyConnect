@@ -6,6 +6,15 @@ Class {
 
 {
 	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 6/7/2024 23:46'
+}
+SPOCStyle class >> currentlyPlayingWidth [
+
+	^ 400
+]
+
+{
+	#category : #'class variables',
 	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
 }
 SPOCStyle class >> defaultMargin [

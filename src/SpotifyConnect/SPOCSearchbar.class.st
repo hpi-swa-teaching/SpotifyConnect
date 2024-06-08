@@ -134,7 +134,7 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:25'
+	#'squeak_changestamp' : 'RK 6/7/2024 23:37'
 }
 SPOCSearchbar >> searchTracks: aString [
 
@@ -148,7 +148,7 @@ SPOCSearchbar >> searchTracks: aString [
 	apiEndpoint authorizer: self app auth.
 	self tracks: (apiEndpoint execute: dict).
 	self app resultList updateResults: tracks.
-	self app resultList updateTitle: 'Your Results'
+	self app resultList title: 'Your Results'
 ]
 
 {

@@ -46,13 +46,14 @@ SPOCResultList >> buildTitle [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/5/2024 22:30'
+	#'squeak_changestamp' : 'RK 6/7/2024 23:41'
 }
 SPOCResultList >> initialize [
 
 	super initialize.
 	
 	self color: Color transparent;
+		titleMorph: (SPOCBoldText newAt: self position withText: '');
 		title: '';
 		results: OrderedCollection new;
 		items: OrderedCollection new;
@@ -125,11 +126,12 @@ SPOCResultList >> title [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:01'
+	#'squeak_changestamp' : 'RK 6/7/2024 23:37'
 }
 SPOCResultList >> title: aString [
 
-	title := aString
+	title := aString.
+	self updateTitle: self title
 ]
 
 {
@@ -189,10 +191,9 @@ SPOCResultList >> updateScrollablePanel [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:27'
+	#'squeak_changestamp' : 'RK 6/7/2024 23:37'
 }
 SPOCResultList >> updateTitle: aString [
 
-	self title: aString.
 	self titleMorph contents: (title asText addAttribute: TextEmphasis bold)
 ]
