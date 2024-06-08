@@ -228,12 +228,12 @@ SPOCApp >> searchbar: aSPOCSearchbar [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/3/2024 14:04'
+	#'squeak_changestamp' : 'TL 6/8/2024 20:23'
 }
 SPOCApp >> setupPlayer [
 
 	self player: (SPOCPlayer new app: self; yourself).
-	self auth registerSuccessCallback: [self player updateIsPlaying].
+	self auth registerSuccessCallback: [self player updateIsPlayingFromLogin].
 ]
 
 {
