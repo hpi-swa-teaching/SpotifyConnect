@@ -41,7 +41,7 @@ SPOCSearchbar >> buildSearchbar [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:02'
+	#'squeak_changestamp' : 'RK 6/9/2024 00:56'
 }
 SPOCSearchbar >> buildTextInputField [
 	"To do: specification irgendwie auslagern, damit Methode kürzer"
@@ -64,6 +64,7 @@ SPOCSearchbar >> buildTextInputField [
 		hScrollBarPolicy: #never;
 		vScrollBarPolicy: #never;
 		acceptOnCR: true;
+		setProperty: #indicateKeyboardFocus toValue: #never;
 		yourself.
 	 ^ textField
 ]

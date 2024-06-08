@@ -374,17 +374,15 @@ SPOCPlayer >> updateIsPlaying [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/8/2024 20:23'
+	#'squeak_changestamp' : 'RK 6/9/2024 00:46'
 }
 SPOCPlayer >> updateIsPlayingFromLogin [
 
-	| res |
-	res := self getPlaybackState.
-	(res isKindOf: SPOCApiEndpointResult)
-		ifFalse: [self deviceID: ((res at: #device) at: #id);
-			isPlaying: (res at: #is_playing)].
-	"self deviceID: apiEndpoint device id;
-		isPlaying: apiEndpoint isPlaying;"
+	| playbackState |
+	playbackState := self getPlaybackState.
+	self deviceID: playbackState device id;
+		isPlaying: playbackState isPlaying;
+		yourself.
 	self updatePlayPauseIcon
 ]
 

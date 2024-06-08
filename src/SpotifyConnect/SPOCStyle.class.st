@@ -24,6 +24,15 @@ SPOCStyle class >> defaultMargin [
 
 {
 	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 6/8/2024 23:35'
+}
+SPOCStyle class >> gitRepoName [
+
+	^ 'SpotifyConnect'
+]
+
+{
+	#category : #'class variables',
 	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
 }
 SPOCStyle class >> resultListHeight [
@@ -128,4 +137,21 @@ SPOCStyle class >> spotifyWhite [
 SPOCStyle class >> textHeight [
 
 	^ 30
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'RK 6/9/2024 00:23'
+}
+SPOCStyle class >> trackWelcome [
+
+	| collection |
+	collection := OrderedCollection new.
+	collection add: (SPOCArtist new name: 'Spotify in Squeak').
+	^(SPOCTrack new
+		image: (SPOCImage newWithPath: '/assets/squeak-mouse.png');
+		name: 'Welcome!';
+		album: (SPOCAlbum new artists: collection);
+		duration: 0;
+		yourself)
 ]

@@ -2,6 +2,8 @@ Class {
 	#name : #SPOCDevice,
 	#superclass : #Object,
 	#instVars : [
+		'id',
+		'name',
 		'isActive',
 		'isPrivateSession',
 		'isRestricted',
@@ -26,6 +28,22 @@ SPOCDevice >> equals: aDevice [
 		& (self supportsVolume = aDevice supportsVolume)
 		& (self type = aDevice type)
 		& (self volume = aDevice volume)
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/9/2024 00:30'
+}
+SPOCDevice >> id [
+	^ id
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/9/2024 00:30'
+}
+SPOCDevice >> id: aString [
+	id := aString
 ]
 
 {
@@ -74,6 +92,22 @@ SPOCDevice >> isRestricted [
 }
 SPOCDevice >> isRestricted: anObject [
 	isRestricted := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/9/2024 00:30'
+}
+SPOCDevice >> name [
+	^ name
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/9/2024 00:30'
+}
+SPOCDevice >> name: aString [
+	name := aString
 ]
 
 {

@@ -4,8 +4,20 @@ Class {
 	#instVars : [
 		'url'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-Utils'
 }
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/9/2024 00:11'
+}
+SPOCImage class >> newWithPath: aString [
+	
+	| form |
+	form := (GitAssetLoader for: SPOCStyle gitRepoName) loadForm: aString.
+	form := form scaledToSize: (SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin)).
+	^ (SPOCImage new image: form)
+]
 
 {
 	#category : #'as yet unclassified',
@@ -22,10 +34,11 @@ SPOCImage class >> newWithUrl: aString [
 
 {
 	#category : #formatting,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:59'
+	#'squeak_changestamp' : 'RK 6/9/2024 00:08'
 }
 SPOCImage >> scaledTo: aNumber [
 	
+	url ifNil: [^ self].
 	^ SPOCImage new image: ((Form fromBinaryStream: (HTTPSocket httpGet: url)) scaledToSize: aNumber)
 ]
 

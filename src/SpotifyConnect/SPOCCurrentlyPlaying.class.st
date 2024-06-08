@@ -23,12 +23,12 @@ SPOCCurrentlyPlaying >> getPlayingTrack [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/8/2024 23:08'
+	#'squeak_changestamp' : 'RK 6/9/2024 00:01'
 }
 SPOCCurrentlyPlaying >> initialize [
 
 	super initialize.
-	self track: self getPlayingTrack;
+	self track: SPOCStyle trackWelcome;
 		item: (SPOCResultListItem newWith: self track);
 		addMorph: item;
 		yourself.
@@ -70,8 +70,8 @@ SPOCCurrentlyPlaying >> track: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/8/2024 23:02'
+	#'squeak_changestamp' : 'RK 6/9/2024 00:53'
 }
 SPOCCurrentlyPlaying >> updateTrack [
-
+	self item changeItemTo: self getPlayingTrack
 ]

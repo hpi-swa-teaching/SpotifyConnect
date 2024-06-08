@@ -188,7 +188,7 @@ SPOCApiPlaybackState >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/8/2024 22:40'
+	#'squeak_changestamp' : 'RK 6/9/2024 00:38'
 }
 SPOCApiPlaybackState >> tinkerReponseContent: aContentStream [
 	
@@ -196,8 +196,8 @@ SPOCApiPlaybackState >> tinkerReponseContent: aContentStream [
 	Transcript showln: aContentStream asString.
 	content := Json readFrom: aContentStream readStream.
 	deviceItem := content at: #device.
-	device := SPOCDevice new
-		id: (deviceItem at: #id);
+	device := SPOCDevice new.
+	device id: (deviceItem at: #id);
 		isActive: (deviceItem at: #is_active);
 		isPrivateSession: (deviceItem at: #is_private_session);
 		isRestricted: (deviceItem at: #is_restricted);
