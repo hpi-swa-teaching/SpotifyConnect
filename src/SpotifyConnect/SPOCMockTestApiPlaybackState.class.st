@@ -2,32 +2,83 @@ Class {
 	#name : #SPOCMockTestApiPlaybackState,
 	#superclass : #TestCase,
 	#instVars : [
-		'requestParts',
-		'apiEndpoint'
+		'apiEndpoint',
+		'track'
 	],
 	#category : #'SpotifyConnect-Mock-Tests'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/5/2024 19:37'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 00:25'
 }
-SPOCMockTestApiPlaybackState >> setUp [
+SPOCMockTestApiPlaybackState >> apiEndpoint [
 
-	apiEndpoint := SPOCApiPlaybackState new.
-	requestParts := {'device'. 'repeat_state'. 'shuffle_state'. 'context'. 'timestamp'. 'progress_ms'. 'is_playing'. 'item'. 'currently_playing_type'. 'actions'}.
-	apiEndpoint returnsTestContent: true
+	^ apiEndpoint
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 00:25'
+}
+SPOCMockTestApiPlaybackState >> apiEndpoint: anObject [
+
+	apiEndpoint := anObject
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/5/2024 19:43'
+	#'squeak_changestamp' : 'TL 6/10/2024 00:21'
+}
+SPOCMockTestApiPlaybackState >> setUp [
+
+	self apiEndpoint: SPOCApiPlaybackState new;
+		track: (SPOCTrack new
+			id: '48lxT5qJF0yYyf2z4wB4xW';
+			name: 'Pedro';
+			image: nil;
+			artists: nil;
+			album: nil;
+			duration: 144;
+			explicit: false;
+			popularity: 86;
+			trackNumber: 1;
+			yourself).
+	self apiEndpoint returnsTestContent: true
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'TL 6/10/2024 00:24'
 }
 SPOCMockTestApiPlaybackState >> testMockApiPlaybackExecute [
 
-	| paramDict response |
-    	paramDict := Dictionary new.
-    	paramDict at: #additional_types put: 'track'.
-    	response := apiEndpoint execute: paramDict.
-	self assert: (requestParts allSatisfy: [:each | response includesSubstring: each])
+	| paramDict res resTrack |
+    	paramDict := Dictionary new
+		at: #additional_types put: 'track';
+		yourself.
+    	res := self apiEndpoint execute: paramDict.
+	resTrack := res track
+		image: nil;
+		artists: nil;
+		album: nil.
+	self assert: (self track equals: resTrack)
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 00:24'
+}
+SPOCMockTestApiPlaybackState >> track [
+
+	^ track
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 00:25'
+}
+SPOCMockTestApiPlaybackState >> track: anObject [
+
+	track := anObject
 ]

@@ -2,11 +2,28 @@ Class {
 	#name : #SPOCApiEndpointResult,
 	#superclass : #Object,
 	#instVars : [
-		'response',
-		'error'
+		'code',
+		'error',
+		'response'
 	],
 	#category : #'SpotifyConnect-Utils'
 }
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/9/2024 19:26'
+}
+SPOCApiEndpointResult >> code [
+	^ code
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/9/2024 19:26'
+}
+SPOCApiEndpointResult >> code: anObject [
+	code := anObject
+]
 
 {
 	#category : #accessing,

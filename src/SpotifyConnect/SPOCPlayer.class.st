@@ -273,18 +273,20 @@ SPOCPlayer >> playPauseIcon: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/5/2024 14:31'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:04'
 }
 SPOCPlayer >> playSong: aString [
 
-	| paramDict apiEndpoint response|
-	paramDict := Dictionary new.
-	paramDict at: #device_id put: self deviceID.
-	paramDict at: #uris put: '"spotify:track:', aString,'"'.
-	apiEndpoint := SPOCApiPlay new.
-	apiEndpoint authorizer: app auth.
-	response := apiEndpoint execute: paramDict.
-	self playPauseIcon iconAsset: SPOCPlayer pauseIconPath
+	| paramDict |
+	paramDict := Dictionary new;
+		at: #device_id put: self deviceID;
+		at: #uris put: '"spotify:track:', aString, '"';
+		yourself.
+	SPOCApiPlay new
+		authorizer: self app auth;
+		execute: paramDict;
+		yourself.
+	self updateIsPlaying
 
 ]
 
@@ -308,7 +310,7 @@ SPOCPlayer >> previousIcon: anObject [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/6/2024 23:57'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:04'
 }
 SPOCPlayer >> skipToNext [
 
@@ -320,12 +322,12 @@ SPOCPlayer >> skipToNext [
 		authorizer: self app auth;
 		execute: paramDict;
 		yourself.
-	self updatePlayPauseIcon
+	self updateIsPlaying
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/6/2024 23:57'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:04'
 }
 SPOCPlayer >> skipToPrevious [
 
@@ -337,7 +339,7 @@ SPOCPlayer >> skipToPrevious [
 		authorizer: self app auth;
 		execute: paramDict;
 		yourself.
-	self updatePlayPauseIcon
+	self updateIsPlaying
 ]
 
 {
@@ -357,18 +359,16 @@ SPOCPlayer >> switchPlaybackState [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/8/2024 20:22'
+	#'squeak_changestamp' : 'TL 6/9/2024 19:01'
 }
 SPOCPlayer >> updateIsPlaying [
 
-	| res |
-	res := self getPlaybackState.
-	(res isKindOf: SPOCApiEndpointResult)
-		ifTrue: [res response code = 204 ifTrue: [UIManager inform: 'Please play music on your device!']]
-		ifFalse: [self deviceID: ((res at: #device) at: #id);
-			isPlaying: (res at: #is_playing)].
-	"self deviceID: apiEndpoint device id;
-		isPlaying: apiEndpoint isPlaying;"
+	| playbackState |
+	playbackState := self getPlaybackState.
+	(playbackState isKindOf: SPOCApiEndpointResult)
+		ifTrue: [playbackState response code = 204 ifTrue: [UIManager inform: 'Please play music on your device!']]
+		ifFalse: [self deviceID: playbackState device id;
+			isPlaying: playbackState isPlaying].
 	self updatePlayPauseIcon
 ]
 

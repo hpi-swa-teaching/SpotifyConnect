@@ -17,6 +17,22 @@ SPOCTestCaseWithAuth class >> resources [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/9/2024 18:45'
+}
+SPOCTestCaseWithAuth >> apiEndpoint [
+	^ apiEndpoint
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/9/2024 18:45'
+}
+SPOCTestCaseWithAuth >> apiEndpoint: anObject [
+	apiEndpoint := anObject
+]
+
+{
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'OW 6/5/2024 18:57'
 }

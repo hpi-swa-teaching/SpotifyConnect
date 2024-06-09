@@ -58,7 +58,7 @@ SPOCApiEndpoint >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/8/2024 20:11'
+	#'squeak_changestamp' : 'TL 6/9/2024 19:26'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
 	| response contentStream |
@@ -68,7 +68,10 @@ SPOCApiEndpoint >> execute: aParamDictionary [
 	response code = 401 ifTrue: [^ self refreshAccessTokenAndExecute: aParamDictionary].
 	response code = 200 ifTrue: [contentStream := response content readStream.
 		^ self tinkerReponseContent: contentStream].
-	^ SPOCApiEndpointResult new response: response; yourself
+	^ SPOCApiEndpointResult new
+		response: response;
+		code: response code;
+		yourself
 ]
 
 {
