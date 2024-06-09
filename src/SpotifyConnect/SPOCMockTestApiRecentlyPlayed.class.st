@@ -1,5 +1,5 @@
 Class {
-	#name : #SPOCMockTestApiTrackHistory,
+	#name : #SPOCMockTestApiRecentlyPlayed,
 	#superclass : #TestCase,
 	#instVars : [
 		'track',
@@ -10,10 +10,10 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/5/2024 19:40'
+	#'squeak_changestamp' : 'VK 6/9/2024 12:32'
 }
-SPOCMockTestApiTrackHistory >> setUp [
-	apiEndpoint := SPOCApiTrackHistory new.
+SPOCMockTestApiRecentlyPlayed >> setUp [
+	apiEndpoint := SPOCApiRecentlyPlayed new.
 	track := SPOCTrack new.
 	track id: '45c4L5n0wh6KRv0SOf879S';
 		name: 'Morning Blue';
@@ -29,7 +29,7 @@ SPOCMockTestApiTrackHistory >> setUp [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 6/5/2024 19:39'
 }
-SPOCMockTestApiTrackHistory >> testMockApiTrackHistoryExecute [
+SPOCMockTestApiRecentlyPlayed >> testMockApiTrackHistoryExecute [
 
 	| dict res resTrack |
 	dict := Dictionary new.
