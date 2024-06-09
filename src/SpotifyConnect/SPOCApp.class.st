@@ -298,12 +298,12 @@ SPOCApp >> setUpResultList [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/8/2024 20:23'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:33'
 }
 SPOCApp >> setupPlayer [
 
-	self player: (SPOCPlayer new app: self; yourself).
-	self auth registerSuccessCallback: [self player updateIsPlayingFromLogin].
+	self player: (SPOCPlayer new app: self).
+	self auth registerSuccessCallback: [self player updateIsPlayingFromLogin]
 ]
 
 {

@@ -24,31 +24,11 @@ SPOCApiNext >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 15:54'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:17'
 }
 SPOCApiNext >> executeRequest: request withParams: aParamDictionary [
 
-	request rawUrl: (request rawUrl, '?device_id=', (aParamDictionary at: #device_id)).
-	request headerAt: 'Content-Length' put: 0.
+	request rawUrl: (request rawUrl, '?device_id=', (aParamDictionary at: #device_id));
+		headerAt: 'Content-Length' put: 0.
 	^ self client sendRequest: request
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/29/2024 20:02'
-}
-SPOCApiNext >> executeTest [
-	
-	"Response code 204"
-	 ^ ''
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 5/27/2024 15:55'
-}
-SPOCApiNext >> tinkerReponseContent: aContentStream [
-	
-	"wenn alles gut gelaufen ist, kommt keine response, sondern nur bei Fehler"
-	
 ]

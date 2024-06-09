@@ -11,22 +11,6 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/9/2024 19:26'
-}
-SPOCApiEndpointResult >> code [
-	^ code
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/9/2024 19:26'
-}
-SPOCApiEndpointResult >> code: anObject [
-	code := anObject
-]
-
-{
-	#category : #accessing,
 	#'squeak_changestamp' : 'VE 6/3/2024 16:11'
 }
 SPOCApiEndpointResult >> error [

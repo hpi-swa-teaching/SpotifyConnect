@@ -24,11 +24,11 @@ SPOCApiPrevious >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/3/2024 22:33'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:19'
 }
 SPOCApiPrevious >> executeRequest: request withParams: aParamDictionary [
 
-	request rawUrl: (request rawUrl, '?device_id=', (aParamDictionary at: #device_id)).
-	request headerAt: 'Content-Length' put: 0.
+	request rawUrl: (request rawUrl, '?device_id=', (aParamDictionary at: #device_id));
+		headerAt: 'Content-Length' put: 0.
 	^ self client sendRequest: request
 ]

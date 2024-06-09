@@ -135,7 +135,7 @@ SPOCPlayer >> deviceID: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/8/2024 20:26'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:07'
 }
 SPOCPlayer >> executeButtonFunction: anIcon [
 	
@@ -147,24 +147,24 @@ SPOCPlayer >> executeButtonFunction: anIcon [
 			(anIcon == self playPauseIcon)
 				ifTrue: [self switchPlaybackState].
 			(anIcon == self nextIcon)
-				ifTrue: [self skipToNext]]
+				ifTrue: [self skipToNext].
+			self updateIsPlaying]
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/8/2024 20:21'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:39'
 }
 SPOCPlayer >> getPlaybackState [
 
-	| apiEndpoint paramDict res |
+	| apiEndpoint paramDict |
 	paramDict := Dictionary new
 		at: #additional_types put: 'track';
 		yourself.
 	apiEndpoint := SPOCApiPlaybackState new
 		authorizer: self app auth;
 		yourself.
-	res := apiEndpoint execute: paramDict.
-	^ res
+	^ apiEndpoint execute: paramDict
 ]
 
 {
@@ -224,7 +224,7 @@ SPOCPlayer >> nextIcon: anObject [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/4/2024 11:46'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:09'
 }
 SPOCPlayer >> pause [
 
@@ -232,7 +232,8 @@ SPOCPlayer >> pause [
 	paramDict := Dictionary new
 		at: #device_id put: self deviceID;
 		yourself.
-	SPOCApiPause new authorizer: self app auth;
+	SPOCApiPause new
+		authorizer: self app auth;
 		execute: paramDict;
 		yourself
 ]
@@ -310,7 +311,7 @@ SPOCPlayer >> previousIcon: anObject [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/10/2024 01:04'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:09'
 }
 SPOCPlayer >> skipToNext [
 
@@ -321,13 +322,12 @@ SPOCPlayer >> skipToNext [
 	SPOCApiNext new
 		authorizer: self app auth;
 		execute: paramDict;
-		yourself.
-	self updateIsPlaying
+		yourself
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/10/2024 01:04'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:10'
 }
 SPOCPlayer >> skipToPrevious [
 
@@ -338,35 +338,32 @@ SPOCPlayer >> skipToPrevious [
 	SPOCApiPrevious new
 		authorizer: self app auth;
 		execute: paramDict;
-		yourself.
-	self updateIsPlaying
+		yourself
 ]
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/8/2024 20:06'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:07'
 }
 SPOCPlayer >> switchPlaybackState [
 
 	self isPlaying 
-		ifTrue: [self pause.
-			self playPauseIcon iconAsset: SPOCPlayer playIconPath]
-		ifFalse: [self play.
-			self playPauseIcon iconAsset: SPOCPlayer pauseIconPath]
+		ifTrue: [self pause]
+		ifFalse: [self play]
 		
 		
 ]
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/9/2024 19:01'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:40'
 }
 SPOCPlayer >> updateIsPlaying [
 
 	| playbackState |
 	playbackState := self getPlaybackState.
 	(playbackState isKindOf: SPOCApiEndpointResult)
-		ifTrue: [playbackState response code = 204 ifTrue: [UIManager inform: 'Please play music on your device!']]
+		ifTrue: [playbackState code = 204 ifTrue: [UIManager inform: 'Please play music on your device!']]
 		ifFalse: [self deviceID: playbackState device id;
 			isPlaying: playbackState isPlaying].
 	self updatePlayPauseIcon
@@ -374,15 +371,15 @@ SPOCPlayer >> updateIsPlaying [
 
 {
 	#category : #'api-connection',
-	#'squeak_changestamp' : 'RK 6/9/2024 00:46'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:36'
 }
 SPOCPlayer >> updateIsPlayingFromLogin [
 
 	| playbackState |
 	playbackState := self getPlaybackState.
-	self deviceID: playbackState device id;
-		isPlaying: playbackState isPlaying;
-		yourself.
+	(playbackState isKindOf: SPOCApiEndpointResult)
+		ifFalse: [self deviceID: playbackState device id;
+			isPlaying: playbackState isPlaying].
 	self updatePlayPauseIcon
 ]
 
