@@ -35,9 +35,10 @@ SPOCResultListItem >> app [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 12:21'
+	#'squeak_changestamp' : 'RK 6/9/2024 11:48'
 }
 SPOCResultListItem >> app: aSPOCApp [
+
 	app := aSPOCApp
 ]
 
@@ -120,7 +121,7 @@ SPOCResultListItem >> buildPrimaryText [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:55'
+	#'squeak_changestamp' : 'RK 6/9/2024 11:49'
 }
 SPOCResultListItem >> buildSecondaryText [
 
@@ -130,7 +131,7 @@ SPOCResultListItem >> buildSecondaryText [
 	(dataModel isKindOf: SPOCAlbum)
 		ifTrue: [content := dataModel artistsAsString].
 	(dataModel isKindOf: SPOCArtist)
-		ifTrue: [content := ''].	
+		ifTrue: [content := ' '].	
 	text := SPOCText newAt: image bottomRight + (SPOCStyle defaultMargin@(SPOCStyle textHeight negated)) withText: content.
 	self secondaryText: text;
 		addMorph: secondaryText;
@@ -197,9 +198,10 @@ SPOCResultListItem >> hasTertiaryText [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 23:34'
+	#'squeak_changestamp' : 'RK 6/9/2024 11:49'
 }
 SPOCResultListItem >> hasTertiaryText: aBoolean [
+
 	hasTertiaryText := aBoolean.
 	self updateTertiaryText
 	

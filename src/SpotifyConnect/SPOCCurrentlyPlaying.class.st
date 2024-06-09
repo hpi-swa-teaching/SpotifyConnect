@@ -39,41 +39,46 @@ SPOCCurrentlyPlaying >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/8/2024 22:02'
+	#'squeak_changestamp' : 'RK 6/9/2024 11:47'
 }
 SPOCCurrentlyPlaying >> item [
+
 	^ item
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/8/2024 22:18'
+	#'squeak_changestamp' : 'RK 6/9/2024 11:47'
 }
 SPOCCurrentlyPlaying >> item: aSPOCResultListItem [
+
 	item := aSPOCResultListItem
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/8/2024 22:02'
+	#'squeak_changestamp' : 'RK 6/9/2024 11:47'
 }
 SPOCCurrentlyPlaying >> track [
+
 	^ track
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/8/2024 22:02'
+	#'squeak_changestamp' : 'RK 6/9/2024 11:47'
 }
-SPOCCurrentlyPlaying >> track: anObject [
-	track := anObject
+SPOCCurrentlyPlaying >> track: aSPOCTrack [
+
+	track := aSPOCTrack
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/9/2024 01:32'
+	#'squeak_changestamp' : 'RK 6/9/2024 11:47'
 }
 SPOCCurrentlyPlaying >> update [
+
 	self track: self getPlayingTrack.
 	self item changeItemTo: self track
 ]
