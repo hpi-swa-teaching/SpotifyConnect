@@ -5,7 +5,8 @@ Class {
 		'inputField',
 		'inputText',
 		'tracks',
-		'trackItems'
+		'trackItems',
+		'disabled'
 	],
 	#category : #SpotifyConnect
 }
@@ -70,8 +71,26 @@ SPOCSearchbar >> buildTextInputField [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/9/2024 13:17'
+}
+SPOCSearchbar >> disabled [
+
+	^ disabled
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/9/2024 13:17'
+}
+SPOCSearchbar >> disabled: aBoolean [
+
+	disabled := aBoolean
+]
+
+{
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:03'
+	#'squeak_changestamp' : 'RK 6/9/2024 13:17'
 }
 SPOCSearchbar >> initialize [
 
@@ -80,6 +99,7 @@ SPOCSearchbar >> initialize [
 		color: Color transparent;
 		trackItems: OrderedCollection new;
 		tracks: OrderedCollection new;
+		disabled: true;
 		buildSearchbar;
 		extendFully;
 		yourself
@@ -135,11 +155,13 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'RK 6/9/2024 01:02'
+	#'squeak_changestamp' : 'RK 6/9/2024 13:20'
 }
 SPOCSearchbar >> searchTracks: aString [
 
 	| dict apiEndpoint |
+	disabled ifTrue: [UIManager inform: 'Please log in!'.
+		^ self].
 	dict := Dictionary new.
 	dict at: 'input' put: (self sanitizeInput: aString);
 		at: 'type' put: 'track';
