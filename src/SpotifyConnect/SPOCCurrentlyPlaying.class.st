@@ -10,12 +10,13 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/8/2024 23:00'
+	#'squeak_changestamp' : 'RK 6/9/2024 01:12'
 }
 SPOCCurrentlyPlaying >> getPlayingTrack [
 
 	| apiEndpoint dict res |
-	dict := Dictionary new at: #additional_types put: 'track'.
+	dict := Dictionary new.
+	dict at: 'additional_types' put: 'track'.
 	apiEndpoint := (SPOCApiPlaybackState new authorizer: self app auth).
 	res := apiEndpoint execute: dict.
 	^ res track
@@ -70,8 +71,9 @@ SPOCCurrentlyPlaying >> track: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/9/2024 00:53'
+	#'squeak_changestamp' : 'RK 6/9/2024 01:32'
 }
-SPOCCurrentlyPlaying >> updateTrack [
-	self item changeItemTo: self getPlayingTrack
+SPOCCurrentlyPlaying >> update [
+	self track: self getPlayingTrack.
+	self item changeItemTo: self track
 ]

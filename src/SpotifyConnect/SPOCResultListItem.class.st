@@ -156,13 +156,15 @@ SPOCResultListItem >> buildTertiaryText [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/8/2024 21:50'
+	#'squeak_changestamp' : 'RK 6/9/2024 01:58'
 }
 SPOCResultListItem >> changeItemTo: aDataModel [
-
-	self image: (aDataModel image scaledTo: SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin)).
+	
+	 | form |
+	form := (aDataModel image scaledTo: SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin)) form.
+	self image image: form.
 	self primaryText contents: (aDataModel name asText addAttribute: TextEmphasis bold).
-	self secondaryText contents: (aDataModel name).
+	self secondaryText contents: (aDataModel album artistsAsString).
 	(aDataModel isKindOf: SPOCTrack) ifTrue: [self tertiaryText contents: (aDataModel durationAsFormattedTime)]
 ]
 

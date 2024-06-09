@@ -154,7 +154,7 @@ SPOCResultList >> titleMorph: aSPOCBoldText [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:23'
+	#'squeak_changestamp' : 'RK 6/9/2024 01:34'
 }
 SPOCResultList >> updateItems [
 	"To do: clickAction in SPOCTrack, SPOCAlbum etc. setzen und hier benutzen"
@@ -163,7 +163,9 @@ SPOCResultList >> updateItems [
 	results do: [ :result |
 		| item |
 		item := SPOCClickable newUsing: (SPOCResultListItem newWith: result)
-			onClick: [ :evt | self app player playSong: result id].
+			onClick: [ :evt |
+				self app player playSong: result id.
+				self app currentlyPlaying update].
 		item vResizing: #shrinkWrap.
 		items add: item]
 ]

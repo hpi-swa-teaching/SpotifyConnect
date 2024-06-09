@@ -188,12 +188,11 @@ SPOCApiPlaybackState >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/9/2024 00:38'
+	#'squeak_changestamp' : 'RK 6/9/2024 01:31'
 }
 SPOCApiPlaybackState >> tinkerReponseContent: aContentStream [
 	
 	| artists artistItems album albumItem content device deviceItem playbackState track trackItem |
-	Transcript showln: aContentStream asString.
 	content := Json readFrom: aContentStream readStream.
 	deviceItem := content at: #device.
 	device := SPOCDevice new.
@@ -228,6 +227,7 @@ SPOCApiPlaybackState >> tinkerReponseContent: aContentStream [
 			track := SPOCTrack new
 				id: (trackItem at: #id);
 				name: (trackItem at: #name);
+				image: album image;
 				album: album;
 				duration: (trackItem at: #duration_ms) // 1000;
 				explicit: (trackItem at: #explicit);
@@ -242,6 +242,4 @@ SPOCApiPlaybackState >> tinkerReponseContent: aContentStream [
 		track: track;
 		yourself.
 	^ playbackState
-	"^ Json readFrom: aContentStream readStream"
-	
 ]
