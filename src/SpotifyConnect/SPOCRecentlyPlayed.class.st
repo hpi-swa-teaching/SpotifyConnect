@@ -5,19 +5,18 @@ Class {
 		'text',
 		'button',
 		'tracks',
-		'trackMorphs',
-		'display'
+		'trackMorphs'
 	],
 	#category : #SpotifyConnect
 }
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/1/2024 22:10'
+	#'squeak_changestamp' : 'VK 6/9/2024 13:53'
 }
-SPOCRecentlyPlayed class >> afterTimestamp [
+SPOCRecentlyPlayed class >> beforeTimestamp [
 
-	^ 1484811043508
+	^ DateAndTime current asUnixTime * 1000
 ]
 
 {
@@ -41,6 +40,15 @@ SPOCRecentlyPlayed >> attachButton [
 ]
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VK 6/9/2024 13:58'
+}
+SPOCRecentlyPlayed >> beforeTimestamp [
+
+	^ DateAndTime current asUnixTime * 1000
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
 }
@@ -57,31 +65,15 @@ SPOCRecentlyPlayed >> button: anObject [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:14'
-}
-SPOCRecentlyPlayed >> display [
-	^ display
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:14'
-}
-SPOCRecentlyPlayed >> display: anObject [
-	display := anObject
-]
-
-{
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 13:15'
+	#'squeak_changestamp' : 'VK 6/9/2024 14:03'
 }
 SPOCRecentlyPlayed >> getRecentlyPlayed [
 
 	| dict apiEndpoint |
 	dict := Dictionary new.
 	dict at: 'limit' put: SPOCRecentlyPlayed trackLimit;
-		at: 'after' put: SPOCRecentlyPlayed afterTimestamp;
+		at: 'before' put: SPOCRecentlyPlayed beforeTimestamp;
 		yourself.
 	apiEndpoint := SPOCApiRecentlyPlayed new.
 	apiEndpoint authorizer: self app auth.
