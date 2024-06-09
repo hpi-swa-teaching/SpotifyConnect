@@ -74,7 +74,7 @@ SPOCRecentlyPlayed >> display: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 12:31'
+	#'squeak_changestamp' : 'VK 6/9/2024 13:15'
 }
 SPOCRecentlyPlayed >> getRecentlyPlayed [
 
@@ -87,7 +87,7 @@ SPOCRecentlyPlayed >> getRecentlyPlayed [
 	apiEndpoint authorizer: self app auth.
 	self tracks: (apiEndpoint execute: dict).
 	self app resultList updateResults: tracks.
-	self app resultList title: 'Your Results'.
+	self app resultList title: 'Recently Played'.
 	self app currentlyPlaying update
 ]
 
