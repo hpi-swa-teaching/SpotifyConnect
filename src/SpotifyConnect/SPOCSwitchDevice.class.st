@@ -4,10 +4,10 @@ Class {
 	#instVars : [
 		'text',
 		'devices',
-		'devicesMorphs',
 		'button',
 		'activeDevice',
-		'resultDisplay'
+		'resultDisplay',
+		'deviceMorphs'
 	],
 	#category : #SpotifyConnect
 }
@@ -153,18 +153,18 @@ SPOCSwitchDevice >> currentDevices [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/27/2024 17:55'
+	#'squeak_changestamp' : 'VK 6/9/2024 15:30'
 }
 SPOCSwitchDevice >> deviceMorphs [
-	^ devicesMorphs
+	^ deviceMorphs
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/27/2024 17:55'
+	#'squeak_changestamp' : 'VK 6/9/2024 15:30'
 }
 SPOCSwitchDevice >> deviceMorphs: anObject [
-	devicesMorphs := anObject
+	deviceMorphs := anObject
 ]
 
 {
@@ -257,16 +257,16 @@ SPOCSwitchDevice >> text: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 15:15'
+	#'squeak_changestamp' : 'VK 6/9/2024 15:30'
 }
 SPOCSwitchDevice >> updateResultDisplay: anOrderedCollection [
 	
 	anOrderedCollection ifNil: [self hideResults.
 		^ self].
-	resultDisplay removeAll.
+	deviceMorphs removeAll.
 	anOrderedCollection do: [:device |
-		resultDisplay add: [self buildResultMorphFrom: device]].
-	resultDisplay updatePanel: resultDisplay.
+		deviceMorphs add: [self buildResultMorphFrom: device]].
+	resultDisplay updatePanel: deviceMorphs.
 	resultDisplay show.
 	self extendFully
 ]
