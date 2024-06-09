@@ -8,7 +8,8 @@ Class {
 		'resultList',
 		'currentlyPlaying',
 		'player',
-		'recentlyPlayed'
+		'recentlyPlayed',
+		'switchDevice'
 	],
 	#category : #SpotifyConnect
 }
@@ -60,11 +61,11 @@ SPOCApp >> auth: anObject [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 6/7/2024 12:27'
+	#'squeak_changestamp' : 'VK 6/9/2024 16:42'
 }
 SPOCApp >> bottomPanelContent [
 
-	^ {self currentlyPlaying. self player}
+	^ {self currentlyPlaying. self switchDevice. self player}
 ]
 
 {
@@ -186,7 +187,7 @@ SPOCApp >> currentlyPlaying: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 13:17'
+	#'squeak_changestamp' : 'VK 6/9/2024 16:42'
 }
 SPOCApp >> initialize [
 
@@ -199,7 +200,8 @@ SPOCApp >> initialize [
 		setUpResultList;
 		setUpCurrentlyPlaying;
 		setupPlayer;
-		setupRecentlyPlayed.
+		setupRecentlyPlayed;
+		setupSwitchDevice.
 
 
 ]
@@ -344,6 +346,15 @@ SPOCApp >> setupSearchbar [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'VK 6/9/2024 16:41'
+}
+SPOCApp >> setupSwitchDevice [
+
+	self switchDevice: (SPOCSwitchDevice new app: self; yourself)
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'VE 5/28/2024 21:34'
 }
 SPOCApp >> setupUserLogin [
@@ -352,6 +363,22 @@ SPOCApp >> setupUserLogin [
 	self auth registerSuccessCallback: [self userLogin toggleLogout].
 
 
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 16:42'
+}
+SPOCApp >> switchDevice [
+	^ switchDevice
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 16:42'
+}
+SPOCApp >> switchDevice: anObject [
+	switchDevice := anObject
 ]
 
 {
