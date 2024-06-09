@@ -7,7 +7,8 @@ Class {
 		'searchbar',
 		'resultList',
 		'currentlyPlaying',
-		'player'
+		'player',
+		'recentlyPlayed'
 	],
 	#category : #SpotifyConnect
 }
@@ -185,7 +186,7 @@ SPOCApp >> currentlyPlaying: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/7/2024 12:24'
+	#'squeak_changestamp' : 'VK 6/9/2024 13:17'
 }
 SPOCApp >> initialize [
 
@@ -197,7 +198,8 @@ SPOCApp >> initialize [
 		setupSearchbar;
 		setUpResultList;
 		setUpCurrentlyPlaying;
-		setupPlayer.
+		setupPlayer;
+		setupRecentlyPlayed.
 
 
 ]
@@ -234,6 +236,22 @@ SPOCApp >> player: anObject [
 SPOCApp >> playerPanelContent [
 
 	^ {self player}
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 13:16'
+}
+SPOCApp >> recentlyPlayed [
+	^ recentlyPlayed
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 13:16'
+}
+SPOCApp >> recentlyPlayed: anObject [
+	recentlyPlayed := anObject
 ]
 
 {
@@ -308,6 +326,15 @@ SPOCApp >> setupPlayer [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'VK 6/9/2024 13:17'
+}
+SPOCApp >> setupRecentlyPlayed [
+
+	self recentlyPlayed: (SPOCRecentlyPlayed new app: self; yourself)
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'RK 5/30/2024 21:34'
 }
 SPOCApp >> setupSearchbar [
@@ -329,11 +356,11 @@ SPOCApp >> setupUserLogin [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/3/2024 10:23'
+	#'squeak_changestamp' : 'VK 6/9/2024 13:21'
 }
 SPOCApp >> topPanelContent [
 
-	^ { self searchbar. self userLogin}
+	^ { self searchbar. self recentlyPlayed. self userLogin}
 ]
 
 {
