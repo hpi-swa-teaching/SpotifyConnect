@@ -2,11 +2,8 @@ Class {
 	#name : #SPOCRecentlyPlayed,
 	#superclass : #SPOCUIComponent,
 	#instVars : [
-		'text',
-		'button',
 		'tracks',
-		'trackMorphs',
-		'display'
+		'trackMorphs'
 	],
 	#category : #SpotifyConnect
 }
@@ -30,50 +27,25 @@ SPOCRecentlyPlayed class >> trackLimit [
 ]
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 12:25'
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/9/2024 14:44'
 }
-SPOCRecentlyPlayed >> attachButton [
+SPOCRecentlyPlayed >> buildButton [
 
-	self text: (SPOCBoxedText new contents: 'Recently Played'; yourself);
-		button: ( SPOCClickable newUsing: text onClick: [:anEvent | self getRecentlyPlayed]);
-		addMorph: self button
+	| text icon button |
+	text := (SPOCBoxedText new contents: ' Recently Played';
+		position: SPOCStyle recentlyPlayedPadding@0;
+		yourself).
+	icon := SPOCIcon new iconAsset: '/assets/recently-played.png'.
+	button := Morph new color: Color transparent.
+	button addMorph: text;
+		addMorph: icon;
+		yourself.
+	self addMorph: (SPOCClickable newUsing: button onClick: [:anEvent | self getRecentlyPlayed])
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
-}
-SPOCRecentlyPlayed >> button [
-	^ button
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
-}
-SPOCRecentlyPlayed >> button: anObject [
-	button := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:14'
-}
-SPOCRecentlyPlayed >> display [
-	^ display
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:14'
-}
-SPOCRecentlyPlayed >> display: anObject [
-	display := anObject
-]
-
-{
-	#category : #initialization,
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VK 6/9/2024 13:15'
 }
 SPOCRecentlyPlayed >> getRecentlyPlayed [
@@ -93,7 +65,7 @@ SPOCRecentlyPlayed >> getRecentlyPlayed [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 12:29'
+	#'squeak_changestamp' : 'RK 6/9/2024 13:53'
 }
 SPOCRecentlyPlayed >> initialize [
 
@@ -103,25 +75,9 @@ SPOCRecentlyPlayed >> initialize [
 		color: Color transparent;
 		trackMorphs: OrderedCollection new;
 		tracks: OrderedCollection new;
-		attachButton;
+		buildButton;
 		extendFully;
 		yourself
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
-}
-SPOCRecentlyPlayed >> text [
-	^ text
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
-}
-SPOCRecentlyPlayed >> text: anObject [
-	text := anObject
 ]
 
 {

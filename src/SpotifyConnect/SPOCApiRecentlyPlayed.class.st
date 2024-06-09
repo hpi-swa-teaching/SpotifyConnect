@@ -510,7 +510,7 @@ SPOCApiRecentlyPlayed >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/4/2024 16:43'
+	#'squeak_changestamp' : 'RK 6/9/2024 13:39'
 }
 SPOCApiRecentlyPlayed >> tinkerReponseContent: aContentStream [
 	
@@ -544,6 +544,7 @@ SPOCApiRecentlyPlayed >> tinkerReponseContent: aContentStream [
 		track
 			id: (trackItem at: #id);
 			name: (trackItem at: #name);
+			image: album image;
 			album: album;
 			duration: (trackItem at: #duration_ms) // 1000;
 			explicit: (trackItem at: #explicit);

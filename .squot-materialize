@@ -93,5 +93,12 @@
 			'previous.png'
 		],
 		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'recently-played.png'
+		],
+		#encoding : @4
 	}
 ]
