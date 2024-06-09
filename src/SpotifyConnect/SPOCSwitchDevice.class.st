@@ -59,20 +59,18 @@ SPOCSwitchDevice >> attachButton [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 15:18'
+	#'squeak_changestamp' : 'RK 6/9/2024 17:54'
 }
 SPOCSwitchDevice >> buildResultDisplay [
 
-	resultDisplay := SPOCScrollablePanel new
-		extent: (2 * self buttonWidth) @ (5 * self buttonHeight);
-		buildPanel;
-		hide.
-	self addMorph: resultDisplay.
+	self resultDisplay: (SPOCScrollablePanel newWithExtent: (2 * self buttonWidth) @ (5 * self buttonHeight)).
+	self resultDisplay position: self position + (0@30).
+	self addMorph: self resultDisplay.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 15:21'
+	#'squeak_changestamp' : 'RK 6/9/2024 18:07'
 }
 SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 	| background nameText typeText finishedMorph deviceButton height ratio width |
@@ -84,9 +82,9 @@ SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 	background := RectangleMorph new
 		color: SPOCStyle spotifyGray;
 		extent: (width +  height@(ratio * height));
-		morphicLayerNumber: SPOCSwitchDevice baseLayer.
+		yourself.
 	nameText := SPOCText newAt: (background topLeft) withText: aDevice name.
-	typeText := SPOCText newAt: (background bottomLeft + (0@(SPOCText defaultHeight negated))) withText: aDevice type.
+	typeText := SPOCText newAt: (background bottomLeft + (0@(SPOCStyle textHeight negated))) withText: aDevice type.
 	nameText color: Color transparent.
 	typeText color: Color transparent.
 	aDevice isActive 
@@ -139,7 +137,7 @@ SPOCSwitchDevice >> buttonWidth [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/3/2024 13:04'
+	#'squeak_changestamp' : 'RK 6/9/2024 17:59'
 }
 SPOCSwitchDevice >> currentDevices [
 
@@ -257,16 +255,13 @@ SPOCSwitchDevice >> text: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 15:30'
+	#'squeak_changestamp' : 'RK 6/9/2024 18:05'
 }
 SPOCSwitchDevice >> updateResultDisplay: anOrderedCollection [
-	
-	anOrderedCollection ifNil: [self hideResults.
-		^ self].
-	deviceMorphs removeAll.
+
+	self deviceMorphs removeAll.
 	anOrderedCollection do: [:device |
-		deviceMorphs add: [self buildResultMorphFrom: device]].
-	resultDisplay updatePanel: deviceMorphs.
-	resultDisplay show.
+		self deviceMorphs add: (self buildResultMorphFrom: device)].
+	self resultDisplay updatePanel: self deviceMorphs.
 	self extendFully
 ]
