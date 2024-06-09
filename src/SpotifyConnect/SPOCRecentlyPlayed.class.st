@@ -40,15 +40,6 @@ SPOCRecentlyPlayed >> attachButton [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/9/2024 13:58'
-}
-SPOCRecentlyPlayed >> beforeTimestamp [
-
-	^ DateAndTime current asUnixTime * 1000
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
 }
