@@ -59,20 +59,19 @@ SPOCSwitchDevice >> attachButton [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 15:18'
+	#'squeak_changestamp' : 'VK 6/9/2024 18:04'
 }
 SPOCSwitchDevice >> buildResultDisplay [
 
-	resultDisplay := SPOCScrollablePanel new
-		extent: (2 * self buttonWidth) @ (5 * self buttonHeight);
-		buildPanel;
-		hide.
-	self addMorph: resultDisplay.
+	self resultDisplay: [SPOCScrollablePanel new extent: (2 * self buttonWidth) @ (5 * self buttonHeight)].
+	self resultDisplay buildPanel.
+	self resultDisplay hide.
+	self addMorph: self resultDisplay
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 15:21'
+	#'squeak_changestamp' : 'VK 6/9/2024 18:05'
 }
 SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 	| background nameText typeText finishedMorph deviceButton height ratio width |
@@ -91,7 +90,7 @@ SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 	typeText color: Color transparent.
 	aDevice isActive 
 		ifTrue: [background color: SPOCStyle spotifyGreen.
-			activeDevice := aDevice].
+			self activeDevice: aDevice].
 	finishedMorph := Morph new color: Color transparent;
 		addMorph: background;
 		addMorph: nameText;
@@ -121,20 +120,20 @@ SPOCSwitchDevice >> button: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 15:17'
+	#'squeak_changestamp' : 'VK 6/9/2024 18:07'
 }
 SPOCSwitchDevice >> buttonHeight [
 
-	^ button extent y
+	^ self button extent y
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 15:17'
+	#'squeak_changestamp' : 'VK 6/9/2024 18:07'
 }
 SPOCSwitchDevice >> buttonWidth [
 
-	^ button extent x
+	^ self button extent x
 ]
 
 {
@@ -257,16 +256,16 @@ SPOCSwitchDevice >> text: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 15:30'
+	#'squeak_changestamp' : 'VK 6/9/2024 18:06'
 }
 SPOCSwitchDevice >> updateResultDisplay: anOrderedCollection [
 	
 	anOrderedCollection ifNil: [self hideResults.
 		^ self].
-	deviceMorphs removeAll.
+	self deviceMorphs removeAll.
 	anOrderedCollection do: [:device |
-		deviceMorphs add: [self buildResultMorphFrom: device]].
-	resultDisplay updatePanel: deviceMorphs.
-	resultDisplay show.
+		self deviceMorphs add: [self buildResultMorphFrom: device]].
+	self resultDisplay updatePanel: self deviceMorphs.
+	self resultDisplay show.
 	self extendFully
 ]
