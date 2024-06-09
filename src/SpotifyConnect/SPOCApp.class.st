@@ -6,6 +6,7 @@ Class {
 		'userLogin',
 		'searchbar',
 		'resultList',
+		'currentlyPlaying',
 		'player'
 	],
 	#category : #SpotifyConnect
@@ -58,28 +59,28 @@ SPOCApp >> auth: anObject [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:50'
+	#'squeak_changestamp' : 'RK 6/7/2024 12:27'
 }
 SPOCApp >> bottomPanelContent [
 
-	^ {self player}
+	^ {self currentlyPlaying. self player}
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/3/2024 10:13'
+	#'squeak_changestamp' : 'RK 6/7/2024 23:53'
 }
 SPOCApp >> buildBottomPanel: aBuilder [
 
 	^ SPOCPluggableTablePanelSpec new
 		model: self;
 		tableLayoutProperties: (TableLayoutProperties new
-			listDirection: #leftToRight;
-			listCentering: #center;
-			wrapDirection: #bottomToTop;
-			cellInset: SPOCStyle defaultMargin;
 			hResizing: #spaceFill;
-			vResizing: #shrinkWrap);
+			vResizing: #shrinkWrap;
+			listDirection: #leftToRight;
+			listCentering: #justified;
+			wrapDirection: #bottomToTop;
+			cellInset: SPOCStyle defaultMargin);
 		children: #bottomPanelContent
 ]
 
@@ -165,8 +166,26 @@ SPOCApp >> centerPanelContent [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/7/2024 12:17'
+}
+SPOCApp >> currentlyPlaying [
+
+	^ currentlyPlaying
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/7/2024 12:17'
+}
+SPOCApp >> currentlyPlaying: anObject [
+
+	currentlyPlaying := anObject
+]
+
+{
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/5/2024 21:31'
+	#'squeak_changestamp' : 'RK 6/7/2024 12:24'
 }
 SPOCApp >> initialize [
 
@@ -177,6 +196,7 @@ SPOCApp >> initialize [
 		setupUserLogin;
 		setupSearchbar;
 		setUpResultList;
+		setUpCurrentlyPlaying;
 		setupPlayer.
 
 
@@ -260,6 +280,15 @@ SPOCApp >> searchbar: aSPOCSearchbar [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'RK 6/9/2024 00:57'
+}
+SPOCApp >> setUpCurrentlyPlaying [
+
+	self currentlyPlaying: (SPOCCurrentlyPlaying new app: self)
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:25'
 }
 SPOCApp >> setUpResultList [
@@ -269,12 +298,12 @@ SPOCApp >> setUpResultList [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/3/2024 14:04'
+	#'squeak_changestamp' : 'TL 6/8/2024 20:23'
 }
 SPOCApp >> setupPlayer [
 
 	self player: (SPOCPlayer new app: self; yourself).
-	self auth registerSuccessCallback: [self player updateIsPlaying].
+	self auth registerSuccessCallback: [self player updateIsPlayingFromLogin].
 ]
 
 {

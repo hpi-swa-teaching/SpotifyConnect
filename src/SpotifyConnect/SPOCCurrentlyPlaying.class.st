@@ -1,0 +1,84 @@
+Class {
+	#name : #SPOCCurrentlyPlaying,
+	#superclass : #SPOCUIComponent,
+	#instVars : [
+		'track',
+		'item'
+	],
+	#category : #SpotifyConnect
+}
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/9/2024 01:12'
+}
+SPOCCurrentlyPlaying >> getPlayingTrack [
+
+	| apiEndpoint dict res |
+	dict := Dictionary new.
+	dict at: 'additional_types' put: 'track'.
+	apiEndpoint := (SPOCApiPlaybackState new authorizer: self app auth).
+	res := apiEndpoint execute: dict.
+	^ res track
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'RK 6/9/2024 00:01'
+}
+SPOCCurrentlyPlaying >> initialize [
+
+	super initialize.
+	self track: SPOCStyle trackWelcome;
+		item: (SPOCResultListItem newWith: self track);
+		addMorph: item;
+		yourself.
+	self item hasTertiaryText: false.
+	self item resizeTo: SPOCStyle currentlyPlayingWidth@SPOCStyle resultListItemHeight
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/9/2024 11:47'
+}
+SPOCCurrentlyPlaying >> item [
+
+	^ item
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/9/2024 11:47'
+}
+SPOCCurrentlyPlaying >> item: aSPOCResultListItem [
+
+	item := aSPOCResultListItem
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/9/2024 11:47'
+}
+SPOCCurrentlyPlaying >> track [
+
+	^ track
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/9/2024 11:47'
+}
+SPOCCurrentlyPlaying >> track: aSPOCTrack [
+
+	track := aSPOCTrack
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/9/2024 11:47'
+}
+SPOCCurrentlyPlaying >> update [
+
+	self track: self getPlayingTrack.
+	self item changeItemTo: self track
+]

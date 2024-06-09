@@ -41,7 +41,7 @@ SPOCSearchbar >> buildSearchbar [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:02'
+	#'squeak_changestamp' : 'RK 6/9/2024 00:56'
 }
 SPOCSearchbar >> buildTextInputField [
 	"To do: specification irgendwie auslagern, damit Methode kürzer"
@@ -64,6 +64,7 @@ SPOCSearchbar >> buildTextInputField [
 		hScrollBarPolicy: #never;
 		vScrollBarPolicy: #never;
 		acceptOnCR: true;
+		setProperty: #indicateKeyboardFocus toValue: #never;
 		yourself.
 	 ^ textField
 ]
@@ -134,7 +135,7 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:25'
+	#'squeak_changestamp' : 'RK 6/9/2024 01:02'
 }
 SPOCSearchbar >> searchTracks: aString [
 
@@ -148,7 +149,8 @@ SPOCSearchbar >> searchTracks: aString [
 	apiEndpoint authorizer: self app auth.
 	self tracks: (apiEndpoint execute: dict).
 	self app resultList updateResults: tracks.
-	self app resultList updateTitle: 'Your Results'
+	self app resultList title: 'Your Results'.
+	self app currentlyPlaying update
 ]
 
 {

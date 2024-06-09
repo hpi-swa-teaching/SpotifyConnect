@@ -46,13 +46,14 @@ SPOCResultList >> buildTitle [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/5/2024 22:30'
+	#'squeak_changestamp' : 'RK 6/7/2024 23:41'
 }
 SPOCResultList >> initialize [
 
 	super initialize.
 	
 	self color: Color transparent;
+		titleMorph: (SPOCBoldText newAt: self position withText: '');
 		title: '';
 		results: OrderedCollection new;
 		items: OrderedCollection new;
@@ -125,11 +126,12 @@ SPOCResultList >> title [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:01'
+	#'squeak_changestamp' : 'RK 6/7/2024 23:37'
 }
 SPOCResultList >> title: aString [
 
-	title := aString
+	title := aString.
+	self updateTitle: self title
 ]
 
 {
@@ -152,7 +154,7 @@ SPOCResultList >> titleMorph: aSPOCBoldText [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:23'
+	#'squeak_changestamp' : 'RK 6/9/2024 01:34'
 }
 SPOCResultList >> updateItems [
 	"To do: clickAction in SPOCTrack, SPOCAlbum etc. setzen und hier benutzen"
@@ -161,7 +163,9 @@ SPOCResultList >> updateItems [
 	results do: [ :result |
 		| item |
 		item := SPOCClickable newUsing: (SPOCResultListItem newWith: result)
-			onClick: [ :evt | self app player playSong: result id].
+			onClick: [ :evt |
+				self app player playSong: result id.
+				self app currentlyPlaying update].
 		item vResizing: #shrinkWrap.
 		items add: item]
 ]
@@ -189,10 +193,9 @@ SPOCResultList >> updateScrollablePanel [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:27'
+	#'squeak_changestamp' : 'RK 6/7/2024 23:37'
 }
 SPOCResultList >> updateTitle: aString [
 
-	self title: aString.
 	self titleMorph contents: (title asText addAttribute: TextEmphasis bold)
 ]

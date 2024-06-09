@@ -2,12 +2,14 @@ Class {
 	#name : #SPOCResultListItem,
 	#superclass : #Morph,
 	#instVars : [
+		'app',
 		'dataModel',
 		'background',
 		'image',
 		'primaryText',
 		'secondaryText',
-		'tertiaryText'
+		'tertiaryText',
+		'hasTertiaryText'
 	],
 	#category : #'SpotifyConnect-Utils'
 }
@@ -20,6 +22,24 @@ SPOCResultListItem class >> newWith: aDataModel [
 	^ (SPOCResultListItem new dataModel: aDataModel;
 		buildItem;
 		yourself)
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/7/2024 12:21'
+}
+SPOCResultListItem >> app [
+
+	^ app
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/9/2024 11:48'
+}
+SPOCResultListItem >> app: aSPOCApp [
+
+	app := aSPOCApp
 ]
 
 {
@@ -101,7 +121,7 @@ SPOCResultListItem >> buildPrimaryText [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:55'
+	#'squeak_changestamp' : 'RK 6/9/2024 11:49'
 }
 SPOCResultListItem >> buildSecondaryText [
 
@@ -111,7 +131,7 @@ SPOCResultListItem >> buildSecondaryText [
 	(dataModel isKindOf: SPOCAlbum)
 		ifTrue: [content := dataModel artistsAsString].
 	(dataModel isKindOf: SPOCArtist)
-		ifTrue: [content := ''].	
+		ifTrue: [content := ' '].	
 	text := SPOCText newAt: image bottomRight + (SPOCStyle defaultMargin@(SPOCStyle textHeight negated)) withText: content.
 	self secondaryText: text;
 		addMorph: secondaryText;
@@ -120,18 +140,33 @@ SPOCResultListItem >> buildSecondaryText [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:55'
+	#'squeak_changestamp' : 'RK 6/7/2024 19:13'
 }
 SPOCResultListItem >> buildTertiaryText [
 
 	| text content |
+	hasTertiaryText ifTrue: [
 	(dataModel isKindOf: SPOCTrack)
 		ifTrue: [content := dataModel durationAsFormattedTime]
 		ifFalse: [content := ''].
 	text := SPOCText newAt: background bottomRight - (SPOCStyle resultListItemPadding@(SPOCStyle resultListItemHeight / 2)) withText: content.
 	self tertiaryText: text;
 		addMorph: tertiaryText;
-		yourself
+		yourself]
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/9/2024 01:58'
+}
+SPOCResultListItem >> changeItemTo: aDataModel [
+	
+	 | form |
+	form := (aDataModel image scaledTo: SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin)) form.
+	self image image: form.
+	self primaryText contents: (aDataModel name asText addAttribute: TextEmphasis bold).
+	self secondaryText contents: (aDataModel album artistsAsString).
+	(aDataModel isKindOf: SPOCTrack) ifTrue: [self tertiaryText contents: (aDataModel durationAsFormattedTime)]
 ]
 
 {
@@ -154,6 +189,26 @@ SPOCResultListItem >> dataModel: aDataModel [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/7/2024 12:30'
+}
+SPOCResultListItem >> hasTertiaryText [
+
+	^ hasTertiaryText
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/9/2024 11:49'
+}
+SPOCResultListItem >> hasTertiaryText: aBoolean [
+
+	hasTertiaryText := aBoolean.
+	self updateTertiaryText
+	
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
 }
 SPOCResultListItem >> image [
@@ -172,13 +227,14 @@ SPOCResultListItem >> image: aSPOCImage [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
+	#'squeak_changestamp' : 'RK 6/7/2024 12:35'
 }
 SPOCResultListItem >> initialize [
 
 	super initialize.
 	self color: Color transparent;
 		vResizing: #shrinkWrap;
+		hasTertiaryText: true;
 		yourself
 ]
 
@@ -198,6 +254,15 @@ SPOCResultListItem >> primaryText [
 SPOCResultListItem >> primaryText: aSPOCText [
 
 	primaryText := aSPOCText
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/7/2024 23:46'
+}
+SPOCResultListItem >> resizeTo: anExtent [
+
+	self background extent: anExtent
 ]
 
 {
@@ -242,4 +307,13 @@ SPOCResultListItem >> tertiaryText: aSPOCText [
 }
 SPOCResultListItem >> toggleTextColor [
 	"To do: If item gets selected, its texts should change color, e.g. to spotifyGreen"
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'RK 6/7/2024 23:35'
+}
+SPOCResultListItem >> updateTertiaryText [
+
+	(self submorphs includes: tertiaryText) ifTrue: [self removeMorph: tertiaryText]
 ]
