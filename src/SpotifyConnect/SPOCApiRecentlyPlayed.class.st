@@ -24,11 +24,11 @@ SPOCApiRecentlyPlayed >> endpointMethod [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/1/2024 22:30'
+	#'squeak_changestamp' : 'VK 6/9/2024 13:50'
 }
 SPOCApiRecentlyPlayed >> executeRequest: request withParams: aParameterDictionary [
 
-	request rawUrl: (request rawUrl, '?limit=', (aParameterDictionary at: 'limit'), '&after=', (aParameterDictionary at: 'after')).
+	request rawUrl: (request rawUrl, '?limit=', (aParameterDictionary at: 'limit'), '&before=', (aParameterDictionary at: 'before')).
 	^ self client sendRequest: request
 ]
 
@@ -510,7 +510,7 @@ SPOCApiRecentlyPlayed >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/9/2024 13:39'
+	#'squeak_changestamp' : 'RK 6/9/2024 14:50'
 }
 SPOCApiRecentlyPlayed >> tinkerReponseContent: aContentStream [
 	
