@@ -13,6 +13,24 @@ Class {
 }
 
 {
+	#category : #'class variables',
+	#'squeak_changestamp' : 'VK 6/9/2024 15:19'
+}
+SPOCSwitchDevice class >> baseLayer [
+
+	^ 500
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'VK 6/9/2024 15:22'
+}
+SPOCSwitchDevice class >> buttonToDeviceRatio [
+
+	^ 2
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 5/27/2024 11:45'
 }
@@ -30,46 +48,47 @@ SPOCSwitchDevice >> activeDevice: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 12:47'
+	#'squeak_changestamp' : 'VK 6/9/2024 15:18'
 }
 SPOCSwitchDevice >> attachButton [
 
-	self text: (SPOCBoxedText new contents: 'available Devices'; yourself);
-		button: ( SPOCClickable newUsing: text onClick: [:anEvent | self currentDevices]);
-		addMorph: self button
+	self text: (SPOCBoxedText new contents: 'available Devices'; yourself).
+	self button: ( SPOCClickable newUsing: text onClick: [:anEvent | self currentDevices]).
+	self addMorph: self button
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 13:56'
+	#'squeak_changestamp' : 'VK 6/9/2024 15:18'
 }
 SPOCSwitchDevice >> buildResultDisplay [
 
 	resultDisplay := SPOCScrollablePanel new
-		buildPanelAtPos: (self topLeft + (0@60)) withExtent: (300@500);
+		extent: (2 * self buttonWidth) @ (5 * self buttonHeight);
+		buildPanel;
 		hide.
-	self addMorph: resultDisplay;
-		yourself
+	self addMorph: resultDisplay.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 13:54'
+	#'squeak_changestamp' : 'VK 6/9/2024 15:21'
 }
 SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
-	| background nameText typeText finishedMorph deviceButton border height ratio width |
+	| background nameText typeText finishedMorph deviceButton height ratio width |
 	
-	height := SPOCSearchbar searchbarHeight.
-	width := SPOCSearchbar searchbarWidth.
-	border := SPOCSearchbar resultBorder.
-	ratio := SPOCSearchbar searchbarToResultRatio.
+	height := self buttonHeight.
+	width := self buttonWidth.
+	ratio := SPOCSwitchDevice buttonToDeviceRatio.
 	
 	background := RectangleMorph new
 		color: SPOCStyle spotifyGray;
 		extent: (width +  height@(ratio * height));
-		morphicLayerNumber: SPOCSearchbar baseLayer.
-	nameText := SPOCText newAt: (background topLeft + (border@0)) withText: aDevice name.
-	typeText := SPOCText newAt: (background bottomLeft + (border@(SPOCText defaultHeight negated))) withText: aDevice type.
+		morphicLayerNumber: SPOCSwitchDevice baseLayer.
+	nameText := SPOCText newAt: (background topLeft) withText: aDevice name.
+	typeText := SPOCText newAt: (background bottomLeft + (0@(SPOCText defaultHeight negated))) withText: aDevice type.
+	nameText color: Color transparent.
+	typeText color: Color transparent.
 	aDevice isActive 
 		ifTrue: [background color: SPOCStyle spotifyGreen.
 			activeDevice := aDevice].
@@ -98,6 +117,24 @@ SPOCSwitchDevice >> button [
 }
 SPOCSwitchDevice >> button: anObject [
 	button := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 15:17'
+}
+SPOCSwitchDevice >> buttonHeight [
+
+	^ button extent y
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 15:17'
+}
+SPOCSwitchDevice >> buttonWidth [
+
+	^ button extent x
 ]
 
 {
@@ -189,7 +226,7 @@ SPOCSwitchDevice >> resultDisplay: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 12:51'
+	#'squeak_changestamp' : 'VK 6/9/2024 15:16'
 }
 SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	
@@ -199,7 +236,7 @@ SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	apiEndpoint := SPOCApiSwitchDevice new.
 	apiEndpoint authorizer: self app auth.
 	res := apiEndpoint execute: dict.
-	(res code = 204) ifTrue: self currentDevices
+	(res code = 204) ifTrue: self hideResults
 ]
 
 {
@@ -220,16 +257,16 @@ SPOCSwitchDevice >> text: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/3/2024 14:29'
+	#'squeak_changestamp' : 'VK 6/9/2024 15:15'
 }
 SPOCSwitchDevice >> updateResultDisplay: anOrderedCollection [
 	
 	anOrderedCollection ifNil: [self hideResults.
 		^ self].
-	resultDisplay items: anOrderedCollection;
-		buildItemMorphsWith: [:value | self buildResultMorphFrom: value];
-		updatePanel;
-		show;
-		yourself.
+	resultDisplay removeAll.
+	anOrderedCollection do: [:device |
+		resultDisplay add: [self buildResultMorphFrom: device]].
+	resultDisplay updatePanel: resultDisplay.
+	resultDisplay show.
 	self extendFully
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #SPOCApiTrackHistory,
+	#name : #SPOCApiRecentlyPlayed,
 	#superclass : #SPOCApiEndpoint,
 	#category : #SpotifyConnect
 }
@@ -8,7 +8,7 @@ Class {
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VK 6/1/2024 22:32'
 }
-SPOCApiTrackHistory >> endpoint [
+SPOCApiRecentlyPlayed >> endpoint [
 
 	^ 'v1/me/player/recently-played'
 ]
@@ -17,7 +17,7 @@ SPOCApiTrackHistory >> endpoint [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VK 6/1/2024 12:25'
 }
-SPOCApiTrackHistory >> endpointMethod [	
+SPOCApiRecentlyPlayed >> endpointMethod [	
 
 	^ 'GET'
 ]
@@ -26,7 +26,7 @@ SPOCApiTrackHistory >> endpointMethod [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VK 6/1/2024 22:30'
 }
-SPOCApiTrackHistory >> executeRequest: request withParams: aParameterDictionary [
+SPOCApiRecentlyPlayed >> executeRequest: request withParams: aParameterDictionary [
 
 	request rawUrl: (request rawUrl, '?limit=', (aParameterDictionary at: 'limit'), '&after=', (aParameterDictionary at: 'after')).
 	^ self client sendRequest: request
@@ -36,7 +36,7 @@ SPOCApiTrackHistory >> executeRequest: request withParams: aParameterDictionary 
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VK 5/28/2024 17:49'
 }
-SPOCApiTrackHistory >> executeTest [
+SPOCApiRecentlyPlayed >> executeTest [
 	
 	^'{
   "href": "string",
@@ -512,7 +512,7 @@ SPOCApiTrackHistory >> executeTest [
 	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VK 6/4/2024 16:43'
 }
-SPOCApiTrackHistory >> tinkerReponseContent: aContentStream [
+SPOCApiRecentlyPlayed >> tinkerReponseContent: aContentStream [
 	
 	| content tracks trackItems |
 	content := Json readFrom: aContentStream readStream.
