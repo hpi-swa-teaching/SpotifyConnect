@@ -34,10 +34,7 @@ jobs:
         timeout-minutes: 30
         env:
           # for uploading coverage reports
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
-      
-      - run: cat /home/runner/work/SpotifyConnect/SpotifyConnect/coverage/lcov.info
-        
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}            
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@v2
         with:
