@@ -8,7 +8,9 @@ Class {
 		'resultList',
 		'currentlyPlaying',
 		'player',
-		'volumeSlider'
+		'volumeSlider',
+		'recentlyPlayed',
+		'switchDevice'
 	],
 	#category : #SpotifyConnect
 }
@@ -60,11 +62,11 @@ SPOCApp >> auth: anObject [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 6/10/2024 02:58'
+	#'squeak_changestamp' : 'VK 6/10/2024 14:08'
 }
 SPOCApp >> bottomPanelContent [
 
-	^ {self currentlyPlaying. self player. self volumeSlider}
+	^ {self currentlyPlaying. self player. self switchDevice. self volumeSlider}
 ]
 
 {
@@ -186,7 +188,7 @@ SPOCApp >> currentlyPlaying: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:48'
+	#'squeak_changestamp' : 'VK 6/10/2024 14:09'
 }
 SPOCApp >> initialize [
 
@@ -199,7 +201,9 @@ SPOCApp >> initialize [
 		setUpResultList;
 		setUpCurrentlyPlaying;
 		setUpPlayer;
-		setUpVolumeSlider
+		setUpVolumeSlider;
+		setUpRecentlyPlayed;
+		setupSwitchDevice
 
 
 ]
@@ -238,6 +242,22 @@ SPOCApp >> player: anObject [
 SPOCApp >> playerPanelContent [
 
 	^ {self player}
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 13:16'
+}
+SPOCApp >> recentlyPlayed [
+	^ recentlyPlayed
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 13:16'
+}
+SPOCApp >> recentlyPlayed: anObject [
+	recentlyPlayed := anObject
 ]
 
 {
@@ -307,6 +327,15 @@ SPOCApp >> setUpPlayer [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'VK 6/10/2024 14:02'
+}
+SPOCApp >> setUpRecentlyPlayed [
+
+	self recentlyPlayed: (SPOCRecentlyPlayed new app: self; yourself)
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:25'
 }
 SPOCApp >> setUpResultList [
@@ -347,12 +376,46 @@ SPOCApp >> setUpVolumeSlider [
 ]
 
 {
+	#category : #initialization,
+	#'squeak_changestamp' : 'VK 6/9/2024 13:17'
+}
+SPOCApp >> setupRecentlyPlayed [
+
+	self recentlyPlayed: (SPOCRecentlyPlayed new app: self; yourself)
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VK 6/9/2024 16:41'
+}
+SPOCApp >> setupSwitchDevice [
+
+	self switchDevice: (SPOCSwitchDevice new app: self; yourself)
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 16:42'
+}
+SPOCApp >> switchDevice [
+	^ switchDevice
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 16:42'
+}
+SPOCApp >> switchDevice: anObject [
+	switchDevice := anObject
+]
+
+{
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
+	#'squeak_changestamp' : 'VK 6/9/2024 13:21'
 }
 SPOCApp >> topPanelContent [
 
-	^ {self searchbar. self userLogin}
+	^ { self searchbar. self recentlyPlayed. self userLogin}
 ]
 
 {

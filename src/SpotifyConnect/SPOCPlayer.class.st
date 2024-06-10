@@ -258,11 +258,12 @@ SPOCPlayer >> playPauseIcon: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 01:04'
+	#'squeak_changestamp' : 'VK 6/10/2024 14:15'
 }
 SPOCPlayer >> playSong: aString [
 
 	| paramDict |
+	self updateIsPlaying.
 	paramDict := Dictionary new;
 		at: #device_id put: self deviceID;
 		at: #uris put: '"spotify:track:', aString, '"';

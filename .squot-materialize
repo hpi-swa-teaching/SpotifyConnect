@@ -1,21 +1,14 @@
 [
-	SquotImageMapper {
+	SquotPlaintextMapper {
 		#path : FSAbsolutePath [
-			'assets',
-			'next.png'
+			'src',
+			'.properties'
 		],
-		#encoding : Class [ #PNGReadWriter ]
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'play.png'
-		],
-		#encoding : @4
+		#encoding : 'TXT'
 	},
 	SquotPlaintextMapper {
 		#path : FSAbsolutePath [
-			'CodeGuidelines.md'
+			'README.md'
 		],
 		#encoding : 'TXT'
 	},
@@ -28,26 +21,60 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
+			'devices.png'
+		],
+		#encoding : Class [ #PNGReadWriter ]
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
 			'pause.png'
 		],
-		#encoding : @4
+		#encoding : @10
 	},
-	SquotPlaintextMapper {
+	SquotImageMapper {
 		#path : FSAbsolutePath [
-			'README.md'
+			'assets',
+			'recently-played.png'
 		],
-		#encoding : 'TXT'
+		#encoding : @10
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'next.png'
+		],
+		#encoding : @10
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
 			'squeak-mouse.png'
 		],
-		#encoding : @4
+		#encoding : @10
+	},
+	SquotPlaintextMapper {
+		#path : FSAbsolutePath [
+			'.smalltalk.ston'
+		],
+		#encoding : 'TXT'
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'previous.png'
+		],
+		#encoding : @10
+	},
+	SquotPlaintextMapper {
+		#path : FSAbsolutePath [
+			'CodeGuidelines.md'
+		],
+		#encoding : 'TXT'
 	},
 	SquotTonelMapper {
 		#package : MCPackage {
-			#name : 'BaselineOfSpotifyConnect'
+			#name : 'SpotifyConnect'
 		},
 		#path : FSAbsolutePath [
 			'src'
@@ -60,24 +87,11 @@
 		],
 		#encoding : 'TXT'
 	},
-	SquotPlaintextMapper {
-		#path : FSAbsolutePath [
-			'.smalltalk.ston'
-		],
-		#encoding : 'TXT'
-	},
-	SquotPlaintextMapper {
-		#path : FSAbsolutePath [
-			'src',
-			'.properties'
-		],
-		#encoding : 'TXT'
-	},
 	SquotTonelMapper {
 		#package : MCPackage {
-			#name : 'SpotifyConnect'
+			#name : 'BaselineOfSpotifyConnect'
 		},
-		#path : @19
+		#path : @27
 	},
 	SquotPlaintextMapper {
 		#path : FSAbsolutePath [
@@ -90,8 +104,8 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'previous.png'
+			'play.png'
 		],
-		#encoding : @4
+		#encoding : @10
 	}
 ]

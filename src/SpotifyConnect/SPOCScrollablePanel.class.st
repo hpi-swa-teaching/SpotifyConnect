@@ -126,7 +126,7 @@ SPOCScrollablePanel >> spec: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/5/2024 22:40'
+	#'squeak_changestamp' : 'RK 6/9/2024 18:05'
 }
 SPOCScrollablePanel >> updatePanel: anOrderedCollection [
 	
