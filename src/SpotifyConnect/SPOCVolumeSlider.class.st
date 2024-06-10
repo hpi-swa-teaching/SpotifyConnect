@@ -12,12 +12,12 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 15:34'
+	#'squeak_changestamp' : 'TL 6/10/2024 17:27'
 }
 SPOCVolumeSlider >> attachSlider [
 
 	self slider: (SPOCSlider new
-			value: self volume;
+			updateValue: self volume;
 			length: 300;
 			yourself).
 	self slider onValueChanged: [:aValue | 
@@ -66,15 +66,14 @@ SPOCVolumeSlider >> deviceID: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 15:31'
+	#'squeak_changestamp' : 'TL 6/10/2024 17:33'
 }
 SPOCVolumeSlider >> initialize [
 
 	super initialize.
 	
 	self color: Color transparent;
-		supportsVolume: false;
-		volume: 100;
+		updateInstanceVariables;
 		attachSlider;
 		layoutPolicy: TableLayout new;
 		listDirection: #leftToRight;
