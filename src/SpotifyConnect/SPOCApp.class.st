@@ -241,6 +241,22 @@ SPOCApp >> playerPanelContent [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 13:16'
+}
+SPOCApp >> recentlyPlayed [
+	^ recentlyPlayed
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 13:16'
+}
+SPOCApp >> recentlyPlayed: anObject [
+	recentlyPlayed := anObject
+]
+
+{
 	#category : #ui,
 	#'squeak_changestamp' : 'RK 6/7/2024 10:51'
 }
@@ -347,12 +363,21 @@ SPOCApp >> setUpVolumeSlider [
 ]
 
 {
+	#category : #initialization,
+	#'squeak_changestamp' : 'VK 6/9/2024 13:17'
+}
+SPOCApp >> setupRecentlyPlayed [
+
+	self recentlyPlayed: (SPOCRecentlyPlayed new app: self; yourself)
+]
+
+{
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
+	#'squeak_changestamp' : 'VK 6/9/2024 13:21'
 }
 SPOCApp >> topPanelContent [
 
-	^ {self searchbar. self userLogin}
+	^ { self searchbar. self recentlyPlayed. self userLogin}
 ]
 
 {
