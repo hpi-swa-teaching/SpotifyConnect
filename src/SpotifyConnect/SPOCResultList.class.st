@@ -24,13 +24,13 @@ SPOCResultList >> buildResultList [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:00'
+	#'squeak_changestamp' : 'TL 6/10/2024 02:01'
 }
 SPOCResultList >> buildScrollablePanel [
 
-	self scrollablePanel: (SPOCScrollablePanel newWithExtent: SPOCStyle resultListWidth@SPOCStyle resultListHeight).
-	self scrollablePanel position: (self titleMorph bottomLeft + (0@SPOCStyle defaultMargin)).
-	self addMorph: scrollablePanel
+	self scrollablePanel: (SPOCScrollablePanel newWithExtent: SPOCStyle resultListWidth @ SPOCStyle resultListHeight).
+	self scrollablePanel position: (self titleMorph bottomLeft + (0 @ SPOCStyle defaultMargin)).
+	self addMorph: self scrollablePanel
 ]
 
 {
@@ -154,20 +154,21 @@ SPOCResultList >> titleMorph: aSPOCBoldText [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/9/2024 01:34'
+	#'squeak_changestamp' : 'TL 6/10/2024 02:02'
 }
 SPOCResultList >> updateItems [
 	"To do: clickAction in SPOCTrack, SPOCAlbum etc. setzen und hier benutzen"
 	
-	items isEmpty ifFalse: [items removeAll].
-	results do: [ :result |
+	self items isEmpty
+		ifFalse: [self items removeAll].
+	self results do: [ :result |
 		| item |
 		item := SPOCClickable newUsing: (SPOCResultListItem newWith: result)
 			onClick: [ :evt |
 				self app player playSong: result id.
 				self app currentlyPlaying update].
 		item vResizing: #shrinkWrap.
-		items add: item]
+		self items add: item]
 ]
 
 {
@@ -184,18 +185,18 @@ SPOCResultList >> updateResults: anOrderedCollection [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:02'
+	#'squeak_changestamp' : 'TL 6/10/2024 02:02'
 }
 SPOCResultList >> updateScrollablePanel [
 
-	self scrollablePanel updatePanel: items
+	self scrollablePanel updatePanel: self items
 ]
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/7/2024 23:37'
+	#'squeak_changestamp' : 'TL 6/10/2024 02:02'
 }
 SPOCResultList >> updateTitle: aString [
 
-	self titleMorph contents: (title asText addAttribute: TextEmphasis bold)
+	self titleMorph contents: (self title asText addAttribute: TextEmphasis bold)
 ]

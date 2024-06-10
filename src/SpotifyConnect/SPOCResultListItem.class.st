@@ -62,27 +62,27 @@ SPOCResultListItem >> background: aRectangleMorph [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/5/2024 00:52'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:56'
 }
 SPOCResultListItem >> buildBackground [
 
 	self background: (RectangleMorph new
-		color: SPOCStyle spotifyGray;
-		borderWidth: 1;
-		extent: (SPOCStyle resultListWidth@SPOCStyle resultListItemHeight);
-		yourself);
-		addMorph: background;
+			color: SPOCStyle spotifyGray;
+			borderWidth: 1;
+			extent: (SPOCStyle resultListWidth @ SPOCStyle resultListItemHeight);
+			yourself);
+		addMorph: self background;
 		yourself
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/6/2024 00:53'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:57'
 }
 SPOCResultListItem >> buildImage [
 
 	| image |
-	image := dataModel image scaledTo: SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin).
+	image := self dataModel image scaledTo: SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin).
 	image position: self topLeft + SPOCStyle defaultMargin asPoint.
 	self image: image;
 		addMorph: image;
@@ -108,65 +108,66 @@ SPOCResultListItem >> buildItem [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/6/2024 01:24'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:57'
 }
 SPOCResultListItem >> buildPrimaryText [
 
 	| text |
-	text := SPOCBoldText newAt: image topRight + (SPOCStyle defaultMargin@0) withText: dataModel name.
+	text := SPOCBoldText newAt: self image topRight + (SPOCStyle defaultMargin @ 0) withText: self dataModel name.
 	self primaryText: text;
-		addMorph: primaryText;
+		addMorph: self primaryText;
 		yourself
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/9/2024 11:49'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:58'
 }
 SPOCResultListItem >> buildSecondaryText [
 
 	| text content |
-	(dataModel isKindOf: SPOCTrack)
-		ifTrue: [content := dataModel album artistsAsString].
-	(dataModel isKindOf: SPOCAlbum)
-		ifTrue: [content := dataModel artistsAsString].
-	(dataModel isKindOf: SPOCArtist)
+	(self dataModel isKindOf: SPOCTrack)
+		ifTrue: [content := self dataModel album artistsAsString].
+	(self dataModel isKindOf: SPOCAlbum)
+		ifTrue: [content := self dataModel artistsAsString].
+	(self dataModel isKindOf: SPOCArtist)
 		ifTrue: [content := ' '].	
-	text := SPOCText newAt: image bottomRight + (SPOCStyle defaultMargin@(SPOCStyle textHeight negated)) withText: content.
+	text := SPOCText newAt: self image bottomRight + (SPOCStyle defaultMargin @ (SPOCStyle textHeight negated)) withText: content.
 	self secondaryText: text;
-		addMorph: secondaryText;
+		addMorph: self secondaryText;
 		yourself
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/7/2024 19:13'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:59'
 }
 SPOCResultListItem >> buildTertiaryText [
 
 	| text content |
-	hasTertiaryText ifTrue: [
-	(dataModel isKindOf: SPOCTrack)
-		ifTrue: [content := dataModel durationAsFormattedTime]
-		ifFalse: [content := ''].
-	text := SPOCText newAt: background bottomRight - (SPOCStyle resultListItemPadding@(SPOCStyle resultListItemHeight / 2)) withText: content.
-	self tertiaryText: text;
-		addMorph: tertiaryText;
-		yourself]
+	self hasTertiaryText
+		ifTrue: [(self dataModel isKindOf: SPOCTrack)
+				ifTrue: [content := self dataModel durationAsFormattedTime]
+				ifFalse: [content := ''].
+			text := SPOCText newAt: self background bottomRight - (SPOCStyle resultListItemPadding @ (SPOCStyle resultListItemHeight / 2)) withText: content.
+			self tertiaryText: text;
+				 addMorph: self tertiaryText;
+				 yourself]
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/9/2024 01:58'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:55'
 }
 SPOCResultListItem >> changeItemTo: aDataModel [
 	
-	 | form |
+	| form |
 	form := (aDataModel image scaledTo: SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin)) form.
 	self image image: form.
 	self primaryText contents: (aDataModel name asText addAttribute: TextEmphasis bold).
 	self secondaryText contents: (aDataModel album artistsAsString).
-	(aDataModel isKindOf: SPOCTrack) ifTrue: [self tertiaryText contents: (aDataModel durationAsFormattedTime)]
+	(aDataModel isKindOf: SPOCTrack)
+		ifTrue: [self tertiaryText contents: (aDataModel durationAsFormattedTime)]
 ]
 
 {
@@ -227,11 +228,12 @@ SPOCResultListItem >> image: aSPOCImage [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/7/2024 12:35'
+	#'squeak_changestamp' : 'TL 6/10/2024 02:00'
 }
 SPOCResultListItem >> initialize [
 
 	super initialize.
+	
 	self color: Color transparent;
 		vResizing: #shrinkWrap;
 		hasTertiaryText: true;
@@ -311,9 +313,10 @@ SPOCResultListItem >> toggleTextColor [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/7/2024 23:35'
+	#'squeak_changestamp' : 'TL 6/10/2024 01:56'
 }
 SPOCResultListItem >> updateTertiaryText [
 
-	(self submorphs includes: tertiaryText) ifTrue: [self removeMorph: tertiaryText]
+	(self submorphs includes: self tertiaryText)
+		ifTrue: [self removeMorph: self tertiaryText]
 ]
