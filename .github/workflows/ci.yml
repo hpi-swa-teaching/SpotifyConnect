@@ -37,7 +37,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
         
       - name: Coveralls GitHub Action
-        uses: coverallsapp/github-action@v2.3
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           file: /home/runner/work/SpotifyConnect/SpotifyConnect/coverage/lcov.info
