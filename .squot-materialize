@@ -23,9 +23,16 @@
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'next.png'
+			'devices.png'
 		],
 		#encoding : Class [ #PNGReadWriter ]
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'next.png'
+		],
+		#encoding : @11
 	},
 	SquotPlaintextMapper {
 		#path : FSAbsolutePath [

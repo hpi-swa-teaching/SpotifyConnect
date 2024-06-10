@@ -38,3 +38,17 @@ SPOCMockTestApiRecentlyPlayed >> testMockApiRecentlyPlayedExecute [
 	resTrack album: nil.
 	self assert: (track equals: resTrack)
 ]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 6/5/2024 19:39'
+}
+SPOCMockTestApiRecentlyPlayed >> testMockApiTrackHistoryExecute [
+
+	| dict res resTrack |
+	dict := Dictionary new.
+	res := apiEndpoint execute: dict.
+	resTrack := res first.
+	resTrack album: nil.
+	self assert: (track equals: resTrack)
+]

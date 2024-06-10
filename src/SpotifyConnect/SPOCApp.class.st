@@ -374,6 +374,40 @@ SPOCApp >> setUpVolumeSlider [
 ]
 
 {
+	#category : #initialization,
+	#'squeak_changestamp' : 'VK 6/9/2024 13:17'
+}
+SPOCApp >> setupRecentlyPlayed [
+
+	self recentlyPlayed: (SPOCRecentlyPlayed new app: self; yourself)
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VK 6/9/2024 16:41'
+}
+SPOCApp >> setupSwitchDevice [
+
+	self switchDevice: (SPOCSwitchDevice new app: self; yourself)
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 16:42'
+}
+SPOCApp >> switchDevice [
+	^ switchDevice
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/9/2024 16:42'
+}
+SPOCApp >> switchDevice: anObject [
+	switchDevice := anObject
+]
+
+{
 	#category : #ui,
 	#'squeak_changestamp' : 'VK 6/9/2024 13:21'
 }
