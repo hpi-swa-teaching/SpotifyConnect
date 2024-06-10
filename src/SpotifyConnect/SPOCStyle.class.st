@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCStyle,
-	#superclass : #Morph,
+	#superclass : #Object,
 	#category : #'SpotifyConnect-Utils'
 }
 
@@ -33,11 +33,11 @@ SPOCStyle class >> gitRepoName [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:24'
 }
 SPOCStyle class >> resultListHeight [
 
-	^ 550
+	^ 250
 ]
 
 {
@@ -60,20 +60,20 @@ SPOCStyle class >> resultListItemPadding [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:20'
 }
 SPOCStyle class >> resultListLimit [
 
-	^ 20
+	^ 10
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:20'
 }
 SPOCStyle class >> resultListWidth [
 
-	^ 1150
+	^ 1000
 ]
 
 {

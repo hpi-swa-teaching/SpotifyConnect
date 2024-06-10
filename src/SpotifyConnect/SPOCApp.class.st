@@ -159,7 +159,7 @@ SPOCApp >> buildWith: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:09'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:04'
 }
 SPOCApp >> centerPanelContent [
 
