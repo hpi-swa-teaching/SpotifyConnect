@@ -3,14 +3,14 @@ Class {
 	#superclass : #Model,
 	#instVars : [
 		'auth',
-		'userLogin',
-		'searchbar',
-		'resultList',
 		'currentlyPlaying',
 		'player',
-		'volumeSlider',
 		'recentlyPlayed',
-		'switchDevice'
+		'resultList',
+		'searchbar',
+		'switchDevice',
+		'userLogin',
+		'volumeSlider'
 	],
 	#category : #SpotifyConnect
 }
@@ -169,6 +169,15 @@ SPOCApp >> centerPanelContent [
 ]
 
 {
+	#category : #updating,
+	#'squeak_changestamp' : 'TL 6/10/2024 18:39'
+}
+SPOCApp >> componentsForUpdatingPlaybackState [
+
+	^ {currentlyPlaying. player. volumeSlider}
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/7/2024 12:17'
 }
@@ -184,6 +193,31 @@ SPOCApp >> currentlyPlaying [
 SPOCApp >> currentlyPlaying: anObject [
 
 	currentlyPlaying := anObject
+]
+
+{
+	#category : #'pop-ups',
+	#'squeak_changestamp' : 'TL 6/10/2024 19:25'
+}
+SPOCApp >> devicePopUp [
+
+	UIManager inform: 'Please open your Spotify App and play music to activate your device!'
+]
+
+{
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/10/2024 19:56'
+}
+SPOCApp >> getPlaybackState [
+
+	| apiEndpoint dict |
+	dict := Dictionary new
+		at: #additional_types put: 'track';
+		yourself.
+	apiEndpoint := SPOCApiPlaybackState new
+		authorizer: self auth;
+		yourself.
+	^ apiEndpoint execute: dict
 ]
 
 {
@@ -206,6 +240,15 @@ SPOCApp >> initialize [
 		setUpSwitchDevice
 
 
+]
+
+{
+	#category : #'pop-ups',
+	#'squeak_changestamp' : 'TL 6/10/2024 19:30'
+}
+SPOCApp >> loginPopUp [
+
+	UIManager inform: 'Please log in!'
 ]
 
 {
@@ -308,33 +351,35 @@ SPOCApp >> searchbar: aSPOCSearchbar [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/9/2024 00:57'
+	#'squeak_changestamp' : 'TL 6/10/2024 19:53'
 }
 SPOCApp >> setUpCurrentlyPlaying [
 
-	self currentlyPlaying: (SPOCCurrentlyPlaying new app: self)
+	self currentlyPlaying: (SPOCCurrentlyPlaying new app: self).
+	self auth registerSuccessCallback: [self updatePlaybackStateFromLogin: true]
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 18:15'
+	#'squeak_changestamp' : 'TL 6/10/2024 19:27'
 }
 SPOCApp >> setUpPlayer [
 
-	self player: (SPOCPlayer new app: self; yourself).
-	self auth registerSuccessCallback: [self player hasActiveDevice
+	self player: (SPOCPlayer new app: self).
+	self auth registerSuccessCallback: [self updatePlaybackStateFromLogin: true
+		"self player hasActiveDevice
 			ifTrue: [self player disabled: false.
-				self player updateIsPlayingFromLogin]]
+				self player updateIsPlayingFromLogin]"]
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 18:05'
+	#'squeak_changestamp' : 'TL 6/10/2024 19:53'
 }
 SPOCApp >> setUpRecentlyPlayed [
 
 	self recentlyPlayed: (SPOCRecentlyPlayed new app: self).
-	self app auth registerSuccessCallback: [self recentlyPlayed disabled: false]
+	self auth registerSuccessCallback: [self updatePlaybackStateFromLogin: true]
 ]
 
 {
@@ -358,33 +403,33 @@ SPOCApp >> setUpSearchbar [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 18:03'
+	#'squeak_changestamp' : 'TL 6/10/2024 19:08'
 }
 SPOCApp >> setUpSwitchDevice [
 
-	self switchDevice: (SPOCSwitchDevice new app: self; yourself)
+	self switchDevice: (SPOCSwitchDevice new app: self)
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
+	#'squeak_changestamp' : 'TL 6/10/2024 19:53'
 }
 SPOCApp >> setUpUserLogin [
 
 	self userLogin: (SPOCUserLogin new app: self).
-	self auth registerSuccessCallback: [self userLogin toggleLogout].
+	self auth registerSuccessCallback: [self userLogin toggleLogout]
 
 
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 15:06'
+	#'squeak_changestamp' : 'TL 6/10/2024 19:51'
 }
 SPOCApp >> setUpVolumeSlider [
 
-	self volumeSlider: (SPOCVolumeSlider new app: self; yourself).
-	self auth registerSuccessCallback: [self volumeSlider updateInstanceVariables]
+	self volumeSlider: (SPOCVolumeSlider new app: self).
+	self auth registerSuccessCallback: [self updatePlaybackStateFromLogin: true]
 ]
 
 {
@@ -410,6 +455,23 @@ SPOCApp >> switchDevice: anObject [
 SPOCApp >> topPanelContent [
 
 	^ { self searchbar. self recentlyPlayed. self userLogin}
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'TL 6/10/2024 19:43'
+}
+SPOCApp >> updatePlaybackStateFromLogin: aBoolean [
+
+	| playbackState |
+	playbackState := self getPlaybackState.
+	playbackState class = SPOCApiEndpointResult
+		ifTrue: [aBoolean
+				ifFalse: [playbackState response code = 204 "self auth isAuthorized"
+						ifTrue: [self devicePopUp]
+						ifFalse: [self loginPopUp]]]
+		ifFalse: [self componentsForUpdatingPlaybackState do: [:aComponent |
+				aComponent updatePlaybackState: playbackState]]
 ]
 
 {

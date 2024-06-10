@@ -50,11 +50,11 @@ SPOCTrack >> artists: aOrderedCollection [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'RK 6/7/2024 12:22'
+	#'squeak_changestamp' : 'TL 6/10/2024 19:59'
 }
 SPOCTrack >> clickAction [
 
-	^ [self owner app player playSong: self id]
+	^ [self owner app player playTrack: self id]
 ]
 
 {
@@ -130,11 +130,11 @@ SPOCTrack >> explicit: aBoolean [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
+	#'squeak_changestamp' : 'TL 6/10/2024 19:59'
 }
 SPOCTrack >> playTrack: aString [
 	
-	self app player playSong: aString
+	self app player playTrack: aString
 ]
 
 {

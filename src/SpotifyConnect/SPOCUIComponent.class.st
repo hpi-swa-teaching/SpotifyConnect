@@ -105,3 +105,12 @@ SPOCUIComponent >> loginPopUp [
 
 	UIManager inform: 'Please log in!'
 ]
+
+{
+	#category : #actions,
+	#'squeak_changestamp' : 'TL 6/10/2024 18:29'
+}
+SPOCUIComponent >> updatePlaybackState: aState [
+
+	^ self subclassResponsibility
+]

@@ -10,7 +10,7 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 14:23'
+	#'squeak_changestamp' : 'TL 6/10/2024 18:44'
 }
 SPOCCurrentlyPlaying >> initialize [
 
@@ -22,7 +22,7 @@ SPOCCurrentlyPlaying >> initialize [
 		yourself.
 	self item hasTertiaryText: false;
 		resizeTo: SPOCStyle currentlyPlayingWidth @ SPOCStyle resultListItemHeight.
-	self extendFully.
+	self extendFully
 ]
 
 {
@@ -62,11 +62,11 @@ SPOCCurrentlyPlaying >> track: aSPOCTrack [
 ]
 
 {
-	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:13'
+	#category : #updating,
+	#'squeak_changestamp' : 'TL 6/10/2024 18:57'
 }
-SPOCCurrentlyPlaying >> update [
+SPOCCurrentlyPlaying >> updatePlaybackState: aState [
 
-	self track: self getPlaybackState track.
+	self track: aState track.
 	self item changeItemTo: self track
 ]

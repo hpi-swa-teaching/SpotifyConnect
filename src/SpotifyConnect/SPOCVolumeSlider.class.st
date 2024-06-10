@@ -12,16 +12,16 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 17:27'
+	#'squeak_changestamp' : 'TL 6/10/2024 19:55'
 }
 SPOCVolumeSlider >> attachSlider [
 
 	self slider: (SPOCSlider new
-			updateValue: self volume;
+			updateValue: 100;
 			length: 300;
 			yourself).
 	self slider onValueChanged: [:aValue | 
-		self updateInstanceVariables.
+		self app updatePlaybackStateFromLogin: false.
 		self supportsVolume
 			ifTrue: [self changeVolumeTo: aValue]
 			ifFalse: [self slider updateValue: self volume.
@@ -66,14 +66,13 @@ SPOCVolumeSlider >> deviceID: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 17:33'
+	#'squeak_changestamp' : 'TL 6/10/2024 19:52'
 }
 SPOCVolumeSlider >> initialize [
 
 	super initialize.
 	
 	self color: Color transparent;
-		updateInstanceVariables;
 		attachSlider;
 		layoutPolicy: TableLayout new;
 		listDirection: #leftToRight;
@@ -131,6 +130,17 @@ SPOCVolumeSlider >> updateInstanceVariables [
 		ifFalse: [self deviceID: playbackState device id;
 			volume: playbackState device volume;
 			supportsVolume: playbackState device supportsVolume]
+]
+
+{
+	#category : #actions,
+	#'squeak_changestamp' : 'TL 6/10/2024 19:51'
+}
+SPOCVolumeSlider >> updatePlaybackState: aState [
+
+	self deviceID: aState device id;
+		volume: aState device volume;
+		supportsVolume: aState device supportsVolume
 ]
 
 {
