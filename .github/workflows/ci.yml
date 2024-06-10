@@ -6,9 +6,6 @@ on:
   # for triggering the workflow manually from the GitHub Actions page
   - workflow_dispatch
 
-env:
-  COVERALLS_REPO_TOKEN : hmbCXXJ5252ForHA02MwuBw3HyqH0E4ei
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -38,7 +35,9 @@ jobs:
         env:
           # for uploading coverage reports
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+        
       - name: Coveralls GitHub Action
-        uses: coverallsapp/github-action@v1.1.1
+        uses: coverallsapp/github-action@v2.3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: /home/runner/work/SpotifyConnect/SpotifyConnect/coverage/lcov.info
