@@ -7,7 +7,7 @@ Class {
 		'supportsVolume',
 		'volume'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {

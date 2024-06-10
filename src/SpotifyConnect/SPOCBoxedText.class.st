@@ -7,7 +7,7 @@ Class {
 		'anObject',
 		'contents'
 	],
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {

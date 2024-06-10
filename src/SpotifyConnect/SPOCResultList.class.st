@@ -8,7 +8,7 @@ Class {
 		'items',
 		'scrollablePanel'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {

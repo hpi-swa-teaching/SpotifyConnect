@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'url'
 	],
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {

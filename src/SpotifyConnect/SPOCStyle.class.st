@@ -1,7 +1,7 @@
 Class {
 	#name : #SPOCStyle,
 	#superclass : #Object,
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {
@@ -29,6 +29,15 @@ SPOCStyle class >> defaultMargin [
 SPOCStyle class >> devicesPanelHeight [
 
 	^ 200
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'VK 6/10/2024 16:48'
+}
+SPOCStyle class >> devicesPanelLayer [
+
+	^ 1
 ]
 
 {

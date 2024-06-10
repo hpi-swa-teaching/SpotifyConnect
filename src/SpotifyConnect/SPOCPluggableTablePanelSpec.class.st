@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'tableLayoutProperties'
 	],
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {

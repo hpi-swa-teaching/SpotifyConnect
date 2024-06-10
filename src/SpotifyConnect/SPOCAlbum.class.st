@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCAlbum,
-	#superclass : #SPOCDataModel,
+	#superclass : #SPOCDataPiece,
 	#instVars : [
 		'totalTracks',
 		'releaseDate',

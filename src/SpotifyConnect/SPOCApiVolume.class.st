@@ -1,7 +1,7 @@
 Class {
 	#name : #SPOCApiVolume,
 	#superclass : #SPOCApiEndpoint,
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-API'
 }
 
 {

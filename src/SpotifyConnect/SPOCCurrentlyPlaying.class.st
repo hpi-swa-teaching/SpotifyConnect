@@ -5,7 +5,7 @@ Class {
 		'track',
 		'item'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {

@@ -9,7 +9,7 @@ Class {
 		'resultDisplay',
 		'deviceMorphs'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {
@@ -32,12 +32,12 @@ SPOCSwitchDevice >> activeDevice: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/10/2024 12:01'
+	#'squeak_changestamp' : 'VK 6/10/2024 16:14'
 }
 SPOCSwitchDevice >> attachButton [
 
 	| text icon button |
-	text := (SPOCBoxedText new contents: ' available Devices';
+	text := (SPOCBoxedText new contents: ' Devices';
 		position: SPOCStyle devicesTextPadding@0;
 		yourself).
 	icon := SPOCIcon new iconAsset: '/assets/devices.png'.
@@ -51,19 +51,19 @@ SPOCSwitchDevice >> attachButton [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 6/10/2024 12:24'
+	#'squeak_changestamp' : 'VK 6/10/2024 16:59'
 }
 SPOCSwitchDevice >> buildResultDisplay [
 
 	self resultDisplay: (SPOCScrollablePanel newWithExtent: (SPOCStyle devicesPanelWidth@SPOCStyle devicesPanelHeight)).
 	self resultDisplay position: self position + (0@SPOCStyle devicesPanelPadding).
 	self addMorph: self resultDisplay.
-	self hideResults.
+	self hideResults
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 6/10/2024 11:44'
+	#'squeak_changestamp' : 'VK 6/10/2024 16:13'
 }
 SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 	| background nameText typeText finishedMorph deviceButton border ratio height width |
@@ -76,11 +76,11 @@ SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 		color: SPOCStyle spotifyGray;
 		extent: (width@(height * ratio));
 		yourself.
-	nameText := SPOCText newAt: (background topLeft + (border@0)) withText: aDevice name.
-	typeText := SPOCText newAt: (background bottomLeft + (border@(SPOCStyle textHeight negated))) withText: aDevice type.
+	nameText := SPOCBoldText newAt: (background topLeft + (border*ratio)) withText: aDevice name.
+	typeText := SPOCPlainText newAt: (background bottomLeft + (border*ratio@((border*ratio + SPOCStyle textHeight) negated))) withText: aDevice type.
 	aDevice isActive 
-		ifTrue: [background color: SPOCStyle spotifyGreen.
-			activeDevice := aDevice].
+		ifTrue: [nameText textColor: SPOCStyle spotifyGreen.
+			typeText textColor: SPOCStyle spotifyGreen].
 	finishedMorph := Morph new color: Color transparent;
 		addMorph: background;
 		addMorph: nameText;
@@ -200,7 +200,7 @@ SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 14:44'
+	#'squeak_changestamp' : 'VK 6/10/2024 16:59'
 }
 SPOCSwitchDevice >> updateResultDisplay: anOrderedCollection [
 
@@ -208,6 +208,5 @@ SPOCSwitchDevice >> updateResultDisplay: anOrderedCollection [
 	anOrderedCollection do: [:device |
 		self deviceMorphs add: (self buildResultMorphFrom: device)].
 	self resultDisplay updatePanel: self deviceMorphs.
-	self resultDisplay show.
-	"self extendFully"
+	self resultDisplay show
 ]

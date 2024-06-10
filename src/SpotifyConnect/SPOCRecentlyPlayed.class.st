@@ -5,7 +5,7 @@ Class {
 		'tracks',
 		'trackMorphs'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {

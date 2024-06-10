@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCTrack,
-	#superclass : #SPOCDataModel,
+	#superclass : #SPOCDataPiece,
 	#instVars : [
 		'artists',
 		'album',

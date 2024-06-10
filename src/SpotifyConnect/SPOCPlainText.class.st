@@ -1,7 +1,7 @@
 Class {
 	#name : #SPOCPlainText,
 	#superclass : #SPOCText,
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {

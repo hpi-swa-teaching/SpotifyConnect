@@ -5,7 +5,7 @@ Class {
 		'wrappee',
 		'onClick'
 	],
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {

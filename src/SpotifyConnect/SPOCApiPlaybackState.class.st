@@ -1,7 +1,7 @@
 Class {
 	#name : #SPOCApiPlaybackState,
 	#superclass : #SPOCApiEndpoint,
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-API'
 }
 
 {

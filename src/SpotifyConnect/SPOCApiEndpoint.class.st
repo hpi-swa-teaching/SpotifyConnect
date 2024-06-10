@@ -5,7 +5,7 @@ Class {
 		'authorizer',
 		'returnsTestContent'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-API'
 }
 
 {
