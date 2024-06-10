@@ -12,7 +12,7 @@ SmalltalkCISpec {
     #categories : [ 'SpotifyConnect-Tests' ],
     #coverage : { 
       #categories : [ 'SpotifyConnect' ],
-      # format : #coveralls
+      # format : #lcov
     }
   }
 }
