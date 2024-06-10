@@ -186,11 +186,11 @@ SPOCStyle class >> spotifyGreen [
 
 {
 	#category : #colors,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:22'
 }
 SPOCStyle class >> spotifyWhite [
 
-	^ Color r: 255/255 g: 255/255 b: 255/255
+	^ Color white
 ]
 
 {

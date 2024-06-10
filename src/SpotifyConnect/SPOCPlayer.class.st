@@ -14,11 +14,11 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'TL 6/3/2024 22:53'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:40'
 }
 SPOCPlayer class >> nextIconPath [
 
-	^ '/assets/next.png'
+	^ '/assets/next-white.png'
 ]
 
 {
@@ -32,7 +32,7 @@ SPOCPlayer class >> pauseIconPath [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'TL 5/30/2024 12:02'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:40'
 }
 SPOCPlayer class >> playIconPath [
 
@@ -41,16 +41,16 @@ SPOCPlayer class >> playIconPath [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'TL 6/3/2024 22:54'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:40'
 }
 SPOCPlayer class >> previousIconPath [
 
-	^ '/assets/previous.png'
+	^ '/assets/previous-white.png'
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/8/2024 19:20'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:27'
 }
 SPOCPlayer >> attachButton: anIcon [
 
@@ -62,19 +62,21 @@ SPOCPlayer >> attachButton: anIcon [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/4/2024 13:35'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:41'
 }
 SPOCPlayer >> attachNextButton [
 
 	self nextIcon: (SPOCIcon new
 				iconAsset: SPOCPlayer nextIconPath;
+				color: Color transparent;
 			 	yourself);		
-		attachButton: self nextIcon
+		attachButton: self nextIcon;
+	      addMorph: (Morph new color: Color transparent; extent: 15@button height; yourself)
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/4/2024 13:34'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:30'
 }
 SPOCPlayer >> attachPlayPauseButton [
 
@@ -82,17 +84,19 @@ SPOCPlayer >> attachPlayPauseButton [
 				iconAsset: SPOCPlayer playIconPath;
 			 	yourself);		
 		attachButton: self playPauseIcon;
+		addMorph: (Morph new color: Color transparent; extent: 15@button height; yourself);
 		updatePlayPauseIcon
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/4/2024 13:34'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:41'
 }
 SPOCPlayer >> attachPreviousButton [
 
 	self previousIcon: (SPOCIcon new 
 				iconAsset: SPOCPlayer previousIconPath;
+				color: Color transparent;
 			 	yourself);		
 		attachButton: self previousIcon
 ]
@@ -152,7 +156,7 @@ SPOCPlayer >> executeButtonFunction: anIcon [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 14:37'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:29'
 }
 SPOCPlayer >> initialize [
 
@@ -165,7 +169,8 @@ SPOCPlayer >> initialize [
 		attachPreviousButton;
 		layoutPolicy: TableLayout new;
 		listDirection: #leftToRight;
-		cellInset: 10;
+		listCentering: #center;
+		hResizing: #spaceFill;
 		extendFully.
 ]
 

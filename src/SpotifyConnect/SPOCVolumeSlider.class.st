@@ -12,13 +12,23 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 15:34'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:25'
+}
+SPOCVolumeSlider >> attachIcon [
+	
+	self addMorph: (Morph new color: Color transparent; extent: 1@20; yourself);
+		addMorph: (SPOCIcon new color: Color transparent; iconAsset: '/assets/speaker.png';yourself)
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 6/10/2024 22:15'
 }
 SPOCVolumeSlider >> attachSlider [
 
 	self slider: (SPOCSlider new
 			value: self volume;
-			length: 300;
+			length: 150;
 			yourself).
 	self slider onValueChanged: [:aValue | 
 		self updateInstanceVariables.
@@ -66,7 +76,7 @@ SPOCVolumeSlider >> deviceID: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 15:31'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:18'
 }
 SPOCVolumeSlider >> initialize [
 
@@ -75,10 +85,10 @@ SPOCVolumeSlider >> initialize [
 	self color: Color transparent;
 		supportsVolume: false;
 		volume: 100;
-		attachSlider;
 		layoutPolicy: TableLayout new;
 		listDirection: #leftToRight;
-		cellInset: 10;
+		attachSlider;
+		attachIcon;
 		extendFully
 ]
 

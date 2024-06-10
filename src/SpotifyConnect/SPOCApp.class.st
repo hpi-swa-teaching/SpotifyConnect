@@ -62,16 +62,16 @@ SPOCApp >> auth: anObject [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VK 6/10/2024 14:08'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:48'
 }
 SPOCApp >> bottomPanelContent [
 
-	^ {self currentlyPlaying. self player. self switchDevice. self volumeSlider}
+	^ {self currentlyPlaying. self player. self switchDevice. self volumeSlider.}
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:47'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:31'
 }
 SPOCApp >> buildBottomPanel: aBuilder [
 
@@ -82,8 +82,7 @@ SPOCApp >> buildBottomPanel: aBuilder [
 			vResizing: #shrinkWrap;
 			listDirection: #leftToRight;
 			listCentering: #justified;
-			wrapDirection: #bottomToTop;
-			cellInset: SPOCStyle defaultMargin);
+			wrapDirection: #bottomToTop);
 		children: #bottomPanelContent
 ]
 

@@ -218,13 +218,14 @@ SPOCSlider >> length [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 6/6/2024 22:10'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:10'
 }
 SPOCSlider >> length: aNumber [
 	
 	self outerBar width: (aNumber - self outerBarRightCircle width).
 	self outerBarRightCircle position: (self topLeft + (self outerBar width @ (self nob height / 4))).
-	self updateInnerBar.
+	self updateInnerBar;
+		updateExtent
 ]
 
 {
@@ -362,11 +363,11 @@ SPOCSlider >> outerBarRightCircle [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 6/6/2024 20:56'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:11'
 }
 SPOCSlider >> updateExtent [
 
-	self extent: (self outerBar width + self outerBarLeftCircle width @ self nob height)
+	self extent: (self outerBar width + (self outerBarLeftCircle width * 1.5) @ self nob height)
 ]
 
 {

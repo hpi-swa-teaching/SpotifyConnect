@@ -10,19 +10,29 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 14:23'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:59'
+}
+SPOCCurrentlyPlaying >> attachItem [
+		
+	self item: ((SPOCResultListItem newWith: self track) hasTertiaryText: false; 
+			yourself);
+		addMorph: self item
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 6/10/2024 22:01'
 }
 SPOCCurrentlyPlaying >> initialize [
 
 	super initialize.
 	
 	self track: SPOCStyle trackWelcome;
-		item: (SPOCResultListItem newWith: self track);
-		addMorph: self item;
-		yourself.
-	self item hasTertiaryText: false;
-		resizeTo: SPOCStyle currentlyPlayingWidth @ SPOCStyle resultListItemHeight.
-	self extendFully.
+		attachItem;
+		layoutPolicy: TableLayout new;
+		hResizing: #spaceFill;
+		vResizing: #shrinkWrap;
+		color: Color transparent
 ]
 
 {

@@ -73,11 +73,13 @@ SPOCBoxedText >> attachRightBorderCircle [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 21:18'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:55'
 }
 SPOCBoxedText >> attachText [
+
 	self label: SPOCPlainText new.
-	self label contents: 'SPOCBoxedText'.
+	self label contents: 'SPOCBoxedText';
+		color: SPOCStyle spotifyBlack.
 	self addMorph: self label.
 ]
 
@@ -130,16 +132,17 @@ SPOCBoxedText >> contents [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 5/28/2024 13:27'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:54'
 }
 SPOCBoxedText >> contents: aString [
+
 	self label contents: aString.
 	self updateAlignments.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/28/2024 13:28'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:54'
 }
 SPOCBoxedText >> initialize [
 	super initialize.
@@ -149,7 +152,7 @@ SPOCBoxedText >> initialize [
 		attachCenterBox;
 		attachText;
 		contents: SPOCBoxedText defaultContent;
-		color: SPOCStyle spotifyWhite.
+		color: SPOCStyle spotifyWhite
 ]
 
 {

@@ -90,7 +90,7 @@ SPOCSearchbar >> disabled: aBoolean [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:22'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:44'
 }
 SPOCSearchbar >> initialize [
 
@@ -101,8 +101,7 @@ SPOCSearchbar >> initialize [
 		tracks: OrderedCollection new;
 		disabled: true;
 		buildSearchbar;
-		extendFully;
-		yourself
+		extendFully
 ]
 
 {

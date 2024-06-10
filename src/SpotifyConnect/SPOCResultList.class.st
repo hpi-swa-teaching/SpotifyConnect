@@ -13,53 +13,60 @@ Class {
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:00'
+	#'squeak_changestamp' : 'VE 6/10/2024 18:11'
 }
 SPOCResultList >> buildResultList [
 
-	self buildTitle;
-		buildScrollablePanel;
+	self buildScrollablePanel;
+		buildTitle;
 		extendFully
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'TL 6/10/2024 02:01'
+	#'squeak_changestamp' : 'VE 6/10/2024 19:09'
 }
 SPOCResultList >> buildScrollablePanel [
 
-	self scrollablePanel: (SPOCScrollablePanel newWithExtent: SPOCStyle resultListWidth @ SPOCStyle resultListHeight).
-	self scrollablePanel position: (self titleMorph bottomLeft + (0 @ SPOCStyle defaultMargin)).
-	self addMorph: self scrollablePanel
+	self scrollablePanel: (SPOCScrollablePanel new
+			hResizing: #spaceFill;
+			vResizing: #spaceFill);
+		addMorph: self scrollablePanel
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:18'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:34'
 }
 SPOCResultList >> buildTitle [
 	
-	self titleMorph: (SPOCBoldText newAt: self position withText: 'Welcome!');
-		addMorph: self titleMorph;
-		yourself
+	self titleMorph: (SPOCBoldText new 
+			vResizing: #shrinkWrap; 
+			hResizing: #spaceFill;
+			yourself);
+		title: 'Welcome!';
+		addMorph: (Morph new color: Color transparent; extent: 1@15; yourself);
+		addMorph: self titleMorph
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 14:14'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:33'
 }
 SPOCResultList >> initialize [
 
 	super initialize.
 	
 	self color: Color transparent;
-		titleMorph: (SPOCBoldText newAt: self position withText: '');
-		title: '';
 		results: OrderedCollection new;
 		items: OrderedCollection new;
+		layoutPolicy: TableLayout new;
+		listDirection: #topToBottom;
+		listCentering: #topLeft;
+		wrapCentering: #topLeft;
+		vResizing: #spaceFill;
 		hResizing: #spaceFill;
-		buildResultList;
-		yourself
+		buildResultList
 ]
 
 {
@@ -155,7 +162,7 @@ SPOCResultList >> titleMorph: aSPOCBoldText [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/10/2024 02:02'
+	#'squeak_changestamp' : 'VE 6/10/2024 19:15'
 }
 SPOCResultList >> updateItems [
 	"To do: clickAction in SPOCTrack, SPOCAlbum etc. setzen und hier benutzen"
@@ -168,7 +175,9 @@ SPOCResultList >> updateItems [
 			onClick: [ :evt |
 				self app player playSong: result id.
 				self app currentlyPlaying update].
-		item vResizing: #shrinkWrap.
+		item layoutPolicy: TableLayout new;
+			hResizing: #spaceFill;
+			vResizing: #shrinkWrap.
 		self items add: item]
 ]
 
