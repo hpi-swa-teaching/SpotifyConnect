@@ -35,7 +35,9 @@ jobs:
         env:
           # for uploading coverage reports
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
-        
+      
+      - run: cat /home/runner/work/SpotifyConnect/SpotifyConnect/coverage/lcov.info
+        shell: bash
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@v2
         with:
