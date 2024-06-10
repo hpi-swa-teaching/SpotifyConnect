@@ -367,11 +367,11 @@ SPOCApp >> setUpUserLogin [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:21'
+	#'squeak_changestamp' : 'VE 6/10/2024 15:06'
 }
 SPOCApp >> setUpVolumeSlider [
 
-	self volumeSlider: (SPOCVolumeSlider new app: self).
+	self volumeSlider: (SPOCVolumeSlider new app: self; yourself).
 	self auth registerSuccessCallback: [self volumeSlider updateInstanceVariables]
 ]
 
