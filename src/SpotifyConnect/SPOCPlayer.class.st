@@ -9,7 +9,7 @@ Class {
 		'playPauseIcon',
 		'previousIcon'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {

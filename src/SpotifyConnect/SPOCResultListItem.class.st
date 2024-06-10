@@ -11,7 +11,7 @@ Class {
 		'tertiaryText',
 		'hasTertiaryText'
 	],
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {

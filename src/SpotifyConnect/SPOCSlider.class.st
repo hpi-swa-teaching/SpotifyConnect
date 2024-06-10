@@ -7,7 +7,7 @@ Class {
 		'innerBarHoverColor',
 		'onValueChanged'
 	],
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {

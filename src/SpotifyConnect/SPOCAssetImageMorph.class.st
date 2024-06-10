@@ -1,7 +1,7 @@
 Class {
 	#name : #SPOCAssetImageMorph,
 	#superclass : #ImageMorph,
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {

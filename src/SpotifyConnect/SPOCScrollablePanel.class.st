@@ -7,7 +7,7 @@ Class {
 		'spec',
 		'panel'
 	],
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {

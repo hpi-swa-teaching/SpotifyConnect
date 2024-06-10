@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'app'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {

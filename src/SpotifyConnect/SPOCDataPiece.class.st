@@ -1,5 +1,5 @@
 Class {
-	#name : #SPOCDataModel,
+	#name : #SPOCDataPiece,
 	#superclass : #Object,
 	#instVars : [
 		'id',
@@ -14,7 +14,7 @@ Class {
 	#category : #actions,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:17'
 }
-SPOCDataModel >> clickAction [
+SPOCDataPiece >> clickAction [
 
 	^ self subclassResponsibility
 ]
@@ -23,7 +23,7 @@ SPOCDataModel >> clickAction [
 	#category : #testing,
 	#'squeak_changestamp' : 'VK 5/27/2024 16:01'
 }
-SPOCDataModel >> equals: aDataModel [
+SPOCDataPiece >> equals: aDataModel [
 
 	^ self subclassResponsibility
 	
@@ -33,7 +33,7 @@ SPOCDataModel >> equals: aDataModel [
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:14'
 }
-SPOCDataModel >> id [
+SPOCDataPiece >> id [
 
 	^ id
 ]
@@ -42,7 +42,7 @@ SPOCDataModel >> id [
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:14'
 }
-SPOCDataModel >> id: aString [
+SPOCDataPiece >> id: aString [
 
 	id := aString
 ]
@@ -51,7 +51,7 @@ SPOCDataModel >> id: aString [
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:14'
 }
-SPOCDataModel >> image [
+SPOCDataPiece >> image [
 
 	^ image
 ]
@@ -60,7 +60,7 @@ SPOCDataModel >> image [
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/7/2024 10:51'
 }
-SPOCDataModel >> image: aSPOCImage [
+SPOCDataPiece >> image: aSPOCImage [
 
 	image := aSPOCImage
 ]
@@ -69,7 +69,7 @@ SPOCDataModel >> image: aSPOCImage [
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/7/2024 10:52'
 }
-SPOCDataModel >> name [
+SPOCDataPiece >> name [
 
 	^ name
 ]
@@ -78,7 +78,7 @@ SPOCDataModel >> name [
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/7/2024 10:52'
 }
-SPOCDataModel >> name: aString [
+SPOCDataPiece >> name: aString [
 
 	name := aString
 ]
