@@ -50,7 +50,7 @@ SPOCSwitchDevice >> attachButton [
 ]
 
 {
-	#category : #accessing,
+	#category : #building,
 	#'squeak_changestamp' : 'VK 6/10/2024 12:24'
 }
 SPOCSwitchDevice >> buildResultDisplay [
@@ -62,7 +62,7 @@ SPOCSwitchDevice >> buildResultDisplay [
 ]
 
 {
-	#category : #accessing,
+	#category : #building,
 	#'squeak_changestamp' : 'VK 6/10/2024 11:44'
 }
 SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
@@ -93,7 +93,7 @@ SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 ]
 
 {
-	#category : #initialization,
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VK 6/10/2024 12:10'
 }
 SPOCSwitchDevice >> currentDevices [
@@ -141,7 +141,7 @@ SPOCSwitchDevice >> devices: anObject [
 ]
 
 {
-	#category : #initialization,
+	#category : #building,
 	#'squeak_changestamp' : 'VK 6/9/2024 18:30'
 }
 SPOCSwitchDevice >> hideResults [
@@ -184,7 +184,7 @@ SPOCSwitchDevice >> resultDisplay: anObject [
 ]
 
 {
-	#category : #initialization,
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VK 6/9/2024 18:41'
 }
 SPOCSwitchDevice >> switchDeviceClicked: aDevice [
@@ -199,7 +199,7 @@ SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 ]
 
 {
-	#category : #initialization,
+	#category : #building,
 	#'squeak_changestamp' : 'VK 6/9/2024 18:30'
 }
 SPOCSwitchDevice >> updateResultDisplay: anOrderedCollection [
