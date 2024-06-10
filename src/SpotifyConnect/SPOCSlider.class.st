@@ -142,14 +142,14 @@ SPOCSlider >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/6/2024 22:17'
+	#'squeak_changestamp' : 'TL 6/10/2024 02:32'
 }
 SPOCSlider >> initializeColors [
 		
-	self outerBarColor: Color gray;
-		nobColor: Color white;
-		innerBarColor: Color white;
-		innerBarHoverColor: Color red
+	self outerBarColor: SPOCStyle spotifyGray;
+		nobColor: SPOCStyle spotifyWhite;
+		innerBarColor: SPOCStyle spotifyWhite;
+		innerBarHoverColor: SPOCStyle spotifyGreen
 ]
 
 {

@@ -15,7 +15,7 @@ SPOCTestApiPlaybackState >> setUp [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/10/2024 00:28'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:30'
 }
 SPOCTestApiPlaybackState >> testApiPlaybackStateExecute [
 
@@ -24,5 +24,5 @@ SPOCTestApiPlaybackState >> testApiPlaybackStateExecute [
 		at: #additional_types put: 'track';
 		yourself.
 	res := self apiEndpoint execute: paramDict.	
-	self assert: true "(res code = 200)"
+	self assert: true "(res response code = 200)"
 ]

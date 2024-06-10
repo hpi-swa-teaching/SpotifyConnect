@@ -15,7 +15,7 @@ SPOCTestApiPrevious >> setUp [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/10/2024 00:26'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:31'
 }
 SPOCTestApiPrevious >> testApiNextExecute [
 
@@ -24,5 +24,6 @@ SPOCTestApiPrevious >> testApiNextExecute [
 		at: #device_id put: 'b704b454bce64526992a3f207723032f5f91e635';
 		yourself.
 	res := self apiEndpoint execute: paramDict.	
-	self assert: (res code = 204)
+	res explore.
+	self assert: (res response code = 204)
 ]

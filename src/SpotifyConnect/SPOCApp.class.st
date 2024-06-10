@@ -7,7 +7,8 @@ Class {
 		'searchbar',
 		'resultList',
 		'currentlyPlaying',
-		'player'
+		'player',
+		'volumeSlider'
 	],
 	#category : #SpotifyConnect
 }
@@ -59,11 +60,11 @@ SPOCApp >> auth: anObject [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 6/7/2024 12:27'
+	#'squeak_changestamp' : 'TL 6/10/2024 02:58'
 }
 SPOCApp >> bottomPanelContent [
 
-	^ {self currentlyPlaying. self player}
+	^ {self currentlyPlaying. self player. self volumeSlider}
 ]
 
 {
@@ -158,7 +159,7 @@ SPOCApp >> buildWith: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:50'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:09'
 }
 SPOCApp >> centerPanelContent [
 
@@ -185,7 +186,7 @@ SPOCApp >> currentlyPlaying: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/7/2024 12:24'
+	#'squeak_changestamp' : 'TL 6/10/2024 02:40'
 }
 SPOCApp >> initialize [
 
@@ -197,7 +198,8 @@ SPOCApp >> initialize [
 		setupSearchbar;
 		setUpResultList;
 		setUpCurrentlyPlaying;
-		setupPlayer.
+		setupPlayer;
+		setUpVolumeSlider
 
 
 ]
@@ -298,6 +300,16 @@ SPOCApp >> setUpResultList [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'TL 6/10/2024 03:21'
+}
+SPOCApp >> setUpVolumeSlider [
+
+	self volumeSlider: (SPOCVolumeSlider new app: self).
+	self auth registerSuccessCallback: [self volumeSlider updateInstanceVariables]
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'TL 6/10/2024 01:33'
 }
 SPOCApp >> setupPlayer [
@@ -351,6 +363,24 @@ SPOCApp >> userLogin [
 }
 SPOCApp >> userLogin: anObject [
 	userLogin := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 02:56'
+}
+SPOCApp >> volumeSlider [
+
+	^ volumeSlider
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 02:56'
+}
+SPOCApp >> volumeSlider: anObject [
+
+	volumeSlider := anObject
 ]
 
 {

@@ -15,7 +15,7 @@ SPOCTestApiPlay >> setUp [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/10/2024 00:36'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:30'
 }
 SPOCTestApiPlay >> testApiPlayExecute [
 
@@ -26,6 +26,6 @@ SPOCTestApiPlay >> testApiPlayExecute [
 	res := self apiEndpoint execute: paramDict.	
 	self assert: true.
 	"isPlaying
-		ifTrue: [self assert: (res code = 403)]
-		ifFalse: [self assert: (res code = 204)]"
+		ifTrue: [self assert: (res response code = 403)]
+		ifFalse: [self assert: (res response code = 204)]"
 ]

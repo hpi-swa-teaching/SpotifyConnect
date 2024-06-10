@@ -152,22 +152,6 @@ SPOCPlayer >> executeButtonFunction: anIcon [
 ]
 
 {
-	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/10/2024 01:39'
-}
-SPOCPlayer >> getPlaybackState [
-
-	| apiEndpoint paramDict |
-	paramDict := Dictionary new
-		at: #additional_types put: 'track';
-		yourself.
-	apiEndpoint := SPOCApiPlaybackState new
-		authorizer: self app auth;
-		yourself.
-	^ apiEndpoint execute: paramDict
-]
-
-{
 	#category : #initialization,
 	#'squeak_changestamp' : 'TL 6/3/2024 23:18'
 }
@@ -355,22 +339,22 @@ SPOCPlayer >> switchPlaybackState [
 ]
 
 {
-	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/10/2024 01:40'
+	#category : #actions,
+	#'squeak_changestamp' : 'TL 6/10/2024 03:33'
 }
 SPOCPlayer >> updateIsPlaying [
 
 	| playbackState |
 	playbackState := self getPlaybackState.
 	(playbackState isKindOf: SPOCApiEndpointResult)
-		ifTrue: [playbackState code = 204 ifTrue: [UIManager inform: 'Please play music on your device!']]
+		ifTrue: [playbackState response code = 204 ifTrue: [UIManager inform: 'Please play music on your device!']]
 		ifFalse: [self deviceID: playbackState device id;
 			isPlaying: playbackState isPlaying].
 	self updatePlayPauseIcon
 ]
 
 {
-	#category : #'api-connection',
+	#category : #actions,
 	#'squeak_changestamp' : 'TL 6/10/2024 01:36'
 }
 SPOCPlayer >> updateIsPlayingFromLogin [
