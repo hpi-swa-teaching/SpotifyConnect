@@ -13,33 +13,6 @@ Class {
 }
 
 {
-	#category : #'class variables',
-	#'squeak_changestamp' : 'VK 6/9/2024 15:19'
-}
-SPOCSwitchDevice class >> baseLayer [
-
-	^ 500
-]
-
-{
-	#category : #'class variables',
-	#'squeak_changestamp' : 'VK 6/9/2024 18:38'
-}
-SPOCSwitchDevice class >> border [
-
-	^ 30
-]
-
-{
-	#category : #'class variables',
-	#'squeak_changestamp' : 'VK 6/9/2024 15:22'
-}
-SPOCSwitchDevice class >> buttonToDeviceRatio [
-
-	^ 2
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'VK 5/27/2024 11:45'
 }
