@@ -53,9 +53,11 @@ SPOCUIComponent >> getPlaybackState [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:00'
+	#'squeak_changestamp' : 'VE 6/10/2024 17:38'
 }
 SPOCUIComponent >> initialize [
 
 	super initialize.
+	self hResizing: #rigid; 
+		vResizing: #rigid
 ]

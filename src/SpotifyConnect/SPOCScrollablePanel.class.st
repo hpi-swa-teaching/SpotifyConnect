@@ -12,19 +12,20 @@ Class {
 
 {
 	#category : #constructor,
-	#'squeak_changestamp' : 'VE 6/10/2024 14:18'
+	#'squeak_changestamp' : 'VE 6/10/2024 17:29'
 }
 SPOCScrollablePanel class >> newWithExtent: anExtent [
-
-	^ SPOCScrollablePanel new
-		extent: anExtent;
-		buildPanel;
-		yourself
+	
+	| inst |
+	inst := self new.
+	inst extent: anExtent.
+	inst panel extent: anExtent.
+	^ inst
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/10/2024 14:18'
+	#'squeak_changestamp' : 'VE 6/10/2024 19:09'
 }
 SPOCScrollablePanel >> buildPanel [
 
@@ -32,10 +33,10 @@ SPOCScrollablePanel >> buildPanel [
 		spec: (builder pluggableScrollPaneSpec new
 			vScrollBarPolicy: #whenNeeded;
 			hScrollBarPolicy: #never;
-			"horizontalResizing: #spaceFill;"
+			horizontalResizing: #spaceFill;
+			verticalResizing: #spaceFill;
 			yourself);
-			panel: (builder build: spec).
-	self panel extent: self extent.
+		panel: (builder build: spec).
 	self panel scroller layoutPolicy: TableLayout new.
 	self addMorph: panel
 ]
@@ -60,14 +61,16 @@ SPOCScrollablePanel >> builder: aBuilder [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
+	#'squeak_changestamp' : 'VE 6/10/2024 19:11'
 }
 SPOCScrollablePanel >> initialize [
 	
 	super initialize.
+	
 	self color: Color transparent;
+		layoutPolicy: TableLayout new;
 		items: OrderedCollection new;
-		yourself.
+		buildPanel
 ]
 
 {

@@ -22,33 +22,33 @@ SPOCPluggableTablePanelSpec class >> fullFrame [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/3/2024 10:32'
+	#'squeak_changestamp' : 'VE 6/10/2024 18:00'
 }
 SPOCPluggableTablePanelSpec >> buildWith: aBuilder [
 	
 	| widget hResizing vResizing |
-	widget := aBuilder buildPluggablePanel: self.
 	hResizing := self tableLayoutProperties hResizing.
 	vResizing := self tableLayoutProperties vResizing.
+	widget := aBuilder buildPluggablePanel: self.
 	widget layoutPolicy: TableLayout new;
 		layoutProperties: self tableLayoutProperties.
 	self frame ifNil: [self frame: SPOCPluggableTablePanelSpec fullFrame].
 	aBuilder setFrame: self frame in: widget.
 	widget hResizing: hResizing;
 		 vResizing: vResizing.
-	widget submorphsDo: [:m | m class = PluggablePanelMorph ifFalse: [m hResizing: #rigid]];
-		 submorphsDo: [:m | m class = PluggablePanelMorph ifFalse: [m vResizing: #rigid]].
 	^ widget.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/30/2024 23:04'
+	#'squeak_changestamp' : 'VE 6/10/2024 18:01'
 }
 SPOCPluggableTablePanelSpec >> initialize [
 	super initialize.
 	
-	self tableLayoutProperties: TableLayoutProperties new
+	self tableLayoutProperties: TableLayoutProperties new;
+		horizontalResizing: #shrinkWrap;
+		verticalResizing: #shrinkWrap
 ]
 
 {

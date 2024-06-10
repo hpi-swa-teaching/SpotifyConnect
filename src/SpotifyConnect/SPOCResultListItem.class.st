@@ -64,17 +64,13 @@ SPOCResultListItem >> background: aRectangleMorph [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'TL 6/10/2024 01:56'
+	#'squeak_changestamp' : 'VE 6/10/2024 19:18'
 }
 SPOCResultListItem >> buildBackground [
 
-	self background: (RectangleMorph new
-			color: SPOCStyle spotifyGray;
-			borderWidth: 1;
-			extent: (SPOCStyle resultListWidth @ SPOCStyle resultListItemHeight);
-			yourself);
-		addMorph: self background;
-		yourself
+	self color: SPOCStyle spotifyGray;
+		borderWidth: 1;
+		extent: (SPOCStyle resultListWidth @ SPOCStyle resultListItemHeight)
 ]
 
 {
@@ -95,7 +91,7 @@ SPOCResultListItem >> buildImage [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
+	#'squeak_changestamp' : 'VE 6/10/2024 19:13'
 }
 SPOCResultListItem >> buildItem [
 
@@ -105,7 +101,7 @@ SPOCResultListItem >> buildItem [
 		buildSecondaryText;
 		buildTertiaryText;
 		vResizing: #shrinkWrap;
-		yourself
+		hResizing: #spaceFill
 ]
 
 {
@@ -142,7 +138,7 @@ SPOCResultListItem >> buildSecondaryText [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'TL 6/10/2024 01:59'
+	#'squeak_changestamp' : 'VE 6/10/2024 19:19'
 }
 SPOCResultListItem >> buildTertiaryText [
 
@@ -151,7 +147,7 @@ SPOCResultListItem >> buildTertiaryText [
 		ifTrue: [(self dataModel isKindOf: SPOCTrack)
 				ifTrue: [content := self dataModel durationAsFormattedTime]
 				ifFalse: [content := ''].
-			text := SPOCText newAt: self background bottomRight - (SPOCStyle resultListItemPadding @ (SPOCStyle resultListItemHeight / 2)) withText: content.
+			text := SPOCText newAt: self bottomRight - (SPOCStyle resultListItemPadding @ (SPOCStyle resultListItemHeight / 2)) withText: content.
 			self tertiaryText: text;
 				 addMorph: self tertiaryText;
 				 yourself]
@@ -230,7 +226,7 @@ SPOCResultListItem >> image: aSPOCImage [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 02:00'
+	#'squeak_changestamp' : 'VE 6/10/2024 19:13'
 }
 SPOCResultListItem >> initialize [
 
@@ -238,8 +234,8 @@ SPOCResultListItem >> initialize [
 	
 	self color: Color transparent;
 		vResizing: #shrinkWrap;
-		hasTertiaryText: true;
-		yourself
+		hResizing: #spaceFill;
+		hasTertiaryText: true
 ]
 
 {
@@ -262,11 +258,11 @@ SPOCResultListItem >> primaryText: aSPOCText [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/7/2024 23:46'
+	#'squeak_changestamp' : 'VE 6/10/2024 19:18'
 }
 SPOCResultListItem >> resizeTo: anExtent [
 
-	self background extent: anExtent
+	self extent: anExtent
 ]
 
 {
