@@ -18,10 +18,18 @@ SPOCBoldText class >> newAt: aPoint withText: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/10/2024 18:10'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:53'
+}
+SPOCBoldText >> contents: aString [
+
+	super contents: (aString asText addAttribute: TextEmphasis bold)
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 6/10/2024 21:53'
 }
 SPOCBoldText >> initialize [
 	super initialize.
 	
-	self textColor: SPOCStyle spotifyWhite.
 ]

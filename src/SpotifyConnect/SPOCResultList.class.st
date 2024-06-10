@@ -36,21 +36,22 @@ SPOCResultList >> buildScrollablePanel [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 19:08'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:34'
 }
 SPOCResultList >> buildTitle [
 	
 	self titleMorph: (SPOCBoldText new 
 			vResizing: #shrinkWrap; 
-			hResizing: #spaceFill; 
+			hResizing: #spaceFill;
 			yourself);
 		title: 'Welcome!';
+		addMorph: (Morph new color: Color transparent; extent: 1@15; yourself);
 		addMorph: self titleMorph
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 19:09'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:33'
 }
 SPOCResultList >> initialize [
 

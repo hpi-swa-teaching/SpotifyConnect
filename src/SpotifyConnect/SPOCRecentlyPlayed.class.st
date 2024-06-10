@@ -37,7 +37,7 @@ SPOCRecentlyPlayed class >> trackLimit [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/9/2024 14:44'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:07'
 }
 SPOCRecentlyPlayed >> buildButton [
 
@@ -46,10 +46,12 @@ SPOCRecentlyPlayed >> buildButton [
 		position: SPOCStyle recentlyPlayedPadding@0;
 		yourself).
 	icon := SPOCIcon new iconAsset: '/assets/recently-played.png'.
-	button := Morph new color: Color transparent.
-	button addMorph: text;
+	button := Morph new color: Color transparent;
+		addMorph: text;
 		addMorph: icon;
 		yourself.
+	button extent: 0@0;
+		extent: button fullBounds extent.
 	self addMorph: (SPOCClickable newUsing: button onClick: [:anEvent | self getRecentlyPlayed])
 ]
 

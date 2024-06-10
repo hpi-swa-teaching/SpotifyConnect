@@ -47,11 +47,13 @@ SPOCText >> handlesMouseOver: anEvent [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/6/2024 01:11'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:53'
 }
 SPOCText >> initialize [
 	
-	super initialize
+	super initialize.
+
+	self textColor: SPOCStyle spotifyWhite
 ]
 
 {

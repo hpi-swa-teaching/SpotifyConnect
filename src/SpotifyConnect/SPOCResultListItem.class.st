@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'app',
 		'dataModel',
-		'background',
 		'image',
 		'primaryText',
 		'secondaryText',
@@ -45,112 +44,112 @@ SPOCResultListItem >> app: aSPOCApp [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
-}
-SPOCResultListItem >> background [
-
-	^ background
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
-}
-SPOCResultListItem >> background: aRectangleMorph [
-
-	background := aRectangleMorph
-]
-
-{
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 19:18'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:00'
 }
 SPOCResultListItem >> buildBackground [
 
 	self color: SPOCStyle spotifyGray;
-		borderWidth: 1;
-		extent: (SPOCStyle resultListWidth @ SPOCStyle resultListItemHeight)
+		borderWidth: 1
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'TL 6/10/2024 01:57'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:51'
+}
+SPOCResultListItem >> buildCenterBox [
+
+	self addMorph: (Morph new name: 'center-box';
+			 color: Color transparent;
+			 layoutPolicy: TableLayout new;
+			 hResizing: #spaceFill;
+			 vResizing: #spaceFill;
+			 listDirection: #topToBottom;
+			 wrapDirection: #leftToRight;
+			 listCentering: #justified;
+			 wrapCentering: #justified;
+			 cellPositioning: #topLeft;
+			 yourself)
+]
+
+{
+	#category : #building,
+	#'squeak_changestamp' : 'VE 6/10/2024 21:43'
 }
 SPOCResultListItem >> buildImage [
 
 	| image |
 	image := self dataModel image scaledTo: SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin).
-	image position: self topLeft + SPOCStyle defaultMargin asPoint.
 	self image: image;
-		addMorph: image;
-		yourself
-
+		addMorph: image
 
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 19:13'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:48'
 }
 SPOCResultListItem >> buildItem [
 
-	self buildBackground;
-		buildImage;
-		buildPrimaryText;
-		buildSecondaryText;
+	self buildBackground;	
 		buildTertiaryText;
+		buildCenterBox;
+		buildImage;
+		buildSecondaryText;
+		buildPrimaryText;
 		vResizing: #shrinkWrap;
 		hResizing: #spaceFill
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'TL 6/10/2024 01:57'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:40'
 }
 SPOCResultListItem >> buildPrimaryText [
 
-	| text |
-	text := SPOCBoldText newAt: self image topRight + (SPOCStyle defaultMargin @ 0) withText: self dataModel name.
-	self primaryText: text;
-		addMorph: self primaryText;
-		yourself
+	self primaryText: (SPOCBoldText new contents: self dataModel name; yourself).
+	self centerBox addMorph: self primaryText
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'TL 6/10/2024 01:58'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:37'
 }
 SPOCResultListItem >> buildSecondaryText [
 
-	| text content |
+	| content |
 	(self dataModel isKindOf: SPOCTrack)
 		ifTrue: [content := self dataModel album artistsAsString].
 	(self dataModel isKindOf: SPOCAlbum)
 		ifTrue: [content := self dataModel artistsAsString].
 	(self dataModel isKindOf: SPOCArtist)
 		ifTrue: [content := ' '].	
-	text := SPOCText newAt: self image bottomRight + (SPOCStyle defaultMargin @ (SPOCStyle textHeight negated)) withText: content.
-	self secondaryText: text;
-		addMorph: self secondaryText;
-		yourself
+	self secondaryText: (SPOCText new contents: content; yourself).
+	self centerBox addMorph: self secondaryText
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 19:19'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:42'
 }
 SPOCResultListItem >> buildTertiaryText [
 
-	| text content |
+	| content |
 	self hasTertiaryText
 		ifTrue: [(self dataModel isKindOf: SPOCTrack)
 				ifTrue: [content := self dataModel durationAsFormattedTime]
 				ifFalse: [content := ''].
-			text := SPOCText newAt: self bottomRight - (SPOCStyle resultListItemPadding @ (SPOCStyle resultListItemHeight / 2)) withText: content.
-			self tertiaryText: text;
-				 addMorph: self tertiaryText;
-				 yourself]
+		self tertiaryText: (SPOCText new contents: content; yourself).
+		self addMorph: self tertiaryText]
+]
+
+{
+	#category : #building,
+	#'squeak_changestamp' : 'VE 6/10/2024 21:34'
+}
+SPOCResultListItem >> centerBox [
+	
+	^ self submorphNamed: 'center-box'
 ]
 
 {
@@ -226,15 +225,21 @@ SPOCResultListItem >> image: aSPOCImage [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 19:13'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:47'
 }
 SPOCResultListItem >> initialize [
 
 	super initialize.
 	
 	self color: Color transparent;
+		layoutPolicy: TableLayout new;
+		listDirection: #leftToRight;
+		listCentering: #topLeft;
+		wrapCentering: #topLeft;
+		cellPositioning: #topLeft;
 		vResizing: #shrinkWrap;
 		hResizing: #spaceFill;
+		cellInset: 10;
 		hasTertiaryText: true
 ]
 

@@ -32,7 +32,7 @@ SPOCSwitchDevice >> activeDevice: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/10/2024 16:14'
+	#'squeak_changestamp' : 'VE 6/10/2024 22:07'
 }
 SPOCSwitchDevice >> attachButton [
 
@@ -41,10 +41,12 @@ SPOCSwitchDevice >> attachButton [
 		position: SPOCStyle devicesTextPadding@0;
 		yourself).
 	icon := SPOCIcon new iconAsset: '/assets/devices.png'.
-	button := Morph new color: Color transparent.
-	button addMorph: text;
+	button := Morph new color: Color transparent;
+		addMorph: text;
 		addMorph: icon;
 		yourself.
+	button extent: 0@0;
+		extent: button fullBounds extent.
 	self addMorph: (SPOCClickable newUsing: button onClick: [:anEvent | self currentDevices])
 	
 ]
