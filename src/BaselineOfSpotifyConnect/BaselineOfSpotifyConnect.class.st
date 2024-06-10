@@ -6,7 +6,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 6/10/2024 23:37'
+	#'squeak_changestamp' : 'OW 6/10/2024 23:51'
 }
 BaselineOfSpotifyConnect >> baseline: spec [
          <baseline>
@@ -19,6 +19,6 @@ BaselineOfSpotifyConnect >> baseline: spec [
                      yourself.
                  spec
                      group: 'default' with: #('SpotifyConnect');
-                     group: 'tests' with: #('SpotifyConnect' 'SpotifyConnect-Tests');
+                     group: 'tests' with: #('SpotifyConnect');
                      yourself].
 ]
