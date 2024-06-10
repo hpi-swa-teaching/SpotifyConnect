@@ -114,14 +114,14 @@ SPOCApiEndpoint >> initialize [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 03:39'
+	#'squeak_changestamp' : 'TL 6/10/2024 21:03'
 }
 SPOCApiEndpoint >> refreshAccessTokenAndExecute: aParamDictionary [
 
 	self authorizer refreshAccessToken.
 	self authorizer isAuthorized
 		ifTrue: [^ self execute: aParamDictionary]
-		ifFalse: [^ SPOCApiEndpointResult new error: 'Access Token Refresh Faild'; yourself]
+		ifFalse: [^ SPOCApiEndpointResult new error: 'Access Token Refresh Failed'; yourself]
 ]
 
 {
@@ -149,6 +149,91 @@ SPOCApiEndpoint >> returnsTestContent [
 SPOCApiEndpoint >> returnsTestContent: aBoolean [
 
 	returnsTestContent := aBoolean
+]
+
+{
+	#category : #response,
+	#'squeak_changestamp' : 'TL 6/10/2024 21:44'
+}
+SPOCApiEndpoint >> setAlbum: aJson [
+
+	| artists |
+	artists := OrderedCollection new.
+	(aJson at: #artists) do: [:anArtist | artists add: (self setArtist: anArtist)].
+	^ SPOCAlbum new
+		id: (aJson at: #id);
+		name: (aJson at: #name);
+		artists: artists;
+		image: (SPOCImage newWithUrl: (((aJson at: #images) at: 1) at: #url));
+		yourself
+]
+
+{
+	#category : #response,
+	#'squeak_changestamp' : 'TL 6/10/2024 21:44'
+}
+SPOCApiEndpoint >> setArtist: aJson [
+
+	^ SPOCArtist new
+		id: (aJson at: #id);
+		name: (aJson at: #name);
+		yourself
+]
+
+{
+	#category : #response,
+	#'squeak_changestamp' : 'TL 6/10/2024 21:08'
+}
+SPOCApiEndpoint >> setDevice: aJson [
+	
+	^ SPOCDevice new
+		id: (aJson at: #id);
+		isActive: (aJson at: #is_active);
+		isPrivateSession: (aJson at: #is_private_session);
+		isRestricted: (aJson at: #is_restricted);
+		name: (aJson at: #name);
+		type: (aJson at: #type);
+		volume: (aJson at: #volume_percent);
+		supportsVolume: (aJson at: #supports_volume);
+		yourself
+]
+
+{
+	#category : #response,
+	#'squeak_changestamp' : 'TL 6/10/2024 21:38'
+}
+SPOCApiEndpoint >> setPlaybackState: aJson [
+
+	| playbackState |
+	playbackState := SPOCPlaybackState new
+		device: (self setDevice: (aJson at: #device));
+		progress: (aJson at: #progress_ms);
+		isPlaying: (aJson at: #is_playing);
+		yourself.
+	((aJson at: #currently_playing_type) = 'track')
+		ifTrue: [playbackState track: (self setTrack: (aJson at: #item))]
+		ifFalse: [playbackState track: nil].
+	^ playbackState
+]
+
+{
+	#category : #response,
+	#'squeak_changestamp' : 'TL 6/10/2024 21:18'
+}
+SPOCApiEndpoint >> setTrack: aJson [
+
+	| album |
+	album := self setAlbum: (aJson at: #album).
+	^ SPOCTrack new
+		id: (aJson at: #id);
+		name: (aJson at: #name);
+		image: album image;
+		album: album;
+		duration: (aJson at: #duration_ms) // 1000;
+		explicit: (aJson at: #explicit);
+		popularity: (aJson at: #popularity);
+		trackNumber: (aJson at: #track_number);
+		yourself
 ]
 
 {

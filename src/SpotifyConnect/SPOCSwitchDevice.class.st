@@ -2,50 +2,62 @@ Class {
 	#name : #SPOCSwitchDevice,
 	#superclass : #SPOCUIComponent,
 	#instVars : [
-		'text',
 		'devices',
-		'button',
-		'activeDevice',
 		'resultDisplay',
-		'deviceMorphs'
+		'deviceItems',
+		'itemBackground'
 	],
 	#category : #'SpotifyConnect-UI'
 }
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:22'
+	#category : #'class variables',
+	#'squeak_changestamp' : 'VK 6/10/2024 19:44'
 }
-SPOCSwitchDevice >> activeDevice [
+SPOCSwitchDevice class >> itemTextPadding [
 
-	^ activeDevice
+	^ SPOCStyle devicesPanelPadding * SPOCStyle devicesPanelToItemRatio
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:22'
-}
-SPOCSwitchDevice >> activeDevice: anObject [
-
-	activeDevice := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/10/2024 16:14'
+	#category : #building,
+	#'squeak_changestamp' : 'VK 6/10/2024 19:11'
 }
 SPOCSwitchDevice >> attachButton [
 
-	| text icon button |
-	text := (SPOCBoxedText new contents: ' Devices';
-		position: SPOCStyle devicesTextPadding@0;
-		yourself).
-	icon := SPOCIcon new iconAsset: '/assets/devices.png'.
+	| button |
 	button := Morph new color: Color transparent.
-	button addMorph: text;
-		addMorph: icon;
+	button addMorph: self  buttonText;
+		addMorph: (SPOCIcon new iconAsset: '/assets/devices.png');
 		yourself.
 	self addMorph: (SPOCClickable newUsing: button onClick: [:anEvent | self currentDevices])
+	
+]
+
+{
+	#category : #building,
+	#'squeak_changestamp' : 'VK 6/10/2024 19:53'
+}
+SPOCSwitchDevice >> buildBackground [
+
+	self itemBackground: RectangleMorph new.
+	self itemBackground color: SPOCStyle spotifyGray;
+		extent: (SPOCStyle devicesPanelWidth@(SPOCStyle devicesPanelHeight * SPOCStyle devicesPanelToItemRatio));
+		yourself.
+	^ self itemBackground
+]
+
+{
+	#category : #building,
+	#'squeak_changestamp' : 'VK 6/10/2024 19:54'
+}
+SPOCSwitchDevice >> buildNameText: aDevice [
+
+	| text |
+	text := SPOCBoldText newAt: (self itemBackground topLeft + SPOCSwitchDevice itemTextPadding) withText: aDevice name.
+	aDevice isActive
+		ifTrue: [text textColor: SPOCStyle spotifyGreen].
+	^ text
 	
 ]
 
@@ -63,33 +75,45 @@ SPOCSwitchDevice >> buildResultDisplay [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 6/10/2024 16:13'
+	#'squeak_changestamp' : 'VK 6/10/2024 19:47'
 }
 SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
-	| background nameText typeText finishedMorph deviceButton border ratio height width |
 	
-	height := SPOCStyle devicesPanelHeight.
-	width := SPOCStyle devicesPanelWidth.
-	border := SPOCStyle devicesPanelPadding.
-	ratio := SPOCStyle devicesPanelToItemRatio.
-	background := RectangleMorph new
-		color: SPOCStyle spotifyGray;
-		extent: (width@(height * ratio));
-		yourself.
-	nameText := SPOCBoldText newAt: (background topLeft + (border*ratio)) withText: aDevice name.
-	typeText := SPOCPlainText newAt: (background bottomLeft + (border*ratio@((border*ratio + SPOCStyle textHeight) negated))) withText: aDevice type.
-	aDevice isActive 
-		ifTrue: [nameText textColor: SPOCStyle spotifyGreen.
-			typeText textColor: SPOCStyle spotifyGreen].
+	| finishedMorph deviceButton |
 	finishedMorph := Morph new color: Color transparent;
-		addMorph: background;
-		addMorph: nameText;
-		addMorph: typeText;
+		addMorph: self buildBackground;
+		addMorph: (self buildNameText: aDevice);
+		addMorph: (self buildTypeText: aDevice);
 		vResizing: #shrinkWrap; 
 		yourself.
 	deviceButton := SPOCClickable newUsing: finishedMorph onClick: [:evt | self switchDeviceClicked: aDevice id].
 	deviceButton vResizing: #shrinkWrap.
 	^ deviceButton
+]
+
+{
+	#category : #building,
+	#'squeak_changestamp' : 'VK 6/10/2024 19:54'
+}
+SPOCSwitchDevice >> buildTypeText: aDevice [
+
+	| text |
+	text := SPOCPlainText newAt: (self itemBackground bottomLeft + (SPOCSwitchDevice itemTextPadding @ ((SPOCSwitchDevice itemTextPadding + SPOCStyle textHeight) negated))) withText: aDevice type.
+	aDevice isActive
+		ifTrue: [text textColor: SPOCStyle spotifyGreen].
+	^ text
+	
+]
+
+{
+	#category : #building,
+	#'squeak_changestamp' : 'VK 6/10/2024 19:10'
+}
+SPOCSwitchDevice >> buttonText [
+
+	^ (SPOCBoxedText new contents: ' Devices';
+		position: SPOCStyle devicesTextPadding@0;
+		yourself).
 ]
 
 {
@@ -108,18 +132,18 @@ SPOCSwitchDevice >> currentDevices [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 15:30'
+	#'squeak_changestamp' : 'VK 6/10/2024 19:35'
 }
-SPOCSwitchDevice >> deviceMorphs [
-	^ deviceMorphs
+SPOCSwitchDevice >> deviceItems [
+	^ deviceItems
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 15:30'
+	#'squeak_changestamp' : 'VK 6/10/2024 19:35'
 }
-SPOCSwitchDevice >> deviceMorphs: anObject [
-	deviceMorphs := anObject
+SPOCSwitchDevice >> deviceItems: anObject [
+	deviceItems := anObject
 ]
 
 {
@@ -141,7 +165,7 @@ SPOCSwitchDevice >> devices: anObject [
 ]
 
 {
-	#category : #building,
+	#category : #updating,
 	#'squeak_changestamp' : 'VK 6/9/2024 18:30'
 }
 SPOCSwitchDevice >> hideResults [
@@ -150,19 +174,35 @@ SPOCSwitchDevice >> hideResults [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/10/2024 14:05'
+	#'squeak_changestamp' : 'VK 6/10/2024 19:49'
 }
 SPOCSwitchDevice >> initialize [
 
 	super initialize.
 	
 	self color: Color transparent;
-		deviceMorphs: OrderedCollection new;
+		deviceItems: OrderedCollection new;
 		devices: OrderedCollection new;
 		attachButton;
 		buildResultDisplay;
 		extendFully;
 		yourself
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/10/2024 19:53'
+}
+SPOCSwitchDevice >> itemBackground [
+	^ itemBackground
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VK 6/10/2024 19:53'
+}
+SPOCSwitchDevice >> itemBackground: anObject [
+	itemBackground := anObject
 ]
 
 {
@@ -185,7 +225,7 @@ SPOCSwitchDevice >> resultDisplay: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VK 6/9/2024 18:41'
+	#'squeak_changestamp' : 'VK 6/10/2024 20:05'
 }
 SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	
@@ -195,18 +235,19 @@ SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	apiEndpoint := SPOCApiSwitchDevice new.
 	apiEndpoint authorizer: self app auth.
 	res := apiEndpoint execute: dict.
-	(res response = 204) ifTrue: self hideResults
+	res response code = 204 
+		ifTrue: [self hideResults]
 ]
 
 {
-	#category : #building,
-	#'squeak_changestamp' : 'VK 6/10/2024 16:59'
+	#category : #updating,
+	#'squeak_changestamp' : 'VK 6/10/2024 19:50'
 }
 SPOCSwitchDevice >> updateResultDisplay: anOrderedCollection [
 
-	self deviceMorphs removeAll.
+	self deviceItems removeAll.
 	anOrderedCollection do: [:device |
-		self deviceMorphs add: (self buildResultMorphFrom: device)].
-	self resultDisplay updatePanel: self deviceMorphs.
+		self deviceItems add: (self buildResultMorphFrom: device)].
+	self resultDisplay updatePanel: self deviceItems.
 	self resultDisplay show
 ]

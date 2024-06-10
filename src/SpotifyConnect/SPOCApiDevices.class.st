@@ -55,26 +55,13 @@ SPOCApiDevices >> executeTest [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:42'
+	#'squeak_changestamp' : 'TL 6/10/2024 21:45'
 }
 SPOCApiDevices >> tinkerReponseContent: aContentStream [
 	
-	| content devices deviceItems |
+	| content devices |
 	content := Json readFrom: aContentStream readStream.
 	devices := OrderedCollection new.
-	deviceItems := content at: #devices.
-	deviceItems do: [ :deviceItem |
-		| device |
-		device := SPOCDevice new.
-		device
-			id: (deviceItem at: #id);
-			isActive: (deviceItem at: #is_active);
-			isPrivateSession: (deviceItem at: #is_private_session);
-			isRestricted: (deviceItem at: #is_restricted);
-			name: (deviceItem at: #name);
-			type: (deviceItem at: #type);
-			volume: (deviceItem at: #volume_percent);
-			supportsVolume: (deviceItem at: #supports_volume).
-		devices add: device].
+	(content at: #devices) do: [:aDevice | devices add: (self setDevice: aDevice)].
 	^ devices
 ]
