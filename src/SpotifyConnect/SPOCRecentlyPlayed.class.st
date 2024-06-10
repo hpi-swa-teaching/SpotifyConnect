@@ -3,7 +3,7 @@ Class {
 	#superclass : #SPOCUIComponent,
 	#instVars : [
 		'tracks',
-		'trackMorphs'
+		'trackItems'
 	],
 	#category : #'SpotifyConnect-UI'
 }
@@ -74,7 +74,7 @@ SPOCRecentlyPlayed >> getRecentlyPlayed [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/9/2024 13:53'
+	#'squeak_changestamp' : 'VK 6/10/2024 19:49'
 }
 SPOCRecentlyPlayed >> initialize [
 
@@ -82,7 +82,7 @@ SPOCRecentlyPlayed >> initialize [
 	
 	self 
 		color: Color transparent;
-		trackMorphs: OrderedCollection new;
+		trackItems: OrderedCollection new;
 		tracks: OrderedCollection new;
 		buildButton;
 		extendFully;
@@ -91,18 +91,18 @@ SPOCRecentlyPlayed >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:16'
+	#'squeak_changestamp' : 'VK 6/10/2024 19:35'
 }
-SPOCRecentlyPlayed >> trackMorphs [
-	^ trackMorphs
+SPOCRecentlyPlayed >> trackItems [
+	^ trackItems
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:16'
+	#'squeak_changestamp' : 'VK 6/10/2024 19:35'
 }
-SPOCRecentlyPlayed >> trackMorphs: anObject [
-	trackMorphs := anObject
+SPOCRecentlyPlayed >> trackItems: anObject [
+	trackItems := anObject
 ]
 
 {

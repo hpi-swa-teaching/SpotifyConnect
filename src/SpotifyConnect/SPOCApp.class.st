@@ -188,7 +188,7 @@ SPOCApp >> currentlyPlaying: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/10/2024 14:09'
+	#'squeak_changestamp' : 'VK 6/10/2024 17:49'
 }
 SPOCApp >> initialize [
 
@@ -202,7 +202,7 @@ SPOCApp >> initialize [
 		setUpCurrentlyPlaying;
 		setUpPlayer;
 		setUpVolumeSlider;
-		setUpRecentlyPlayed;
+		setupRecentlyPlayed;
 		setupSwitchDevice
 
 
