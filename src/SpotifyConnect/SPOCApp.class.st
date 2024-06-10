@@ -9,7 +9,8 @@ Class {
 		'currentlyPlaying',
 		'player',
 		'volumeSlider',
-		'recentlyPlayed'
+		'recentlyPlayed',
+		'switchDevice'
 	],
 	#category : #SpotifyConnect
 }
@@ -61,11 +62,11 @@ SPOCApp >> auth: anObject [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 6/10/2024 02:58'
+	#'squeak_changestamp' : 'VK 6/10/2024 14:08'
 }
 SPOCApp >> bottomPanelContent [
 
-	^ {self currentlyPlaying. self player. self volumeSlider}
+	^ {self currentlyPlaying. self player. self switchDevice. self volumeSlider}
 ]
 
 {
@@ -187,7 +188,7 @@ SPOCApp >> currentlyPlaying: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/10/2024 14:02'
+	#'squeak_changestamp' : 'VK 6/10/2024 14:09'
 }
 SPOCApp >> initialize [
 
@@ -201,7 +202,8 @@ SPOCApp >> initialize [
 		setUpCurrentlyPlaying;
 		setUpPlayer;
 		setUpVolumeSlider;
-		setUpRecentlyPlayed
+		setUpRecentlyPlayed;
+		setupSwitchDevice
 
 
 ]
