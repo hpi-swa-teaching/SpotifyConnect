@@ -510,13 +510,13 @@ SPOCApiRecentlyPlayed >> executeTest [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/10/2024 21:51'
+	#'squeak_changestamp' : 'TL 6/10/2024 23:32'
 }
 SPOCApiRecentlyPlayed >> tinkerReponseContent: aContentStream [
 	
 	| content tracks |
 	content := Json readFrom: aContentStream readStream.
 	tracks := OrderedCollection new.
-	(content at: #items) do: [:anItem | tracks add: (self setTrack: (anItem at: #track))].
+	(content at: #items) do: [:anItem | tracks add: (self tinkerTrack: (anItem at: #track))].
 	^ tracks
 ]

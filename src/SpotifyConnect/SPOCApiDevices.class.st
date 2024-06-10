@@ -55,13 +55,13 @@ SPOCApiDevices >> executeTest [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 21:45'
+	#'squeak_changestamp' : 'TL 6/10/2024 23:33'
 }
 SPOCApiDevices >> tinkerReponseContent: aContentStream [
 	
 	| content devices |
 	content := Json readFrom: aContentStream readStream.
 	devices := OrderedCollection new.
-	(content at: #devices) do: [:aDevice | devices add: (self setDevice: aDevice)].
+	(content at: #devices) do: [:aDevice | devices add: (self tinkerDevice: aDevice)].
 	^ devices
 ]
