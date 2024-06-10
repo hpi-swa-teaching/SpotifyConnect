@@ -135,19 +135,20 @@ SPOCPlayer >> deviceID: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 14:44'
+	#'squeak_changestamp' : 'TL 6/10/2024 18:24'
 }
 SPOCPlayer >> executeButtonFunction: anIcon [
 	
-	self app auth accessToken
-		ifNil: [UIManager inform: 'Please log in!']
-		ifNotNil: [self updateIsPlaying.
+	self disabled
+		ifTrue: [self loginPopUp]
+		ifFalse: [self updateIsPlaying.
 			(anIcon == self previousIcon)
 				ifTrue: [self skipToPrevious].
 			(anIcon == self playPauseIcon)
 				ifTrue: [self switchPlaybackState].
 			(anIcon == self nextIcon)
 				ifTrue: [self skipToNext]]
+
 ]
 
 {

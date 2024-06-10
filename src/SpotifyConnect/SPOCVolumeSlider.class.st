@@ -119,14 +119,15 @@ SPOCVolumeSlider >> supportsVolume: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 05:08'
+	#'squeak_changestamp' : 'TL 6/10/2024 18:01'
 }
 SPOCVolumeSlider >> updateInstanceVariables [
 
 	| playbackState |
 	playbackState := self getPlaybackState.
 	playbackState class = SPOCApiEndpointResult
-		ifTrue: [playbackState response code = 204 ifTrue: [UIManager inform: 'Please play music on your device!']]
+		ifTrue: [playbackState response code = 204
+			ifTrue: [UIManager inform: 'Please play music on your device!']]
 		ifFalse: [self deviceID: playbackState device id;
 			volume: playbackState device volume;
 			supportsVolume: playbackState device supportsVolume]

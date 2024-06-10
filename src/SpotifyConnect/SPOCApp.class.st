@@ -188,7 +188,7 @@ SPOCApp >> currentlyPlaying: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/10/2024 14:09'
+	#'squeak_changestamp' : 'TL 6/10/2024 18:03'
 }
 SPOCApp >> initialize [
 
@@ -203,7 +203,7 @@ SPOCApp >> initialize [
 		setUpPlayer;
 		setUpVolumeSlider;
 		setUpRecentlyPlayed;
-		setupSwitchDevice
+		setUpSwitchDevice
 
 
 ]
@@ -317,21 +317,24 @@ SPOCApp >> setUpCurrentlyPlaying [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:48'
+	#'squeak_changestamp' : 'TL 6/10/2024 18:15'
 }
 SPOCApp >> setUpPlayer [
 
-	self player: (SPOCPlayer new app: self).
-	self auth registerSuccessCallback: [self player updateIsPlayingFromLogin]
+	self player: (SPOCPlayer new app: self; yourself).
+	self auth registerSuccessCallback: [self player hasActiveDevice
+			ifTrue: [self player disabled: false.
+				self player updateIsPlayingFromLogin]]
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/10/2024 14:02'
+	#'squeak_changestamp' : 'TL 6/10/2024 18:05'
 }
 SPOCApp >> setUpRecentlyPlayed [
 
-	self recentlyPlayed: (SPOCRecentlyPlayed new app: self; yourself)
+	self recentlyPlayed: (SPOCRecentlyPlayed new app: self).
+	self app auth registerSuccessCallback: [self recentlyPlayed disabled: false]
 ]
 
 {
@@ -355,6 +358,15 @@ SPOCApp >> setUpSearchbar [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'TL 6/10/2024 18:03'
+}
+SPOCApp >> setUpSwitchDevice [
+
+	self switchDevice: (SPOCSwitchDevice new app: self; yourself)
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
 }
 SPOCApp >> setUpUserLogin [
@@ -373,24 +385,6 @@ SPOCApp >> setUpVolumeSlider [
 
 	self volumeSlider: (SPOCVolumeSlider new app: self; yourself).
 	self auth registerSuccessCallback: [self volumeSlider updateInstanceVariables]
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 13:17'
-}
-SPOCApp >> setupRecentlyPlayed [
-
-	self recentlyPlayed: (SPOCRecentlyPlayed new app: self; yourself)
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 16:41'
-}
-SPOCApp >> setupSwitchDevice [
-
-	self switchDevice: (SPOCSwitchDevice new app: self; yourself)
 ]
 
 {

@@ -71,24 +71,6 @@ SPOCSearchbar >> buildTextInputField [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/9/2024 13:17'
-}
-SPOCSearchbar >> disabled [
-
-	^ disabled
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/9/2024 13:17'
-}
-SPOCSearchbar >> disabled: aBoolean [
-
-	disabled := aBoolean
-]
-
-{
 	#category : #initialization,
 	#'squeak_changestamp' : 'TL 6/10/2024 04:22'
 }
