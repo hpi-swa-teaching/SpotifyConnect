@@ -57,7 +57,7 @@ SPOCSwitchDevice >> activeDevice: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/10/2024 11:55'
+	#'squeak_changestamp' : 'VK 6/10/2024 12:01'
 }
 SPOCSwitchDevice >> attachButton [
 
@@ -65,7 +65,7 @@ SPOCSwitchDevice >> attachButton [
 	text := (SPOCBoxedText new contents: ' available Devices';
 		position: SPOCStyle devicesTextPadding@0;
 		yourself).
-	icon := (SPOCIcon new iconAsset: '/assets/devices.png').
+	icon := SPOCIcon new iconAsset: '/assets/devices.png'.
 	button := Morph new color: Color transparent.
 	button addMorph: text;
 		addMorph: icon;
@@ -76,11 +76,11 @@ SPOCSwitchDevice >> attachButton [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/10/2024 11:47'
+	#'squeak_changestamp' : 'VK 6/10/2024 12:08'
 }
 SPOCSwitchDevice >> buildResultDisplay [
 
-	self resultDisplay: (SPOCScrollablePanel newWithExtent: (SPOCStyle devicesPanelWidth) @ (SPOCStyle devicesPanelHeight)).
+	self resultDisplay: (SPOCScrollablePanel newWithExtent: (SPOCStyle devicesPanelWidth@SPOCStyle devicesPanelHeight)).
 	self resultDisplay position: self position + (0@SPOCStyle devicesPanelPadding).
 	self addMorph: self resultDisplay.
 ]
@@ -118,7 +118,7 @@ SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/9/2024 17:59'
+	#'squeak_changestamp' : 'VK 6/10/2024 12:10'
 }
 SPOCSwitchDevice >> currentDevices [
 
@@ -127,7 +127,7 @@ SPOCSwitchDevice >> currentDevices [
 	apiEndpoint := SPOCApiDevices new.
 	apiEndpoint authorizer: self app auth.
 	self devices: (apiEndpoint execute: dict).
-	self updateResultDisplay: devices
+	self updateResultDisplay: self devices
 ]
 
 {
