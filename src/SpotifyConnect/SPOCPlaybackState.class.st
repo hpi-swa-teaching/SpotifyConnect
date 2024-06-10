@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'device',
 		'isPlaying',
-		'progressMS',
+		'progress',
 		'track'
 	],
 	#category : #SpotifyConnect
@@ -48,20 +48,20 @@ SPOCPlaybackState >> isPlaying: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:09'
+	#'squeak_changestamp' : 'TL 6/10/2024 21:25'
 }
-SPOCPlaybackState >> progressMS [
+SPOCPlaybackState >> progress [
 
-	^ progressMS
+	^ progress
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:09'
+	#'squeak_changestamp' : 'TL 6/10/2024 21:25'
 }
-SPOCPlaybackState >> progressMS: anObject [
+SPOCPlaybackState >> progress: anObject [
 
-	progressMS := anObject
+	progress := anObject
 ]
 
 {

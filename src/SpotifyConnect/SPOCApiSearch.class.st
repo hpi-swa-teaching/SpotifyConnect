@@ -496,47 +496,13 @@ SPOCApiSearch >> executeTest [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'RK 6/6/2024 00:59'
+	#'squeak_changestamp' : 'TL 6/10/2024 21:59'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
-	| content tracks trackItems |
+	| content tracks |
 	content := Json readFrom: aContentStream readStream.
 	tracks := OrderedCollection new.
-	trackItems := (content at: #tracks) at: #items.
-	"For each track"
-	trackItems do: [ :trackItem |
-		| artists artistItems album albumItem track |
-		album := SPOCAlbum new.
-		albumItem := (trackItem at: #album).
-		artists := OrderedCollection new.
-		artistItems := (albumItem at: #artists).
-		"For each artist"
-		artistItems do: [ :artistItem |
-			| artist |
-			artist := SPOCArtist new.
-			artist
-				id: (artistItem at: #id);
-				name: (artistItem at: #name).
-			artists add: artist			
-		].
-		album
-			id: (albumItem at: #id);
-			name: (albumItem at: #name);
-			artists: artists;
-			image: (SPOCImage newWithUrl: (((albumItem at: #images) at: 1) at: #url)).
-		track := SPOCTrack new.
-		track
-			id: (trackItem at: #id);
-			name: (trackItem at: #name);
-			image: album image;
-			album: album;
-			duration: (trackItem at: #duration_ms) // 1000;
-			explicit: (trackItem at: #explicit);
-			popularity: (trackItem at: #popularity);
-			trackNumber: (trackItem at: #track_number);
-			yourself.
-		tracks add: track 
-	].
+	((content at: #tracks) at: #items) do: [:anItem | tracks add: (self setTrack: anItem)].
 	^ tracks
 ]
