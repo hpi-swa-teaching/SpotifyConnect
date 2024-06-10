@@ -33,6 +33,15 @@ SPOCStyle class >> devicesPanelHeight [
 
 {
 	#category : #'class variables',
+	#'squeak_changestamp' : 'VK 6/10/2024 16:48'
+}
+SPOCStyle class >> devicesPanelLayer [
+
+	^ 1
+]
+
+{
+	#category : #'class variables',
 	#'squeak_changestamp' : 'VK 6/10/2024 11:46'
 }
 SPOCStyle class >> devicesPanelPadding [
