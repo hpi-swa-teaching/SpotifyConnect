@@ -61,11 +61,11 @@ SPOCApp >> auth: anObject [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VK 6/9/2024 16:42'
+	#'squeak_changestamp' : 'VK 6/10/2024 12:21'
 }
 SPOCApp >> bottomPanelContent [
 
-	^ {self currentlyPlaying. self switchDevice. self player}
+	^ {self currentlyPlaying. self player. self switchDevice}
 ]
 
 {

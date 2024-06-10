@@ -76,13 +76,14 @@ SPOCSwitchDevice >> attachButton [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/10/2024 12:08'
+	#'squeak_changestamp' : 'VK 6/10/2024 12:24'
 }
 SPOCSwitchDevice >> buildResultDisplay [
 
 	self resultDisplay: (SPOCScrollablePanel newWithExtent: (SPOCStyle devicesPanelWidth@SPOCStyle devicesPanelHeight)).
 	self resultDisplay position: self position + (0@SPOCStyle devicesPanelPadding).
 	self addMorph: self resultDisplay.
+	self hideResults.
 ]
 
 {
@@ -172,7 +173,7 @@ SPOCSwitchDevice >> hideResults [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 18:28'
+	#'squeak_changestamp' : 'VK 6/10/2024 12:23'
 }
 SPOCSwitchDevice >> initialize [
 	super initialize.
@@ -183,7 +184,6 @@ SPOCSwitchDevice >> initialize [
 		devices: OrderedCollection new;
 		attachButton;
 		buildResultDisplay;
-		hideResults;
 		extendFully;
 		yourself
 ]
