@@ -6,11 +6,11 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/7/2024 23:46'
+	#'squeak_changestamp' : 'RK 6/10/2024 14:32'
 }
 SPOCStyle class >> currentlyPlayingWidth [
 
-	^ 400
+	^ 600
 ]
 
 {
