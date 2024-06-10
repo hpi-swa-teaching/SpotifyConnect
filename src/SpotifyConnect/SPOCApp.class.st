@@ -89,7 +89,7 @@ SPOCApp >> buildBottomPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 6/5/2024 21:30'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:47'
 }
 SPOCApp >> buildCenterPanel: aBuilder [
 

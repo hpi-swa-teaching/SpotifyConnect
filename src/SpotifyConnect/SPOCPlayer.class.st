@@ -153,7 +153,7 @@ SPOCPlayer >> executeButtonFunction: anIcon [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/3/2024 23:18'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:37'
 }
 SPOCPlayer >> initialize [
 
@@ -167,7 +167,7 @@ SPOCPlayer >> initialize [
 		layoutPolicy: TableLayout new;
 		listDirection: #leftToRight;
 		cellInset: 10;
-		extendFully
+		extendFully.
 ]
 
 {

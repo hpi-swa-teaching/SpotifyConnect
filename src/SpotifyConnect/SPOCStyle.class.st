@@ -87,11 +87,11 @@ SPOCStyle class >> recentlyPlayedPadding [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'VE 6/10/2024 14:24'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:47'
 }
 SPOCStyle class >> resultListHeight [
 
-	^ 250
+	^ 350
 ]
 
 {
@@ -123,11 +123,11 @@ SPOCStyle class >> resultListLimit [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'VE 6/10/2024 14:20'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:45'
 }
 SPOCStyle class >> resultListWidth [
 
-	^ 1000
+	^ 1048
 ]
 
 {

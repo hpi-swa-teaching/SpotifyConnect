@@ -200,7 +200,7 @@ SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 18:30'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:44'
 }
 SPOCSwitchDevice >> updateResultDisplay: anOrderedCollection [
 
@@ -209,5 +209,5 @@ SPOCSwitchDevice >> updateResultDisplay: anOrderedCollection [
 		self deviceMorphs add: (self buildResultMorphFrom: device)].
 	self resultDisplay updatePanel: self deviceMorphs.
 	self resultDisplay show.
-	self extendFully
+	"self extendFully"
 ]
