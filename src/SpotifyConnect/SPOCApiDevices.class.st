@@ -5,23 +5,25 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 21:01'
+	#category : #parameters,
+	#'squeak_changestamp' : 'TL 6/10/2024 03:41'
 }
 SPOCApiDevices >> endpoint [
+
 	^ 'v1/me/player/devices'
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 19:09'
+	#category : #parameters,
+	#'squeak_changestamp' : 'TL 6/10/2024 03:41'
 }
 SPOCApiDevices >> endpointMethod [
+
 	^ 'GET'
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VK 6/3/2024 13:23'
 }
 SPOCApiDevices >> executeRequest: request withParams: aParameterDictionary [
@@ -30,11 +32,12 @@ SPOCApiDevices >> executeRequest: request withParams: aParameterDictionary [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 19:15'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/10/2024 03:42'
 }
 SPOCApiDevices >> executeTest [
-	^'{
+
+	^ '{
 		  "devices": [
 		    {
 		      "id": "string",
@@ -47,12 +50,12 @@ SPOCApiDevices >> executeTest [
 		      "supports_volume": false
 		    }
 		  ]
-	}' readStream
+		}' readStream
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/3/2024 13:30'
+	#category : #response,
+	#'squeak_changestamp' : 'TL 6/10/2024 03:42'
 }
 SPOCApiDevices >> tinkerReponseContent: aContentStream [
 	
@@ -72,7 +75,6 @@ SPOCApiDevices >> tinkerReponseContent: aContentStream [
 			type: (deviceItem at: #type);
 			volume: (deviceItem at: #volume_percent);
 			supportsVolume: (deviceItem at: #supports_volume).
-		devices add: device 
-	].
+		devices add: device].
 	^ devices
 ]

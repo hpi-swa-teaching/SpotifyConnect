@@ -8,28 +8,29 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/9/2024 00:11'
+	#category : #constructor,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:14'
 }
 SPOCImage class >> newWithPath: aString [
 	
 	| form |
 	form := (GitAssetLoader for: SPOCStyle gitRepoName) loadForm: aString.
 	form := form scaledToSize: (SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin)).
-	^ (SPOCImage new image: form)
+	^ SPOCImage new
+		image: form;
+		yourself
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/1/2024 15:10'
+	#category : #constructor,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:14'
 }
 SPOCImage class >> newWithUrl: aString [
 	
-	| img |
-	img := SPOCImage new url: aString;
+	^ SPOCImage new
+		url: aString;
 		image: (Form fromBinaryStream: (HTTPSocket httpGet: aString));
-		yourself.
-	^ img
+		yourself
 ]
 
 {

@@ -5,7 +5,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'TL 6/10/2024 01:18'
 }
 SPOCApiPlay >> buildData: aString [
@@ -14,16 +14,7 @@ SPOCApiPlay >> buildData: aString [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/10/2024 01:18'
-}
-SPOCApiPlay >> buildEmptyData [
-
-	^ ''
-]
-
-{
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'MH 5/26/2024 15:41'
 }
 SPOCApiPlay >> endpoint [ 
@@ -32,7 +23,7 @@ SPOCApiPlay >> endpoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'MH 5/26/2024 15:42'
 }
 SPOCApiPlay >> endpointMethod [
@@ -41,15 +32,15 @@ SPOCApiPlay >> endpointMethod [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/10/2024 01:19'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/10/2024 04:02'
 }
 SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 
 	| data |
 	request rawUrl: (request rawUrl, '?device_id=', (aParamDictionary at: #device_id)).
 	(aParamDictionary size = 1)
-		ifTrue: [data := self buildEmptyData]
+		ifTrue: [data := '']
 		ifFalse: [data := self buildData: (aParamDictionary at: #uris)].
 	request headerAt: 'Content-Length' put: data size.
 	(data size = 0)

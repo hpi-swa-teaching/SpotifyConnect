@@ -9,32 +9,19 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/9/2024 01:12'
-}
-SPOCCurrentlyPlaying >> getPlayingTrack [
-
-	| apiEndpoint dict res |
-	dict := Dictionary new.
-	dict at: 'additional_types' put: 'track'.
-	apiEndpoint := (SPOCApiPlaybackState new authorizer: self app auth).
-	res := apiEndpoint execute: dict.
-	^ res track
-]
-
-{
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/9/2024 00:01'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:11'
 }
 SPOCCurrentlyPlaying >> initialize [
 
 	super initialize.
+	
 	self track: SPOCStyle trackWelcome;
 		item: (SPOCResultListItem newWith: self track);
-		addMorph: item;
+		addMorph: self item;
 		yourself.
-	self item hasTertiaryText: false.
-	self item resizeTo: SPOCStyle currentlyPlayingWidth@SPOCStyle resultListItemHeight
+	self item hasTertiaryText: false;
+		resizeTo: SPOCStyle currentlyPlayingWidth @ SPOCStyle resultListItemHeight
 ]
 
 {
@@ -74,11 +61,11 @@ SPOCCurrentlyPlaying >> track: aSPOCTrack [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/9/2024 11:47'
+	#category : #actions,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:13'
 }
 SPOCCurrentlyPlaying >> update [
 
-	self track: self getPlayingTrack.
+	self track: self getPlaybackState track.
 	self item changeItemTo: self track
 ]

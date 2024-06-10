@@ -33,19 +33,19 @@ SPOCAlbum >> artists: anOrderedCollection [
 
 {
 	#category : #formatting,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:52'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:54'
 }
 SPOCAlbum >> artistsAsString [
 
 	| result |
 	result := ''.
-	self artists allButLastDo: [ :artist | result := result, artist name, ', '].
+	self artists allButLastDo: [:artist | result := result, artist name, ', '].
 	result := result, self artists last name.
 	^ result
 ]
 
 {
-	#category : #formatting,
+	#category : #actions,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:18'
 }
 SPOCAlbum >> clickAction [
@@ -54,7 +54,7 @@ SPOCAlbum >> clickAction [
 ]
 
 {
-	#category : #accessing,
+	#category : #testing,
 	#'squeak_changestamp' : 'RK 6/6/2024 00:47'
 }
 SPOCAlbum >> equals: anAlbum [

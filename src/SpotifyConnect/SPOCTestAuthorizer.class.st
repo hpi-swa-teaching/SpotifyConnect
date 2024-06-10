@@ -8,53 +8,71 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 21:13'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:46'
 }
-SPOCTestAuthorizer >> setUp [
-	authorizer := SPOCAuthorizer new.
+SPOCTestAuthorizer >> authorizer [
+
+	^ authorizer
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 6/5/2024 20:07'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:46'
+}
+SPOCTestAuthorizer >> authorizer: anObject [
+
+	authorizer := anObject
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:46'
+}
+SPOCTestAuthorizer >> setUp [
+
+	self authorizer: SPOCAuthorizer new
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:39'
 }
 SPOCTestAuthorizer >> testAuthorizationUrl [
 	
-	| responseUrl targetUrl clipboardText | 
-	responseUrl := authorizer startAuthorization.
+	| clipboardText responseUrl targetUrl | 
+	responseUrl := self authorizer startAuthorization.
 	targetUrl := 'https://accounts.spotify.com/authorize',
 		'?response_type=code',
 		'&scope=', SPOCAuthorizer scope,
 		'&redirect_uri=', SPOCAuthorizer redirectUri,
-		'&state=', authorizer randomState,
+		'&state=', self authorizer randomState,
 		'&client_id=', SPOCAuthorizer clientId. 
-	clipboardText := Clipboard default primitiveClipboardText.
-	
+	clipboardText := Clipboard default primitiveClipboardText.	
 	self assert: targetUrl equals: responseUrl.
 	self assert: targetUrl equals: clipboardText
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 19:00'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:40'
 }
 SPOCTestAuthorizer >> testCallbackEndpoint [
 	
 	| response |
-	authorizer startAuthorization.
+	self authorizer startAuthorization.
 	response := WebClient httpGet: SPOCAuthorizer redirectUri.
 	self assert: (response code = 404) not
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 19:00'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:40'
 }
 SPOCTestAuthorizer >> testCallbackErrors [
 	
 	| response |
-	authorizer startAuthorization.
+	self authorizer startAuthorization.
 	response := WebClient httpGet: (SPOCAuthorizer redirectUri, '?code=123').
 	self assert: response code = 400.
 	response := WebClient httpGet: (SPOCAuthorizer redirectUri, '?state=123').
@@ -64,37 +82,37 @@ SPOCTestAuthorizer >> testCallbackErrors [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/28/2024 21:19'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:40'
 }
 SPOCTestAuthorizer >> testOnAuthorizationSuccessCallbacks [
 	
 	| tmp |
 	tmp := 0.
-	authorizer registerSuccessCallback: [tmp := 1].
-	authorizer callSuccessCallbacks.
-	self assert: tmp = 1.
+	self authorizer registerSuccessCallback: [tmp := 1].
+	self authorizer callSuccessCallbacks.
+	self assert: tmp = 1
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 21:48'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:41'
 }
 SPOCTestAuthorizer >> testRandomState [
 	
 	| lastRandomState |
-	authorizer nextRandomState.
-	self assert: authorizer randomState isString.
-	lastRandomState := authorizer randomState.
-	authorizer nextRandomState.
-	self assert: (lastRandomState = authorizer randomState) not
+	self authorizer nextRandomState.
+	self assert: self authorizer randomState isString.
+	lastRandomState := self authorizer randomState.
+	self authorizer nextRandomState.
+	self assert: (lastRandomState = self authorizer randomState) not
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 19:05'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:41'
 }
 SPOCTestAuthorizer >> testResponseAsset [
 	
-	self assert: ((GitAssetLoader for: 'SpotifyConnect') loadString: 'assets/successResponse.html') notNil.
+	self assert: ((GitAssetLoader for: 'SpotifyConnect') loadString: 'assets/successResponse.html') notNil
 ]

@@ -11,7 +11,7 @@ Class {
 }
 
 {
-	#category : #accessing,
+	#category : #actions,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:17'
 }
 SPOCDataModel >> clickAction [
@@ -20,7 +20,7 @@ SPOCDataModel >> clickAction [
 ]
 
 {
-	#category : #accessing,
+	#category : #testing,
 	#'squeak_changestamp' : 'VK 5/27/2024 16:01'
 }
 SPOCDataModel >> equals: aDataModel [

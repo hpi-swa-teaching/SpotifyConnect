@@ -5,7 +5,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'MH 5/26/2024 21:26'
 }
 SPOCApiPause >> endpoint [ 
@@ -14,7 +14,7 @@ SPOCApiPause >> endpoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'MH 5/26/2024 21:26'
 }
 SPOCApiPause >> endpointMethod [
@@ -23,7 +23,7 @@ SPOCApiPause >> endpointMethod [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'TL 6/10/2024 01:17'
 }
 SPOCApiPause >> executeRequest: request withParams: aParamDictionary [

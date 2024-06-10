@@ -5,7 +5,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'VK 6/3/2024 12:19'
 }
 SPOCApiSwitchDevice >> endpoint [
@@ -14,7 +14,7 @@ SPOCApiSwitchDevice >> endpoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'VK 6/3/2024 12:19'
 }
 SPOCApiSwitchDevice >> endpointMethod [
@@ -23,32 +23,13 @@ SPOCApiSwitchDevice >> endpointMethod [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/4/2024 17:15'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/10/2024 03:43'
 }
 SPOCApiSwitchDevice >> executeRequest: request withParams: aParameterDictionary [
 
 	| data |
-	data := 
-	'{"device_ids": ["', (aParameterDictionary at: #deviceID), '"]}'.
+	data := '{"device_ids": ["', (aParameterDictionary at: #deviceID), '"]}'.
 	request headerAt: 'Content-Length' put: data size.
 	^ self client sendRequest: request content: data readStream size: data size
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/3/2024 12:21'
-}
-SPOCApiSwitchDevice >> executeTest [
-	"TODO: empty Response"
-	^ ''
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/4/2024 16:01'
-}
-SPOCApiSwitchDevice >> tinkerReponseContent: aContentStream [
-	
-	"wenn alles gut gelaufen ist, kommt keine response, sondern nur bei Fehler"
 ]

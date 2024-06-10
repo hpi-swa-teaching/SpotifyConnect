@@ -5,24 +5,24 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 6/5/2024 19:26'
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:51'
 }
 SPOCTestApiTrack >> setUp [
 
-	apiEndpoint := SPOCApiTrack new authorizer: self auth; yourself
+	self apiEndpoint: (SPOCApiTrack new authorizer: self auth; yourself)
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 6/5/2024 19:25'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:51'
 }
 SPOCTestApiTrack >> testApiTrackExecute [
 
 	| dict res |
-	dict := Dictionary new.
-	dict at: 'trackId' put: '4PTG3Z6ehGkBFwjybzWkR8'.
-	res := apiEndpoint execute: dict.
-	
+	dict := Dictionary new
+		at: 'trackId' put: '4PTG3Z6ehGkBFwjybzWkR8';
+		yourself.
+	res := self apiEndpoint execute: dict.
 	self assert: res notNil
 ]

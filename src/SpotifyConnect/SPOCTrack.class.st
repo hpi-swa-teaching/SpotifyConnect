@@ -49,7 +49,7 @@ SPOCTrack >> artists: aOrderedCollection [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'RK 6/7/2024 12:22'
 }
 SPOCTrack >> clickAction [
@@ -78,12 +78,12 @@ SPOCTrack >> duration: aNumber [
 
 {
 	#category : #formatting,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:38'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:55'
 }
 SPOCTrack >> durationAsFormattedTime [
 	"Converts milliseconds to 'mm:ss'"
 	
-	| min sec filler time |
+	| filler min sec time |
 	min := duration // 60.
 	sec := duration \\ 60.
 	sec < 10 
@@ -94,7 +94,7 @@ SPOCTrack >> durationAsFormattedTime [
 ]
 
 {
-	#category : #accessing,
+	#category : #testing,
 	#'squeak_changestamp' : 'RK 6/6/2024 00:49'
 }
 SPOCTrack >> equals: aTrack [
@@ -129,7 +129,7 @@ SPOCTrack >> explicit: aBoolean [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
 }
 SPOCTrack >> playTrack: aString [

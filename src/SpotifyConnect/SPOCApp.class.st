@@ -69,7 +69,7 @@ SPOCApp >> bottomPanelContent [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 6/7/2024 23:53'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:47'
 }
 SPOCApp >> buildBottomPanel: aBuilder [
 
@@ -101,7 +101,7 @@ SPOCApp >> buildCenterPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:50'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:48'
 }
 SPOCApp >> buildMainTable: aBuilder [
 	
@@ -114,7 +114,7 @@ SPOCApp >> buildMainTable: aBuilder [
 			vResizing: #spaceFill);
 		children: {self buildTopPanel: aBuilder.
 			self buildCenterPanel: aBuilder.
-			self buildBottomPanel: aBuilder.}
+			self buildBottomPanel: aBuilder}
 ]
 
 {
@@ -186,7 +186,7 @@ SPOCApp >> currentlyPlaying: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 02:40'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:48'
 }
 SPOCApp >> initialize [
 
@@ -194,11 +194,11 @@ SPOCApp >> initialize [
 	
 	self auth: SPOCAuthorizer new; 
 		registerOpenCommand;
-		setupUserLogin;
-		setupSearchbar;
+		setUpUserLogin;
+		setUpSearchbar;
 		setUpResultList;
 		setUpCurrentlyPlaying;
-		setupPlayer;
+		setUpPlayer;
 		setUpVolumeSlider
 
 
@@ -215,17 +215,19 @@ SPOCApp >> open [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 5/30/2024 11:49'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
 }
 SPOCApp >> player [
+
 	^ player
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 5/30/2024 11:49'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
 }
 SPOCApp >> player: anObject [
+
 	player := anObject
 ]
 
@@ -250,33 +252,37 @@ SPOCApp >> registerOpenCommand [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 21:29'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
 }
 SPOCApp >> resultList [
+
 	^ resultList
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/5/2024 21:29'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
 }
 SPOCApp >> resultList: aSPOCResultList [
+
 	resultList := aSPOCResultList
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/30/2024 21:27'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
 }
 SPOCApp >> searchbar [
+
 	^ searchbar
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/30/2024 21:34'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
 }
 SPOCApp >> searchbar: aSPOCSearchbar [
+
 	searchbar := aSPOCSearchbar
 ]
 
@@ -291,11 +297,43 @@ SPOCApp >> setUpCurrentlyPlaying [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'TL 6/10/2024 03:48'
+}
+SPOCApp >> setUpPlayer [
+
+	self player: (SPOCPlayer new app: self).
+	self auth registerSuccessCallback: [self player updateIsPlayingFromLogin]
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:25'
 }
 SPOCApp >> setUpResultList [
 
 	self resultList: (SPOCResultList new app: self)
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
+}
+SPOCApp >> setUpSearchbar [
+
+	self searchbar: (SPOCSearchbar new app: self).
+	self auth registerSuccessCallback: [self searchbar disabled: false]
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
+}
+SPOCApp >> setUpUserLogin [
+
+	self userLogin: (SPOCUserLogin new app: self).
+	self auth registerSuccessCallback: [self userLogin toggleLogout].
+
+
 ]
 
 {
@@ -309,59 +347,29 @@ SPOCApp >> setUpVolumeSlider [
 ]
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 01:33'
-}
-SPOCApp >> setupPlayer [
-
-	self player: (SPOCPlayer new app: self).
-	self auth registerSuccessCallback: [self player updateIsPlayingFromLogin]
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/9/2024 13:18'
-}
-SPOCApp >> setupSearchbar [
-
-	self searchbar: (SPOCSearchbar new app: self; yourself).
-	self auth registerSuccessCallback: [self searchbar disabled: false]
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/28/2024 21:34'
-}
-SPOCApp >> setupUserLogin [
-
-	self userLogin: (SPOCUserLogin new app: self; yourself).
-	self auth registerSuccessCallback: [self userLogin toggleLogout].
-
-
-]
-
-{
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/3/2024 10:23'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
 }
 SPOCApp >> topPanelContent [
 
-	^ { self searchbar. self userLogin}
+	^ {self searchbar. self userLogin}
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 19:59'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:50'
 }
 SPOCApp >> userLogin [
+
 	^ userLogin
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 19:59'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:50'
 }
 SPOCApp >> userLogin: anObject [
+
 	userLogin := anObject
 ]
 

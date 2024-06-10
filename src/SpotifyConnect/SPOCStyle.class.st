@@ -5,7 +5,7 @@ Class {
 }
 
 {
-	#category : #'class variables',
+	#category : #constants,
 	#'squeak_changestamp' : 'RK 6/7/2024 23:46'
 }
 SPOCStyle class >> currentlyPlayingWidth [
@@ -14,7 +14,7 @@ SPOCStyle class >> currentlyPlayingWidth [
 ]
 
 {
-	#category : #'class variables',
+	#category : #constants,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
 }
 SPOCStyle class >> defaultMargin [
@@ -23,7 +23,7 @@ SPOCStyle class >> defaultMargin [
 ]
 
 {
-	#category : #'class variables',
+	#category : #constants,
 	#'squeak_changestamp' : 'RK 6/8/2024 23:35'
 }
 SPOCStyle class >> gitRepoName [
@@ -32,7 +32,7 @@ SPOCStyle class >> gitRepoName [
 ]
 
 {
-	#category : #'class variables',
+	#category : #constants,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
 }
 SPOCStyle class >> resultListHeight [
@@ -41,7 +41,7 @@ SPOCStyle class >> resultListHeight [
 ]
 
 {
-	#category : #'class variables',
+	#category : #constants,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
 }
 SPOCStyle class >> resultListItemHeight [
@@ -50,7 +50,7 @@ SPOCStyle class >> resultListItemHeight [
 ]
 
 {
-	#category : #'class variables',
+	#category : #constants,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
 }
 SPOCStyle class >> resultListItemPadding [
@@ -59,7 +59,7 @@ SPOCStyle class >> resultListItemPadding [
 ]
 
 {
-	#category : #'class variables',
+	#category : #constants,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
 }
 SPOCStyle class >> resultListLimit [
@@ -68,7 +68,7 @@ SPOCStyle class >> resultListLimit [
 ]
 
 {
-	#category : #'class variables',
+	#category : #constants,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCStyle class >> resultListWidth [
@@ -77,7 +77,7 @@ SPOCStyle class >> resultListWidth [
 ]
 
 {
-	#category : #'class variables',
+	#category : #constants,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCStyle class >> searchbarHeight [
@@ -86,7 +86,7 @@ SPOCStyle class >> searchbarHeight [
 ]
 
 {
-	#category : #'class variables',
+	#category : #constants,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCStyle class >> searchbarWidth [
@@ -95,7 +95,7 @@ SPOCStyle class >> searchbarWidth [
 ]
 
 {
-	#category : #'class variables',
+	#category : #colors,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCStyle class >> spotifyBlack [
@@ -104,7 +104,7 @@ SPOCStyle class >> spotifyBlack [
 ]
 
 {
-	#category : #'class variables',
+	#category : #colors,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCStyle class >> spotifyGray [
@@ -113,7 +113,7 @@ SPOCStyle class >> spotifyGray [
 ]
 
 {
-	#category : #'class variables',
+	#category : #colors,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCStyle class >> spotifyGreen [
@@ -122,7 +122,7 @@ SPOCStyle class >> spotifyGreen [
 ]
 
 {
-	#category : #'class variables',
+	#category : #colors,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCStyle class >> spotifyWhite [
@@ -131,7 +131,7 @@ SPOCStyle class >> spotifyWhite [
 ]
 
 {
-	#category : #'class variables',
+	#category : #constants,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCStyle class >> textHeight [
@@ -140,18 +140,18 @@ SPOCStyle class >> textHeight [
 ]
 
 {
-	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 6/9/2024 00:23'
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:15'
 }
 SPOCStyle class >> trackWelcome [
 
 	| collection |
 	collection := OrderedCollection new.
 	collection add: (SPOCArtist new name: 'Spotify in Squeak').
-	^(SPOCTrack new
+	^ SPOCTrack new
 		image: (SPOCImage newWithPath: '/assets/squeak-mouse.png');
 		name: 'Welcome!';
 		album: (SPOCAlbum new artists: collection);
 		duration: 0;
-		yourself)
+		yourself
 ]

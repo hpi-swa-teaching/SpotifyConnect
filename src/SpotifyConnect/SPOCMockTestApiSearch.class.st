@@ -9,37 +9,74 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/10/2024 00:19'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:58'
 }
-SPOCMockTestApiSearch >> setUp [
+SPOCMockTestApiSearch >> apiEndpoint [
 
-	apiEndpoint := SPOCApiSearch new.
-	track := SPOCTrack new.
-	track id: '45c4L5n0wh6KRv0SOf879S';
-		name: 'Morning Blue';
-		image: nil;
-		artists: nil;
-		album: nil;
-		duration: 217;
-		explicit: false;
-		popularity: 59;
-		trackNumber: 11.
-	apiEndpoint returnsTestContent: true
+	^ apiEndpoint
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/10/2024 00:25'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:58'
+}
+SPOCMockTestApiSearch >> apiEndpoint: anObject [
+
+	apiEndpoint := anObject
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:19'
+}
+SPOCMockTestApiSearch >> setUp [
+
+	self apiEndpoint: SPOCApiSearch new;
+		track: (SPOCTrack new
+			id: '45c4L5n0wh6KRv0SOf879S';
+			name: 'Morning Blue';
+			image: nil;
+			artists: nil;
+			album: nil;
+			duration: 217;
+			explicit: false;
+			popularity: 59;
+			trackNumber: 11;
+			yourself).
+	self apiEndpoint returnsTestContent: true
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:00'
 }
 SPOCMockTestApiSearch >> testMockApiSearchExecute [
 
 	| dict res resTrack |
 	dict := Dictionary new.
-	res := apiEndpoint execute: dict.
+	res := self apiEndpoint execute: dict.
 	resTrack := res first
 		image: nil;
 		artists: nil;
 		album: nil.
-	self assert: (track equals: resTrack)
+	self assert: (self track equals: resTrack)
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:58'
+}
+SPOCMockTestApiSearch >> track [
+
+	^ track
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:58'
+}
+SPOCMockTestApiSearch >> track: anObject [
+
+	track := anObject
 ]

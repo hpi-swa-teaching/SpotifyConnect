@@ -8,26 +8,29 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/28/2024 13:37'
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:11'
 }
 SPOCIcon class >> defaultAsset [
+
 	^ '/assets/play.png'
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 19:41'
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:11'
 }
 SPOCIcon class >> iconScaling [
-	^ 1/8
+
+	^ 1 / 8
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 19:41'
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:11'
 }
 SPOCIcon class >> size [
+
 	^ 32
 ]
 

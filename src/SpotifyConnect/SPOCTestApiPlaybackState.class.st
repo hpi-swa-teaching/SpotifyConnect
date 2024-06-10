@@ -5,7 +5,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #setup,
 	#'squeak_changestamp' : 'TL 6/10/2024 00:28'
 }
 SPOCTestApiPlaybackState >> setUp [
@@ -14,7 +14,7 @@ SPOCTestApiPlaybackState >> setUp [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #testing,
 	#'squeak_changestamp' : 'TL 6/10/2024 03:30'
 }
 SPOCTestApiPlaybackState >> testApiPlaybackStateExecute [

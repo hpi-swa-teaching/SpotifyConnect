@@ -5,7 +5,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #constructor,
 	#'squeak_changestamp' : 'RK 6/6/2024 01:23'
 }
 SPOCBoldText class >> newAt: aPoint withText: aString [

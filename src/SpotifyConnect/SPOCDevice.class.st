@@ -15,7 +15,7 @@ Class {
 }
 
 {
-	#category : #accessing,
+	#category : #testing,
 	#'squeak_changestamp' : 'VK 5/27/2024 16:25'
 }
 SPOCDevice >> equals: aDevice [
@@ -32,128 +32,144 @@ SPOCDevice >> equals: aDevice [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/9/2024 00:30'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
 }
 SPOCDevice >> id [
+
 	^ id
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/9/2024 00:30'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
 }
 SPOCDevice >> id: aString [
+
 	id := aString
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:05'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
 }
 SPOCDevice >> isActive [
+
 	^ isActive
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:05'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
 }
 SPOCDevice >> isActive: anObject [
+
 	isActive := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:05'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
 }
 SPOCDevice >> isPrivateSession [
+
 	^ isPrivateSession
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:05'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
 }
 SPOCDevice >> isPrivateSession: anObject [
+
 	isPrivateSession := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:05'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
 }
 SPOCDevice >> isRestricted [
+
 	^ isRestricted
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:05'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
 }
 SPOCDevice >> isRestricted: anObject [
+
 	isRestricted := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/9/2024 00:30'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
 }
 SPOCDevice >> name [
+
 	^ name
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/9/2024 00:30'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
 }
 SPOCDevice >> name: aString [
+
 	name := aString
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:07'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
 }
 SPOCDevice >> supportsVolume [
+
 	^ supportsVolume
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:07'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
 }
 SPOCDevice >> supportsVolume: anObject [
+
 	supportsVolume := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:06'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:57'
 }
 SPOCDevice >> type [
+
 	^ type
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:06'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:57'
 }
 SPOCDevice >> type: anObject [
+
 	type := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:06'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:57'
 }
 SPOCDevice >> volume [
+
 	^ volume
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 19:06'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:57'
 }
 SPOCDevice >> volume: anObject [
+
 	volume := anObject
 ]

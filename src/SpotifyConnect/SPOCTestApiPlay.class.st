@@ -5,8 +5,8 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/10/2024 00:28'
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:44'
 }
 SPOCTestApiPlay >> setUp [
 
@@ -14,17 +14,17 @@ SPOCTestApiPlay >> setUp [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/10/2024 03:30'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:49'
 }
 SPOCTestApiPlay >> testApiPlayExecute [
 
-	| paramDict res |
-	paramDict := Dictionary new
+	| dict res |
+	dict := Dictionary new
 		at: #device_id put: 'b704b454bce64526992a3f207723032f5f91e635';
 		yourself.
-	res := self apiEndpoint execute: paramDict.	
-	self assert: true.
+	res := self apiEndpoint execute: dict.	
+	self assert: true
 	"isPlaying
 		ifTrue: [self assert: (res response code = 403)]
 		ifFalse: [self assert: (res response code = 204)]"

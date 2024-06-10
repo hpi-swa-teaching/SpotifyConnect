@@ -17,20 +17,22 @@ Class {
 
 {
 	#category : #credentials,
-	#'squeak_changestamp' : 'OW 5/22/2024 18:43'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:58'
 }
 SPOCAuthorizer class >> clientId [
 
-   ^ ClientId ifNil: [ClientId := UIManager default request: 'Please enter client id']
+   ^ ClientId
+		ifNil: [ClientId := UIManager default request: 'Please enter client id']
 ]
 
 {
 	#category : #credentials,
-	#'squeak_changestamp' : 'OW 5/22/2024 18:43'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:58'
 }
 SPOCAuthorizer class >> clientSecret [
 
-   ^ ClientSecret ifNil: [ClientSecret := UIManager default request: 'Please enter client secret']
+   ^ ClientSecret
+		ifNil: [ClientSecret := UIManager default request: 'Please enter client secret']
 ]
 
 {
@@ -149,23 +151,25 @@ SPOCAuthorizer >> buildAuthorizationUrl [
 
 {
 	#category : #callback,
-	#'squeak_changestamp' : 'VE 5/28/2024 21:19'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:50'
 }
 SPOCAuthorizer >> callSuccessCallbacks [
 
-	successCallbacks do: [:aBlock | aBlock value]
+	self successCallbacks do: [:aBlock | aBlock value]
 ]
 
 {
 	#category : #callback,
-	#'squeak_changestamp' : 'VE 6/4/2024 09:38'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:52'
 }
 SPOCAuthorizer >> callback: aRequest [
 
 	| code state |
 	aRequest fields at: 'error' ifPresent: [aRequest send500Response: (aRequest fields at: 'error')].
-	code := aRequest fields at: 'code' ifAbsent: [aRequest send400Response].
-	state := aRequest fields at: 'state' ifAbsent: [aRequest send400Response].
+	code := aRequest fields at: 'code'
+		ifAbsent: [aRequest send400Response].
+	state := aRequest fields at: 'state'
+		ifAbsent: [aRequest send400Response].
 	state = self randomState
 		ifTrue: [self retreiveAccessTokenWithAccessCode: code.
 			aRequest send200Response: (SPOCAuthorizer successPage) contentType: 'text/html']
@@ -174,11 +178,12 @@ SPOCAuthorizer >> callback: aRequest [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/28/2024 21:20'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:51'
 }
 SPOCAuthorizer >> initialize [
 
 	super initialize.
+	
 	SPOCAuthorizer clientId.
 	SPOCAuthorizer clientSecret.
 	self isAuthorized: false;
@@ -205,7 +210,7 @@ SPOCAuthorizer >> isAuthorized: aBoolean [
 ]
 
 {
-	#category : #accessing,
+	#category : #actions,
 	#'squeak_changestamp' : 'VE 5/28/2024 21:37'
 }
 SPOCAuthorizer >> logout [
@@ -215,11 +220,11 @@ SPOCAuthorizer >> logout [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/4/2024 09:27'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:51'
 }
 SPOCAuthorizer >> nextRandomState [
 
-	self randomState: (self randomString: SPOCAuthorizer randomStateStringLength).
+	self randomState: (self randomString: SPOCAuthorizer randomStateStringLength)
 ]
 
 {
@@ -242,22 +247,21 @@ SPOCAuthorizer >> randomState: aState [
 
 {
 	#category : #utilities,
-	#'squeak_changestamp' : 'OW 5/22/2024 18:38'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:51'
 }
 SPOCAuthorizer >> randomString: aLength [
 
-	| chars randomString index |
+	| chars index randomString |
     	chars := Character alphabet asArray.
     	randomString := String new: aLength.
     	1 to: aLength do: [:i | index := (1 to: chars size) atRandom.
-        	randomString at: i put: (chars at: index)].
-    	
+      randomString at: i put: (chars at: index)].
 	^ randomString
 ]
 
 {
 	#category : #authorization,
-	#'squeak_changestamp' : 'VE 6/4/2024 09:36'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:52'
 }
 SPOCAuthorizer >> refreshAccessToken [
 
@@ -265,10 +269,12 @@ SPOCAuthorizer >> refreshAccessToken [
 	self isAuthorized: false.
 	content := self spotifyRefreshApiContent.
 	response := self requestSpotifyApiEndpoint: content.
-	response isSuccess ifFalse: [^ self error: response status].
+	response isSuccess
+		ifFalse: [^ self error: response status].
 	responseContent := Json readFrom: response content readStream.
 	self accessToken: (responseContent at: 'access_token').
-	self refreshToken: (responseContent at: 'refresh_token' ifAbsent: [self refreshToken]).
+	self refreshToken: (responseContent at: 'refresh_token'
+			ifAbsent: [self refreshToken]).
 	self isAuthorized: true
 ]
 
@@ -300,7 +306,7 @@ SPOCAuthorizer >> registerSuccessCallback: aBlock [
 ]
 
 {
-	#category : #'api-calls',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VE 6/4/2024 09:36'
 }
 SPOCAuthorizer >> requestSpotifyApiEndpoint: aContentString [
@@ -311,35 +317,36 @@ SPOCAuthorizer >> requestSpotifyApiEndpoint: aContentString [
 
 {
 	#category : #authorization,
-	#'squeak_changestamp' : 'VE 6/4/2024 09:36'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:53'
 }
 SPOCAuthorizer >> retreiveAccessTokenWithAccessCode: anAccessCode [
 	
 	| content response responseContent |
 	content := self spotifyAccessApiContent: anAccessCode.
 	response := self requestSpotifyApiEndpoint: content.
-	response isSuccess ifFalse:[^self error: response status].
+	response isSuccess
+		ifFalse: [^self error: response status].
 	responseContent := Json readFrom: response content readStream.
  	self accessToken: (responseContent at: 'access_token');
 		refreshToken: (responseContent at: 'refresh_token');
 		isAuthorized: true;
-		callSuccessCallbacks.
+		callSuccessCallbacks
 	
 
 ]
 
 {
 	#category : #callback,
-	#'squeak_changestamp' : 'VE 5/28/2024 14:47'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:53'
 }
 SPOCAuthorizer >> setupCallbackService [
 
 	WebServer default removeService: SPOCAuthorizer redirectRoute.
-	WebServer default addService: SPOCAuthorizer redirectRoute action: [:aRequest | self callback: aRequest].
+	WebServer default addService: SPOCAuthorizer redirectRoute action: [:aRequest | self callback: aRequest]
 ]
 
 {
-	#category : #'api-calls',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VE 6/4/2024 09:33'
 }
 SPOCAuthorizer >> spotifyAccessApiContent: anAccessCode [
@@ -353,7 +360,7 @@ SPOCAuthorizer >> spotifyAccessApiContent: anAccessCode [
 ]
 
 {
-	#category : #'api-calls',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VE 6/4/2024 09:34'
 }
 SPOCAuthorizer >> spotifyRefreshApiContent [

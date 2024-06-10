@@ -14,65 +14,67 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/27/2024 11:45'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:22'
 }
 SPOCSwitchDevice >> activeDevice [
+
 	^ activeDevice
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/27/2024 11:45'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:22'
 }
 SPOCSwitchDevice >> activeDevice: anObject [
+
 	activeDevice := anObject
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 12:47'
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:22'
 }
 SPOCSwitchDevice >> attachButton [
 
-	self text: (SPOCBoxedText new contents: 'available Devices'; yourself);
-		button: ( SPOCClickable newUsing: text onClick: [:anEvent | self currentDevices]);
+	self text: (SPOCBoxedText new
+			contents: 'available devices';
+			yourself);
+		button: (SPOCClickable newUsing: self text onClick: [:anEvent | self currentDevices]);
 		addMorph: self button
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 13:56'
+	#category : #building,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:24'
 }
 SPOCSwitchDevice >> buildResultDisplay [
 
-	resultDisplay := SPOCScrollablePanel new
-		buildPanelAtPos: (self topLeft + (0@60)) withExtent: (300@500);
-		hide.
-	self addMorph: resultDisplay;
-		yourself
+	self resultDisplay: (SPOCScrollablePanel new
+			buildPanelAtPos: (self topLeft + (0 @ 60)) withExtent: (300 @ 500);
+			hide).
+	self addMorph: self resultDisplay
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 13:54'
+	#category : #building,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:24'
 }
 SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
+
 	| background nameText typeText finishedMorph deviceButton border height ratio width |
-	
 	height := SPOCSearchbar searchbarHeight.
 	width := SPOCSearchbar searchbarWidth.
 	border := SPOCSearchbar resultBorder.
-	ratio := SPOCSearchbar searchbarToResultRatio.
-	
+	ratio := SPOCSearchbar searchbarToResultRatio.	
 	background := RectangleMorph new
 		color: SPOCStyle spotifyGray;
-		extent: (width +  height@(ratio * height));
+		extent: (width +  height @ (ratio * height));
 		morphicLayerNumber: SPOCSearchbar baseLayer.
-	nameText := SPOCText newAt: (background topLeft + (border@0)) withText: aDevice name.
-	typeText := SPOCText newAt: (background bottomLeft + (border@(SPOCText defaultHeight negated))) withText: aDevice type.
+	nameText := SPOCText newAt: (background topLeft + (border @ 0)) withText: aDevice name.
+	typeText := SPOCText newAt: (background bottomLeft + (border @ (SPOCText defaultHeight negated))) withText: aDevice type.
 	aDevice isActive 
 		ifTrue: [background color: SPOCStyle spotifyGreen.
-			activeDevice := aDevice].
+			self activeDevice: aDevice].
 	finishedMorph := Morph new color: Color transparent;
 		addMorph: background;
 		addMorph: nameText;
@@ -86,83 +88,90 @@ SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 12:53'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:23'
 }
 SPOCSwitchDevice >> button [
+
 	^ button
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 12:53'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:23'
 }
 SPOCSwitchDevice >> button: anObject [
+
 	button := anObject
 ]
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/3/2024 13:04'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/10/2024 05:09'
 }
 SPOCSwitchDevice >> currentDevices [
 
-	| dict apiEndpoint |
-	dict := Dictionary new.
-	apiEndpoint := SPOCApiDevices new.
-	apiEndpoint authorizer: self app auth.
-	self devices: (apiEndpoint execute: dict).
-	self updateResultDisplay: devices
+	| apiEndpoint |
+	apiEndpoint := SPOCApiDevices new
+		authorizer: self app auth;
+		yourself.
+	self devices: (apiEndpoint execute: (Dictionary new)).
+	self updateResultDisplay: self devices
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/27/2024 17:55'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:23'
 }
 SPOCSwitchDevice >> deviceMorphs [
+
 	^ devicesMorphs
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/27/2024 17:55'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:23'
 }
 SPOCSwitchDevice >> deviceMorphs: anObject [
+
 	devicesMorphs := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 20:03'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:23'
 }
 SPOCSwitchDevice >> devices [
+
 	^ devices
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 5/25/2024 20:03'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:23'
 }
 SPOCSwitchDevice >> devices: anObject [
+
 	devices := anObject
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/4/2024 12:02'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:27'
 }
 SPOCSwitchDevice >> hideResults [
+
 	self resultList hide
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/3/2024 13:00'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:25'
 }
 SPOCSwitchDevice >> initialize [
+
 	super initialize.
 	
-	self
-		color: Color transparent;
+	self color: Color transparent;
 		deviceMorphs: OrderedCollection new;
 		devices: OrderedCollection new;
 		attachButton;
@@ -173,61 +182,68 @@ SPOCSwitchDevice >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 12:52'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:23'
 }
 SPOCSwitchDevice >> resultDisplay [
+
 	^ resultDisplay
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 12:52'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:23'
 }
 SPOCSwitchDevice >> resultDisplay: anObject [
+
 	resultDisplay := anObject
 ]
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/4/2024 16:13'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/10/2024 04:27'
 }
 SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	
-	| apiEndpoint dict |
-	dict := Dictionary new.
-	dict at: #deviceID put: aDevice.
-	apiEndpoint := SPOCApiSwitchDevice new.
-	apiEndpoint authorizer: self app auth.
-	apiEndpoint execute: dict.
+	| dict |
+	dict := Dictionary new
+		at: #deviceID put: aDevice;
+		yourself.
+	SPOCApiSwitchDevice new
+		authorizer: self app auth;
+		execute: dict;
+		yourself.
 	(Delay forMilliseconds: 1000) wait.
 	self currentDevices
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 12:53'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:23'
 }
 SPOCSwitchDevice >> text [
+
 	^ text
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 12:53'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:23'
 }
 SPOCSwitchDevice >> text: anObject [
+
 	text := anObject
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/3/2024 14:29'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:27'
 }
 SPOCSwitchDevice >> updateResultDisplay: anOrderedCollection [
 	
-	anOrderedCollection ifNil: [self hideResults.
-		^ self].
-	resultDisplay items: anOrderedCollection;
+	anOrderedCollection
+		ifNil: [self hideResults.
+			^ self].
+	self resultDisplay items: anOrderedCollection;
 		buildItemMorphsWith: [:value | self buildResultMorphFrom: value];
 		updatePanel;
 		show;

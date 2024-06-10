@@ -29,19 +29,19 @@ SPOCVolumeSlider >> attachSlider [
 ]
 
 {
-	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/10/2024 02:51'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/10/2024 04:35'
 }
 SPOCVolumeSlider >> changeVolumeTo: aVolume [
 
-	| paramDict |
-	paramDict := Dictionary new
+	| dict |
+	dict := Dictionary new
 		at: #volume_percent put: aVolume;
 		at: #device_id put: self deviceID;
 		yourself.
 	SPOCApiVolume new
 		authorizer: self app auth;
-		execute: paramDict;
+		execute: dict;
 		yourself
 ]
 
@@ -119,13 +119,13 @@ SPOCVolumeSlider >> supportsVolume: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:18'
+	#'squeak_changestamp' : 'TL 6/10/2024 05:08'
 }
 SPOCVolumeSlider >> updateInstanceVariables [
 
 	| playbackState |
 	playbackState := self getPlaybackState.
-	(playbackState isKindOf: SPOCApiEndpointResult)
+	playbackState class = SPOCApiEndpointResult
 		ifTrue: [playbackState response code = 204 ifTrue: [UIManager inform: 'Please play music on your device!']]
 		ifFalse: [self deviceID: playbackState device id;
 			volume: playbackState device volume;

@@ -26,7 +26,7 @@ SPOCUIComponent >> app: aSPOCApp [
 ]
 
 {
-	#category : #accessing,
+	#category : #initialization,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:00'
 }
 SPOCUIComponent >> extendFully [
@@ -36,19 +36,19 @@ SPOCUIComponent >> extendFully [
 ]
 
 {
-	#category : #'api-connection',
-	#'squeak_changestamp' : 'TL 6/10/2024 02:46'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/10/2024 04:37'
 }
 SPOCUIComponent >> getPlaybackState [
 
-	| apiEndpoint paramDict |
-	paramDict := Dictionary new
+	| apiEndpoint dict |
+	dict := Dictionary new
 		at: #additional_types put: 'track';
 		yourself.
 	apiEndpoint := SPOCApiPlaybackState new
 		authorizer: self app auth;
 		yourself.
-	^ apiEndpoint execute: paramDict
+	^ apiEndpoint execute: dict
 ]
 
 {

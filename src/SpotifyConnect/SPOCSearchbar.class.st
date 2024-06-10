@@ -26,23 +26,23 @@ SPOCSearchbar >> buildCircle [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:02'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:20'
 }
 SPOCSearchbar >> buildSearchbar [
 
 	| leftCircle rightCircle |
 	leftCircle := self buildCircle.
-	rightCircle := (self buildCircle) position: self topLeft + (SPOCStyle searchbarWidth@0).
+	rightCircle := self buildCircle position: self topLeft + (SPOCStyle searchbarWidth @ 0).
 	self inputField: self buildTextInputField;
 		addMorph: leftCircle;
 		addMorph: rightCircle;
-		addMorph: inputField;
+		addMorph: self inputField;
 		yourself
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/9/2024 00:56'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:21'
 }
 SPOCSearchbar >> buildTextInputField [
 	"To do: specification irgendwie auslagern, damit Methode kürzer"
@@ -58,8 +58,8 @@ SPOCSearchbar >> buildTextInputField [
 		help: 'Was möchtest du wiedergeben?';
 		yourself.
 	textField := builder build: spec.
-	textField extent: SPOCStyle searchbarWidth@SPOCStyle searchbarHeight;
-		position: self topLeft + ((SPOCStyle searchbarHeight / 2)@0);
+	textField extent: SPOCStyle searchbarWidth @ SPOCStyle searchbarHeight;
+		position: self topLeft + ((SPOCStyle searchbarHeight / 2) @ 0);
 		color: SPOCStyle spotifyGray;
 		borderWidth: 0;
 		hScrollBarPolicy: #never;
@@ -90,13 +90,13 @@ SPOCSearchbar >> disabled: aBoolean [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/9/2024 13:17'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:22'
 }
 SPOCSearchbar >> initialize [
 
 	super initialize.
-	self
-		color: Color transparent;
+	
+	self color: Color transparent;
 		trackItems: OrderedCollection new;
 		tracks: OrderedCollection new;
 		disabled: true;
@@ -144,34 +144,34 @@ SPOCSearchbar >> inputText: aString [
 
 {
 	#category : #formatting,
-	#'squeak_changestamp' : 'RK 5/18/2024 20:44'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:21'
 }
 SPOCSearchbar >> sanitizeInput: aString [
 	
-	| santitizedInput |
-	santitizedInput := aString copyReplaceAll: ' ' with: '+'.
-	^ santitizedInput
+	^ aString copyReplaceAll: ' ' with: '+'
 ]
 
 {
-	#category : #actions,
-	#'squeak_changestamp' : 'RK 6/9/2024 13:20'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/10/2024 04:19'
 }
 SPOCSearchbar >> searchTracks: aString [
 
-	| dict apiEndpoint |
-	disabled ifTrue: [UIManager inform: 'Please log in!'.
-		^ self].
-	dict := Dictionary new.
-	dict at: 'input' put: (self sanitizeInput: aString);
-		at: 'type' put: 'track';
-		at: 'limit' put: SPOCStyle resultListLimit;
+	| apiEndpoint dict |
+	self disabled
+		ifTrue: [UIManager inform: 'Please log in!'.
+			^ self].
+	dict := Dictionary new
+		at: #input put: (self sanitizeInput: aString);
+		at: #type put: 'track';
+		at: #limit put: SPOCStyle resultListLimit;
 		yourself.
-	apiEndpoint := SPOCApiSearch new.
-	apiEndpoint authorizer: self app auth.
+	apiEndpoint := SPOCApiSearch new
+		authorizer: self app auth;
+		yourself.
 	self tracks: (apiEndpoint execute: dict).
-	self app resultList updateResults: tracks.
-	self app resultList title: 'Your Results'.
+	self app resultList updateResults: self tracks;
+		title: 'Your Results'.
 	self app currentlyPlaying update
 ]
 

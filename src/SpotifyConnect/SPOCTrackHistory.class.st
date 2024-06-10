@@ -22,26 +22,26 @@ SPOCTrackHistory class >> afterTimestamp [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/1/2024 22:08'
+	#'squeak_changestamp' : 'TL 6/10/2024 03:59'
 }
 SPOCTrackHistory class >> trackLimit [
 
-	^10
+	^ 10
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/1/2024 21:12'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:31'
 }
 SPOCTrackHistory >> attachButton [
 
 	self text: (SPOCBoxedText new contents: 'Song History'; yourself);
-		button: ( SPOCClickable newUsing: text onClick: [:anEvent | self getTrackHistory]);
+		button: (SPOCClickable newUsing: self text onClick: [:anEvent | self getTrackHistory]);
 		addMorph: self button
 ]
 
 {
-	#category : #accessing,
+	#category : #building,
 	#'squeak_changestamp' : 'VK 6/1/2024 21:23'
 }
 SPOCTrackHistory >> buildDisplay [
@@ -52,22 +52,21 @@ SPOCTrackHistory >> buildDisplay [
 ]
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/1/2024 21:49'
+	#category : #building,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:31'
 }
 SPOCTrackHistory >> buildTrackHistory [
 
 	| builtDisplay |
 	builtDisplay := self buildDisplay.
-	self 
-		display: builtDisplay;
-		addMorph: display;
+	self display: builtDisplay;
+		addMorph: self display;
 		yourself
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/3/2024 12:03'
+	#category : #building,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:30'
 }
 SPOCTrackHistory >> buildTrackMorphFrom: aTrack [
 
@@ -75,18 +74,17 @@ SPOCTrackHistory >> buildTrackMorphFrom: aTrack [
 	height := SPOCSearchbar searchbarHeight.
 	width := SPOCSearchbar searchbarWidth.
 	border := SPOCSearchbar resultBorder.
-	ratio := SPOCSearchbar searchbarToResultRatio.
-	
+	ratio := SPOCSearchbar searchbarToResultRatio.	
 	background := RectangleMorph new
 		color: SPOCStyle spotifyGray;
-		extent: (width +  height@(ratio * height));
+		extent: (width +  height @ (ratio * height));
 		morphicLayerNumber: SPOCSearchbar baseLayer.
 	image := (aTrack album) image scaledTo: (ratio * (height - border)).
-	image position: (background topLeft + (border@border));
+	image position: (background topLeft + (border @ border));
 		morphicLayerNumber: SPOCSearchbar baseLayer - 1.
-	trackText := SPOCText newAt: (image topRight + (border@0)) withText: aTrack name.
-	artistText := SPOCText newAt: (image bottomRight +  (border@(SPOCText defaultHeight negated))) withText: (aTrack album artistsAsString).
-	durationText := SPOCText newAt: (background bottomRight - (10 * border@(height + (SPOCText defaultHeight / 2)))) withText: aTrack durationAsFormattedTime.
+	trackText := SPOCText newAt: (image topRight + (border @ 0)) withText: aTrack name.
+	artistText := SPOCText newAt: (image bottomRight +  (border @ (SPOCText defaultHeight negated))) withText: (aTrack album artistsAsString).
+	durationText := SPOCText newAt: (background bottomRight - (10 * border @ (height + (SPOCText defaultHeight / 2)))) withText: aTrack durationAsFormattedTime.
 	finishedMorph := Morph new color: Color transparent;
 		addMorph: background;
 		addMorph: image;
@@ -100,71 +98,76 @@ SPOCTrackHistory >> buildTrackMorphFrom: aTrack [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:28'
 }
 SPOCTrackHistory >> button [
+
 	^ button
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:28'
 }
 SPOCTrackHistory >> button: anObject [
+
 	button := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:14'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:28'
 }
 SPOCTrackHistory >> display [
+
 	^ display
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:14'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:28'
 }
 SPOCTrackHistory >> display: anObject [
+
 	display := anObject
 ]
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/1/2024 22:08'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/10/2024 04:32'
 }
 SPOCTrackHistory >> getTrackHistory [
 
-	| dict apiEndpoint |
-	dict := Dictionary new.
-	dict at: 'limit' put: SPOCTrackHistory trackLimit;
-		at: 'after' put: SPOCTrackHistory afterTimestamp;
+	| apiEndpoint dict |
+	dict := Dictionary new
+		at: #limit put: SPOCTrackHistory trackLimit;
+		at: #after put: SPOCTrackHistory afterTimestamp;
 		yourself.
-	apiEndpoint := SPOCApiTrackHistory new.
-	apiEndpoint authorizer: self app auth.
+	apiEndpoint := SPOCApiTrackHistory new
+		authorizer: self app auth;
+		yourself.
 	self tracks: (apiEndpoint execute: dict).
-	self updateDisplay: tracks
+	self updateDisplay: self tracks
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:26'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:32'
 }
 SPOCTrackHistory >> hideHistory [
+
 	self display hide
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:36'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:29'
 }
 SPOCTrackHistory >> initialize [
 
 	super initialize.
 	
-	self 
-		color: Color transparent;
+	self color: Color transparent;
 		trackMorphs: OrderedCollection new;
 		tracks: OrderedCollection new;
 		attachButton;
@@ -174,7 +177,7 @@ SPOCTrackHistory >> initialize [
 ]
 
 {
-	#category : #accessing,
+	#category : #actions,
 	#'squeak_changestamp' : 'VK 6/3/2024 12:05'
 }
 SPOCTrackHistory >> playTrack: aString [
@@ -183,61 +186,68 @@ SPOCTrackHistory >> playTrack: aString [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:28'
 }
 SPOCTrackHistory >> text [
+
 	^ text
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:28'
 }
 SPOCTrackHistory >> text: anObject [
+
 	text := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:16'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:28'
 }
 SPOCTrackHistory >> trackMorphs [
+
 	^ trackMorphs
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:16'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:28'
 }
 SPOCTrackHistory >> trackMorphs: anObject [
+
 	trackMorphs := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:29'
 }
 SPOCTrackHistory >> tracks [
+
 	^ tracks
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:29'
 }
 SPOCTrackHistory >> tracks: anObject [
+
 	tracks := anObject
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 22:37'
+	#category : #actions,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:29'
 }
 SPOCTrackHistory >> updateDisplay: anOrderedCollection [
 	
-	anOrderedCollection ifNil: [self hideHistory.
-		^ self].
-	display items: anOrderedCollection;
+	anOrderedCollection
+		ifNil: [self hideHistory.
+			^ self].
+	self display items: anOrderedCollection;
 		buildItemMorphsWith: [:value | self buildTrackMorphFrom: value];
 		updatePanel;
 		show;

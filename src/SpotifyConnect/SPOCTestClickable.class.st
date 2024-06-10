@@ -5,39 +5,43 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #setup,
 	#'squeak_changestamp' : 'VE 5/27/2024 17:13'
 }
 SPOCTestClickable >> setUp [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 17:14'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:03'
 }
 SPOCTestClickable >> testClickableAction [
-	| tmp clickable |
+
+	| clickable tmp |
 	tmp := 0.
 	clickable := SPOCClickable newUsing: Morph new onClick: [:anEvent | tmp := 1].
 	clickable mouseDown: nil.
-	self assert: tmp = 1.
+	self assert: tmp = 1
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 16:49'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:03'
 }
 SPOCTestClickable >> testClickableActionNotSet [
+
+	| clickable |
 	self should: [clickable mouseDown: nil] raise: Error
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 17:16'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:04'
 }
 SPOCTestClickable >> testWrappeeSubmorph [
+
 	| clickable tmpMorph |
 	tmpMorph := Morph new.
 	clickable := SPOCClickable newUsing: tmpMorph onClick: nil.
-	self assert: (clickable submorphs includes: tmpMorph).
+	self assert: (clickable submorphs includes: tmpMorph)
 ]

@@ -9,7 +9,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #constructor,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
 }
 SPOCClickable class >> newUsing: aWrappeeMorph onClick: aBlock [

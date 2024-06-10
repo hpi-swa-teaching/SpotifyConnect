@@ -5,7 +5,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'RK 5/16/2024 19:01'
 }
 SPOCApiSearch >> endpoint [
@@ -13,7 +13,7 @@ SPOCApiSearch >> endpoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'RK 5/16/2024 18:51'
 }
 SPOCApiSearch >> endpointMethod [
@@ -21,7 +21,7 @@ SPOCApiSearch >> endpointMethod [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'RK 5/16/2024 23:05'
 }
 SPOCApiSearch >> executeRequest: request withParams: aParameterDictionary [
@@ -31,7 +31,7 @@ SPOCApiSearch >> executeRequest: request withParams: aParameterDictionary [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'RK 5/16/2024 19:05'
 }
 SPOCApiSearch >> executeTest [
@@ -495,7 +495,7 @@ SPOCApiSearch >> executeTest [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #response,
 	#'squeak_changestamp' : 'RK 6/6/2024 00:59'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [

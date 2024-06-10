@@ -8,21 +8,43 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/13/2024 17:25'
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:04'
 }
 SPOCTestTrack >> setUp [
+
 	super setUp.
-	track := SPOCTrack new 
-		id: '123'; 
-		name: 'MEGA'
+	
+	self track: (SPOCTrack new 
+			id: '123'; 
+			name: 'MEGA';
+			yourself)
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/18/2024 13:38'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:05'
 }
 SPOCTestTrack >> testInstanceVariables [
-	self assert: track id = '123'.
-	self assert: track name = 'MEGA'
+
+	self assert: self track id = '123'.
+	self assert: self track name = 'MEGA'
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:05'
+}
+SPOCTestTrack >> track [
+
+	^ track
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:05'
+}
+SPOCTestTrack >> track: anObject [
+
+	track := anObject
 ]

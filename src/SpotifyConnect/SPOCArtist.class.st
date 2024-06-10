@@ -11,7 +11,7 @@ Class {
 }
 
 {
-	#category : #accessing,
+	#category : #actions,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:19'
 }
 SPOCArtist >> clickAction [
@@ -20,7 +20,7 @@ SPOCArtist >> clickAction [
 ]
 
 {
-	#category : #accessing,
+	#category : #testing,
 	#'squeak_changestamp' : 'VK 5/27/2024 16:28'
 }
 SPOCArtist >> equals: anArtist [

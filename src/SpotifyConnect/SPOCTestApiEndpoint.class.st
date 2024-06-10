@@ -8,20 +8,39 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 12:42'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:01'
 }
-SPOCTestApiEndpoint >> setUp [
-	apiEndpoint := SPOCApiEndpoint new.
+SPOCTestApiEndpoint >> apiEndpoint [
+
+	^ apiEndpoint
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/4/2024 09:09'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:01'
+}
+SPOCTestApiEndpoint >> apiEndpoint: anObject [
+
+	apiEndpoint := anObject
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:02'
+}
+SPOCTestApiEndpoint >> setUp [
+
+	self apiEndpoint: SPOCApiEndpoint new
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:02'
 }
 SPOCTestApiEndpoint >> testNoAuthenticator [
 	
 	| res |
-	res := apiEndpoint execute: (Dictionary new).
+	res := self apiEndpoint execute: (Dictionary new).
 	self assert: res class = SPOCApiEndpointResult
 ]

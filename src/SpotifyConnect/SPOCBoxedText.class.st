@@ -11,26 +11,29 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/28/2024 13:28'
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:10'
 }
 SPOCBoxedText class >> defaultContent [
+
 	^ 'SPOCBoxedText'
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 20:09'
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:10'
 }
 SPOCBoxedText class >> height [
+
 	^ 32
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 20:29'
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:10'
 }
 SPOCBoxedText class >> horizontalSpacing [
+
 	^ 10
 ]
 

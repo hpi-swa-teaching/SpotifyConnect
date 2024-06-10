@@ -9,30 +9,31 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'OW 6/5/2024 18:28'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:38'
 }
 SPOCAuthTestResource >> auth [
+
 	^ auth
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'OW 6/5/2024 18:28'
+	#'squeak_changestamp' : 'TL 6/10/2024 04:38'
 }
 SPOCAuthTestResource >> auth: anObject [
+
 	auth := anObject
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 6/5/2024 19:12'
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:46'
 }
 SPOCAuthTestResource >> setUp [
 
-	auth := SPOCAuthorizer new.
-	self auth startAuthorization.
-	
-	[auth isAuthorized] 
+	self auth: SPOCAuthorizer new.
+	self auth startAuthorization.	
+	[self auth isAuthorized] 
 		whileFalse: [(Delay forMilliseconds: 100) wait]
 	
 ]

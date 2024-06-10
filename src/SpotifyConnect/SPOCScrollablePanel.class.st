@@ -11,13 +11,15 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/7/2024 11:09'
+	#category : #constructor,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:14'
 }
 SPOCScrollablePanel class >> newWithExtent: anExtent [
 
-	^(SPOCScrollablePanel new extent: anExtent;
-		buildPanel)
+	^ SPOCScrollablePanel new
+		extent: anExtent;
+		buildPanel;
+		yourself
 ]
 
 {

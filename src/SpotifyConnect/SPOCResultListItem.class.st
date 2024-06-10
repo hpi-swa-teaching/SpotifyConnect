@@ -15,13 +15,15 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/7/2024 11:09'
+	#category : #constructor,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:12'
 }
 SPOCResultListItem class >> newWith: aDataModel [
-	^ (SPOCResultListItem new dataModel: aDataModel;
+
+	^ SPOCResultListItem new
+		dataModel: aDataModel;
 		buildItem;
-		yourself)
+		yourself
 ]
 
 {

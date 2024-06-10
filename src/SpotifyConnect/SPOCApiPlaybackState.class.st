@@ -5,16 +5,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 5/26/2024 13:05'
-}
-SPOCApiPlaybackState class >> getAccessToken [
-
-	^ 'BQBZXwtxc5yCEAznBT5QSwEklnLk04IOqnfUF1ScqWN4lPeR49qC8WUZzCNZnT_0O7suxLH69N-il5pNekHZXve1XQ6llqxxW0ktqHEy3bbNThD5WQDX86L5cCfPHJb9q-7Gs7yjvLlbvQ5LZOgYOaMFPIocfADeW6WZUgev3akszWVcqMeY22ej0G5jt-xLRudOdUYyQRAG9W5A48-ypg2VVadwiBQAW1BsyPyfvAha'
-]
-
-{
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'TL 5/27/2024 17:06'
 }
 SPOCApiPlaybackState >> endpoint [
@@ -23,7 +14,7 @@ SPOCApiPlaybackState >> endpoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'TL 5/27/2024 15:49'
 }
 SPOCApiPlaybackState >> endpointMethod [
@@ -32,7 +23,7 @@ SPOCApiPlaybackState >> endpointMethod [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'TL 6/9/2024 19:28'
 }
 SPOCApiPlaybackState >> executeRequest: request withParams: aParamDictionary [
@@ -42,7 +33,7 @@ SPOCApiPlaybackState >> executeRequest: request withParams: aParamDictionary [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'TL 6/10/2024 00:05'
 }
 SPOCApiPlaybackState >> executeTest [
@@ -571,7 +562,7 @@ SPOCApiPlaybackState >> executeTest [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #response,
 	#'squeak_changestamp' : 'RK 6/9/2024 01:31'
 }
 SPOCApiPlaybackState >> tinkerReponseContent: aContentStream [

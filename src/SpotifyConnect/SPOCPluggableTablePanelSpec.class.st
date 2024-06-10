@@ -9,10 +9,15 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'VE 6/3/2024 09:51'
+	#'squeak_changestamp' : 'TL 6/10/2024 05:12'
 }
 SPOCPluggableTablePanelSpec class >> fullFrame [
-	^ LayoutFrame new topFraction: 0; leftFraction: 0; rightFraction: 1; bottomFraction: 1
+
+	^ LayoutFrame new
+		topFraction: 0;
+		leftFraction: 0;
+		rightFraction: 1;
+		bottomFraction: 1
 ]
 
 {

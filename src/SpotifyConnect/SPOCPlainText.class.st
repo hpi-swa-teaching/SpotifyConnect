@@ -5,10 +5,11 @@ Class {
 }
 
 {
-	#category : #'instance creation',
-	#'squeak_changestamp' : 'RK 5/30/2024 23:00'
+	#category : #constructor,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:16'
 }
 SPOCPlainText class >> newAt: aPoint withText: aString [
+
 	^ SPOCText new
 		position: aPoint;
 		contents: aString;

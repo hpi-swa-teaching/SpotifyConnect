@@ -27,7 +27,7 @@ SPOCMockTestApiPlaybackState >> apiEndpoint: anObject [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #setup,
 	#'squeak_changestamp' : 'TL 6/10/2024 00:21'
 }
 SPOCMockTestApiPlaybackState >> setUp [
@@ -48,16 +48,16 @@ SPOCMockTestApiPlaybackState >> setUp [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 6/10/2024 00:24'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:56'
 }
 SPOCMockTestApiPlaybackState >> testMockApiPlaybackExecute [
 
-	| paramDict res resTrack |
-    	paramDict := Dictionary new
+	| dict res resTrack |
+    	dict := Dictionary new
 		at: #additional_types put: 'track';
 		yourself.
-    	res := self apiEndpoint execute: paramDict.
+    	res := self apiEndpoint execute: dict.
 	resTrack := res track
 		image: nil;
 		artists: nil;

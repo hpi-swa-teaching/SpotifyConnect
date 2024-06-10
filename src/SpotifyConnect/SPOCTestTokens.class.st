@@ -5,16 +5,16 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 6/4/2024 12:17'
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:53'
 }
 SPOCTestTokens >> setUp [
 
-	super setUp.
+	super setUp
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #testing,
 	#'squeak_changestamp' : 'OW 6/5/2024 18:33'
 }
 SPOCTestTokens >> testAccAndRefToken [
@@ -25,16 +25,14 @@ SPOCTestTokens >> testAccAndRefToken [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 6/5/2024 18:34'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 04:53'
 }
 SPOCTestTokens >> testRefreshAccessToken [
 
 	| oldAccToken |
-	oldAccToken := self auth accessToken.
-	
-	self auth refreshAccessToken.
-	
+	oldAccToken := self auth accessToken.	
+	self auth refreshAccessToken.	
 	self assert: self auth accessToken notNil.
 	self assert: self auth refreshToken notNil.
 	self assert: self auth isAuthorized.
