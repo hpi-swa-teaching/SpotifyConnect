@@ -8,7 +8,8 @@ Class {
 		'resultList',
 		'currentlyPlaying',
 		'player',
-		'volumeSlider'
+		'volumeSlider',
+		'recentlyPlayed'
 	],
 	#category : #SpotifyConnect
 }
@@ -186,7 +187,7 @@ SPOCApp >> currentlyPlaying: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:48'
+	#'squeak_changestamp' : 'VK 6/10/2024 14:02'
 }
 SPOCApp >> initialize [
 
@@ -199,7 +200,8 @@ SPOCApp >> initialize [
 		setUpResultList;
 		setUpCurrentlyPlaying;
 		setUpPlayer;
-		setUpVolumeSlider
+		setUpVolumeSlider;
+		setUpRecentlyPlayed
 
 
 ]
@@ -323,6 +325,15 @@ SPOCApp >> setUpPlayer [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'VK 6/10/2024 14:02'
+}
+SPOCApp >> setUpRecentlyPlayed [
+
+	self recentlyPlayed: (SPOCRecentlyPlayed new app: self; yourself)
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:25'
 }
 SPOCApp >> setUpResultList [
@@ -360,15 +371,6 @@ SPOCApp >> setUpVolumeSlider [
 
 	self volumeSlider: (SPOCVolumeSlider new app: self).
 	self auth registerSuccessCallback: [self volumeSlider updateInstanceVariables]
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 13:17'
-}
-SPOCApp >> setupRecentlyPlayed [
-
-	self recentlyPlayed: (SPOCRecentlyPlayed new app: self; yourself)
 ]
 
 {

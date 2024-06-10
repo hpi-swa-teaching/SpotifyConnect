@@ -27,9 +27,9 @@ SPOCMockTestApiRecentlyPlayed >> setUp [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/5/2024 19:39'
+	#'squeak_changestamp' : 'VK 6/10/2024 14:00'
 }
-SPOCMockTestApiRecentlyPlayed >> testMockApiTrackHistoryExecute [
+SPOCMockTestApiRecentlyPlayed >> testMockApiRecentlyPlayedExecute [
 
 	| dict res resTrack |
 	dict := Dictionary new.
