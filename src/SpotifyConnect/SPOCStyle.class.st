@@ -24,6 +24,51 @@ SPOCStyle class >> defaultMargin [
 
 {
 	#category : #'class variables',
+	#'squeak_changestamp' : 'VK 6/10/2024 11:43'
+}
+SPOCStyle class >> devicesPanelHeight [
+
+	^ 200
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'VK 6/10/2024 11:46'
+}
+SPOCStyle class >> devicesPanelPadding [
+
+	^ 35
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'VK 6/10/2024 11:39'
+}
+SPOCStyle class >> devicesPanelToItemRatio [
+
+	^ 0.4
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'VK 6/10/2024 11:30'
+}
+SPOCStyle class >> devicesPanelWidth [
+
+	^ 300
+]
+
+{
+	#category : #'class variables',
+	#'squeak_changestamp' : 'VK 6/10/2024 11:55'
+}
+SPOCStyle class >> devicesTextPadding [
+
+	^ 8
+]
+
+{
+	#category : #'class variables',
 	#'squeak_changestamp' : 'RK 6/8/2024 23:35'
 }
 SPOCStyle class >> gitRepoName [

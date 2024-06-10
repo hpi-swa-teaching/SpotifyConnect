@@ -57,50 +57,48 @@ SPOCSwitchDevice >> activeDevice: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/10/2024 11:04'
+	#'squeak_changestamp' : 'VK 6/10/2024 11:55'
 }
 SPOCSwitchDevice >> attachButton [
 
-	| text icon buttonMorph |
-	text := (SPOCBoxedText new contents: 'available Devices';
-		position: SPOCSwitchDevice border@0;
+	| text icon button |
+	text := (SPOCBoxedText new contents: ' available Devices';
+		position: SPOCStyle devicesTextPadding@0;
 		yourself).
 	icon := (SPOCIcon new iconAsset: '/assets/devices.png').
-	buttonMorph := Morph new color: Color transparent.
-	buttonMorph addMorph: text;
+	button := Morph new color: Color transparent.
+	button addMorph: text;
 		addMorph: icon;
 		yourself.
-	self button: (SPOCClickable newUsing: buttonMorph onClick: [:anEvent | self currentDevices]).
-	self addMorph: self button
+	self addMorph: (SPOCClickable newUsing: button onClick: [:anEvent | self currentDevices])
 	
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 18:38'
+	#'squeak_changestamp' : 'VK 6/10/2024 11:47'
 }
 SPOCSwitchDevice >> buildResultDisplay [
 
-	self resultDisplay: (SPOCScrollablePanel newWithExtent: (2 * self buttonWidth) @ (5 * self buttonHeight)).
-	self resultDisplay position: self position + (0@SPOCSwitchDevice border).
+	self resultDisplay: (SPOCScrollablePanel newWithExtent: (SPOCStyle devicesPanelWidth) @ (SPOCStyle devicesPanelHeight)).
+	self resultDisplay position: self position + (0@SPOCStyle devicesPanelPadding).
 	self addMorph: self resultDisplay.
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 18:40'
+	#'squeak_changestamp' : 'VK 6/10/2024 11:44'
 }
 SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
-	| background nameText typeText finishedMorph deviceButton border height ratio width |
+	| background nameText typeText finishedMorph deviceButton border ratio height width |
 	
-	height := self buttonHeight.
-	width := self buttonWidth.
-	ratio := SPOCSwitchDevice buttonToDeviceRatio.
-	border := SPOCSwitchDevice border.
-	
+	height := SPOCStyle devicesPanelHeight.
+	width := SPOCStyle devicesPanelWidth.
+	border := SPOCStyle devicesPanelPadding.
+	ratio := SPOCStyle devicesPanelToItemRatio.
 	background := RectangleMorph new
 		color: SPOCStyle spotifyGray;
-		extent: (2 * width@(ratio * height));
+		extent: (width@(height * ratio));
 		yourself.
 	nameText := SPOCText newAt: (background topLeft + (border@0)) withText: aDevice name.
 	typeText := SPOCText newAt: (background bottomLeft + (border@(SPOCStyle textHeight negated))) withText: aDevice type.
@@ -116,40 +114,6 @@ SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 	deviceButton := SPOCClickable newUsing: finishedMorph onClick: [:evt | self switchDeviceClicked: aDevice id].
 	deviceButton vResizing: #shrinkWrap.
 	^ deviceButton
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 12:53'
-}
-SPOCSwitchDevice >> button [
-	^ button
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 12:53'
-}
-SPOCSwitchDevice >> button: anObject [
-	button := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 15:17'
-}
-SPOCSwitchDevice >> buttonHeight [
-
-	^ button extent y
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 15:17'
-}
-SPOCSwitchDevice >> buttonWidth [
-
-	^ button extent x
 ]
 
 {
@@ -253,22 +217,6 @@ SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	apiEndpoint authorizer: self app auth.
 	res := apiEndpoint execute: dict.
 	(res response = 204) ifTrue: self hideResults
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 12:53'
-}
-SPOCSwitchDevice >> text [
-	^ text
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/3/2024 12:53'
-}
-SPOCSwitchDevice >> text: anObject [
-	text := anObject
 ]
 
 {
