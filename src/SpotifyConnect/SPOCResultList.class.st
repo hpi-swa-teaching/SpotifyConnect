@@ -8,7 +8,7 @@ Class {
 		'items',
 		'scrollablePanel'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {
@@ -46,7 +46,7 @@ SPOCResultList >> buildTitle [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/7/2024 23:41'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:14'
 }
 SPOCResultList >> initialize [
 
@@ -57,6 +57,7 @@ SPOCResultList >> initialize [
 		title: '';
 		results: OrderedCollection new;
 		items: OrderedCollection new;
+		hResizing: #spaceFill;
 		buildResultList;
 		yourself
 ]

@@ -89,7 +89,7 @@ SPOCApp >> buildBottomPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 6/5/2024 21:30'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:47'
 }
 SPOCApp >> buildCenterPanel: aBuilder [
 
@@ -161,7 +161,7 @@ SPOCApp >> buildWith: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:09'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:04'
 }
 SPOCApp >> centerPanelContent [
 
@@ -367,11 +367,11 @@ SPOCApp >> setUpUserLogin [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:21'
+	#'squeak_changestamp' : 'VE 6/10/2024 15:06'
 }
 SPOCApp >> setUpVolumeSlider [
 
-	self volumeSlider: (SPOCVolumeSlider new app: self).
+	self volumeSlider: (SPOCVolumeSlider new app: self; yourself).
 	self auth registerSuccessCallback: [self volumeSlider updateInstanceVariables]
 ]
 

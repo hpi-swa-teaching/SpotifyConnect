@@ -1,6 +1,6 @@
 Class {
 	#name : #SPOCArtist,
-	#superclass : #SPOCDataModel,
+	#superclass : #SPOCDataPiece,
 	#instVars : [
 		'followers',
 		'genres',

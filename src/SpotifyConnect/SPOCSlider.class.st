@@ -7,7 +7,7 @@ Class {
 		'innerBarHoverColor',
 		'onValueChanged'
 	],
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {
@@ -125,7 +125,7 @@ SPOCSlider >> circleMorph [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/6/2024 22:17'
+	#'squeak_changestamp' : 'VE 6/10/2024 15:28'
 }
 SPOCSlider >> initialize [
 	super initialize.

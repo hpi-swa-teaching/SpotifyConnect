@@ -5,12 +5,12 @@ Class {
 		'track',
 		'item'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:11'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:23'
 }
 SPOCCurrentlyPlaying >> initialize [
 
@@ -21,7 +21,8 @@ SPOCCurrentlyPlaying >> initialize [
 		addMorph: self item;
 		yourself.
 	self item hasTertiaryText: false;
-		resizeTo: SPOCStyle currentlyPlayingWidth @ SPOCStyle resultListItemHeight
+		resizeTo: SPOCStyle currentlyPlayingWidth @ SPOCStyle resultListItemHeight.
+	self extendFully.
 ]
 
 {

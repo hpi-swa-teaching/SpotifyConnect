@@ -1,7 +1,7 @@
 Class {
 	#name : #SPOCApiSearch,
 	#superclass : #SPOCApiEndpoint,
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-API'
 }
 
 {

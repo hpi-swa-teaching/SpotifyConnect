@@ -7,12 +7,12 @@ Class {
 		'spec',
 		'panel'
 	],
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {
 	#category : #constructor,
-	#'squeak_changestamp' : 'TL 6/10/2024 05:14'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:18'
 }
 SPOCScrollablePanel class >> newWithExtent: anExtent [
 
@@ -24,7 +24,7 @@ SPOCScrollablePanel class >> newWithExtent: anExtent [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/7/2024 11:09'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:18'
 }
 SPOCScrollablePanel >> buildPanel [
 
@@ -32,6 +32,7 @@ SPOCScrollablePanel >> buildPanel [
 		spec: (builder pluggableScrollPaneSpec new
 			vScrollBarPolicy: #whenNeeded;
 			hScrollBarPolicy: #never;
+			"horizontalResizing: #spaceFill;"
 			yourself);
 			panel: (builder build: spec).
 	self panel extent: self extent.

@@ -6,7 +6,7 @@ Class {
 		'button',
 		'buttonLabel'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {

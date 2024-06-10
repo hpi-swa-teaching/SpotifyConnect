@@ -1,7 +1,7 @@
 Class {
 	#name : #SPOCStyle,
-	#superclass : #Morph,
-	#category : #'SpotifyConnect-Utils'
+	#superclass : #Object,
+	#category : #'SpotifyConnect-UI'
 }
 
 {
@@ -96,11 +96,11 @@ SPOCStyle class >> recentlyPlayedPadding [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:47'
 }
 SPOCStyle class >> resultListHeight [
 
-	^ 550
+	^ 350
 ]
 
 {
@@ -123,20 +123,20 @@ SPOCStyle class >> resultListItemPadding [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:20'
 }
 SPOCStyle class >> resultListLimit [
 
-	^ 20
+	^ 10
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
+	#'squeak_changestamp' : 'VE 6/10/2024 14:45'
 }
 SPOCStyle class >> resultListWidth [
 
-	^ 1150
+	^ 1048
 ]
 
 {

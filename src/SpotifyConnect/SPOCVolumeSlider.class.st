@@ -7,12 +7,12 @@ Class {
 		'supportsVolume',
 		'volume'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:07'
+	#'squeak_changestamp' : 'VE 6/10/2024 15:34'
 }
 SPOCVolumeSlider >> attachSlider [
 
@@ -25,7 +25,8 @@ SPOCVolumeSlider >> attachSlider [
 		self supportsVolume
 			ifTrue: [self changeVolumeTo: aValue]
 			ifFalse: [self slider updateValue: self volume.
-				UIManager inform: 'Your device does not support volume changes.']]
+				UIManager inform: 'Your device does not support volume changes.']].
+	self addMorph: self slider
 ]
 
 {
@@ -65,7 +66,7 @@ SPOCVolumeSlider >> deviceID: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:06'
+	#'squeak_changestamp' : 'VE 6/10/2024 15:31'
 }
 SPOCVolumeSlider >> initialize [
 

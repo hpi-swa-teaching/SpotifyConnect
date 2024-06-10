@@ -8,7 +8,7 @@ Class {
 		'trackItems',
 		'disabled'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {

@@ -9,7 +9,7 @@ Class {
 		'resultDisplay',
 		'deviceMorphs'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {

@@ -1,7 +1,7 @@
 Class {
 	#name : #SPOCApiSwitchDevice,
 	#superclass : #SPOCApiEndpoint,
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-API'
 }
 
 {
