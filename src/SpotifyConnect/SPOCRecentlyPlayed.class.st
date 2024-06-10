@@ -36,18 +36,7 @@ SPOCRecentlyPlayed class >> trackLimit [
 ]
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/9/2024 12:25'
-}
-SPOCRecentlyPlayed >> attachButton [
-
-	self text: (SPOCBoxedText new contents: 'Recently Played'; yourself);
-		button: ( SPOCClickable newUsing: text onClick: [:anEvent | self getRecentlyPlayed]);
-		addMorph: self button
-]
-
-{
-	#category : #'as yet unclassified',
+	#category : #building,
 	#'squeak_changestamp' : 'RK 6/9/2024 14:44'
 }
 SPOCRecentlyPlayed >> buildButton [
@@ -65,39 +54,7 @@ SPOCRecentlyPlayed >> buildButton [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
-}
-SPOCRecentlyPlayed >> button [
-	^ button
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
-}
-SPOCRecentlyPlayed >> button: anObject [
-	button := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:14'
-}
-SPOCRecentlyPlayed >> display [
-	^ display
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 20:14'
-}
-SPOCRecentlyPlayed >> display: anObject [
-	display := anObject
-]
-
-{
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VK 6/9/2024 14:03'
 }
 SPOCRecentlyPlayed >> getRecentlyPlayed [
@@ -130,22 +87,6 @@ SPOCRecentlyPlayed >> initialize [
 		buildButton;
 		extendFully;
 		yourself
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
-}
-SPOCRecentlyPlayed >> text [
-	^ text
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
-}
-SPOCRecentlyPlayed >> text: anObject [
-	text := anObject
 ]
 
 {
