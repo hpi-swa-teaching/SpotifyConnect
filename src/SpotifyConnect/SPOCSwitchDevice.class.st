@@ -225,7 +225,7 @@ SPOCSwitchDevice >> resultDisplay: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VK 6/10/2024 20:02'
+	#'squeak_changestamp' : 'VK 6/10/2024 20:05'
 }
 SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	
@@ -235,7 +235,7 @@ SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	apiEndpoint := SPOCApiSwitchDevice new.
 	apiEndpoint authorizer: self app auth.
 	res := apiEndpoint execute: dict.
-	res response = 204 
+	res response code = 204 
 		ifTrue: [self hideResults]
 ]
 
