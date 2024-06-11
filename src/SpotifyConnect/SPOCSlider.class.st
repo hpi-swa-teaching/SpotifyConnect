@@ -425,11 +425,11 @@ SPOCSlider >> updateOuterBarLeftCircleColorIfNecessary: aColor [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'VE 6/6/2024 22:25'
+	#'squeak_changestamp' : 'VK 6/11/2024 14:32'
 }
 SPOCSlider >> updateValue: aWidth [
 
-	value := ((aWidth / self length * 100) min: 100 max: 0).
+	value := ((aWidth * 100 // self length) min: 100 max: 0).
 	self value: value.
 ]
 
