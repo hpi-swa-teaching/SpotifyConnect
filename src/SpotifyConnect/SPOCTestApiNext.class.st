@@ -15,13 +15,13 @@ SPOCTestApiNext >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:50'
+	#'squeak_changestamp' : 'TL 6/11/2024 14:58'
 }
-SPOCTestApiNext >> testApiPreviousExecute [
+SPOCTestApiNext >> testApiNextExecute [
 
 	| dict res |
 	dict := Dictionary new
-		at: #device_id put: 'b704b454bce64526992a3f207723032f5f91e635';
+		at: #device_id put: self getPlaybackState device id;
 		yourself.
 	res := self apiEndpoint execute: dict.	
 	self assert: (res response code = 204)

@@ -2,11 +2,9 @@ Class {
 	#name : #SPOCTrack,
 	#superclass : #SPOCDataPiece,
 	#instVars : [
-		'artists',
 		'album',
+		'artists',
 		'duration',
-		'explicit',
-		'popularity',
 		'trackNumber'
 	],
 	#category : #SpotifyConnect
@@ -95,17 +93,17 @@ SPOCTrack >> durationAsFormattedTime [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/11/2024 12:07'
+	#'squeak_changestamp' : 'TL 6/11/2024 15:27'
 }
 SPOCTrack >> equals: aTrack [
 
-    ^ (self id = aTrack id) 
-        & (self name = aTrack name)
-	  & (self image = aTrack image)
-        & (self artists = aTrack artists)
-        & (self album = aTrack album)
-        & (self duration = aTrack duration)
-        & (self trackNumber = aTrack trackNumber)
+	^ (self id = aTrack id) 
+		& (self name = aTrack name) 
+		& (self image = aTrack image)
+		& (self album = aTrack album)
+		& (self artists = aTrack artists)
+ 		& (self duration = aTrack duration)
+ 		& (self trackNumber = aTrack trackNumber)
 ]
 
 {

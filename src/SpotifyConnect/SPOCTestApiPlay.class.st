@@ -5,22 +5,6 @@ Class {
 }
 
 {
-	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 14:11'
-}
-SPOCTestApiPlay >> getPlaybackState [
-
-	| apiEndpoint dict |
-	dict := Dictionary new
-		at: #additional_types put: 'track';
-		yourself.
-	apiEndpoint := SPOCApiPlaybackState new
-		authorizer: self auth;
-		yourself.
-	^ apiEndpoint execute: dict
-]
-
-{
 	#category : #setup,
 	#'squeak_changestamp' : 'TL 6/10/2024 04:44'
 }

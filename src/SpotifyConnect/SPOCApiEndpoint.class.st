@@ -153,7 +153,7 @@ SPOCApiEndpoint >> returnsTestContent: aBoolean [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 23:33'
+	#'squeak_changestamp' : 'TL 6/11/2024 15:20'
 }
 SPOCApiEndpoint >> tinkerAlbum: aJson [
 
@@ -163,8 +163,9 @@ SPOCApiEndpoint >> tinkerAlbum: aJson [
 	^ SPOCAlbum new
 		id: (aJson at: #id);
 		name: (aJson at: #name);
-		artists: artists;
 		image: (SPOCImage newWithUrl: (((aJson at: #images) at: 1) at: #url));
+		artists: artists;
+		totalTracks: (aJson at: #total_tracks);
 		yourself
 ]
 

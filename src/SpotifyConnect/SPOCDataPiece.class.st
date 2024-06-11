@@ -3,9 +3,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'id',
-		'name',
+		'clickAction',
 		'image',
-		'clickAction'
+		'name'
 	],
 	#category : #SpotifyConnect
 }

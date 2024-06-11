@@ -42,3 +42,19 @@ SPOCTestCaseWithAuth >> auth [
 
 	^ SPOCTestCaseWithAuth resources first current auth
 ]
+
+{
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/11/2024 14:56'
+}
+SPOCTestCaseWithAuth >> getPlaybackState [
+
+	| apiEndpoint dict |
+	dict := Dictionary new
+		at: #additional_types put: 'track';
+		yourself.
+	apiEndpoint := SPOCApiPlaybackState new
+		authorizer: self auth;
+		yourself.
+	^ apiEndpoint execute: dict
+]

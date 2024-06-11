@@ -1439,30 +1439,33 @@ SPOCTestTinkerResponseContent >> setUp [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/11/2024 00:11'
+	#'squeak_changestamp' : 'TL 6/11/2024 14:49'
 }
 SPOCTestTinkerResponseContent >> setUpAlbum [
 
 	self album: (SPOCAlbum new
-			id: '48lxT5qJF0yYyf2z4wB4xW';
+			id: '5y6RXjI5VPR0RyInghTbf1';
 			name: 'Pedro';
 			image: nil;
-			
+			artists: nil;
+			popularity: nil;
+			totalTracks: 1;
 			yourself)
 	
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/11/2024 00:11'
+	#'squeak_changestamp' : 'TL 6/11/2024 14:41'
 }
 SPOCTestTinkerResponseContent >> setUpArtist [
 
-	self track: (SPOCArtist new
-			id: '48lxT5qJF0yYyf2z4wB4xW';
-			name: 'Pedro';
+	self artist: (SPOCArtist new
+			id: '1c3uso4iIeeX3P0bhKaQDq';
+			name: 'Jaxomy';
 			image: nil;
-			
+			followers: nil;
+			popularity: nil;			
 			yourself)
 	
 ]
@@ -1485,12 +1488,12 @@ SPOCTestTinkerResponseContent >> setUpDevice [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/11/2024 00:11'
+	#'squeak_changestamp' : 'TL 6/11/2024 14:53'
 }
 SPOCTestTinkerResponseContent >> setUpPlaybackState [
 
-	
-	
+	self playbackState: (SPOCPlaybackState new
+			device: self)
 ]
 
 {
@@ -1509,6 +1512,36 @@ SPOCTestTinkerResponseContent >> setUpTrack [
 			trackNumber: 1;
 			yourself)
 	
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/11/2024 14:48'
+}
+SPOCTestTinkerResponseContent >> testTinkerAlbum [
+
+	| content res |
+	content := Json readFrom: self mockAlbum readStream.
+	res := self apiEndpoint tinkerAlbum: content.
+	res image: nil;
+		artists: nil;
+		popularity: nil.
+	self assert: (res equals: self album)
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/11/2024 14:45'
+}
+SPOCTestTinkerResponseContent >> testTinkerArtist [
+
+	| content res |
+	content := Json readFrom: self mockArtist readStream.
+	res := self apiEndpoint tinkerArtist: content.
+	res image: nil;
+		followers: nil;
+		popularity: nil.
+	self assert: (res equals: self artist)
 ]
 
 {
@@ -1537,7 +1570,7 @@ SPOCTestTinkerResponseContent >> testTinkerPlaybackState [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/11/2024 11:52'
+	#'squeak_changestamp' : 'TL 6/11/2024 14:45'
 }
 SPOCTestTinkerResponseContent >> testTinkerTrack [
 
