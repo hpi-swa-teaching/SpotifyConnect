@@ -95,7 +95,7 @@ SPOCTrack >> durationAsFormattedTime [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'RK 6/6/2024 00:49'
+	#'squeak_changestamp' : 'TL 6/11/2024 12:07'
 }
 SPOCTrack >> equals: aTrack [
 
@@ -105,27 +105,7 @@ SPOCTrack >> equals: aTrack [
         & (self artists = aTrack artists)
         & (self album = aTrack album)
         & (self duration = aTrack duration)
-        & (self explicit = aTrack explicit)
-        & (self popularity = aTrack popularity)
         & (self trackNumber = aTrack trackNumber)
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
-}
-SPOCTrack >> explicit [
-
-	^ explicit
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
-}
-SPOCTrack >> explicit: aBoolean [
-
-	explicit := aBoolean
 ]
 
 {
@@ -135,24 +115,6 @@ SPOCTrack >> explicit: aBoolean [
 SPOCTrack >> playTrack: aString [
 	
 	self app player playTrack: aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
-}
-SPOCTrack >> popularity [
-
-	^ popularity
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:57'
-}
-SPOCTrack >> popularity: aNumber [
-
-	popularity := aNumber
 ]
 
 {

@@ -46,7 +46,7 @@ SPOCMockTestApiDevice >> device: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:57'
+	#'squeak_changestamp' : 'TL 6/11/2024 11:55'
 }
 SPOCMockTestApiDevice >> setUp [
 
@@ -55,8 +55,6 @@ SPOCMockTestApiDevice >> setUp [
 			id: 'string';
 			name: 'Kitchen speaker';
 			isActive: false;
-			isPrivateSession: false;
-			isRestricted: false;
 			type: 'computer';
 			volume: 59;
 			supportsVolume: false;

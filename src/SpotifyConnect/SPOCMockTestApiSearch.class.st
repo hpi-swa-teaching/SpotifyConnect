@@ -28,7 +28,7 @@ SPOCMockTestApiSearch >> apiEndpoint: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/10/2024 05:19'
+	#'squeak_changestamp' : 'TL 6/11/2024 12:08'
 }
 SPOCMockTestApiSearch >> setUp [
 
@@ -40,8 +40,6 @@ SPOCMockTestApiSearch >> setUp [
 			artists: nil;
 			album: nil;
 			duration: 217;
-			explicit: false;
-			popularity: 59;
 			trackNumber: 11;
 			yourself).
 	self apiEndpoint returnsTestContent: true

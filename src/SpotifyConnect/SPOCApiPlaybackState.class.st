@@ -563,7 +563,7 @@ SPOCApiPlaybackState >> executeTest [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 23:33'
+	#'squeak_changestamp' : 'TL 6/10/2024 23:46'
 }
 SPOCApiPlaybackState >> tinkerReponseContent: aContentStream [
 	

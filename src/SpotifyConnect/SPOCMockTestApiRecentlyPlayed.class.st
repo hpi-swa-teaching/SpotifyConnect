@@ -10,7 +10,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/9/2024 12:32'
+	#'squeak_changestamp' : 'TL 6/11/2024 12:08'
 }
 SPOCMockTestApiRecentlyPlayed >> setUp [
 	apiEndpoint := SPOCApiRecentlyPlayed new.
@@ -19,8 +19,6 @@ SPOCMockTestApiRecentlyPlayed >> setUp [
 		name: 'Morning Blue';
 		album: nil;
 		duration: 217;
-		explicit: false;
-		popularity: 59;
 		trackNumber: 11.
 	apiEndpoint returnsTestContent: true
 ]

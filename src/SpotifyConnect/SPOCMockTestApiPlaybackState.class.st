@@ -28,7 +28,7 @@ SPOCMockTestApiPlaybackState >> apiEndpoint: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/10/2024 00:21'
+	#'squeak_changestamp' : 'TL 6/11/2024 12:08'
 }
 SPOCMockTestApiPlaybackState >> setUp [
 
@@ -40,8 +40,6 @@ SPOCMockTestApiPlaybackState >> setUp [
 			artists: nil;
 			album: nil;
 			duration: 144;
-			explicit: false;
-			popularity: 86;
 			trackNumber: 1;
 			yourself).
 	self apiEndpoint returnsTestContent: true

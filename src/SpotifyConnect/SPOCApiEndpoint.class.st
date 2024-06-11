@@ -182,15 +182,13 @@ SPOCApiEndpoint >> tinkerArtist: aJson [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 23:33'
+	#'squeak_changestamp' : 'TL 6/11/2024 11:55'
 }
 SPOCApiEndpoint >> tinkerDevice: aJson [
 	
 	^ SPOCDevice new
 		id: (aJson at: #id);
 		isActive: (aJson at: #is_active);
-		isPrivateSession: (aJson at: #is_private_session);
-		isRestricted: (aJson at: #is_restricted);
 		name: (aJson at: #name);
 		type: (aJson at: #type);
 		volume: (aJson at: #volume_percent);
@@ -241,7 +239,7 @@ SPOCApiEndpoint >> tinkerRequest [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 23:32'
+	#'squeak_changestamp' : 'TL 6/11/2024 12:07'
 }
 SPOCApiEndpoint >> tinkerTrack: aJson [
 
@@ -253,8 +251,6 @@ SPOCApiEndpoint >> tinkerTrack: aJson [
 		image: album image;
 		album: album;
 		duration: (aJson at: #duration_ms) // 1000;
-		explicit: (aJson at: #explicit);
-		popularity: (aJson at: #popularity);
 		trackNumber: (aJson at: #track_number);
 		yourself
 ]
