@@ -93,15 +93,15 @@ SPOCTrack >> durationAsFormattedTime [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/11/2024 15:27'
+	#'squeak_changestamp' : 'TL 6/12/2024 01:21'
 }
 SPOCTrack >> equals: aTrack [
 
 	^ (self id = aTrack id) 
 		& (self name = aTrack name) 
-		& (self image = aTrack image)
-		& (self album = aTrack album)
-		& (self artists = aTrack artists)
+		& (self image equals: aTrack image)
+		& (self album equals: aTrack album)
+		& (self artistsEqual: aTrack artists)
  		& (self duration = aTrack duration)
  		& (self trackNumber = aTrack trackNumber)
 ]

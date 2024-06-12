@@ -36,7 +36,7 @@ SPOCTestAuthorizer >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/11/2024 11:38'
+	#'squeak_changestamp' : 'TL 6/12/2024 00:40'
 }
 SPOCTestAuthorizer >> testAuthorizationUrl [
 	
@@ -49,8 +49,8 @@ SPOCTestAuthorizer >> testAuthorizationUrl [
 		'&state=', self authorizer randomState,
 		'&client_id=', SPOCAuthorizer clientId. 
 	clipboardText := Clipboard default primitiveClipboardText.
-	self assert: targetUrl equals: responseUrl.
-	self assert: targetUrl equals: clipboardText
+	self assert: targetUrl = responseUrl.
+	self assert: targetUrl = clipboardText
 ]
 
 {
