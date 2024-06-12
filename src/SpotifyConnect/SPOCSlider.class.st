@@ -57,9 +57,10 @@ SPOCSlider class >> defaultNobSize [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 6/6/2024 21:37'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:32'
 }
 SPOCSlider >> align [
+
 	self outerBar position: (self outerBar position + (self outerBarLeftCircle width / 2 @ (self nob height / 4))).
 	self innerBar position: (self innerBar position + (self outerBarLeftCircle width / 2 @ (self nob height / 4))).
 	self outerBarRightCircle position: (self outerBarRightCircle position + (self outerBar width @ (self nob height / 4))).
@@ -70,9 +71,10 @@ SPOCSlider >> align [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/6/2024 22:34'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:32'
 }
 SPOCSlider >> attachInnerBar [
+
 	self addMorph: (self circleMorph name: 'inner-right-circle';
 			eventHandler: self mouseEventHandler;
 			yourself);
@@ -84,9 +86,10 @@ SPOCSlider >> attachInnerBar [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/6/2024 22:00'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:32'
 }
 SPOCSlider >> attachNob [
+
 	self addMorph: (self circleMorph extent: SPOCSlider defaultNobSize asPoint;
 			 name: 'nob';
 			 eventHandler: self mouseEventHandler;
@@ -96,9 +99,10 @@ SPOCSlider >> attachNob [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/6/2024 22:00'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:32'
 }
 SPOCSlider >> attachOuterBar [
+
 	self addMorph: (self circleMorph name: 'outer-left-circle';
 			 eventHandler: self mouseEventHandler;
 			 yourself);
@@ -113,21 +117,22 @@ SPOCSlider >> attachOuterBar [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/6/2024 20:37'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:42'
 }
 SPOCSlider >> circleMorph [
-	| circle |
-	circle := CircleMorph new.
-	circle extent: SPOCSlider defaultBarHeight asPoint;
-		borderWidth: 0.
-	^ circle
+
+	^ CircleMorph new
+		extent: SPOCSlider defaultBarHeight asPoint;
+		borderWidth: 0;
+		yourself
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 15:28'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:32'
 }
 SPOCSlider >> initialize [
+
 	super initialize.
 		
 	self color: Color transparent;
@@ -163,9 +168,10 @@ SPOCSlider >> innerBar [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 6/6/2024 21:32'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:32'
 }
 SPOCSlider >> innerBarColor [
+
 	^ innerBarColor
 ]
 
@@ -296,7 +302,7 @@ SPOCSlider >> onMouseMove: anEvent [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'VE 6/6/2024 22:25'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:43'
 }
 SPOCSlider >> onMouseUp: anEvent [
 	
@@ -304,22 +310,24 @@ SPOCSlider >> onMouseUp: anEvent [
 	x := anEvent position x.
 	diff := x - self position x.
 	self updateValue: diff.
-	self onValueChanged ifNotNil: [self onValueChanged value: value].
+	self onValueChanged ifNotNil: [self onValueChanged value: value]
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 6/6/2024 22:18'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:33'
 }
 SPOCSlider >> onValueChanged [
+
 	^ onValueChanged
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 6/6/2024 22:18'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:33'
 }
 SPOCSlider >> onValueChanged: anObject [
+
 	onValueChanged := anObject
 ]
 
@@ -334,13 +342,13 @@ SPOCSlider >> outerBar [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 6/6/2024 21:10'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:34'
 }
 SPOCSlider >> outerBarColor: aColor [
 
 	self outerBarLeftCircle color: aColor.
 	self outerBarRightCircle color: aColor.
-	self outerBar color: aColor.
+	self outerBar color: aColor
 ]
 
 {
@@ -363,6 +371,15 @@ SPOCSlider >> outerBarRightCircle [
 
 {
 	#category : #updating,
+	#'squeak_changestamp' : 'TL 6/12/2024 03:35'
+}
+SPOCSlider >> threshold [
+
+	^ self outerBarLeftCircle height / self length * 100
+]
+
+{
+	#category : #updating,
 	#'squeak_changestamp' : 'VE 6/10/2024 22:11'
 }
 SPOCSlider >> updateExtent [
@@ -372,7 +389,7 @@ SPOCSlider >> updateExtent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 6/6/2024 22:15'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:34'
 }
 SPOCSlider >> updateInnerBar [
 	
@@ -382,62 +399,57 @@ SPOCSlider >> updateInnerBar [
 	self innerBarRightCircle position: (self outerBarLeftCircle position + (width @ 0)).
 	self nob position: (self outerBarLeftCircle position x @ self nob position y + (width @ 0)).
 	self updateOuterBarLeftCircleColor;
-		updateInnerBarRightCircleVisibilityIfNecessary.
+		updateInnerBarRightCircleVisibilityIfNecessary
 ]
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 6/6/2024 22:15'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:35'
 }
 SPOCSlider >> updateInnerBarRightCircleVisibilityIfNecessary [
 	
-	| threshold |
-	threshold := self outerBarLeftCircle height / self length * 100.
-	self value < threshold
+	self value < self threshold
 		ifTrue: [self innerBarRightCircle hide]
 		ifFalse: [self innerBarRightCircle show]
 ]
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 6/6/2024 21:29'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:35'
 }
 SPOCSlider >> updateOuterBarLeftCircleColor [
 	
-	| threshold |
-	threshold := self outerBarLeftCircle height / self length * 100.
-	self innerBar width > threshold
+	self innerBar width > self threshold
 		ifTrue: [self outerBarLeftCircle color: self innerBar color]
 		ifFalse: [self outerBarLeftCircle color: self outerBar color]
 ]
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 6/6/2024 21:29'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:36'
 }
 SPOCSlider >> updateOuterBarLeftCircleColorIfNecessary: aColor [
 	
-	| threshold |
-	threshold := self outerBarLeftCircle height / self length * 100.
-	self innerBar width > threshold
+	self innerBar width > self threshold
 		ifTrue: [self outerBarLeftCircle color: aColor]
 ]
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'VK 6/11/2024 14:32'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:44'
 }
 SPOCSlider >> updateValue: aWidth [
 
 	value := ((aWidth * 100 // self length) min: 100 max: 0).
-	self value: value.
+	self value: value
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 6/6/2024 21:11'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:36'
 }
 SPOCSlider >> value [
+
 	^ value
 ]
 

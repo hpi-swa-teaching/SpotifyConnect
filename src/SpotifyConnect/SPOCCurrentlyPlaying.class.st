@@ -73,10 +73,11 @@ SPOCCurrentlyPlaying >> track: aSPOCTrack [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/10/2024 18:57'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:11'
 }
 SPOCCurrentlyPlaying >> updatePlaybackState: aState [
 
-	self track: aState track.
-	self item changeItemTo: self track
+	self disabled
+		ifFalse: [self track: aState track.
+			self item changeItemTo: self track]
 ]

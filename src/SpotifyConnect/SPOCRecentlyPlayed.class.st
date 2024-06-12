@@ -57,21 +57,21 @@ SPOCRecentlyPlayed >> buildButton [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VK 6/9/2024 14:03'
+	#'squeak_changestamp' : 'TL 6/12/2024 04:17'
 }
 SPOCRecentlyPlayed >> getRecentlyPlayed [
 
 	| dict apiEndpoint |
-	dict := Dictionary new.
-	dict at: 'limit' put: SPOCRecentlyPlayed trackLimit;
-		at: 'before' put: SPOCRecentlyPlayed beforeTimestamp;
+	dict := Dictionary new
+		at: #limit put: SPOCRecentlyPlayed trackLimit;
+		at: #before put: SPOCRecentlyPlayed beforeTimestamp;
 		yourself.
-	apiEndpoint := SPOCApiRecentlyPlayed new.
-	apiEndpoint authorizer: self app auth.
+	apiEndpoint := SPOCApiRecentlyPlayed new
+		authorizer: self app auth;
+		yourself.
 	self tracks: (apiEndpoint execute: dict).
-	self app resultList updateResults: tracks.
-	self app resultList title: 'Recently Played'.
-	self app currentlyPlaying update
+	self app resultList updateResults: self tracks;
+		title: 'Recently Played'
 ]
 
 {

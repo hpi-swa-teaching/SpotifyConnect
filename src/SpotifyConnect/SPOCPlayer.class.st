@@ -62,7 +62,7 @@ SPOCPlayer >> attachButton: anIcon [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 22:41'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:21'
 }
 SPOCPlayer >> attachNextButton [
 
@@ -71,12 +71,15 @@ SPOCPlayer >> attachNextButton [
 				color: Color transparent;
 			 	yourself);		
 		attachButton: self nextIcon;
-	      addMorph: (Morph new color: Color transparent; extent: 15@button height; yourself)
+	      addMorph: (Morph new
+			color: Color transparent;
+			extent: 15 @ self button height;
+			yourself)
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 22:30'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:21'
 }
 SPOCPlayer >> attachPlayPauseButton [
 
@@ -84,7 +87,10 @@ SPOCPlayer >> attachPlayPauseButton [
 				iconAsset: SPOCPlayer playIconPath;
 			 	yourself);		
 		attachButton: self playPauseIcon;
-		addMorph: (Morph new color: Color transparent; extent: 15@button height; yourself);
+		addMorph: (Morph new
+			color: Color transparent;
+			extent: 15 @ self button height;
+			yourself);
 		updatePlayPauseIcon
 ]
 
@@ -139,17 +145,19 @@ SPOCPlayer >> deviceID: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 20:27'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:05'
 }
 SPOCPlayer >> executeButtonFunction: anIcon [
 	
-	(anIcon == self previousIcon)
-		ifTrue: [self skipToPrevious].
-	(anIcon == self playPauseIcon)
-		ifTrue: [self switchPlaybackState].
-	(anIcon == self nextIcon)
-		ifTrue: [self skipToNext].
-	self app updatePlaybackStateFromLogin: false
+	self app updatePlaybackStateFromLogin: false.
+	self disabled
+		ifFalse: [(anIcon == self previousIcon)
+				ifTrue: [self skipToPrevious].
+			(anIcon == self playPauseIcon)
+				ifTrue: [self switchPlaybackState].
+			(anIcon == self nextIcon)
+				ifTrue: [self skipToNext].
+			self app updatePlaybackStateFromLogin: false]
 
 ]
 
@@ -330,11 +338,10 @@ SPOCPlayer >> skipToPrevious [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 19:49'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:01'
 }
 SPOCPlayer >> switchPlaybackState [
 
-	self app updatePlaybackStateFromLogin: false.
 	self isPlaying 
 		ifTrue: [self pause]
 		ifFalse: [self play]
@@ -343,7 +350,7 @@ SPOCPlayer >> switchPlaybackState [
 ]
 
 {
-	#category : #initialization,
+	#category : #updating,
 	#'squeak_changestamp' : 'TL 6/3/2024 23:36'
 }
 SPOCPlayer >> updatePlayPauseIcon [
@@ -355,11 +362,12 @@ SPOCPlayer >> updatePlayPauseIcon [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/10/2024 19:44'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:12'
 }
 SPOCPlayer >> updatePlaybackState: aState [
 
-	self deviceID: aState device id;
-		isPlaying: aState isPlaying;
-		updatePlayPauseIcon
+	self disabled
+		ifFalse: [self deviceID: aState device id;
+			isPlaying: aState isPlaying;
+			updatePlayPauseIcon]
 ]

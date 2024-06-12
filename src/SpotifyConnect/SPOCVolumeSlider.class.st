@@ -11,31 +11,47 @@ Class {
 }
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 22:25'
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/12/2024 03:19'
 }
-SPOCVolumeSlider >> attachIcon [
-	
-	self addMorph: (Morph new color: Color transparent; extent: 1@20; yourself);
-		addMorph: (SPOCIcon new color: Color transparent; iconAsset: '/assets/speaker.png';yourself)
+SPOCVolumeSlider class >> speakerIconPath [
+
+	^ '/assets/speaker.png'
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 19:55'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:20'
+}
+SPOCVolumeSlider >> attachIcon [
+	
+	self addMorph: (Morph new
+			color: Color transparent;
+			extent: 1 @ 20;
+			yourself);
+		addMorph: (SPOCIcon new
+			color: Color transparent;
+			iconAsset: self class speakerIconPath;
+			yourself)
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 6/12/2024 04:06'
 }
 SPOCVolumeSlider >> attachSlider [
 
 	self slider: (SPOCSlider new
-			updateValue: 100;
-			length: 300;
+			value: self volume;
+			length: 100;
 			yourself).
 	self slider onValueChanged: [:aValue | 
 		self app updatePlaybackStateFromLogin: false.
-		self supportsVolume
-			ifTrue: [self changeVolumeTo: aValue]
-			ifFalse: [self slider updateValue: self volume.
-				UIManager inform: 'Your device does not support volume changes.']].
+		self disabled
+			ifFalse: [self supportsVolume
+					ifTrue: [self changeVolumeTo: aValue.
+						self app updatePlaybackStateFromLogin: false]
+					ifFalse: [self app volumePopUp]]].
 	self addMorph: self slider
 ]
 
@@ -130,29 +146,15 @@ SPOCVolumeSlider >> supportsVolume: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 18:01'
-}
-SPOCVolumeSlider >> updateInstanceVariables [
-
-	| playbackState |
-	playbackState := self getPlaybackState.
-	playbackState class = SPOCApiEndpointResult
-		ifTrue: [playbackState response code = 204
-			ifTrue: [UIManager inform: 'Please play music on your device!']]
-		ifFalse: [self deviceID: playbackState device id;
-			volume: playbackState device volume;
-			supportsVolume: playbackState device supportsVolume]
-]
-
-{
-	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 19:51'
+	#'squeak_changestamp' : 'TL 6/12/2024 04:24'
 }
 SPOCVolumeSlider >> updatePlaybackState: aState [
 
-	self deviceID: aState device id;
-		volume: aState device volume;
-		supportsVolume: aState device supportsVolume
+	self disabled
+		ifFalse: [self deviceID: aState device id;
+				supportsVolume: aState device supportsVolume;
+				volume: aState device volume.
+			self slider updateValue: self volume]
 ]
 
 {

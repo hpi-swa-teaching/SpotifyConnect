@@ -55,48 +55,25 @@ SPOCUIComponent >> disabled: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:00'
+	#'squeak_changestamp' : 'TL 6/12/2024 02:52'
 }
 SPOCUIComponent >> extendFully [
 
-	self extent: 0@0.
+	self extent: 0 @ 0.
 	self extent: self fullBounds extent
 ]
 
 {
-	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 04:37'
-}
-SPOCUIComponent >> getPlaybackState [
-
-	| apiEndpoint dict |
-	dict := Dictionary new
-		at: #additional_types put: 'track';
-		yourself.
-	apiEndpoint := SPOCApiPlaybackState new
-		authorizer: self app auth;
-		yourself.
-	^ apiEndpoint execute: dict
-]
-
-{
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 18:16'
-}
-SPOCUIComponent >> hasActiveDevice [
-	
-	^ (self getPlaybackState class = SPOCApiEndpointResult) not
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 17:38'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:08'
 }
 SPOCUIComponent >> initialize [
 
 	super initialize.
+	
 	self hResizing: #rigid; 
-		vResizing: #rigid
+		vResizing: #rigid;
+		disabled: true
 ]
 
 {

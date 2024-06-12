@@ -169,11 +169,11 @@ SPOCApp >> centerPanelContent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/10/2024 18:39'
+	#'squeak_changestamp' : 'TL 6/12/2024 04:12'
 }
 SPOCApp >> componentsForUpdatingPlaybackState [
 
-	^ {currentlyPlaying. player. volumeSlider}
+	^ {currentlyPlaying. player. resultList. volumeSlider}
 ]
 
 {
@@ -350,35 +350,29 @@ SPOCApp >> searchbar: aSPOCSearchbar [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 19:53'
+	#'squeak_changestamp' : 'TL 6/12/2024 02:54'
 }
 SPOCApp >> setUpCurrentlyPlaying [
 
-	self currentlyPlaying: (SPOCCurrentlyPlaying new app: self).
-	self auth registerSuccessCallback: [self updatePlaybackStateFromLogin: true]
+	self currentlyPlaying: (SPOCCurrentlyPlaying new app: self)
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 19:27'
+	#'squeak_changestamp' : 'TL 6/12/2024 02:54'
 }
 SPOCApp >> setUpPlayer [
 
-	self player: (SPOCPlayer new app: self).
-	self auth registerSuccessCallback: [self updatePlaybackStateFromLogin: true
-		"self player hasActiveDevice
-			ifTrue: [self player disabled: false.
-				self player updateIsPlayingFromLogin]"]
+	self player: (SPOCPlayer new app: self)
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 19:53'
+	#'squeak_changestamp' : 'TL 6/12/2024 02:54'
 }
 SPOCApp >> setUpRecentlyPlayed [
 
-	self recentlyPlayed: (SPOCRecentlyPlayed new app: self).
-	self auth registerSuccessCallback: [self updatePlaybackStateFromLogin: true]
+	self recentlyPlayed: (SPOCRecentlyPlayed new app: self)
 ]
 
 {
@@ -392,12 +386,11 @@ SPOCApp >> setUpResultList [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
+	#'squeak_changestamp' : 'TL 6/12/2024 02:58'
 }
 SPOCApp >> setUpSearchbar [
 
-	self searchbar: (SPOCSearchbar new app: self).
-	self auth registerSuccessCallback: [self searchbar disabled: false]
+	self searchbar: (SPOCSearchbar new app: self)
 ]
 
 {
@@ -411,24 +404,24 @@ SPOCApp >> setUpSwitchDevice [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 19:53'
+	#'squeak_changestamp' : 'TL 6/12/2024 02:54'
 }
 SPOCApp >> setUpUserLogin [
 
 	self userLogin: (SPOCUserLogin new app: self).
-	self auth registerSuccessCallback: [self userLogin toggleLogout]
+	self auth registerSuccessCallback: [self userLogin toggleLogout.
+		self updatePlaybackStateFromLogin: true]
 
 
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 19:51'
+	#'squeak_changestamp' : 'TL 6/12/2024 02:54'
 }
 SPOCApp >> setUpVolumeSlider [
 
-	self volumeSlider: (SPOCVolumeSlider new app: self).
-	self auth registerSuccessCallback: [self updatePlaybackStateFromLogin: true]
+	self volumeSlider: (SPOCVolumeSlider new app: self)
 ]
 
 {
@@ -458,19 +451,23 @@ SPOCApp >> topPanelContent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/10/2024 19:43'
+	#'squeak_changestamp' : 'TL 6/12/2024 03:54'
 }
 SPOCApp >> updatePlaybackStateFromLogin: aBoolean [
 
 	| playbackState |
-	playbackState := self getPlaybackState.
-	playbackState class = SPOCApiEndpointResult
-		ifTrue: [aBoolean
-				ifFalse: [playbackState response code = 204 "self auth isAuthorized"
-						ifTrue: [self devicePopUp]
-						ifFalse: [self loginPopUp]]]
-		ifFalse: [self componentsForUpdatingPlaybackState do: [:aComponent |
+	aBoolean
+		ifTrue: [playbackState := self getPlaybackState.
+			self componentsForUpdatingPlaybackState do: [:aComponent | 
 				aComponent updatePlaybackState: playbackState]]
+		ifFalse: [self auth isAuthorized
+				ifTrue: [playbackState := self getPlaybackState.
+					playbackState class = SPOCApiEndpointResult
+						ifTrue: [self devicePopUp]
+						ifFalse: [self componentsForUpdatingPlaybackState do: [:aComponent | 
+								aComponent disabled: false.
+								aComponent updatePlaybackState: playbackState]]]
+				ifFalse: [self loginPopUp]]
 ]
 
 {
@@ -489,6 +486,15 @@ SPOCApp >> userLogin [
 SPOCApp >> userLogin: anObject [
 
 	userLogin := anObject
+]
+
+{
+	#category : #'pop-ups',
+	#'squeak_changestamp' : 'TL 6/12/2024 04:00'
+}
+SPOCApp >> volumePopUp [
+
+	UIManager inform: 'Your device does not support volume changes.'
 ]
 
 {

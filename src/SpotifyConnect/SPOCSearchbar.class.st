@@ -5,8 +5,7 @@ Class {
 		'inputField',
 		'inputText',
 		'tracks',
-		'trackItems',
-		'disabled'
+		'trackItems'
 	],
 	#category : #'SpotifyConnect-UI'
 }
@@ -134,14 +133,11 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 20:10'
+	#'squeak_changestamp' : 'TL 6/12/2024 04:17'
 }
 SPOCSearchbar >> searchTracks: aString [
 
 	| apiEndpoint dict |
-	self disabled
-		ifTrue: [UIManager inform: 'Please log in!'.
-			^ self].
 	dict := Dictionary new
 		at: #input put: (self sanitizeInput: aString);
 		at: #type put: 'track';
@@ -152,8 +148,7 @@ SPOCSearchbar >> searchTracks: aString [
 		yourself.
 	self tracks: (apiEndpoint execute: dict).
 	self app resultList updateResults: self tracks;
-		title: 'Your Results'.
-	self app updatePlaybackStateFromLogin: false
+		title: 'Your Results'
 ]
 
 {
