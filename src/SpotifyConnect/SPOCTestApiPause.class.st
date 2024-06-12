@@ -5,22 +5,6 @@ Class {
 }
 
 {
-	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 14:11'
-}
-SPOCTestApiPause >> getPlaybackState [
-
-	| apiEndpoint dict |
-	dict := Dictionary new
-		at: #additional_types put: 'track';
-		yourself.
-	apiEndpoint := SPOCApiPlaybackState new
-		authorizer: self auth;
-		yourself.
-	^ apiEndpoint execute: dict
-]
-
-{
 	#category : #setup,
 	#'squeak_changestamp' : 'TL 6/10/2024 00:28'
 }
@@ -31,17 +15,17 @@ SPOCTestApiPause >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/10/2024 14:24'
+	#'squeak_changestamp' : 'TL 6/10/2024 23:12'
 }
 SPOCTestApiPause >> testApiPauseExecute [
 
-	| dict res |
+	| dict res playbackState |
+	playbackState := self getPlaybackState.
 	dict := Dictionary new
-		at: #device_id put: 'b704b454bce64526992a3f207723032f5f91e635';
+		at: #device_id put: playbackState device id;
 		yourself.
 	res := self apiEndpoint execute: dict.
-	self assert: true
-	"self getPlaybackState isPlaying
+	playbackState isPlaying
 		ifTrue: [self assert: (res response code = 204)]
-		ifFalse: [self assert: (res response code = 403)]"
+		ifFalse: [self assert: (res response code = 403)]
 ]

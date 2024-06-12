@@ -29,6 +29,18 @@ SPOCPlaybackState >> device: anObject [
 ]
 
 {
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:25'
+}
+SPOCPlaybackState >> equals: aState [
+	
+	^ (self device equals: aState device) 
+		& (self isPlaying = aState isPlaying) 
+		& (self progress = aState progress)
+		& (self track equals: aState track)
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/10/2024 04:09'
 }

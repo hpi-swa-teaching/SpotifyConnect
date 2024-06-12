@@ -153,26 +153,27 @@ SPOCApiEndpoint >> returnsTestContent: aBoolean [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 21:44'
+	#'squeak_changestamp' : 'TL 6/12/2024 01:31'
 }
-SPOCApiEndpoint >> setAlbum: aJson [
+SPOCApiEndpoint >> tinkerAlbum: aJson [
 
 	| artists |
 	artists := OrderedCollection new.
-	(aJson at: #artists) do: [:anArtist | artists add: (self setArtist: anArtist)].
+	(aJson at: #artists) do: [:anArtist | artists add: (self tinkerArtist: anArtist)].
 	^ SPOCAlbum new
 		id: (aJson at: #id);
 		name: (aJson at: #name);
+		image: (SPOCImage newWithUrl: (((aJson at: #images) first) at: #url));
 		artists: artists;
-		image: (SPOCImage newWithUrl: (((aJson at: #images) at: 1) at: #url));
+		totalTracks: (aJson at: #total_tracks);
 		yourself
 ]
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 21:44'
+	#'squeak_changestamp' : 'TL 6/12/2024 00:35'
 }
-SPOCApiEndpoint >> setArtist: aJson [
+SPOCApiEndpoint >> tinkerArtist: aJson [
 
 	^ SPOCArtist new
 		id: (aJson at: #id);
@@ -182,15 +183,13 @@ SPOCApiEndpoint >> setArtist: aJson [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 21:08'
+	#'squeak_changestamp' : 'TL 6/11/2024 11:55'
 }
-SPOCApiEndpoint >> setDevice: aJson [
+SPOCApiEndpoint >> tinkerDevice: aJson [
 	
 	^ SPOCDevice new
 		id: (aJson at: #id);
 		isActive: (aJson at: #is_active);
-		isPrivateSession: (aJson at: #is_private_session);
-		isRestricted: (aJson at: #is_restricted);
 		name: (aJson at: #name);
 		type: (aJson at: #type);
 		volume: (aJson at: #volume_percent);
@@ -200,40 +199,20 @@ SPOCApiEndpoint >> setDevice: aJson [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 21:38'
+	#'squeak_changestamp' : 'TL 6/10/2024 23:33'
 }
-SPOCApiEndpoint >> setPlaybackState: aJson [
+SPOCApiEndpoint >> tinkerPlaybackState: aJson [
 
 	| playbackState |
 	playbackState := SPOCPlaybackState new
-		device: (self setDevice: (aJson at: #device));
+		device: (self tinkerDevice: (aJson at: #device));
 		progress: (aJson at: #progress_ms);
 		isPlaying: (aJson at: #is_playing);
 		yourself.
 	((aJson at: #currently_playing_type) = 'track')
-		ifTrue: [playbackState track: (self setTrack: (aJson at: #item))]
+		ifTrue: [playbackState track: (self tinkerTrack: (aJson at: #item))]
 		ifFalse: [playbackState track: nil].
 	^ playbackState
-]
-
-{
-	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 21:18'
-}
-SPOCApiEndpoint >> setTrack: aJson [
-
-	| album |
-	album := self setAlbum: (aJson at: #album).
-	^ SPOCTrack new
-		id: (aJson at: #id);
-		name: (aJson at: #name);
-		image: album image;
-		album: album;
-		duration: (aJson at: #duration_ms) // 1000;
-		explicit: (aJson at: #explicit);
-		popularity: (aJson at: #popularity);
-		trackNumber: (aJson at: #track_number);
-		yourself
 ]
 
 {
@@ -257,4 +236,25 @@ SPOCApiEndpoint >> tinkerRequest [
 		headerAt: 'Authorization' put: 'Bearer ', self authorizer accessToken;
 		headerAt: 'Content-Type' put: 'application/json'.
 	^ request
+]
+
+{
+	#category : #response,
+	#'squeak_changestamp' : 'TL 6/11/2024 23:27'
+}
+SPOCApiEndpoint >> tinkerTrack: aJson [
+
+	| album artists |
+	album := self tinkerAlbum: (aJson at: #album).
+	artists := OrderedCollection new.
+	(aJson at: #artists) do: [:anArtist | artists add: (self tinkerArtist: anArtist)].
+	^ SPOCTrack new
+		id: (aJson at: #id);
+		name: (aJson at: #name);
+		image: album image;
+		album: album;
+		artists: artists;
+		duration: (aJson at: #duration_ms) // 1000;
+		trackNumber: (aJson at: #track_number);
+		yourself
 ]

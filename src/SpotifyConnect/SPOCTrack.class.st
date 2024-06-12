@@ -2,11 +2,9 @@ Class {
 	#name : #SPOCTrack,
 	#superclass : #SPOCDataPiece,
 	#instVars : [
-		'artists',
 		'album',
+		'artists',
 		'duration',
-		'explicit',
-		'popularity',
 		'trackNumber'
 	],
 	#category : #SpotifyConnect
@@ -50,11 +48,11 @@ SPOCTrack >> artists: aOrderedCollection [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'RK 6/7/2024 12:22'
+	#'squeak_changestamp' : 'TL 6/10/2024 19:59'
 }
 SPOCTrack >> clickAction [
 
-	^ [self owner app player playSong: self id]
+	^ [self owner app player playTrack: self id]
 ]
 
 {
@@ -95,64 +93,26 @@ SPOCTrack >> durationAsFormattedTime [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'RK 6/6/2024 00:49'
+	#'squeak_changestamp' : 'TL 6/12/2024 01:21'
 }
 SPOCTrack >> equals: aTrack [
 
-    ^ (self id = aTrack id) 
-        & (self name = aTrack name)
-	  & (self image = aTrack image)
-        & (self artists = aTrack artists)
-        & (self album = aTrack album)
-        & (self duration = aTrack duration)
-        & (self explicit = aTrack explicit)
-        & (self popularity = aTrack popularity)
-        & (self trackNumber = aTrack trackNumber)
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
-}
-SPOCTrack >> explicit [
-
-	^ explicit
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
-}
-SPOCTrack >> explicit: aBoolean [
-
-	explicit := aBoolean
+	^ (self id = aTrack id) 
+		& (self name = aTrack name) 
+		& (self image equals: aTrack image)
+		& (self album equals: aTrack album)
+		& (self artistsEqual: aTrack artists)
+ 		& (self duration = aTrack duration)
+ 		& (self trackNumber = aTrack trackNumber)
 ]
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
+	#'squeak_changestamp' : 'TL 6/10/2024 19:59'
 }
 SPOCTrack >> playTrack: aString [
 	
-	self app player playSong: aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
-}
-SPOCTrack >> popularity [
-
-	^ popularity
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:57'
-}
-SPOCTrack >> popularity: aNumber [
-
-	popularity := aNumber
+	self app player playTrack: aString
 ]
 
 {

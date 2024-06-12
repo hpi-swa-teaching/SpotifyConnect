@@ -1,8 +1,43 @@
 [
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'pause.png'
+		],
+		#encoding : Class [ #PNGReadWriter ]
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'devices.png'
+		],
+		#encoding : @4
+	},
 	SquotPlaintextMapper {
 		#path : FSAbsolutePath [
-			'src',
-			'.properties'
+			'LICENSE'
+		],
+		#encoding : 'TXT'
+	},
+	SquotTonelMapper {
+		#package : MCPackage {
+			#name : 'BaselineOfSpotifyConnect'
+		},
+		#path : FSAbsolutePath [
+			'src'
+		]
+	},
+	SquotPlaintextMapper {
+		#path : FSAbsolutePath [
+			'.smalltalk.ston'
+		],
+		#encoding : 'TXT'
+	},
+	SquotPlaintextMapper {
+		#path : FSAbsolutePath [
+			'.github',
+			'workflows',
+			'ci.yml'
 		],
 		#encoding : 'TXT'
 	},
@@ -14,71 +49,72 @@
 	},
 	SquotPlaintextMapper {
 		#path : FSAbsolutePath [
-			'LICENSE'
+			'CodeGuidelines.md'
 		],
 		#encoding : 'TXT'
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'devices.png'
+			'play.png'
 		],
-		#encoding : Class [ #PNGReadWriter ]
+		#encoding : @4
+	},
+	SquotPlaintextMapper {
+		#path : FSAbsolutePath [
+			'src',
+			'.properties'
+		],
+		#encoding : 'TXT'
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
-			'pause.png'
+			'speaker.png'
 		],
-		#encoding : @10
+		#encoding : @4
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
 			'recently-played.png'
 		],
-		#encoding : @10
+		#encoding : @4
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
 			'next.png'
 		],
-		#encoding : @10
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'next-white.png'
-		],
-		#encoding : @10
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'squeak-mouse.png'
-		],
-		#encoding : @10
-	},
-	SquotPlaintextMapper {
-		#path : FSAbsolutePath [
-			'.smalltalk.ston'
-		],
-		#encoding : 'TXT'
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'previous-white.png'
-		],
-		#encoding : @10
+		#encoding : @4
 	},
 	SquotImageMapper {
 		#path : FSAbsolutePath [
 			'assets',
 			'previous.png'
 		],
-		#encoding : @10
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'previous-white.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'squeak-mouse.png'
+		],
+		#encoding : @4
+	},
+	SquotImageMapper {
+		#path : FSAbsolutePath [
+			'assets',
+			'next-white.png'
+		],
+		#encoding : @4
 	},
 	SquotPlaintextMapper {
 		#path : FSAbsolutePath [
@@ -91,42 +127,6 @@
 		#package : MCPackage {
 			#name : 'SpotifyConnect'
 		},
-		#path : FSAbsolutePath [
-			'src'
-		]
-	},
-	SquotTonelMapper {
-		#package : MCPackage {
-			#name : 'BaselineOfSpotifyConnect'
-		},
-		#path : @31
-	},
-	SquotPlaintextMapper {
-		#path : FSAbsolutePath [
-			'CodeGuidelines.md'
-		],
-		#encoding : 'TXT'
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'speaker.png'
-		],
-		#encoding : @10
-	},
-	SquotPlaintextMapper {
-		#path : FSAbsolutePath [
-			'.github',
-			'workflows',
-			'ci.yml'
-		],
-		#encoding : 'TXT'
-	},
-	SquotImageMapper {
-		#path : FSAbsolutePath [
-			'assets',
-			'play.png'
-		],
-		#encoding : @10
+		#path : @11
 	}
 ]

@@ -2,7 +2,8 @@ Class {
 	#name : #SPOCUIComponent,
 	#superclass : #Morph,
 	#instVars : [
-		'app'
+		'app',
+		'disabled'
 	],
 	#category : #'SpotifyConnect-UI'
 }
@@ -23,6 +24,33 @@ SPOCUIComponent >> app [
 SPOCUIComponent >> app: aSPOCApp [
 
 	app := aSPOCApp
+]
+
+{
+	#category : #'pop-ups',
+	#'squeak_changestamp' : 'TL 6/10/2024 18:22'
+}
+SPOCUIComponent >> devicePopUp [
+
+	UIManager inform: 'Please open your Spotify App and play music to activate your device!'
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 17:59'
+}
+SPOCUIComponent >> disabled [
+
+	^ disabled
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 17:59'
+}
+SPOCUIComponent >> disabled: anObject [
+
+	disabled := anObject
 ]
 
 {
@@ -53,6 +81,15 @@ SPOCUIComponent >> getPlaybackState [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'TL 6/10/2024 18:16'
+}
+SPOCUIComponent >> hasActiveDevice [
+	
+	^ (self getPlaybackState class = SPOCApiEndpointResult) not
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'VE 6/10/2024 17:38'
 }
 SPOCUIComponent >> initialize [
@@ -60,4 +97,22 @@ SPOCUIComponent >> initialize [
 	super initialize.
 	self hResizing: #rigid; 
 		vResizing: #rigid
+]
+
+{
+	#category : #'pop-ups',
+	#'squeak_changestamp' : 'TL 6/10/2024 18:21'
+}
+SPOCUIComponent >> loginPopUp [
+
+	UIManager inform: 'Please log in!'
+]
+
+{
+	#category : #actions,
+	#'squeak_changestamp' : 'TL 6/10/2024 18:29'
+}
+SPOCUIComponent >> updatePlaybackState: aState [
+
+	^ self subclassResponsibility
 ]

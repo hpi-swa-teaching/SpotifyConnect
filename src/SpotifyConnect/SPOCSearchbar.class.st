@@ -71,24 +71,6 @@ SPOCSearchbar >> buildTextInputField [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/9/2024 13:17'
-}
-SPOCSearchbar >> disabled [
-
-	^ disabled
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/9/2024 13:17'
-}
-SPOCSearchbar >> disabled: aBoolean [
-
-	disabled := aBoolean
-]
-
-{
 	#category : #initialization,
 	#'squeak_changestamp' : 'VE 6/10/2024 22:44'
 }
@@ -152,7 +134,7 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 04:19'
+	#'squeak_changestamp' : 'TL 6/10/2024 20:10'
 }
 SPOCSearchbar >> searchTracks: aString [
 
@@ -171,7 +153,7 @@ SPOCSearchbar >> searchTracks: aString [
 	self tracks: (apiEndpoint execute: dict).
 	self app resultList updateResults: self tracks;
 		title: 'Your Results'.
-	self app currentlyPlaying update
+	self app updatePlaybackStateFromLogin: false
 ]
 
 {

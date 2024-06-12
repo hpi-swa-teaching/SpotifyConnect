@@ -3,28 +3,24 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'id',
-		'name',
 		'isActive',
-		'isPrivateSession',
-		'isRestricted',
+		'name',
+		'supportsVolume',
 		'type',
-		'volume',
-		'supportsVolume'
+		'volume'
 	],
 	#category : #SpotifyConnect
 }
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'VK 5/27/2024 16:25'
+	#'squeak_changestamp' : 'TL 6/11/2024 11:54'
 }
 SPOCDevice >> equals: aDevice [
 	
 	^ (self id = aDevice id) 
 		& (self name = aDevice name) 
 		& (self isActive = aDevice isActive)
-		& (self isPrivateSession = aDevice isPrivateSession)
-		& (self isRestricted = aDevice isRestricted)
 		& (self supportsVolume = aDevice supportsVolume)
 		& (self type = aDevice type)
 		& (self volume = aDevice volume)
@@ -64,42 +60,6 @@ SPOCDevice >> isActive [
 SPOCDevice >> isActive: anObject [
 
 	isActive := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
-}
-SPOCDevice >> isPrivateSession [
-
-	^ isPrivateSession
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
-}
-SPOCDevice >> isPrivateSession: anObject [
-
-	isPrivateSession := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
-}
-SPOCDevice >> isRestricted [
-
-	^ isRestricted
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
-}
-SPOCDevice >> isRestricted: anObject [
-
-	isRestricted := anObject
 ]
 
 {

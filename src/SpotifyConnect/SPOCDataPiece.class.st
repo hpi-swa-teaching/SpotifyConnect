@@ -3,12 +3,24 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'id',
-		'name',
+		'clickAction',
 		'image',
-		'clickAction'
+		'name'
 	],
 	#category : #SpotifyConnect
 }
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:29'
+}
+SPOCDataPiece >> artistsEqual: anArtistCollection [
+
+	self artists collect: [:anArtist | 
+		((anArtistCollection at: (self artists indexOf: anArtist)) equals: anArtist)
+			ifFalse: [^ false]].
+	^ true
+]
 
 {
 	#category : #actions,

@@ -72,11 +72,11 @@ SPOCCurrentlyPlaying >> track: aSPOCTrack [
 ]
 
 {
-	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:13'
+	#category : #updating,
+	#'squeak_changestamp' : 'TL 6/10/2024 18:57'
 }
-SPOCCurrentlyPlaying >> update [
+SPOCCurrentlyPlaying >> updatePlaybackState: aState [
 
-	self track: self getPlaybackState track.
+	self track: aState track.
 	self item changeItemTo: self track
 ]

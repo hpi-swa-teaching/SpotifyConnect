@@ -34,6 +34,15 @@ SPOCImage class >> newWithUrl: aString [
 ]
 
 {
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:12'
+}
+SPOCImage >> equals: anImage [
+
+	^ (self url = anImage url)
+]
+
+{
 	#category : #formatting,
 	#'squeak_changestamp' : 'RK 6/9/2024 00:08'
 }

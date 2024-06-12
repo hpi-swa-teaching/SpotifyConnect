@@ -36,7 +36,7 @@ SPOCTestAuthorizer >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:39'
+	#'squeak_changestamp' : 'TL 6/12/2024 00:40'
 }
 SPOCTestAuthorizer >> testAuthorizationUrl [
 	
@@ -48,14 +48,14 @@ SPOCTestAuthorizer >> testAuthorizationUrl [
 		'&redirect_uri=', SPOCAuthorizer redirectUri,
 		'&state=', self authorizer randomState,
 		'&client_id=', SPOCAuthorizer clientId. 
-	clipboardText := Clipboard default primitiveClipboardText.	
-	self assert: targetUrl equals: responseUrl.
-	self assert: targetUrl equals: clipboardText
+	clipboardText := Clipboard default primitiveClipboardText.
+	self assert: targetUrl = responseUrl.
+	self assert: targetUrl = clipboardText
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:40'
+	#'squeak_changestamp' : 'TL 6/10/2024 23:16'
 }
 SPOCTestAuthorizer >> testCallbackEndpoint [
 	
@@ -67,7 +67,7 @@ SPOCTestAuthorizer >> testCallbackEndpoint [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:40'
+	#'squeak_changestamp' : 'TL 6/10/2024 23:16'
 }
 SPOCTestAuthorizer >> testCallbackErrors [
 	
@@ -83,7 +83,7 @@ SPOCTestAuthorizer >> testCallbackErrors [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:40'
+	#'squeak_changestamp' : 'TL 6/10/2024 23:16'
 }
 SPOCTestAuthorizer >> testOnAuthorizationSuccessCallbacks [
 	
@@ -96,7 +96,7 @@ SPOCTestAuthorizer >> testOnAuthorizationSuccessCallbacks [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:41'
+	#'squeak_changestamp' : 'TL 6/10/2024 23:17'
 }
 SPOCTestAuthorizer >> testRandomState [
 	
@@ -110,7 +110,7 @@ SPOCTestAuthorizer >> testRandomState [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:41'
+	#'squeak_changestamp' : 'TL 6/10/2024 23:17'
 }
 SPOCTestAuthorizer >> testResponseAsset [
 	

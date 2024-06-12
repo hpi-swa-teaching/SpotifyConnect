@@ -1,42 +1,123 @@
 Class {
-	#name : #SPOCApiPlaybackState,
-	#superclass : #SPOCApiEndpoint,
-	#category : #'SpotifyConnect-API'
+	#name : #SPOCTestTinkerResponseContent,
+	#superclass : #TestCase,
+	#instVars : [
+		'album',
+		'apiEndpoint',
+		'artist',
+		'device',
+		'playbackState',
+		'track'
+	],
+	#category : #'SpotifyConnect-Tests'
 }
 
 {
-	#category : #parameters,
-	#'squeak_changestamp' : 'TL 5/27/2024 17:06'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:50'
 }
-SPOCApiPlaybackState >> endpoint [
+SPOCTestTinkerResponseContent >> album [
 
-	^ 'v1/me/player'
+	^ album
 ]
 
 {
-	#category : #parameters,
-	#'squeak_changestamp' : 'TL 5/27/2024 15:49'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:50'
 }
-SPOCApiPlaybackState >> endpointMethod [
+SPOCTestTinkerResponseContent >> album: anObject [
 
-	^ 'GET'
+	album := anObject
 ]
 
 {
-	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/9/2024 19:28'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/11/2024 00:08'
 }
-SPOCApiPlaybackState >> executeRequest: request withParams: aParamDictionary [
+SPOCTestTinkerResponseContent >> apiEndpoint [
 
-	request rawUrl: (request rawUrl, '?additional_types=', (aParamDictionary at: #additional_types)).
-	^ self client sendRequest: request
+	^ apiEndpoint
 ]
 
 {
-	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 00:05'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/11/2024 00:08'
 }
-SPOCApiPlaybackState >> executeTest [
+SPOCTestTinkerResponseContent >> apiEndpoint: anObject [
+
+	apiEndpoint := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:50'
+}
+SPOCTestTinkerResponseContent >> artist [
+
+	^ artist
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:50'
+}
+SPOCTestTinkerResponseContent >> artist: anObject [
+
+	artist := anObject
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/12/2024 00:38'
+}
+SPOCTestTinkerResponseContent >> artists [
+	
+	^ {(SPOCArtist new
+			id: '1c3uso4iIeeX3P0bhKaQDq';
+			name: 'Jaxomy';
+			yourself).
+		(SPOCArtist new
+			id: '124jbwgd8Hh6LW7jAqTa8r';
+			name: 'Agatino Romero';
+			yourself).
+		(SPOCArtist new
+			id: '6EVyI0S0b1Ld2nm37m5x85';
+			name: 'Raffaella Carrà';
+			yourself)} asOrderedCollection
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:50'
+}
+SPOCTestTinkerResponseContent >> device [
+
+	^ device
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:50'
+}
+SPOCTestTinkerResponseContent >> device: anObject [
+
+	device := anObject
+]
+
+{
+	#category : #mocks,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:34'
+}
+SPOCTestTinkerResponseContent >> mockContent [
+
+	^ Json readFrom: self mockPlaybackState readStream
+]
+
+{
+	#category : #mocks,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:49'
+}
+SPOCTestTinkerResponseContent >> mockPlaybackState [
 
 	^ '{
 		  "device": {
@@ -558,16 +639,187 @@ SPOCApiPlaybackState >> executeTest [
 		    }
 		  },
 		  "is_playing": true
-		}' readStream
+		}'
 ]
 
 {
-	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 23:46'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:50'
 }
-SPOCApiPlaybackState >> tinkerReponseContent: aContentStream [
+SPOCTestTinkerResponseContent >> playbackState [
+
+	^ playbackState
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:50'
+}
+SPOCTestTinkerResponseContent >> playbackState: anObject [
+
+	playbackState := anObject
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:41'
+}
+SPOCTestTinkerResponseContent >> setUp [
+
+	self apiEndpoint: SPOCApiEndpoint new;
+		setUpDevice;
+		setUpArtists;
+		setUpAlbum;
+		setUpTrack;
+		setUpPlaybackState
 	
-	| content |
-	content := Json readFrom: aContentStream readStream.
-	^ self tinkerPlaybackState: content
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:38'
+}
+SPOCTestTinkerResponseContent >> setUpAlbum [
+
+	self album: (SPOCAlbum new
+			id: '5y6RXjI5VPR0RyInghTbf1';
+			name: 'Pedro';
+			image: (SPOCImage newWithUrl: 'https://i.scdn.co/image/ab67616d0000b27384464d902b1ebaf62775a6da');
+			artists: self artists;
+			totalTracks: 1;
+			yourself)
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:41'
+}
+SPOCTestTinkerResponseContent >> setUpArtists [
+
+	self artist: (SPOCArtist new
+			id: '1c3uso4iIeeX3P0bhKaQDq';
+			name: 'Jaxomy';
+			yourself)
+	
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/11/2024 11:56'
+}
+SPOCTestTinkerResponseContent >> setUpDevice [
+
+	self device: (SPOCDevice new
+			id: 'b704b454bce64526992a3f207723032f5f91e635';
+			isActive: true;
+			name: 'TL-04';
+			supportsVolume: true;
+			type: 'Computer';
+			volume: 100;
+			yourself)
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:29'
+}
+SPOCTestTinkerResponseContent >> setUpPlaybackState [
+
+	self playbackState: (SPOCPlaybackState new
+			device: self device;
+			isPlaying: true;
+			progress: 66236;
+			track: self track;
+			yourself)
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:23'
+}
+SPOCTestTinkerResponseContent >> setUpTrack [
+
+	self track: (SPOCTrack new
+			id: '48lxT5qJF0yYyf2z4wB4xW';
+			name: 'Pedro';
+			image: (SPOCImage newWithUrl: 'https://i.scdn.co/image/ab67616d0000b27384464d902b1ebaf62775a6da');
+			album: self album;
+			artists: self artists;
+			duration: 144;
+			trackNumber: 1;
+			yourself)
+	
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:35'
+}
+SPOCTestTinkerResponseContent >> testTinkerAlbum [
+
+	| res |
+	res := self apiEndpoint tinkerAlbum: ((self mockContent at: #item) at: #album).
+	self assert: (res equals: self album)
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:35'
+}
+SPOCTestTinkerResponseContent >> testTinkerArtist [
+
+	| res |
+	res := self apiEndpoint tinkerArtist: (((self mockContent at: #item) at: #artists) first).
+	self assert: (res equals: self artist)
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:35'
+}
+SPOCTestTinkerResponseContent >> testTinkerDevice [
+
+	| res |
+	res := self apiEndpoint tinkerDevice: (self mockContent at: #device).
+	self assert: (res equals: self device)
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:35'
+}
+SPOCTestTinkerResponseContent >> testTinkerPlaybackState [
+
+	| res |
+	res := self apiEndpoint tinkerPlaybackState: self mockContent.
+	self assert: (res equals: self playbackState)
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:35'
+}
+SPOCTestTinkerResponseContent >> testTinkerTrack [
+
+	| res |
+	res := self apiEndpoint tinkerTrack: (self mockContent at: #item).
+	self assert: (res equals: self track)
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:50'
+}
+SPOCTestTinkerResponseContent >> track [
+
+	^ track
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:50'
+}
+SPOCTestTinkerResponseContent >> track: anObject [
+
+	track := anObject
 ]

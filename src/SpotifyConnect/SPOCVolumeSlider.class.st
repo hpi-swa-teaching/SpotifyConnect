@@ -22,16 +22,16 @@ SPOCVolumeSlider >> attachIcon [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 22:15'
+	#'squeak_changestamp' : 'TL 6/10/2024 19:55'
 }
 SPOCVolumeSlider >> attachSlider [
 
 	self slider: (SPOCSlider new
-			value: self volume;
-			length: 150;
+			updateValue: 100;
+			length: 300;
 			yourself).
 	self slider onValueChanged: [:aValue | 
-		self updateInstanceVariables.
+		self app updatePlaybackStateFromLogin: false.
 		self supportsVolume
 			ifTrue: [self changeVolumeTo: aValue]
 			ifFalse: [self slider updateValue: self volume.
@@ -130,17 +130,29 @@ SPOCVolumeSlider >> supportsVolume: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 05:08'
+	#'squeak_changestamp' : 'TL 6/10/2024 18:01'
 }
 SPOCVolumeSlider >> updateInstanceVariables [
 
 	| playbackState |
 	playbackState := self getPlaybackState.
 	playbackState class = SPOCApiEndpointResult
-		ifTrue: [playbackState response code = 204 ifTrue: [UIManager inform: 'Please play music on your device!']]
+		ifTrue: [playbackState response code = 204
+			ifTrue: [UIManager inform: 'Please play music on your device!']]
 		ifFalse: [self deviceID: playbackState device id;
 			volume: playbackState device volume;
 			supportsVolume: playbackState device supportsVolume]
+]
+
+{
+	#category : #actions,
+	#'squeak_changestamp' : 'TL 6/10/2024 19:51'
+}
+SPOCVolumeSlider >> updatePlaybackState: aState [
+
+	self deviceID: aState device id;
+		volume: aState device volume;
+		supportsVolume: aState device supportsVolume
 ]
 
 {
