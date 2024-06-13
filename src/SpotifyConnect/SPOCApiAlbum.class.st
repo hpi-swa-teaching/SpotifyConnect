@@ -41,13 +41,32 @@ SPOCApiAlbum >> executeTest [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 23:32'
+	#'squeak_changestamp' : 'RK 6/13/2024 23:25'
 }
 SPOCApiAlbum >> tinkerReponseContent: aContentStream [
 	
 	| content tracks |
 	content := Json readFrom: aContentStream readStream.
 	tracks := OrderedCollection new.
-	((content at: #tracks) at: #items) do: [:anItem | tracks add: (self tinkerTrack: anItem)].
+	(content at: #items) do: [:anItem | tracks add: (self tinkerTrack: anItem)].
 	^ tracks
+]
+
+{
+	#category : #response,
+	#'squeak_changestamp' : 'RK 6/13/2024 23:49'
+}
+SPOCApiAlbum >> tinkerTrack: aJson [
+
+	| artists |
+	artists := OrderedCollection new.
+	(aJson at: #artists) do: [:anArtist | artists add: (self tinkerArtist: anArtist)].
+	^ SPOCTrack new
+		id: (aJson at: #id);
+		name: (aJson at: #name);
+		image: (SPOCImage newWithPath: '/assets/squeak-mouse.png');
+		artists: artists;
+		duration: (aJson at: #duration_ms) // 1000;
+		trackNumber: (aJson at: #track_number);
+		yourself
 ]

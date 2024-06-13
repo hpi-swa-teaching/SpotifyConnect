@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'label',
 		'content',
-		'anObject',
 		'contents'
 	],
 	#category : #'SpotifyConnect-UI'
@@ -124,10 +123,10 @@ SPOCBoxedText >> content [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 13:27'
+	#'squeak_changestamp' : 'RK 6/14/2024 01:21'
 }
 SPOCBoxedText >> contents [
-	^ contents
+	^ self label contents
 ]
 
 {
