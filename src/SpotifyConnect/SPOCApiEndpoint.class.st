@@ -217,6 +217,20 @@ SPOCApiEndpoint >> tinkerPlaybackState: aJson [
 
 {
 	#category : #response,
+	#'squeak_changestamp' : 'RK 6/15/2024 18:17'
+}
+SPOCApiEndpoint >> tinkerPlaylist: aJson [
+
+	^ SPOCPlaylist new
+		id: (aJson at: #id);
+		name: (aJson at: #name);
+		image: (SPOCImage newWithUrl: (((aJson at: #images) first) at: #url));
+		owner: ((aJson at: #owner) at: #display_name);
+		yourself
+]
+
+{
+	#category : #response,
 	#'squeak_changestamp' : 'TL 6/10/2024 03:40'
 }
 SPOCApiEndpoint >> tinkerReponseContent: aContentStream [

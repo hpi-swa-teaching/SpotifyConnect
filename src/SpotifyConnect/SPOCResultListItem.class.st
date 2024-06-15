@@ -113,7 +113,7 @@ SPOCResultListItem >> buildPrimaryText [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 21:37'
+	#'squeak_changestamp' : 'RK 6/15/2024 18:22'
 }
 SPOCResultListItem >> buildSecondaryText [
 
@@ -122,8 +122,8 @@ SPOCResultListItem >> buildSecondaryText [
 		ifTrue: [content := self dataModel album artistsAsString].
 	(self dataModel isKindOf: SPOCAlbum)
 		ifTrue: [content := self dataModel artistsAsString].
-	(self dataModel isKindOf: SPOCArtist)
-		ifTrue: [content := ' '].	
+	(self dataModel isKindOf: SPOCPlaylist)
+		ifTrue: [content := self dataModel owner].	
 	self secondaryText: (SPOCText new contents: content; yourself).
 	self centerBox addMorph: self secondaryText
 ]

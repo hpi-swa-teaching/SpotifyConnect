@@ -496,7 +496,7 @@ SPOCApiSearch >> executeTest [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'RK 6/15/2024 16:59'
+	#'squeak_changestamp' : 'RK 6/15/2024 18:23'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
@@ -508,5 +508,8 @@ SPOCApiSearch >> tinkerReponseContent: aContentStream [
 			^ results].
 	(content includesKey: 'albums')
 		ifTrue: [((content at: #albums) at: #items) do: [ :anAlbum | results add: (self tinkerAlbum: anAlbum)].
+			^ results].
+	(content includesKey: 'playlists')
+		ifTrue: [((content at: #playlists) at: #items) do: [ :aPlaylist | results add: (self tinkerPlaylist: aPlaylist)].
 			^ results]
 ]
