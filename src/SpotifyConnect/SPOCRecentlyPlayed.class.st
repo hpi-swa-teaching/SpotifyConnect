@@ -57,7 +57,7 @@ SPOCRecentlyPlayed >> buildButton [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/12/2024 04:17'
+	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
 }
 SPOCRecentlyPlayed >> getRecentlyPlayed [
 
@@ -69,14 +69,14 @@ SPOCRecentlyPlayed >> getRecentlyPlayed [
 	apiEndpoint := SPOCApiRecentlyPlayed new
 		authorizer: self app auth;
 		yourself.
-	self tracks: (apiEndpoint execute: dict).
-	self app resultList updateResults: self tracks;
+	self results: (apiEndpoint execute: dict).
+	self app resultList updateResults: self results;
 		title: 'Recently Played'
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:49'
+	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
 }
 SPOCRecentlyPlayed >> initialize [
 
@@ -84,8 +84,8 @@ SPOCRecentlyPlayed >> initialize [
 	
 	self 
 		color: Color transparent;
-		trackItems: OrderedCollection new;
-		tracks: OrderedCollection new;
+		items: OrderedCollection new;
+		results: OrderedCollection new;
 		buildButton;
 		extendFully;
 		yourself
@@ -93,32 +93,32 @@ SPOCRecentlyPlayed >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:35'
+	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
 }
-SPOCRecentlyPlayed >> trackItems [
+SPOCRecentlyPlayed >> items [
 	^ trackItems
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:35'
+	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
 }
-SPOCRecentlyPlayed >> trackItems: anObject [
+SPOCRecentlyPlayed >> items: anObject [
 	trackItems := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
+	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
 }
-SPOCRecentlyPlayed >> tracks [
+SPOCRecentlyPlayed >> results [
 	^ tracks
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/1/2024 13:08'
+	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
 }
-SPOCRecentlyPlayed >> tracks: anObject [
+SPOCRecentlyPlayed >> results: anObject [
 	tracks := anObject
 ]

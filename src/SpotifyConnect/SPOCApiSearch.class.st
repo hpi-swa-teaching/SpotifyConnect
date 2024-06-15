@@ -496,13 +496,17 @@ SPOCApiSearch >> executeTest [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 23:32'
+	#'squeak_changestamp' : 'RK 6/15/2024 16:59'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
-	| content tracks |
+	| content results |
 	content := Json readFrom: aContentStream readStream.
-	tracks := OrderedCollection new.
-	((content at: #tracks) at: #items) do: [:anItem | tracks add: (self tinkerTrack: anItem)].
-	^ tracks
+	results := OrderedCollection new.
+	(content includesKey: 'tracks')
+		ifTrue: [((content at: #tracks) at: #items) do: [:anItem | results add: (self tinkerTrack: anItem)].
+			^ results].
+	(content includesKey: 'albums')
+		ifTrue: [((content at: #albums) at: #items) do: [ :anAlbum | results add: (self tinkerAlbum: anAlbum)].
+			^ results]
 ]

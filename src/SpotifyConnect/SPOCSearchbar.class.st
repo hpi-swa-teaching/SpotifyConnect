@@ -3,9 +3,10 @@ Class {
 	#superclass : #SPOCUIComponent,
 	#instVars : [
 		'inputField',
+		'input',
 		'inputText',
-		'tracks',
-		'trackItems',
+		'results',
+		'items',
 		'filter'
 	],
 	#category : #'SpotifyConnect-UI'
@@ -59,7 +60,7 @@ SPOCSearchbar >> buildCircle [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/13/2024 23:56'
+	#'squeak_changestamp' : 'RK 6/15/2024 16:40'
 }
 SPOCSearchbar >> buildInputField [
 	"To do: specification irgendwie auslagern, damit Methode kürzer"
@@ -70,7 +71,7 @@ SPOCSearchbar >> buildInputField [
 		model: self;
 		plainTextOnly: true;
 		getText: #inputText;
-		setText: #searchTracks:;
+		setText: #search:;
 		indicateUnacceptedChanges: false;
 		help: 'Was möchtest du wiedergeben?';
 		yourself.
@@ -105,7 +106,7 @@ SPOCSearchbar >> buildSearchbar [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/14/2024 01:30'
+	#'squeak_changestamp' : 'RK 6/15/2024 17:08'
 }
 SPOCSearchbar >> buttonClicked: aButton [
 	
@@ -113,7 +114,9 @@ SPOCSearchbar >> buttonClicked: aButton [
 	names := OrderedCollection withAll: #('track' 'album' 'playlist').
 	names do: [ :aName | (self submorphNamed: aName ) wrappee color: SPOCStyle spotifyWhite].	
 	aButton wrappee color: SPOCStyle spotifyGreen.
-	self filter: aButton externalName
+	self filter: aButton externalName.
+	
+	self search: self input
 ]
 
 {
@@ -136,19 +139,38 @@ SPOCSearchbar >> filter: aString [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/14/2024 01:38'
+	#'squeak_changestamp' : 'RK 6/15/2024 17:04'
 }
 SPOCSearchbar >> initialize [
 
 	super initialize.
 	
 	self color: Color transparent;
-		trackItems: OrderedCollection new;
-		tracks: OrderedCollection new;
+		items: OrderedCollection new;
+		results: OrderedCollection new;
 		buildSearchbar;
 		disabled: true;
-		buttonClicked: (self submorphNamed: 'track');
-		extendFully
+		filter: 'track';
+		extendFully.
+	(self submorphNamed: 'track') wrappee color: SPOCStyle spotifyGreen
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/15/2024 17:10'
+}
+SPOCSearchbar >> input [
+
+	^ input
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/15/2024 17:08'
+}
+SPOCSearchbar >> input: aString [
+
+	input := aString
 ]
 
 {
@@ -189,6 +211,42 @@ SPOCSearchbar >> inputText: aString [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
+}
+SPOCSearchbar >> items [
+
+	^ items
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
+}
+SPOCSearchbar >> items: anOrderedCollection [
+
+	items := anOrderedCollection
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
+}
+SPOCSearchbar >> results [
+
+	^ results
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/15/2024 16:42'
+}
+SPOCSearchbar >> results: anOrderedCollection [
+
+	results := anOrderedCollection
+]
+
+{
 	#category : #formatting,
 	#'squeak_changestamp' : 'TL 6/10/2024 04:21'
 }
@@ -199,11 +257,12 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'RK 6/14/2024 01:31'
+	#'squeak_changestamp' : 'RK 6/15/2024 17:07'
 }
-SPOCSearchbar >> searchTracks: aString [
+SPOCSearchbar >> search: aString [
 
 	| apiEndpoint dict |
+	self input: aString.
 	dict := Dictionary new
 		at: #input put: (self sanitizeInput: aString);
 		at: #type put: self filter;
@@ -212,43 +271,7 @@ SPOCSearchbar >> searchTracks: aString [
 	apiEndpoint := SPOCApiSearch new
 		authorizer: self app auth;
 		yourself.
-	self tracks: (apiEndpoint execute: dict).
-	self app resultList updateResults: self tracks;
+	self results: (apiEndpoint execute: dict).
+	self app resultList updateResults: self results;
 		title: 'Your Results'
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:03'
-}
-SPOCSearchbar >> trackItems [
-
-	^ trackItems
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:04'
-}
-SPOCSearchbar >> trackItems: anOrderedCollection [
-
-	trackItems := anOrderedCollection
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:04'
-}
-SPOCSearchbar >> tracks [
-
-	^ tracks
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:04'
-}
-SPOCSearchbar >> tracks: anOrderedCollection [
-
-	tracks := anOrderedCollection
 ]
