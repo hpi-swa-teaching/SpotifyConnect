@@ -113,13 +113,13 @@ SPOCResultListItem >> buildPrimaryText [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/15/2024 18:22'
+	#'squeak_changestamp' : 'RK 6/16/2024 12:25'
 }
 SPOCResultListItem >> buildSecondaryText [
 
 	| content |
 	(self dataModel isKindOf: SPOCTrack)
-		ifTrue: [content := self dataModel album artistsAsString].
+		ifTrue: [content := self dataModel artistsAsString].
 	(self dataModel isKindOf: SPOCAlbum)
 		ifTrue: [content := self dataModel artistsAsString].
 	(self dataModel isKindOf: SPOCPlaylist)

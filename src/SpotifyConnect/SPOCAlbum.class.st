@@ -40,15 +40,6 @@ SPOCAlbum >> artistsAsString [
 ]
 
 {
-	#category : #actions,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:18'
-}
-SPOCAlbum >> clickAction [
-
-	^ ["To do: show all tracks from this album in resultList"]
-]
-
-{
 	#category : #testing,
 	#'squeak_changestamp' : 'TL 6/12/2024 01:20'
 }
@@ -59,6 +50,25 @@ SPOCAlbum >> equals: anAlbum [
 		& (self image equals: anAlbum image)
  		& (self artistsEqual: anAlbum artists)
 		& (self totalTracks = anAlbum totalTracks)
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'RK 6/16/2024 12:21'
+}
+SPOCAlbum >> onClick: anApp [
+
+	| apiEndpoint dict results |
+	dict := Dictionary new
+		at: #id put: self id;
+		yourself.
+	apiEndpoint := SPOCApiAlbum new authorizer: anApp auth.
+	results := (apiEndpoint execute: dict).
+	results do: [ :result |
+		result artists: self artists;
+			image: self image;
+			yourself].
+	anApp resultList updateResults: results
 ]
 
 {

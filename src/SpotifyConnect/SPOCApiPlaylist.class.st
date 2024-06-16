@@ -1,22 +1,22 @@
 Class {
-	#name : #SPOCApiAlbum,
+	#name : #SPOCApiPlaylist,
 	#superclass : #SPOCApiEndpoint,
 	#category : #'SpotifyConnect-API'
 }
 
 {
 	#category : #parameters,
-	#'squeak_changestamp' : 'RK 6/13/2024 23:16'
+	#'squeak_changestamp' : 'RK 6/16/2024 12:29'
 }
-SPOCApiAlbum >> endpoint [
-	^ 'v1/albums/'
+SPOCApiPlaylist >> endpoint [
+	^ 'v1/playlists/'
 ]
 
 {
 	#category : #parameters,
 	#'squeak_changestamp' : 'RK 5/16/2024 18:51'
 }
-SPOCApiAlbum >> endpointMethod [
+SPOCApiPlaylist >> endpointMethod [
 	^ 'GET'
 ]
 
@@ -24,7 +24,7 @@ SPOCApiAlbum >> endpointMethod [
 	#category : #'api-call',
 	#'squeak_changestamp' : 'RK 6/13/2024 23:17'
 }
-SPOCApiAlbum >> executeRequest: request withParams: aParameterDictionary [
+SPOCApiPlaylist >> executeRequest: request withParams: aParameterDictionary [
 
 	request rawUrl: (request rawUrl, (aParameterDictionary at: 'id'), '/tracks').
 	^ self client sendRequest: request
@@ -34,7 +34,7 @@ SPOCApiAlbum >> executeRequest: request withParams: aParameterDictionary [
 	#category : #'api-call',
 	#'squeak_changestamp' : 'RK 6/13/2024 23:17'
 }
-SPOCApiAlbum >> executeTest [
+SPOCApiPlaylist >> executeTest [
 
 	^ '...'
 ]
@@ -43,7 +43,7 @@ SPOCApiAlbum >> executeTest [
 	#category : #response,
 	#'squeak_changestamp' : 'RK 6/16/2024 12:56'
 }
-SPOCApiAlbum >> tinkerReponseContent: aContentStream [
+SPOCApiPlaylist >> tinkerReponseContent: aContentStream [
 	
 	| content tracks |
 	content := Json readFrom: aContentStream readStream.
@@ -54,19 +54,20 @@ SPOCApiAlbum >> tinkerReponseContent: aContentStream [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'RK 6/13/2024 23:49'
+	#'squeak_changestamp' : 'RK 6/16/2024 12:51'
 }
-SPOCApiAlbum >> tinkerTrack: aJson [
+SPOCApiPlaylist >> tinkerTrack: aJson [
 
-	| artists |
+	| track artists |
+	track := aJson at: #track. 
 	artists := OrderedCollection new.
-	(aJson at: #artists) do: [:anArtist | artists add: (self tinkerArtist: anArtist)].
+	(track at: #artists) do: [:anArtist | artists add: (self tinkerArtist: anArtist)].
 	^ SPOCTrack new
-		id: (aJson at: #id);
-		name: (aJson at: #name);
-		image: (SPOCImage newWithPath: '/assets/squeak-mouse.png');
+		id: (track at: #id);
+		name: (track at: #name);
+		image: (SPOCImage newWithUrl: ((((track at: #album) at: #images) at: 1) at: #url));
 		artists: artists;
-		duration: (aJson at: #duration_ms) // 1000;
-		trackNumber: (aJson at: #track_number);
+		duration: (track at: #duration_ms) // 1000;
+		trackNumber: (track at: #track_number);
 		yourself
 ]

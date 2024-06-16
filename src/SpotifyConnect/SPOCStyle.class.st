@@ -204,7 +204,7 @@ SPOCStyle class >> textHeight [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'TL 6/10/2024 05:15'
+	#'squeak_changestamp' : 'RK 6/16/2024 12:37'
 }
 SPOCStyle class >> trackWelcome [
 
@@ -214,7 +214,7 @@ SPOCStyle class >> trackWelcome [
 	^ SPOCTrack new
 		image: (SPOCImage newWithPath: '/assets/squeak-mouse.png');
 		name: 'Welcome!';
-		album: (SPOCAlbum new artists: collection);
+		artists: collection;
 		duration: 0;
 		yourself
 ]

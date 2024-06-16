@@ -3,7 +3,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'id',
-		'clickAction',
 		'image',
 		'name'
 	],
@@ -20,15 +19,6 @@ SPOCDataPiece >> artistsEqual: anArtistCollection [
 		((anArtistCollection at: (self artists indexOf: anArtist)) equals: anArtist)
 			ifFalse: [^ false]].
 	^ true
-]
-
-{
-	#category : #actions,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:17'
-}
-SPOCDataPiece >> clickAction [
-
-	^ self subclassResponsibility
 ]
 
 {
@@ -93,4 +83,13 @@ SPOCDataPiece >> name [
 SPOCDataPiece >> name: aString [
 
 	name := aString
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'RK 6/16/2024 12:10'
+}
+SPOCDataPiece >> onClick: anApp [
+
+	^ self subclassResponsibility
 ]

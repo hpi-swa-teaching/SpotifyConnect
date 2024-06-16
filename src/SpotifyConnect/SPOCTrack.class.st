@@ -47,12 +47,16 @@ SPOCTrack >> artists: aOrderedCollection [
 ]
 
 {
-	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 19:59'
+	#category : #formatting,
+	#'squeak_changestamp' : 'RK 6/16/2024 12:24'
 }
-SPOCTrack >> clickAction [
+SPOCTrack >> artistsAsString [
 
-	^ [self owner app player playTrack: self id]
+	| result |
+	result := ''.
+	self artists allButLastDo: [:artist | result := result, artist name, ', '].
+	result := result, self artists last name.
+	^ result
 ]
 
 {
@@ -104,6 +108,15 @@ SPOCTrack >> equals: aTrack [
 		& (self artistsEqual: aTrack artists)
  		& (self duration = aTrack duration)
  		& (self trackNumber = aTrack trackNumber)
+]
+
+{
+	#category : #actions,
+	#'squeak_changestamp' : 'RK 6/16/2024 12:11'
+}
+SPOCTrack >> onClick: anApp [
+
+	^ anApp player playTrack: self id
 ]
 
 {
