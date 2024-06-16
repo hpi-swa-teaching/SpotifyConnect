@@ -240,6 +240,26 @@ SPOCPlayer >> play [
 ]
 
 {
+	#category : #initialization,
+	#'squeak_changestamp' : 'MH 6/10/2024 18:37'
+}
+SPOCPlayer >> playAlbum: aString withTrack: aTrack [
+
+	| paramDict |
+	paramDict := Dictionary new
+		at: #device_id put: self deviceID;
+		at: #context_uri put: '"spotify:album', aString, '"';
+		at: #uris put: '"spotify:track"',aTrack, '"';
+		yourself.
+	SPOCApiPlay new
+		authorizer: self app auth;
+		execute: paramDict;
+		yourself.
+	self updateIsPlaying
+
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/3/2024 23:37'
 }
@@ -255,6 +275,26 @@ SPOCPlayer >> playPauseIcon [
 SPOCPlayer >> playPauseIcon: anObject [
 
 	playPauseIcon := anObject
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'MH 6/10/2024 19:03'
+}
+SPOCPlayer >> playPlaylist: aString withTrack: aTrack [
+
+	| paramDict |
+	paramDict := Dictionary new
+		at: #device_id put: self deviceID;
+		at: #context_uri put: '"spotify:playlist', aString, '"';
+		at: #uris put: '"spotify:track"',aTrack, '"';
+		yourself.
+	SPOCApiPlay new
+		authorizer: self app auth;
+		execute: paramDict;
+		yourself.
+	self updateIsPlaying
+
 ]
 
 {

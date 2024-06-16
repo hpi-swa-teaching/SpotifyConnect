@@ -64,7 +64,7 @@ SPOCApiEndpoint >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 03:40'
+	#'squeak_changestamp' : 'MH 6/10/2024 18:51'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
 
@@ -74,6 +74,7 @@ SPOCApiEndpoint >> execute: aParamDictionary [
 	self authorizer
 		ifNil: [^ SPOCApiEndpointResult new error: 'Authorizer needed'; yourself].
 	response := self executeRequest: (self tinkerRequest) withParams: aParamDictionary.
+	response explore.
 	response code = 401
 		ifTrue: [^ self refreshAccessTokenAndExecute: aParamDictionary].
 	response code = 200
