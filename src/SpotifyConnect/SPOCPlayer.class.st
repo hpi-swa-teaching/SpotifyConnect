@@ -327,6 +327,26 @@ SPOCPlayer >> playTrack: aString [
 ]
 
 {
+	#category : #initialization,
+	#'squeak_changestamp' : 'RK 6/16/2024 18:53'
+}
+SPOCPlayer >> playTrack: aString WithContext: anotherString [
+
+	| paramDict |
+	paramDict := Dictionary new
+		at: #device_id put: self deviceID;
+		at: #context_uri put: anotherString;
+		at: #uris put: '"spotify:track:', aString, '"';
+		yourself.
+	SPOCApiPlay new
+		authorizer: self app auth;
+		execute: paramDict;
+		yourself.
+	self app updatePlaybackStateFromLogin: false.
+
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/3/2024 23:37'
 }
@@ -346,7 +366,7 @@ SPOCPlayer >> previousIcon: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 20:28'
+	#'squeak_changestamp' : 'RK 6/16/2024 18:57'
 }
 SPOCPlayer >> skipToNext [
 
@@ -357,12 +377,13 @@ SPOCPlayer >> skipToNext [
 	SPOCApiNext new
 		authorizer: self app auth;
 		execute: dict;
-		yourself
+		yourself.
+	self app updatePlaybackStateFromLogin: false
 ]
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 19:48'
+	#'squeak_changestamp' : 'RK 6/16/2024 18:57'
 }
 SPOCPlayer >> skipToPrevious [
 
@@ -373,7 +394,8 @@ SPOCPlayer >> skipToPrevious [
 	SPOCApiPrevious new
 		authorizer: self app auth;
 		execute: dict;
-		yourself
+		yourself.
+	self app updatePlaybackStateFromLogin: false
 ]
 
 {

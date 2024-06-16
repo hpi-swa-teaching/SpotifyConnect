@@ -42,19 +42,18 @@ SPOCApiPlay >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'MH 6/10/2024 19:04'
+	#'squeak_changestamp' : 'RK 6/16/2024 18:51'
 }
 SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 
 	| data |
 	request rawUrl: (request rawUrl, '?device_id=', (aParamDictionary at: #device_id)).
-	"wenn param dict size = 1 resume play, size = 1 song, size = 2 album?"
 	(aParamDictionary size = 1)
 		ifTrue: [data := ''].
-	"	ifFalse: [data := self buildDataWithSong: (aParamDictionary at: #uris)]."
 	(aParamDictionary size = 2)
 		ifTrue: [data := self buildDataWithSong: (aParamDictionary at: #uris)]
-		ifFalse: [data:= self buildDataWithContext: (aParamDictionary at: #context_uri) andTrack: (aParamDictionary at: #uris)].
+		ifFalse: [(aParamDictionary includesKey: 'context_uri')
+			ifTrue: [data:= self buildDataWithContext: (aParamDictionary at: #context_uri) andTrack: (aParamDictionary at: #uris)]].
 	request headerAt: 'Content-Length' put: data size.
 	(data size = 0)
 		ifTrue: [request headerAt: 'Content-Length' put: 0.
