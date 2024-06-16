@@ -46,11 +46,11 @@ SPOCUIComponent >> disabled [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 17:59'
+	#'squeak_changestamp' : 'RK 6/16/2024 18:05'
 }
-SPOCUIComponent >> disabled: anObject [
+SPOCUIComponent >> disabled: aBoolean [
 
-	disabled := anObject
+	disabled := aBoolean
 ]
 
 {
