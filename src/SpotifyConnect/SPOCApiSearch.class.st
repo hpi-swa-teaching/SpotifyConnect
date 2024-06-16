@@ -496,20 +496,33 @@ SPOCApiSearch >> executeTest [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'RK 6/15/2024 18:23'
+	#'squeak_changestamp' : 'RK 6/16/2024 14:15'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
-	| content results |
+	| content results index |
 	content := Json readFrom: aContentStream readStream.
 	results := OrderedCollection new.
+	index := 0.
 	(content includesKey: 'tracks')
-		ifTrue: [((content at: #tracks) at: #items) do: [:anItem | results add: (self tinkerTrack: anItem)].
+		ifTrue: [((content at: #tracks) at: #items) do: [:aTrack |
+				| track |
+				track := (self tinkerTrack: aTrack) offset: index.
+				index := index + 1.
+				results add: track].
 			^ results].
 	(content includesKey: 'albums')
-		ifTrue: [((content at: #albums) at: #items) do: [ :anAlbum | results add: (self tinkerAlbum: anAlbum)].
+		ifTrue: [((content at: #albums) at: #items) do: [ :anAlbum | 
+			| track |
+				track := (self tinkerAlbum: anAlbum) offset: index.
+				index := index + 1.
+				results add: track].
 			^ results].
 	(content includesKey: 'playlists')
-		ifTrue: [((content at: #playlists) at: #items) do: [ :aPlaylist | results add: (self tinkerPlaylist: aPlaylist)].
+		ifTrue: [((content at: #playlists) at: #items) do: [ :aPlaylist | 
+			| track |
+				track := (self tinkerPlaylist: aPlaylist) offset: index.
+				index := index + 1.
+				results add: track].
 			^ results]
 ]

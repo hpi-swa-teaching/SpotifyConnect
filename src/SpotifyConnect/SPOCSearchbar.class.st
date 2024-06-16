@@ -4,10 +4,10 @@ Class {
 	#instVars : [
 		'inputField',
 		'input',
-		'inputText',
 		'results',
 		'items',
-		'filter'
+		'filter',
+		'context'
 	],
 	#category : #'SpotifyConnect-UI'
 }
@@ -60,7 +60,7 @@ SPOCSearchbar >> buildCircle [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/15/2024 16:40'
+	#'squeak_changestamp' : 'RK 6/16/2024 13:01'
 }
 SPOCSearchbar >> buildInputField [
 	"To do: specification irgendwie auslagern, damit Methode kürzer"
@@ -70,7 +70,7 @@ SPOCSearchbar >> buildInputField [
 	spec := builder pluggableTextSpec new
 		model: self;
 		plainTextOnly: true;
-		getText: #inputText;
+		getText: #input;
 		setText: #search:;
 		indicateUnacceptedChanges: false;
 		help: 'Was möchtest du wiedergeben?';
@@ -120,6 +120,24 @@ SPOCSearchbar >> buttonClicked: aButton [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/16/2024 13:45'
+}
+SPOCSearchbar >> context [
+
+	^ context
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/16/2024 13:45'
+}
+SPOCSearchbar >> context: aString [
+
+	context := aString
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/14/2024 01:12'
 }
 SPOCSearchbar >> filter [
@@ -165,11 +183,12 @@ SPOCSearchbar >> input [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/15/2024 17:08'
+	#'squeak_changestamp' : 'RK 6/16/2024 13:01'
 }
 SPOCSearchbar >> input: aString [
 
-	input := aString
+	input := aString.
+	self changed: #input
 ]
 
 {
@@ -188,25 +207,6 @@ SPOCSearchbar >> inputField [
 SPOCSearchbar >> inputField: aSPOCTextInput [
 
 	inputField := aSPOCTextInput
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:03'
-}
-SPOCSearchbar >> inputText [
-
-	^ inputText
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:03'
-}
-SPOCSearchbar >> inputText: aString [
-
-	inputText:= aString.
-	self changed: #inputText
 ]
 
 {
@@ -256,7 +256,7 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'RK 6/15/2024 17:07'
+	#'squeak_changestamp' : 'RK 6/16/2024 13:04'
 }
 SPOCSearchbar >> search: aString [
 

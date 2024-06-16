@@ -20,7 +20,7 @@ SPOCPlaylist >> equals: aPlaylist [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 6/16/2024 12:35'
+	#'squeak_changestamp' : 'RK 6/16/2024 14:16'
 }
 SPOCPlaylist >> onClick: anApp [
 
@@ -30,6 +30,7 @@ SPOCPlaylist >> onClick: anApp [
 		yourself.
 	apiEndpoint := SPOCApiPlaylist new authorizer: anApp auth.
 	results := (apiEndpoint execute: dict).
+	anApp searchbar context: self id.
 	anApp resultList updateResults: results
 ]
 

@@ -3,7 +3,7 @@ Class {
 	#superclass : #Morph,
 	#instVars : [
 		'app',
-		'dataModel',
+		'dataPiece',
 		'image',
 		'primaryText',
 		'secondaryText',
@@ -15,12 +15,12 @@ Class {
 
 {
 	#category : #constructor,
-	#'squeak_changestamp' : 'TL 6/10/2024 05:12'
+	#'squeak_changestamp' : 'RK 6/16/2024 14:35'
 }
-SPOCResultListItem class >> newWith: aDataModel [
+SPOCResultListItem class >> newWith: aDataPiece [
 
 	^ SPOCResultListItem new
-		dataModel: aDataModel;
+		dataPiece: aDataPiece;
 		buildItem;
 		yourself
 ]
@@ -74,12 +74,12 @@ SPOCResultListItem >> buildCenterBox [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 21:43'
+	#'squeak_changestamp' : 'RK 6/16/2024 14:31'
 }
 SPOCResultListItem >> buildImage [
 
 	| image |
-	image := self dataModel image scaledTo: SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin).
+	image := self dataPiece image scaledTo: SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin).
 	self image: image;
 		addMorph: image
 
@@ -103,41 +103,41 @@ SPOCResultListItem >> buildItem [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 21:40'
+	#'squeak_changestamp' : 'RK 6/16/2024 14:31'
 }
 SPOCResultListItem >> buildPrimaryText [
 
-	self primaryText: (SPOCBoldText new contents: self dataModel name; yourself).
+	self primaryText: (SPOCBoldText new contents: self dataPiece name; yourself).
 	self centerBox addMorph: self primaryText
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/16/2024 12:25'
+	#'squeak_changestamp' : 'RK 6/16/2024 14:31'
 }
 SPOCResultListItem >> buildSecondaryText [
 
 	| content |
-	(self dataModel isKindOf: SPOCTrack)
-		ifTrue: [content := self dataModel artistsAsString].
-	(self dataModel isKindOf: SPOCAlbum)
-		ifTrue: [content := self dataModel artistsAsString].
-	(self dataModel isKindOf: SPOCPlaylist)
-		ifTrue: [content := self dataModel owner].	
+	(self dataPiece isKindOf: SPOCTrack)
+		ifTrue: [content := self dataPiece artistsAsString].
+	(self dataPiece isKindOf: SPOCAlbum)
+		ifTrue: [content := self dataPiece artistsAsString].
+	(self dataPiece isKindOf: SPOCPlaylist)
+		ifTrue: [content := self dataPiece owner].	
 	self secondaryText: (SPOCText new contents: content; yourself).
 	self centerBox addMorph: self secondaryText
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 21:42'
+	#'squeak_changestamp' : 'RK 6/16/2024 14:31'
 }
 SPOCResultListItem >> buildTertiaryText [
 
 	| content |
 	self hasTertiaryText
-		ifTrue: [(self dataModel isKindOf: SPOCTrack)
-				ifTrue: [content := self dataModel durationAsFormattedTime]
+		ifTrue: [(self dataPiece isKindOf: SPOCTrack)
+				ifTrue: [content := self dataPiece durationAsFormattedTime]
 				ifFalse: [content := ''].
 		self tertiaryText: (SPOCText new contents: content; yourself).
 		self addMorph: self tertiaryText]
@@ -169,20 +169,20 @@ SPOCResultListItem >> changeItemTo: aDataModel [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
+	#'squeak_changestamp' : 'RK 6/16/2024 14:32'
 }
-SPOCResultListItem >> dataModel [
+SPOCResultListItem >> dataPiece [
 
-	^ dataModel
+	^ dataPiece
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
+	#'squeak_changestamp' : 'RK 6/16/2024 14:35'
 }
-SPOCResultListItem >> dataModel: aDataModel [
+SPOCResultListItem >> dataPiece: aDataPiece [
 
-	dataModel := aDataModel
+	dataPiece := aDataPiece
 ]
 
 {
