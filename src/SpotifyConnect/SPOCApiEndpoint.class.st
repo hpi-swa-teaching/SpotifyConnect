@@ -64,7 +64,7 @@ SPOCApiEndpoint >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 03:40'
+	#'squeak_changestamp' : 'RK 6/16/2024 18:21'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
 
