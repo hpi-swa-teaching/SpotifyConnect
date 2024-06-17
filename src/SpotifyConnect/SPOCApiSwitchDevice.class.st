@@ -33,3 +33,14 @@ SPOCApiSwitchDevice >> executeRequest: request withParams: aParameterDictionary 
 	request headerAt: 'Content-Length' put: data size.
 	^ self client sendRequest: request content: data readStream size: data size
 ]
+
+{
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/17/2024 20:10'
+}
+SPOCApiSwitchDevice >> switchDeviceTo: aDevice [
+	
+	self execute: (Dictionary new
+			at: #device_id put: aDevice;
+			yourself)
+]

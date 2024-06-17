@@ -5,6 +5,18 @@ Class {
 }
 
 {
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/17/2024 20:06'
+}
+SPOCApiVolume >> changeVolumeTo: aVolume on: aDevice [
+
+	self execute: (Dictionary new
+			at: #volume_percent put: aVolume;
+			at: #device_id put: aDevice;
+			yourself)
+]
+
+{
 	#category : #parameters,
 	#'squeak_changestamp' : 'TL 6/10/2024 02:24'
 }

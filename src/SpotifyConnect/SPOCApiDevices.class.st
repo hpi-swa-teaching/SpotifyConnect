@@ -32,7 +32,7 @@ SPOCApiDevices >> executeRequest: request withParams: aParameterDictionary [
 ]
 
 {
-	#category : #'api-call',
+	#category : #response,
 	#'squeak_changestamp' : 'TL 6/10/2024 03:42'
 }
 SPOCApiDevices >> executeTest [
@@ -51,6 +51,15 @@ SPOCApiDevices >> executeTest [
 		    }
 		  ]
 		}' readStream
+]
+
+{
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/17/2024 20:17'
+}
+SPOCApiDevices >> getCurrentDevices [
+
+	^ self execute: Dictionary new
 ]
 
 {

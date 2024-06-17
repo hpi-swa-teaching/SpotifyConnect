@@ -31,7 +31,7 @@ SPOCApiSearch >> executeRequest: request withParams: aParameterDictionary [
 ]
 
 {
-	#category : #'api-call',
+	#category : #response,
 	#'squeak_changestamp' : 'RK 5/16/2024 19:05'
 }
 SPOCApiSearch >> executeTest [
@@ -492,6 +492,19 @@ SPOCApiSearch >> executeTest [
     "total": 802
   }
 }' readStream
+]
+
+{
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/17/2024 20:42'
+}
+SPOCApiSearch >> search: aString withFilter: aFilter [
+
+	^ self execute: (Dictionary new
+			at: #input put: aString;
+			at: #type put: aFilter;
+			at: #limit put: SPOCStyle resultListLimit;
+			yourself)
 ]
 
 {

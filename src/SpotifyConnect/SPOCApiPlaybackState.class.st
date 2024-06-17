@@ -33,7 +33,7 @@ SPOCApiPlaybackState >> executeRequest: request withParams: aParamDictionary [
 ]
 
 {
-	#category : #'api-call',
+	#category : #response,
 	#'squeak_changestamp' : 'TL 6/10/2024 00:05'
 }
 SPOCApiPlaybackState >> executeTest [

@@ -34,7 +34,7 @@ SPOCApiTrack >> executeRequest: request withParams: aParameterDictionary [
 ]
 
 {
-	#category : #'api-call',
+	#category : #response,
 	#'squeak_changestamp' : 'TL 6/10/2024 03:44'
 }
 SPOCApiTrack >> executeTest [

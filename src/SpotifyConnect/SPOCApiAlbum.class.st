@@ -31,7 +31,7 @@ SPOCApiAlbum >> executeRequest: request withParams: aParameterDictionary [
 ]
 
 {
-	#category : #'api-call',
+	#category : #response,
 	#'squeak_changestamp' : 'RK 6/16/2024 13:15'
 }
 SPOCApiAlbum >> executeTest [

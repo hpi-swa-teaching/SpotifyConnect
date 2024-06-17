@@ -57,18 +57,13 @@ SPOCVolumeSlider >> attachSlider [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 04:35'
+	#'squeak_changestamp' : 'TL 6/17/2024 20:05'
 }
 SPOCVolumeSlider >> changeVolumeTo: aVolume [
 
-	| dict |
-	dict := Dictionary new
-		at: #volume_percent put: aVolume;
-		at: #device_id put: self deviceID;
-		yourself.
 	SPOCApiVolume new
 		authorizer: self app auth;
-		execute: dict;
+		changeVolumeTo: aVolume on: self deviceID;
 		yourself
 ]
 

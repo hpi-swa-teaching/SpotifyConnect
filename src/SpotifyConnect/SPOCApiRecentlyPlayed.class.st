@@ -5,7 +5,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'VK 6/1/2024 22:32'
 }
 SPOCApiRecentlyPlayed >> endpoint [
@@ -14,7 +14,7 @@ SPOCApiRecentlyPlayed >> endpoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'VK 6/1/2024 12:25'
 }
 SPOCApiRecentlyPlayed >> endpointMethod [	
@@ -23,7 +23,7 @@ SPOCApiRecentlyPlayed >> endpointMethod [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'VK 6/9/2024 13:50'
 }
 SPOCApiRecentlyPlayed >> executeRequest: request withParams: aParameterDictionary [
@@ -33,7 +33,7 @@ SPOCApiRecentlyPlayed >> executeRequest: request withParams: aParameterDictionar
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #response,
 	#'squeak_changestamp' : 'TL 6/10/2024 21:46'
 }
 SPOCApiRecentlyPlayed >> executeTest [
@@ -509,7 +509,19 @@ SPOCApiRecentlyPlayed >> executeTest [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/17/2024 20:37'
+}
+SPOCApiRecentlyPlayed >> getRecentlyPlayed [
+
+	^ self execute: (Dictionary new
+		at: #limit put: SPOCRecentlyPlayed trackLimit;
+		at: #before put: SPOCRecentlyPlayed beforeTimestamp;
+		yourself)
+]
+
+{
+	#category : #response,
 	#'squeak_changestamp' : 'TL 6/10/2024 23:32'
 }
 SPOCApiRecentlyPlayed >> tinkerReponseContent: aContentStream [

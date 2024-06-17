@@ -2,16 +2,25 @@ Class {
 	#name : #SPOCSwitchDevice,
 	#superclass : #SPOCUIComponent,
 	#instVars : [
-		'devices',
-		'resultDisplay',
 		'deviceItems',
-		'itemBackground'
+		'devices',
+		'itemBackground',
+		'resultDisplay'
 	],
 	#category : #'SpotifyConnect-UI'
 }
 
 {
-	#category : #'class variables',
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/17/2024 20:23'
+}
+SPOCSwitchDevice class >> devicesIconPath [
+
+	^ '/assets/devices.png'
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'VK 6/10/2024 19:44'
 }
 SPOCSwitchDevice class >> itemTextPadding [
@@ -21,15 +30,16 @@ SPOCSwitchDevice class >> itemTextPadding [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 6/17/2024 11:16'
+	#'squeak_changestamp' : 'TL 6/17/2024 20:23'
 }
 SPOCSwitchDevice >> attachButton [
 
 	| button |
-	button := Morph new color: Color transparent;
-		addMorph: self buttonText;
-		addMorph: (SPOCIcon new iconAsset: '/assets/devices.png');
-		yourself.
+	button := Morph new 
+			color: Color transparent;
+			addMorph: self buttonText;
+			addMorph: (SPOCIcon new iconAsset: self class devicesIconPath);
+			yourself.
 	button extent: 0@0;
 		extent: button fullBounds extent.
 	self addMorph: (SPOCClickable newUsing: button onClick: [:anEvent | self buttonClicked])
@@ -131,31 +141,33 @@ SPOCSwitchDevice >> buttonText [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VK 6/10/2024 12:10'
+	#'squeak_changestamp' : 'TL 6/17/2024 20:29'
 }
 SPOCSwitchDevice >> currentDevices [
 
-	| dict apiEndpoint |
-	dict := Dictionary new.
-	apiEndpoint := SPOCApiDevices new.
-	apiEndpoint authorizer: self app auth.
-	self devices: (apiEndpoint execute: dict).
+	| apiEndpoint |
+	apiEndpoint := SPOCApiDevices new
+			authorizer: self app auth;
+			yourself.
+	self devices: (apiEndpoint getCurrentDevices).
 	self updateResultDisplay: self devices
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:35'
+	#'squeak_changestamp' : 'TL 6/17/2024 20:21'
 }
 SPOCSwitchDevice >> deviceItems [
+
 	^ deviceItems
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:35'
+	#'squeak_changestamp' : 'TL 6/17/2024 20:21'
 }
 SPOCSwitchDevice >> deviceItems: anObject [
+
 	deviceItems := anObject
 ]
 
@@ -179,9 +191,10 @@ SPOCSwitchDevice >> devices: anObject [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VK 6/9/2024 18:30'
+	#'squeak_changestamp' : 'TL 6/17/2024 20:13'
 }
 SPOCSwitchDevice >> hideResults [
+
 	self resultDisplay hide
 ]
 
@@ -213,17 +226,19 @@ SPOCSwitchDevice >> isVisible [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:53'
+	#'squeak_changestamp' : 'TL 6/17/2024 20:21'
 }
 SPOCSwitchDevice >> itemBackground [
+
 	^ itemBackground
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:53'
+	#'squeak_changestamp' : 'TL 6/17/2024 20:21'
 }
 SPOCSwitchDevice >> itemBackground: anObject [
+
 	itemBackground := anObject
 ]
 
@@ -247,18 +262,15 @@ SPOCSwitchDevice >> resultDisplay: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VK 6/17/2024 11:36'
+	#'squeak_changestamp' : 'TL 6/17/2024 20:11'
 }
 SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	
-	| apiEndpoint dict res |
-	dict := Dictionary new.
-	dict at: #device_id put: aDevice.
-	apiEndpoint := SPOCApiSwitchDevice new.
-	apiEndpoint authorizer: self app auth.
-	res := apiEndpoint execute: dict.
-	res response code = 204 
-		ifTrue: [self hideResults]
+	SPOCApiSwitchDevice new
+		authorizer: self app auth;
+		switchDeviceTo: aDevice;
+		yourself.
+	self hideResults
 ]
 
 {

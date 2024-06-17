@@ -256,21 +256,16 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'RK 6/16/2024 13:04'
+	#'squeak_changestamp' : 'TL 6/17/2024 20:31'
 }
 SPOCSearchbar >> search: aString [
 
-	| apiEndpoint dict |
-	self input: aString.
-	dict := Dictionary new
-		at: #input put: (self sanitizeInput: aString);
-		at: #type put: self filter;
-		at: #limit put: SPOCStyle resultListLimit;
-		yourself.
+	| apiEndpoint |
 	apiEndpoint := SPOCApiSearch new
 		authorizer: self app auth;
 		yourself.
-	self results: (apiEndpoint execute: dict).
+	self input: aString;
+		results: (apiEndpoint search: (self sanitizeInput: aString) withFilter: self filter).
 	self app resultList updateResults: self results;
 		title: 'Your Results'
 ]
