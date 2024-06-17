@@ -162,7 +162,7 @@ SPOCResultList >> titleMorph: aSPOCBoldText [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/16/2024 14:31'
+	#'squeak_changestamp' : 'TL 6/17/2024 16:50'
 }
 SPOCResultList >> updateItems [
 	
@@ -171,9 +171,9 @@ SPOCResultList >> updateItems [
 		| item clickable |
 		item := SPOCResultListItem newWith: aResult.
 		clickable := SPOCClickable newUsing: item onClick: [:anEvent |
-			self app updatePlaybackStateFromLogin: false.
+			self app updatePlaybackState.
 			self disabled ifFalse: [item dataPiece onClick: self app.
-						self app updatePlaybackStateFromLogin: false]].
+						self app updatePlaybackState]].
 		clickable layoutPolicy: TableLayout new;
 			hResizing: #spaceFill;
 			vResizing: #shrinkWrap.

@@ -145,11 +145,11 @@ SPOCPlayer >> deviceID: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/12/2024 03:05'
+	#'squeak_changestamp' : 'TL 6/17/2024 16:51'
 }
 SPOCPlayer >> executeButtonFunction: anIcon [
 	
-	self app updatePlaybackStateFromLogin: false.
+	self app updatePlaybackState.
 	self disabled
 		ifFalse: [(anIcon == self previousIcon)
 				ifTrue: [self skipToPrevious].
@@ -157,7 +157,7 @@ SPOCPlayer >> executeButtonFunction: anIcon [
 				ifTrue: [self switchPlaybackState].
 			(anIcon == self nextIcon)
 				ifTrue: [self skipToNext].
-			self app updatePlaybackStateFromLogin: false]
+			self app updatePlaybackState]
 
 ]
 
@@ -261,7 +261,7 @@ SPOCPlayer >> playPauseIcon: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 12:18'
+	#'squeak_changestamp' : 'TL 6/17/2024 16:47'
 }
 SPOCPlayer >> playTrack: aString [
 
@@ -269,13 +269,13 @@ SPOCPlayer >> playTrack: aString [
 		authorizer: self app auth;
 		playTrack: aString on: self deviceID;
 		yourself.
-	self app updatePlaybackStateFromLogin: false
+	self app updatePlaybackState
 
 ]
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 12:19'
+	#'squeak_changestamp' : 'TL 6/17/2024 16:50'
 }
 SPOCPlayer >> playTrack: aString withContext: anotherString [
 
@@ -283,7 +283,7 @@ SPOCPlayer >> playTrack: aString withContext: anotherString [
 		authorizer: self app auth;
 		playTrack: aString withContext: anotherString on: self deviceID
 		yourself.
-	self app updatePlaybackStateFromLogin: false
+	self app updatePlaybackState
 
 ]
 
@@ -307,7 +307,7 @@ SPOCPlayer >> previousIcon: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 12:21'
+	#'squeak_changestamp' : 'TL 6/17/2024 16:50'
 }
 SPOCPlayer >> skipToNext [
 
@@ -315,12 +315,12 @@ SPOCPlayer >> skipToNext [
 		authorizer: self app auth;
 		skipToNextOn: self deviceID;
 		yourself.
-	self app updatePlaybackStateFromLogin: false
+	self app updatePlaybackState
 ]
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 12:21'
+	#'squeak_changestamp' : 'TL 6/17/2024 16:50'
 }
 SPOCPlayer >> skipToPrevious [
 
@@ -328,7 +328,7 @@ SPOCPlayer >> skipToPrevious [
 		authorizer: self app auth;
 		skipToPreviousOn: self deviceID;
 		yourself.
-	self app updatePlaybackStateFromLogin: false
+	self app updatePlaybackState
 ]
 
 {

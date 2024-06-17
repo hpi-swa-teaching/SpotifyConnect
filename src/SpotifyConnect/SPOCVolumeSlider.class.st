@@ -37,7 +37,7 @@ SPOCVolumeSlider >> attachIcon [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/12/2024 04:06'
+	#'squeak_changestamp' : 'TL 6/17/2024 16:51'
 }
 SPOCVolumeSlider >> attachSlider [
 
@@ -46,11 +46,11 @@ SPOCVolumeSlider >> attachSlider [
 			length: 100;
 			yourself).
 	self slider onValueChanged: [:aValue | 
-		self app updatePlaybackStateFromLogin: false.
+		self app updatePlaybackState.
 		self disabled
 			ifFalse: [self supportsVolume
 					ifTrue: [self changeVolumeTo: aValue.
-						self app updatePlaybackStateFromLogin: false]
+						self app updatePlaybackState]
 					ifFalse: [self app volumePopUp]]].
 	self addMorph: self slider
 ]
