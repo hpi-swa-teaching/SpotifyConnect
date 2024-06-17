@@ -112,7 +112,7 @@ SPOCTrack >> equals: aTrack [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/17/2024 16:19'
+	#'squeak_changestamp' : 'TL 6/17/2024 16:41'
 }
 SPOCTrack >> onClick: anApp [
 
@@ -122,13 +122,13 @@ SPOCTrack >> onClick: anApp [
 	filter = 'track' 
 			ifTrue: [SPOCApiPlay new 
 				authorizer: anApp auth;
-				playTrack: self id;
+				playTrack: self id on: anApp player deviceID;
 				yourself].
 	(filter = 'album' or: filter = 'playlist') ifTrue: [context := context, anApp searchbar context].
 	context := context, '"'.
 	SPOCApiPlay new 
 		authorizer: anApp auth;
-		playTrack: self id withContext: context;
+		playTrack: self id withContext: context on: anApp player deviceID;
 		yourself
 ]
 
