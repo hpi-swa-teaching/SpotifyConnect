@@ -15,7 +15,7 @@ SPOCTestApiAlbum >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'RK 6/16/2024 13:23'
+	#'squeak_changestamp' : 'TL 6/17/2024 11:59'
 }
 SPOCTestApiAlbum >> testApiAlbumExecute [
 
@@ -24,5 +24,5 @@ SPOCTestApiAlbum >> testApiAlbumExecute [
 		at: #id put: '6DEjYFkNZh67HP7R9PSZvv';
 		yourself.
 	res := self apiEndpoint execute: dict.
-	self assert: (res response code = 204)
+	self assert: (res class = SPOCApiEndpointResult) not
 ]

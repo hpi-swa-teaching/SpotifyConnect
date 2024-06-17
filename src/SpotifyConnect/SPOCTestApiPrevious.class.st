@@ -15,7 +15,7 @@ SPOCTestApiPrevious >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/12/2024 02:14'
+	#'squeak_changestamp' : 'TL 6/17/2024 11:51'
 }
 SPOCTestApiPrevious >> testApiPreviousExecute [
 

@@ -61,3 +61,45 @@ SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 		ifFalse: [^ self client sendRequest: request content: data readStream size: data size]
 
 ]
+
+{
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/17/2024 12:14'
+}
+SPOCApiPlay >> playOn: aDevice [
+
+	| dict |
+	dict := Dictionary new
+		at: #device_id put: aDevice;
+		yourself.
+	self execute: dict
+]
+
+{
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/17/2024 12:18'
+}
+SPOCApiPlay >> playTrack: aString on: aDevice [
+
+	| dict |
+	dict := Dictionary new
+		at: #device_id put: aDevice;
+		at: #uris put: '"spotify:track:', aString, '"';
+		yourself.
+	self execute: dict
+]
+
+{
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/17/2024 12:19'
+}
+SPOCApiPlay >> playTrack: aString withContext: anotherString on: aDevice [
+
+	| dict |
+	dict := Dictionary new
+		at: #device_id put: aDevice;
+		at: #context_uri put: anotherString;
+		at: #uris put: '"spotify:track:', aString, '"';
+		yourself.
+	self execute: dict
+]

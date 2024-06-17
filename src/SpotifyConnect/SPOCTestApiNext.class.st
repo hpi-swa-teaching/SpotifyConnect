@@ -15,9 +15,9 @@ SPOCTestApiNext >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/12/2024 02:14'
+	#'squeak_changestamp' : 'TL 6/17/2024 11:49'
 }
-SPOCTestApiNext >> testApiPreviousExecute [
+SPOCTestApiNext >> testApiNextExecute [
 
 	| dict res |
 	dict := Dictionary new

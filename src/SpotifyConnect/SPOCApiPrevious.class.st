@@ -32,3 +32,16 @@ SPOCApiPrevious >> executeRequest: request withParams: aParamDictionary [
 		headerAt: 'Content-Length' put: 0.
 	^ self client sendRequest: request
 ]
+
+{
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/17/2024 12:21'
+}
+SPOCApiPrevious >> skipToPreviousOn: aDevice [
+
+	| dict |
+	dict := Dictionary new
+		at: #device_id put: aDevice;
+		yourself.
+	self execute: dict
+]
