@@ -15,9 +15,9 @@ SPOCApiPlay >> buildDataWithContext: aString andTrack: aTrack [
 
 {
 	#category : #parameters,
-	#'squeak_changestamp' : 'MH 6/10/2024 17:37'
+	#'squeak_changestamp' : 'MH 6/17/2024 11:41'
 }
-SPOCApiPlay >> buildDataWithSong: aString [
+SPOCApiPlay >> buildDataWithTrack: aString [
 
 	^ '{"uris":[', aString, '],"offset": {"uri":', aString, '},"position_ms": 0}'
 ]
@@ -42,7 +42,7 @@ SPOCApiPlay >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'RK 6/16/2024 18:51'
+	#'squeak_changestamp' : 'MH 6/17/2024 11:41'
 }
 SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 
@@ -51,7 +51,7 @@ SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 	(aParamDictionary size = 1)
 		ifTrue: [data := ''].
 	(aParamDictionary size = 2)
-		ifTrue: [data := self buildDataWithSong: (aParamDictionary at: #uris)]
+		ifTrue: [data := self buildDataWithTrack: (aParamDictionary at: #uris)]
 		ifFalse: [(aParamDictionary includesKey: 'context_uri')
 			ifTrue: [data:= self buildDataWithContext: (aParamDictionary at: #context_uri) andTrack: (aParamDictionary at: #uris)]].
 	request headerAt: 'Content-Length' put: data size.
