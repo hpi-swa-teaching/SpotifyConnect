@@ -21,7 +21,7 @@ SPOCSwitchDevice class >> itemTextPadding [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 22:59'
+	#'squeak_changestamp' : 'VK 6/17/2024 11:16'
 }
 SPOCSwitchDevice >> attachButton [
 
@@ -32,7 +32,7 @@ SPOCSwitchDevice >> attachButton [
 		yourself.
 	button extent: 0@0;
 		extent: button fullBounds extent.
-	self addMorph: (SPOCClickable newUsing: button onClick: [:anEvent | self currentDevices])
+	self addMorph: (SPOCClickable newUsing: button onClick: [:anEvent | self buttonClicked])
 	
 ]
 
@@ -109,6 +109,17 @@ SPOCSwitchDevice >> buildTypeText: aDevice [
 
 {
 	#category : #building,
+	#'squeak_changestamp' : 'VK 6/17/2024 11:19'
+}
+SPOCSwitchDevice >> buttonClicked [
+
+	self isVisible
+		ifTrue: [self resultDisplay hide]
+		ifFalse: [self currentDevices]
+]
+
+{
+	#category : #building,
 	#'squeak_changestamp' : 'VK 6/10/2024 19:10'
 }
 SPOCSwitchDevice >> buttonText [
@@ -176,7 +187,7 @@ SPOCSwitchDevice >> hideResults [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:49'
+	#'squeak_changestamp' : 'VK 6/17/2024 11:17'
 }
 SPOCSwitchDevice >> initialize [
 
@@ -185,10 +196,19 @@ SPOCSwitchDevice >> initialize [
 	self color: Color transparent;
 		deviceItems: OrderedCollection new;
 		devices: OrderedCollection new;
-		attachButton;
 		buildResultDisplay;
+		attachButton;
 		extendFully;
 		yourself
+]
+
+{
+	#category : #building,
+	#'squeak_changestamp' : 'VK 6/17/2024 11:19'
+}
+SPOCSwitchDevice >> isVisible [
+
+	^ self resultDisplay visible
 ]
 
 {
