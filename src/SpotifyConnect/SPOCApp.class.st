@@ -6,6 +6,7 @@ Class {
 		'currentlyPlaying',
 		'player',
 		'recentlyPlayed',
+		'refresh',
 		'resultList',
 		'searchbar',
 		'switchDevice',
@@ -205,23 +206,20 @@ SPOCApp >> devicePopUp [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 19:56'
+	#'squeak_changestamp' : 'TL 6/18/2024 23:24'
 }
 SPOCApp >> getPlaybackState [
 
-	| apiEndpoint dict |
-	dict := Dictionary new
-		at: #additional_types put: 'track';
-		yourself.
+	| apiEndpoint |
 	apiEndpoint := SPOCApiPlaybackState new
 		authorizer: self auth;
 		yourself.
-	^ apiEndpoint execute: dict
+	^ apiEndpoint getPlaybackState
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 18:03'
+	#'squeak_changestamp' : 'TL 6/18/2024 23:22'
 }
 SPOCApp >> initialize [
 
@@ -230,13 +228,16 @@ SPOCApp >> initialize [
 	self auth: SPOCAuthorizer new; 
 		registerOpenCommand;
 		setUpUserLogin;
-		setUpSearchbar;
-		setUpResultList;
 		setUpCurrentlyPlaying;
 		setUpPlayer;
-		setUpVolumeSlider;
 		setUpRecentlyPlayed;
-		setUpSwitchDevice
+		setUpRefresh;
+		setUpResultList;
+		setUpSearchbar;
+		setUpSwitchDevice;		
+		setUpVolumeSlider
+		
+		
 
 
 ]
@@ -300,6 +301,24 @@ SPOCApp >> recentlyPlayed [
 }
 SPOCApp >> recentlyPlayed: anObject [
 	recentlyPlayed := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/18/2024 23:19'
+}
+SPOCApp >> refresh [
+
+	^ refresh
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/18/2024 23:19'
+}
+SPOCApp >> refresh: anObject [
+
+	refresh := anObject
 ]
 
 {
@@ -377,6 +396,15 @@ SPOCApp >> setUpRecentlyPlayed [
 
 {
 	#category : #initialization,
+	#'squeak_changestamp' : 'TL 6/18/2024 23:21'
+}
+SPOCApp >> setUpRefresh [
+
+	self refresh: (SPOCRefresh new app: self)
+]
+
+{
+	#category : #initialization,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:25'
 }
 SPOCApp >> setUpResultList [
@@ -442,11 +470,11 @@ SPOCApp >> switchDevice: anObject [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VK 6/9/2024 13:21'
+	#'squeak_changestamp' : 'TL 6/18/2024 23:26'
 }
 SPOCApp >> topPanelContent [
 
-	^ { self searchbar. self recentlyPlayed. self userLogin}
+	^ { self searchbar. self recentlyPlayed. self refresh. self userLogin}
 ]
 
 {

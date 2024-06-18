@@ -562,6 +562,19 @@ SPOCApiPlaybackState >> executeTest [
 ]
 
 {
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/18/2024 23:23'
+}
+SPOCApiPlaybackState >> getPlaybackState [
+
+	| dict |
+	dict := Dictionary new
+		at: #additional_types put: 'track';
+		yourself.
+	^ self execute: dict
+]
+
+{
 	#category : #response,
 	#'squeak_changestamp' : 'TL 6/10/2024 23:46'
 }

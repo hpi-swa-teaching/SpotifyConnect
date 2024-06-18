@@ -62,12 +62,12 @@ SPOCPlayer >> attachButton: anIcon [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/12/2024 03:21'
+	#'squeak_changestamp' : 'TL 6/18/2024 23:35'
 }
 SPOCPlayer >> attachNextButton [
 
 	self nextIcon: (SPOCIcon new
-				iconAsset: SPOCPlayer nextIconPath;
+				iconAsset: self class nextIconPath;
 				color: Color transparent;
 			 	yourself);		
 		attachButton: self nextIcon;
@@ -79,12 +79,12 @@ SPOCPlayer >> attachNextButton [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/12/2024 03:21'
+	#'squeak_changestamp' : 'TL 6/18/2024 23:35'
 }
 SPOCPlayer >> attachPlayPauseButton [
 
 	self playPauseIcon: (SPOCIcon new
-				iconAsset: SPOCPlayer playIconPath;
+				iconAsset: self class playIconPath;
 			 	yourself);		
 		attachButton: self playPauseIcon;
 		addMorph: (Morph new
@@ -96,12 +96,12 @@ SPOCPlayer >> attachPlayPauseButton [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 22:41'
+	#'squeak_changestamp' : 'TL 6/18/2024 23:36'
 }
 SPOCPlayer >> attachPreviousButton [
 
 	self previousIcon: (SPOCIcon new 
-				iconAsset: SPOCPlayer previousIconPath;
+				iconAsset: self class previousIconPath;
 				color: Color transparent;
 			 	yourself);		
 		attachButton: self previousIcon
