@@ -432,13 +432,13 @@ SPOCApp >> setUpSwitchDevice [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/17/2024 16:47'
+	#'squeak_changestamp' : 'TL 6/19/2024 01:26'
 }
 SPOCApp >> setUpUserLogin [
 
 	self userLogin: (SPOCUserLogin new app: self).
 	self auth registerSuccessCallback: [self userLogin toggleLogout.
-		self updatePlaybackStateFromLogin]
+		self updateComponentsWith: self getPlaybackState andDisabled: true]
 
 
 ]
@@ -479,18 +479,18 @@ SPOCApp >> topPanelContent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/17/2024 16:54'
+	#'squeak_changestamp' : 'TL 6/19/2024 01:26'
 }
-SPOCApp >> updateComponentsWith: aState [
+SPOCApp >> updateComponentsWith: aState andDisabled: aBoolean [
 
 	self componentsForUpdatingPlaybackState do: [:aComponent | 
-		aComponent disabled: false.
+		aComponent disabled: aBoolean.
 		aComponent updatePlaybackState: aState]
 ]
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/17/2024 16:54'
+	#'squeak_changestamp' : 'TL 6/19/2024 01:26'
 }
 SPOCApp >> updatePlaybackState [
 
@@ -499,20 +499,8 @@ SPOCApp >> updatePlaybackState [
 		ifTrue: [playbackState := self getPlaybackState.
 			playbackState class = SPOCApiEndpointResult
 				ifTrue: [self devicePopUp]
-				ifFalse: [self updateComponentsWith: playbackState]]
+				ifFalse: [self updateComponentsWith: playbackState andDisabled: false]]
 		ifFalse: [self loginPopUp]
-]
-
-{
-	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/17/2024 16:46'
-}
-SPOCApp >> updatePlaybackStateFromLogin [
-
-	| playbackState |
-	playbackState := self getPlaybackState.
-	self componentsForUpdatingPlaybackState do: [:aComponent | 
-		aComponent updatePlaybackState: playbackState]
 ]
 
 {

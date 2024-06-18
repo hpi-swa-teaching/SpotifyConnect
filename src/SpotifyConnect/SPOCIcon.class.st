@@ -36,9 +36,9 @@ SPOCIcon class >> size [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 19:46'
+	#'squeak_changestamp' : 'TL 6/19/2024 00:19'
 }
-SPOCIcon >> attachIcon [
+SPOCIcon >> attachButton [
 	self icon: SPOCAssetImageMorph new.
 	self addMorph: self icon.
 	self icon position: (self icon position + 8 asPoint)
@@ -71,12 +71,12 @@ SPOCIcon >> iconAsset: anAssetPath [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/28/2024 13:36'
+	#'squeak_changestamp' : 'TL 6/19/2024 00:19'
 }
 SPOCIcon >> initialize [
 	super initialize.
 	
-	self attachIcon; 
+	self attachButton; 
 		initializeStyle;
 		iconAsset: SPOCIcon defaultAsset.
 ]
