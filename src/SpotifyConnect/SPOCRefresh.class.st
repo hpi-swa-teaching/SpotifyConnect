@@ -19,7 +19,7 @@ SPOCRefresh class >> refreshIconPath [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/18/2024 23:42'
+	#'squeak_changestamp' : 'TL 6/18/2024 23:51'
 }
 SPOCRefresh >> attachButton [
 

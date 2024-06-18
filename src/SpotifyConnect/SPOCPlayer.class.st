@@ -346,13 +346,13 @@ SPOCPlayer >> switchPlaybackState [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/3/2024 23:36'
+	#'squeak_changestamp' : 'TL 6/18/2024 23:56'
 }
 SPOCPlayer >> updatePlayPauseIcon [
 
 	self isPlaying
-		ifTrue: [self playPauseIcon iconAsset: SPOCPlayer pauseIconPath]
-		ifFalse: [self playPauseIcon iconAsset: SPOCPlayer playIconPath]
+		ifTrue: [self playPauseIcon iconAsset: self class pauseIconPath]
+		ifFalse: [self playPauseIcon iconAsset: self class playIconPath]
 ]
 
 {

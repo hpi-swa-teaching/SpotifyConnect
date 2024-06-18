@@ -3,6 +3,7 @@ Class {
 	#superclass : #SPOCUIComponent,
 	#instVars : [
 		'deviceID',
+		'icon',
 		'slider',
 		'supportsVolume',
 		'volume'
@@ -12,16 +13,25 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'TL 6/12/2024 03:19'
+	#'squeak_changestamp' : 'TL 6/18/2024 23:57'
 }
-SPOCVolumeSlider class >> speakerIconPath [
+SPOCVolumeSlider class >> speakerOffIconPath [
+
+	^ '/assets/next-white.png'
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/18/2024 23:54'
+}
+SPOCVolumeSlider class >> speakerOnIconPath [
 
 	^ '/assets/speaker.png'
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/12/2024 03:20'
+	#'squeak_changestamp' : 'TL 6/18/2024 23:57'
 }
 SPOCVolumeSlider >> attachIcon [
 	
@@ -29,10 +39,11 @@ SPOCVolumeSlider >> attachIcon [
 			color: Color transparent;
 			extent: 1 @ 20;
 			yourself);
-		addMorph: (SPOCIcon new
+		icon: (SPOCIcon new
 			color: Color transparent;
-			iconAsset: self class speakerIconPath;
-			yourself)
+			iconAsset: self class speakerOnIconPath;
+			yourself);
+		addMorph: self icon
 ]
 
 {
@@ -83,6 +94,24 @@ SPOCVolumeSlider >> deviceID [
 SPOCVolumeSlider >> deviceID: anObject [
 
 	deviceID := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/18/2024 23:56'
+}
+SPOCVolumeSlider >> icon [
+
+	^ icon
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/18/2024 23:56'
+}
+SPOCVolumeSlider >> icon: anObject [
+
+	icon := anObject
 ]
 
 {
@@ -140,8 +169,8 @@ SPOCVolumeSlider >> supportsVolume: anObject [
 ]
 
 {
-	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/12/2024 04:24'
+	#category : #updating,
+	#'squeak_changestamp' : 'TL 6/18/2024 23:55'
 }
 SPOCVolumeSlider >> updatePlaybackState: aState [
 
@@ -149,7 +178,19 @@ SPOCVolumeSlider >> updatePlaybackState: aState [
 		ifFalse: [self deviceID: aState device id;
 				supportsVolume: aState device supportsVolume;
 				volume: aState device volume.
-			self slider updateValue: self volume]
+			self slider updateValue: self volume.
+			self updateSpeakerIcon]
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'TL 6/18/2024 23:54'
+}
+SPOCVolumeSlider >> updateSpeakerIcon [
+
+	self volume = 0
+		ifTrue: [self icon iconAsset: self class speakerOffIconPath]
+		ifFalse: [self icon iconAsset: self class speakerOnIconPath]
 ]
 
 {
