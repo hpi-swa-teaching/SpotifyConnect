@@ -27,15 +27,6 @@ SPOCUIComponent >> app: aSPOCApp [
 ]
 
 {
-	#category : #'pop-ups',
-	#'squeak_changestamp' : 'TL 6/10/2024 18:22'
-}
-SPOCUIComponent >> devicePopUp [
-
-	UIManager inform: 'Please open your Spotify App and play music to activate your device!'
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/10/2024 17:59'
 }
@@ -74,15 +65,6 @@ SPOCUIComponent >> initialize [
 	self hResizing: #rigid; 
 		vResizing: #rigid;
 		disabled: true
-]
-
-{
-	#category : #'pop-ups',
-	#'squeak_changestamp' : 'TL 6/10/2024 18:21'
-}
-SPOCUIComponent >> loginPopUp [
-
-	UIManager inform: 'Please log in!'
 ]
 
 {

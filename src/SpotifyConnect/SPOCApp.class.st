@@ -196,11 +196,11 @@ SPOCApp >> currentlyPlaying: anObject [
 
 {
 	#category : #'pop-ups',
-	#'squeak_changestamp' : 'TL 6/10/2024 19:25'
+	#'squeak_changestamp' : 'TL 6/18/2024 12:25'
 }
 SPOCApp >> devicePopUp [
 
-	UIManager inform: 'Please open your Spotify App and play music to activate your device!'
+	UIManager inform: 'Please activate your device!', String cr, 'Open your Spotify App and play music or use the ''Devices'' button to choose a device.'
 ]
 
 {
