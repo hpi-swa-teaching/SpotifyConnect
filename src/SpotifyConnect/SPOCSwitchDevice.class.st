@@ -30,18 +30,12 @@ SPOCSwitchDevice class >> itemTextPadding [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'TL 6/17/2024 20:23'
+	#'squeak_changestamp' : 'VK 6/19/2024 16:31'
 }
 SPOCSwitchDevice >> attachButton [
 
 	| button |
-	button := Morph new 
-			color: Color transparent;
-			addMorph: self buttonText;
-			addMorph: (SPOCIcon new iconAsset: self class devicesIconPath);
-			yourself.
-	button extent: 0@0;
-		extent: button fullBounds extent.
+	button := SPOCBoxedTextWithIcon newWithText: ' Devices' withIcon: self class devicesIconPath.
 	self addMorph: (SPOCClickable newUsing: button onClick: [:anEvent | self buttonClicked])
 	
 ]
@@ -119,24 +113,15 @@ SPOCSwitchDevice >> buildTypeText: aDevice [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 6/17/2024 11:19'
+	#'squeak_changestamp' : 'VK 6/19/2024 15:52'
 }
 SPOCSwitchDevice >> buttonClicked [
 
-	self isVisible
-		ifTrue: [self resultDisplay hide]
-		ifFalse: [self currentDevices]
-]
-
-{
-	#category : #building,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:10'
-}
-SPOCSwitchDevice >> buttonText [
-
-	^ (SPOCBoxedText new contents: ' Devices';
-		position: SPOCStyle devicesTextPadding@0;
-		yourself).
+	self app updatePlaybackState.
+	self disabled
+		ifFalse: [self isVisible
+			ifTrue: [self resultDisplay hide]
+			ifFalse: [self currentDevices]]
 ]
 
 {
@@ -271,6 +256,13 @@ SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 		switchDeviceTo: aDevice;
 		yourself.
 	self hideResults
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'VK 6/19/2024 15:51'
+}
+SPOCSwitchDevice >> updatePlaybackState: aState [
 ]
 
 {

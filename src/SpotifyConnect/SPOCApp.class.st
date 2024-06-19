@@ -170,11 +170,11 @@ SPOCApp >> centerPanelContent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/12/2024 04:12'
+	#'squeak_changestamp' : 'VK 6/19/2024 15:49'
 }
 SPOCApp >> componentsForUpdatingPlaybackState [
 
-	^ {currentlyPlaying. player. resultList. volumeSlider}
+	^ {currentlyPlaying. player. resultList. volumeSlider. recentlyPlayed. switchDevice}
 ]
 
 {

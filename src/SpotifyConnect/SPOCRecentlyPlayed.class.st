@@ -28,6 +28,15 @@ SPOCRecentlyPlayed class >> beforeTimestamp [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VK 6/19/2024 16:32'
+}
+SPOCRecentlyPlayed class >> recentlyPlayedIconPath [
+
+	^ '/assets/recently-played.png'
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VK 6/1/2024 22:08'
 }
 SPOCRecentlyPlayed class >> trackLimit [
@@ -37,18 +46,14 @@ SPOCRecentlyPlayed class >> trackLimit [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 22:07'
+	#'squeak_changestamp' : 'VK 6/19/2024 16:33'
 }
 SPOCRecentlyPlayed >> buildButton [
 
-	| text icon button |
-	text := (SPOCBoxedText new contents: ' Recently Played';
-		position: SPOCStyle recentlyPlayedPadding@0;
-		yourself).
-	icon := SPOCIcon new iconAsset: '/assets/recently-played.png'.
+	| text button |
+	text := SPOCBoxedTextWithIcon newWithText: ' Recently Played' withIcon: self class recentlyPlayedIconPath.
 	button := Morph new color: Color transparent;
 		addMorph: text;
-		addMorph: icon;
 		yourself.
 	button extent: 0@0;
 		extent: button fullBounds extent.
@@ -57,17 +62,19 @@ SPOCRecentlyPlayed >> buildButton [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 20:37'
+	#'squeak_changestamp' : 'VK 6/19/2024 15:39'
 }
 SPOCRecentlyPlayed >> getRecentlyPlayed [
 
 	| apiEndpoint |
-	apiEndpoint := SPOCApiRecentlyPlayed new
-		authorizer: self app auth;
-		yourself.
-	self results: (apiEndpoint getRecentlyPlayed).
-	self app resultList updateResults: self results;
-		title: 'Recently Played'
+	self app updatePlaybackState.
+	self disabled
+		ifFalse: [apiEndpoint := SPOCApiRecentlyPlayed new
+				authorizer: self app auth;
+				yourself.
+			self results: (apiEndpoint getRecentlyPlayed).
+			self app resultList updateResults: self results;
+				title: 'Recently Played'.]
 ]
 
 {
@@ -117,4 +124,13 @@ SPOCRecentlyPlayed >> results [
 }
 SPOCRecentlyPlayed >> results: anObject [
 	tracks := anObject
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'VK 6/19/2024 15:48'
+}
+SPOCRecentlyPlayed >> updatePlaybackState: aState [
+
+	
 ]
