@@ -87,6 +87,15 @@ SPOCStyle class >> gitRepoName [
 
 {
 	#category : #'class variables',
+	#'squeak_changestamp' : 'VK 6/19/2024 16:07'
+}
+SPOCStyle class >> iconPadding [
+
+	^ 8
+]
+
+{
+	#category : #'class variables',
 	#'squeak_changestamp' : 'RK 6/9/2024 14:44'
 }
 SPOCStyle class >> recentlyPlayedPadding [
