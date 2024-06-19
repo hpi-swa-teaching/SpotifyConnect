@@ -237,7 +237,7 @@ SPOCSearchbar >> results [
 ]
 
 {
-	#category : #accessing,
+	#category : #initialization,
 	#'squeak_changestamp' : 'RK 6/15/2024 16:42'
 }
 SPOCSearchbar >> results: anOrderedCollection [

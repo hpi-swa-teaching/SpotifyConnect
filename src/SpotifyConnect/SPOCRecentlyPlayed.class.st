@@ -57,17 +57,19 @@ SPOCRecentlyPlayed >> buildButton [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 20:37'
+	#'squeak_changestamp' : 'VK 6/19/2024 15:39'
 }
 SPOCRecentlyPlayed >> getRecentlyPlayed [
 
 	| apiEndpoint |
-	apiEndpoint := SPOCApiRecentlyPlayed new
-		authorizer: self app auth;
-		yourself.
-	self results: (apiEndpoint getRecentlyPlayed).
-	self app resultList updateResults: self results;
-		title: 'Recently Played'
+	self app updatePlaybackState.
+	self disabled
+		ifFalse: [apiEndpoint := SPOCApiRecentlyPlayed new
+				authorizer: self app auth;
+				yourself.
+			self results: (apiEndpoint getRecentlyPlayed).
+			self app resultList updateResults: self results;
+				title: 'Recently Played'.]
 ]
 
 {
@@ -117,4 +119,13 @@ SPOCRecentlyPlayed >> results [
 }
 SPOCRecentlyPlayed >> results: anObject [
 	tracks := anObject
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'VK 6/19/2024 15:48'
+}
+SPOCRecentlyPlayed >> updatePlaybackState: aState [
+
+	
 ]

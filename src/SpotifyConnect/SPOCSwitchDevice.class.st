@@ -119,13 +119,15 @@ SPOCSwitchDevice >> buildTypeText: aDevice [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 6/17/2024 11:19'
+	#'squeak_changestamp' : 'VK 6/19/2024 15:52'
 }
 SPOCSwitchDevice >> buttonClicked [
 
-	self isVisible
-		ifTrue: [self resultDisplay hide]
-		ifFalse: [self currentDevices]
+	self app updatePlaybackState.
+	self disabled
+		ifFalse: [self isVisible
+			ifTrue: [self resultDisplay hide]
+			ifFalse: [self currentDevices]]
 ]
 
 {
@@ -271,6 +273,13 @@ SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 		switchDeviceTo: aDevice;
 		yourself.
 	self hideResults
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'VK 6/19/2024 15:51'
+}
+SPOCSwitchDevice >> updatePlaybackState: aState [
 ]
 
 {
