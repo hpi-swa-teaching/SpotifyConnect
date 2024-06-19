@@ -15,31 +15,31 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'TL 6/18/2024 23:57'
+	#'squeak_changestamp' : 'TL 6/19/2024 19:44'
 }
-SPOCVolumeSlider class >> speakerOffIconPath [
-
-	^ '/assets/next-white.png'
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'TL 6/18/2024 23:54'
-}
-SPOCVolumeSlider class >> speakerOnIconPath [
+SPOCVolumeSlider class >> speakerIconPath [
 
 	^ '/assets/speaker.png'
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/19/2024 19:44'
+}
+SPOCVolumeSlider class >> speakerMutedIconPath [
+
+	^ '/assets/speaker-muted.png'
+]
+
+{
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/19/2024 01:21'
+	#'squeak_changestamp' : 'TL 6/19/2024 19:44'
 }
 SPOCVolumeSlider >> attachButton [
 	
 	self icon: (SPOCIcon new
 			color: Color transparent;
-			iconAsset: self class speakerOnIconPath;
+			iconAsset: self class speakerIconPath;
 			yourself);
 		button: (SPOCClickable
 				newUsing: self icon
@@ -240,13 +240,13 @@ SPOCVolumeSlider >> updatePlaybackState: aState [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/19/2024 00:50'
+	#'squeak_changestamp' : 'TL 6/19/2024 19:44'
 }
 SPOCVolumeSlider >> updateSpeakerIcon [
 
 	self volume = 0
-		ifTrue: [self icon iconAsset: self class speakerOffIconPath]
-		ifFalse: [self icon iconAsset: self class speakerOnIconPath]
+		ifTrue: [self icon iconAsset: self class speakerMutedIconPath]
+		ifFalse: [self icon iconAsset: self class speakerIconPath]
 ]
 
 {

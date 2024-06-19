@@ -10,11 +10,11 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'TL 6/18/2024 23:30'
+	#'squeak_changestamp' : 'TL 6/19/2024 19:06'
 }
 SPOCRefresh class >> refreshIconPath [
 
-	^ '/assets/next.png'
+	^ '/assets/refresh.png'
 ]
 
 {
