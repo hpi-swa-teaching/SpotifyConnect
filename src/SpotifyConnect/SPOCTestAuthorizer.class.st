@@ -51,16 +51,3 @@ SPOCTestAuthorizer >> testResponseAsset [
 	
 	self assert: ((GitAssetLoader for: 'SpotifyConnect') loadString: 'assets/successResponse.html') notNil
 ]
-
-{
-	#category : #testing,
-	#'squeak_changestamp' : 'VE 6/20/2024 20:03'
-}
-SPOCTestAuthorizer >> testStartAuthorization [
-	
-	| url entryPoints |
-	url := authorizer startAuthorization.
-	entryPoints := WebServer default entryPoints.
-	self assert: ((entryPoints at: (SPOCAuthorizer redirectRoute)) ~= nil).
-	self assert: url ~= nil.
-]

@@ -46,3 +46,14 @@ SPOCTestAuthorizerProcess >> testCallbackErrors [
 	response := WebClient httpGet: (SPOCAuthorizer redirectUri, '?error=error').
 	self assert: response code = 500
 ]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 6/20/2024 20:11'
+}
+SPOCTestAuthorizerProcess >> testStartAuthorization [
+	
+	| entryPoints |
+	entryPoints := WebServer default entryPoints.
+	self assert: ((entryPoints at: (SPOCAuthorizer redirectRoute)) ~= nil).
+]
