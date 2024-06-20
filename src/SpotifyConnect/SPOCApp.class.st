@@ -26,6 +26,15 @@ SPOCApp class >> appName [
 ]
 
 {
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 6/20/2024 18:18'
+}
+SPOCApp class >> initialize [
+	
+	self registerOpenCommand
+]
+
+{
 	#category : #start,
 	#'squeak_changestamp' : 'RK 6/7/2024 10:51'
 }
@@ -41,6 +50,15 @@ SPOCApp class >> minimumExtent [
 SPOCApp class >> open [
 
 	self new open
+]
+
+{
+	#category : #start,
+	#'squeak_changestamp' : 'VE 6/20/2024 18:18'
+}
+SPOCApp class >> registerOpenCommand [
+
+	TheWorldMenu registerOpenCommand: {'Spotify Connect'. {self. #open}}
 ]
 
 {
@@ -138,7 +156,7 @@ SPOCApp >> buildTopPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/20/2024 15:03'
+	#'squeak_changestamp' : 'VE 6/20/2024 18:22'
 }
 SPOCApp >> buildWindow: aBuilder [
 
@@ -153,7 +171,7 @@ SPOCApp >> buildWindow: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
+	#'squeak_changestamp' : 'VE 6/20/2024 18:33'
 }
 SPOCApp >> buildWith: aBuilder [
 
@@ -220,14 +238,13 @@ SPOCApp >> getPlaybackState [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/18/2024 23:22'
+	#'squeak_changestamp' : 'VE 6/20/2024 18:18'
 }
 SPOCApp >> initialize [
 
 	super initialize.
 	
 	self auth: SPOCAuthorizer new; 
-		registerOpenCommand;
 		setUpUserLogin;
 		setUpCurrentlyPlaying;
 		setUpPlayer;
@@ -254,11 +271,16 @@ SPOCApp >> loginPopUp [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
+	#'squeak_changestamp' : 'VE 6/20/2024 19:00'
 }
 SPOCApp >> open [
 
-	^ ToolBuilder open: self
+	| a |
+	a := ToolBuilder open: self.
+	a color: SPOCStyle spotifyBlack.
+	a borderColor: SPOCStyle spotifyBlack.
+	a paneColor: SPOCStyle spotifyBlack.
+	^ a
 ]
 
 {
@@ -320,16 +342,6 @@ SPOCApp >> refresh [
 SPOCApp >> refresh: anObject [
 
 	refresh := anObject
-]
-
-{
-	#category : #ui,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:51'
-}
-SPOCApp >> registerOpenCommand [
-
-	TheWorldMenu registerOpenCommand: {'Spotify Connect'. {self. #open}}
-
 ]
 
 {

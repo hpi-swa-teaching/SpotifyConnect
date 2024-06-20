@@ -25,7 +25,7 @@ SPOCScrollablePanel class >> newWithExtent: anExtent [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/10/2024 19:09'
+	#'squeak_changestamp' : 'VE 6/20/2024 18:26'
 }
 SPOCScrollablePanel >> buildPanel [
 
@@ -38,7 +38,8 @@ SPOCScrollablePanel >> buildPanel [
 			yourself);
 		panel: (builder build: spec).
 	self panel scroller layoutPolicy: TableLayout new.
-	self addMorph: panel
+	self panel color: SPOCStyle spotifyBlack.
+	self addMorph: self panel
 ]
 
 {
