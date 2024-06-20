@@ -138,12 +138,13 @@ SPOCApp >> buildTopPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:50'
+	#'squeak_changestamp' : 'VE 6/20/2024 15:03'
 }
 SPOCApp >> buildWindow: aBuilder [
 
 	^ aBuilder pluggableWindowSpec new 
 		model: self;
+		color: SPOCStyle spotifyBlack;
 		label: #windowTitle;
 		minimumExtent: SPOCApp minimumExtent;
 		children: {self buildMainTable: aBuilder};

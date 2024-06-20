@@ -228,6 +228,17 @@ SPOCAuthorizer >> nextRandomState [
 ]
 
 {
+	#category : #authorization,
+	#'squeak_changestamp' : 'VE 6/20/2024 15:01'
+}
+SPOCAuthorizer >> openUrlIfPossible: aUrl in: aWebBrowser [
+	
+	aWebBrowser
+		ifNotNil: [WebBrowser default openOnUrl: aUrl]
+		ifNil: [UIManager inform: 'Open a web browser and paste: ', String cr, aUrl.].
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'OW 5/22/2024 18:36'
 }
@@ -373,7 +384,7 @@ SPOCAuthorizer >> spotifyRefreshApiContent [
 
 {
 	#category : #authorization,
-	#'squeak_changestamp' : 'VE 6/4/2024 09:30'
+	#'squeak_changestamp' : 'VE 6/20/2024 15:01'
 }
 SPOCAuthorizer >> startAuthorization [
 
@@ -381,7 +392,7 @@ SPOCAuthorizer >> startAuthorization [
 	self setupCallbackService.
 	url := self buildAuthorizationUrl.
 	Clipboard default primitiveClipboardText: url.	
-	WebBrowser default openOnUrl: url.
+	self openUrlIfPossible: url in: WebBrowser default.
 	^ url
 ]
 
