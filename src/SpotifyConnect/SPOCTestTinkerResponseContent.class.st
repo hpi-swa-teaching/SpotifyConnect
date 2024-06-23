@@ -753,7 +753,7 @@ SPOCTestTinkerResponseContent >> setUpTrack [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/12/2024 01:35'
+	#'squeak_changestamp' : 'TL 6/23/2024 15:10'
 }
 SPOCTestTinkerResponseContent >> testTinkerAlbum [
 

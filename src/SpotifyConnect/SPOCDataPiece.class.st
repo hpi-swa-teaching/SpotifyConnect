@@ -11,6 +11,19 @@ Class {
 }
 
 {
+	#category : #formatting,
+	#'squeak_changestamp' : 'TL 6/23/2024 14:57'
+}
+SPOCDataPiece >> artistsAsString [
+
+	| result |
+	result := ''.
+	self artists allButLastDo: [:anArtist | result := result, anArtist name, ', '].
+	result := result, self artists last name.
+	^ result
+]
+
+{
 	#category : #testing,
 	#'squeak_changestamp' : 'TL 6/12/2024 01:29'
 }

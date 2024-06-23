@@ -47,19 +47,6 @@ SPOCTrack >> artists: aOrderedCollection [
 ]
 
 {
-	#category : #formatting,
-	#'squeak_changestamp' : 'RK 6/16/2024 12:24'
-}
-SPOCTrack >> artistsAsString [
-
-	| result |
-	result := ''.
-	self artists allButLastDo: [:artist | result := result, artist name, ', '].
-	result := result, self artists last name.
-	^ result
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 5/16/2024 23:44'
 }
@@ -80,14 +67,14 @@ SPOCTrack >> duration: aNumber [
 
 {
 	#category : #formatting,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:55'
+	#'squeak_changestamp' : 'TL 6/23/2024 14:57'
 }
 SPOCTrack >> durationAsFormattedTime [
 	"Converts milliseconds to 'mm:ss'"
 	
 	| filler min sec time |
-	min := duration // 60.
-	sec := duration \\ 60.
+	min := self duration // 60.
+	sec := self duration \\ 60.
 	sec < 10 
 		ifTrue: [filler := '0']
 		ifFalse: [filler := ''].

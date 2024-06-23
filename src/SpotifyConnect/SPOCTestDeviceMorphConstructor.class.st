@@ -9,37 +9,74 @@ Class {
 }
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/23/2024 14:28'
+}
+SPOCTestDeviceMorphConstructor >> device [
+
+	^ device
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/23/2024 14:28'
+}
+SPOCTestDeviceMorphConstructor >> device: anObject [
+
+	device := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/23/2024 14:28'
+}
+SPOCTestDeviceMorphConstructor >> deviceMorph [
+
+	^ deviceMorph
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/23/2024 14:28'
+}
+SPOCTestDeviceMorphConstructor >> deviceMorph: anObject [
+
+	deviceMorph := anObject
+]
+
+{
 	#category : #setup,
-	#'squeak_changestamp' : 'VK 6/22/2024 16:43'
+	#'squeak_changestamp' : 'TL 6/23/2024 14:30'
 }
 SPOCTestDeviceMorphConstructor >> setUp [
 
-	| switchDevice |
-	switchDevice := SPOCSwitchDevice new.
-	device := SPOCDevice new type: 'Smart Fridge';
-		name: 'Samsung Fridge';
-		isActive: true;
-		yourself.
-	deviceMorph := switchDevice buildResultMorphFrom: device.
+	self device: (SPOCDevice new
+			type: 'Smart Fridge';
+			name: 'Samsung Fridge';
+			isActive: true;
+			yourself);
+		deviceMorph: (SPOCSwitchDevice new 
+			buildResultMorphFrom: self device);
+		yourself
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'VK 6/22/2024 16:44'
+	#'squeak_changestamp' : 'TL 6/23/2024 14:30'
 }
 SPOCTestDeviceMorphConstructor >> testMorphClass [
 
-	self assert: (deviceMorph class = SPOCClickable)
+	self assert: (self deviceMorph class = SPOCClickable)
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'VK 6/22/2024 16:58'
+	#'squeak_changestamp' : 'TL 6/23/2024 14:31'
 }
 SPOCTestDeviceMorphConstructor >> testSubMorphs [
 
-	| finishedMorph background nameText typeText |
-	finishedMorph := deviceMorph submorphs first.
+	| background finishedMorph nameText typeText |
+	finishedMorph := self deviceMorph submorphs first.
 	typeText := finishedMorph submorphs first.
 	nameText := finishedMorph submorphs at: 2.
 	background := finishedMorph submorphs at: 3.

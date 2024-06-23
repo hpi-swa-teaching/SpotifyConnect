@@ -27,19 +27,6 @@ SPOCAlbum >> artists: anOrderedCollection [
 ]
 
 {
-	#category : #formatting,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:54'
-}
-SPOCAlbum >> artistsAsString [
-
-	| result |
-	result := ''.
-	self artists allButLastDo: [:artist | result := result, artist name, ', '].
-	result := result, self artists last name.
-	^ result
-]
-
-{
 	#category : #testing,
 	#'squeak_changestamp' : 'TL 6/12/2024 01:20'
 }
