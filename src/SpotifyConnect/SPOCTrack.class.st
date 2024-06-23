@@ -101,7 +101,7 @@ SPOCTrack >> equals: aTrack [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/17/2024 16:41'
+	#'squeak_changestamp' : 'VE 6/23/2024 20:52'
 }
 SPOCTrack >> onClick: anApp [
 
@@ -118,7 +118,8 @@ SPOCTrack >> onClick: anApp [
 	SPOCApiPlay new 
 		authorizer: anApp auth;
 		playTrack: self id withContext: context on: anApp player deviceID;
-		yourself
+		yourself.
+	anApp updatePlaybackState
 ]
 
 {

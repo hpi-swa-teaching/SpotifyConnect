@@ -10,7 +10,7 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:30'
+	#'squeak_changestamp' : 'VE 6/23/2024 18:16'
 }
 SPOCTestPluggableTableSpec >> setUp [
 
@@ -29,13 +29,12 @@ SPOCTestPluggableTableSpec >> testBuild [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:36'
+	#'squeak_changestamp' : 'VE 6/23/2024 18:16'
 }
-SPOCTestPluggableTableSpec >> testDefaultLayout [
+SPOCTestPluggableTableSpec >> testDefaultWidgetResizing [
 	
-	self assert: (spec tableLayoutProperties isKindOf: TableLayoutProperties).
-	self assert: (spec horizontalResizing = #shrinkWrap). 
-	self assert: (spec verticalResizing = #shrinkWrap). 
+	self assert: (widget hResizing = #rigid). 
+	self assert: (widget vResizing = #rigid). 
 ]
 
 {
@@ -60,4 +59,21 @@ SPOCTestPluggableTableSpec >> testFullFrame [
 SPOCTestPluggableTableSpec >> testTableLayout [
 	
 	self assert: (widget layoutPolicy isKindOf: TableLayout)
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 6/23/2024 18:18'
+}
+SPOCTestPluggableTableSpec >> testWidgetResizing [
+	
+	spec := SPOCPluggableTablePanelSpec new 
+		tableLayoutProperties: (TableLayoutProperties new
+			hResizing: #spaceFill;
+			vResizing: #shrinkWrap;
+			yourself);
+		yourself.
+	widget := spec buildWith: (ToolBuilder default).
+	self assert: (widget hResizing = #spaceFill). 
+	self assert: (widget vResizing = #shrinkWrap). 
 ]

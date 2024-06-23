@@ -15,7 +15,7 @@ SPOCTestApiPlay >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/10/2024 23:08'
+	#'squeak_changestamp' : 'MH 6/23/2024 18:59'
 }
 SPOCTestApiPlay >> testApiPlayExecute [
 
