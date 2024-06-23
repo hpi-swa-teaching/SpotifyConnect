@@ -40,7 +40,7 @@ SPOCMockTestApiAlbum >> artists [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/23/2024 16:22'
+	#'squeak_changestamp' : 'TL 6/23/2024 17:18'
 }
 SPOCMockTestApiAlbum >> setUp [
 
@@ -48,7 +48,7 @@ SPOCMockTestApiAlbum >> setUp [
 		track: (SPOCTrack new
 			id: '2yLa0QULdQr0qAIvVwN6B5';
 			name: '...Ready For It?';
-			image: nil;
+			image: (SPOCImage newWithPath: '/assets/squeak-mouse.png');
 			album: nil;
 			artists: self artists;
 			duration: 208;
@@ -58,14 +58,13 @@ SPOCMockTestApiAlbum >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/23/2024 16:27'
+	#'squeak_changestamp' : 'TL 6/23/2024 17:18'
 }
 SPOCMockTestApiAlbum >> testMockApiAlbumExecute [
 
 	| res |
 	res := self apiEndpoint execute: (Dictionary new).
-	res first image: nil;
-		album: nil.
+	res first album: nil.
 	self assert: (res first equals: self track)
 ]
 
