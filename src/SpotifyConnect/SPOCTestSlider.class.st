@@ -9,9 +9,20 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:12'
+	#'squeak_changestamp' : 'VE 6/23/2024 17:55'
+}
+SPOCTestSlider >> mockMouseEventAt: aPosition [
+
+	^ MouseEvent new setType: nil position: aPosition buttons: nil hand: nil; 
+		yourself
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 6/23/2024 17:55'
 }
 SPOCTestSlider >> setUp [
+
 	slider := SPOCSlider new
 ]
 
@@ -77,19 +88,19 @@ SPOCTestSlider >> testLengthChange [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:13'
+	#'squeak_changestamp' : 'VE 6/23/2024 17:56'
 }
 SPOCTestSlider >> testMouseMove [
 
 	| value |
 	value := slider value.
-	slider onMouseMove: (MouseEvent new position: slider position x + 10 asPoint; yourself).
+	slider onMouseMove: (self mockMouseEventAt: slider position x + 10 asPoint).
 	self assert: slider value ~= value
 ]
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:14'
+	#'squeak_changestamp' : 'VE 6/23/2024 17:55'
 }
 SPOCTestSlider >> testValueChangedEvent [
 
@@ -97,6 +108,6 @@ SPOCTestSlider >> testValueChangedEvent [
 	tmp := nil.
 	slider onValueChanged: [:aValue | tmp := aValue].
 	slider value: 100.
-	slider onMouseUp: (MouseEvent new position: 0 asPoint; yourself).
+	slider onMouseUp: (self mockMouseEventAt: 0 asPoint).
 	self assert: tmp = 0
 ]

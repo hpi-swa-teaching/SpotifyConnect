@@ -22,7 +22,7 @@ SPOCPluggableTablePanelSpec class >> fullFrame [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 18:00'
+	#'squeak_changestamp' : 'VE 6/23/2024 18:12'
 }
 SPOCPluggableTablePanelSpec >> buildWith: aBuilder [
 	
@@ -41,14 +41,12 @@ SPOCPluggableTablePanelSpec >> buildWith: aBuilder [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 18:01'
+	#'squeak_changestamp' : 'VE 6/23/2024 18:15'
 }
 SPOCPluggableTablePanelSpec >> initialize [
 	super initialize.
 	
-	self tableLayoutProperties: TableLayoutProperties new;
-		horizontalResizing: #shrinkWrap;
-		verticalResizing: #shrinkWrap
+	self tableLayoutProperties: TableLayoutProperties new
 ]
 
 {
