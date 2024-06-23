@@ -29,13 +29,14 @@ SPOCTestPlay >> testApiPlayOn [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/24/2024 00:18'
+	#'squeak_changestamp' : 'MH 6/24/2024 00:32'
 }
 SPOCTestPlay >> testApiPlayTrack [
 
-	|playbackState instance|
+	|playbackState instance trackID|
 	playbackState := self getPlaybackState.
 	instance := apiEndpoint playTrack: '4PTG3Z6ehGkBFwjybzWkR8' on: playbackState device id.
 	playbackState := self getPlaybackState.
+	self assert: trackID = '4PTG3Z6ehGkBFwjybzWkR8'
 
 ]
