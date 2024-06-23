@@ -45,16 +45,3 @@ SPOCApiPause >> pauseOn: aDevice [
 		yourself.
 	self execute: dict
 ]
-
-{
-	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 12:20'
-}
-SPOCApiPause >> playOn: aDevice [
-
-	| dict |
-	dict := Dictionary new
-		at: #device_id put: aDevice;
-		yourself.
-	self execute: dict
-]

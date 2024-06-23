@@ -105,8 +105,8 @@ SPOCSearchbar >> buildSearchbar [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/16/2024 12:06'
+	#category : #actions,
+	#'squeak_changestamp' : 'TL 6/23/2024 16:51'
 }
 SPOCSearchbar >> buttonClicked: aButton [
 	
@@ -115,7 +115,7 @@ SPOCSearchbar >> buttonClicked: aButton [
 	names do: [ :aName | (self submorphNamed: aName ) wrappee color: SPOCStyle spotifyWhite].	
 	aButton wrappee color: SPOCStyle spotifyGreen.
 	self filter: aButton externalName.
-	input ifNotNil: [self search: self input]
+	self input ifNotNil: [self search: self input]
 ]
 
 {
@@ -189,24 +189,6 @@ SPOCSearchbar >> input: aString [
 
 	input := aString.
 	self changed: #input
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:03'
-}
-SPOCSearchbar >> inputField [
-
-	^ inputField
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:03'
-}
-SPOCSearchbar >> inputField: aSPOCTextInput [
-
-	inputField := aSPOCTextInput
 ]
 
 {

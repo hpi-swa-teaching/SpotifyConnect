@@ -46,27 +46,30 @@ SPOCIcon >> attachButton [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 19:39'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:47'
 }
 SPOCIcon >> icon [
+
 	^ icon
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 19:39'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:47'
 }
 SPOCIcon >> icon: anObject [
+
 	icon := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 13:36'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:47'
 }
 SPOCIcon >> iconAsset: anAssetPath [
+
 	self icon assetPath: anAssetPath.
-	self icon magnifyBy: SPOCIcon iconScaling.
+	self icon magnifyBy: SPOCIcon iconScaling
 ]
 
 {

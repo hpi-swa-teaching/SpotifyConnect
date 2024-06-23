@@ -115,17 +115,19 @@ SPOCBoxedText >> color: aColor [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:02'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:45'
 }
 SPOCBoxedText >> content [
+
 	^ content
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/14/2024 01:21'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:45'
 }
 SPOCBoxedText >> contents [
+
 	^ self label contents
 ]
 
@@ -156,33 +158,37 @@ SPOCBoxedText >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 21:01'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:46'
 }
 SPOCBoxedText >> label [
+
 	^ label
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 21:01'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:46'
 }
 SPOCBoxedText >> label: anObject [
+
 	label := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:15'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:46'
 }
 SPOCBoxedText >> leftBorderCircle [
+
 	^ self submorphNamed: 'left'
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:15'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:46'
 }
 SPOCBoxedText >> rightBorderCircle [
+
 	^ self submorphNamed: 'right'
 ]
 
