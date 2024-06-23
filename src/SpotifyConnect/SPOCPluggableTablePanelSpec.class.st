@@ -41,12 +41,14 @@ SPOCPluggableTablePanelSpec >> buildWith: aBuilder [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/23/2024 18:15'
+	#'squeak_changestamp' : 'VE 6/23/2024 20:46'
 }
 SPOCPluggableTablePanelSpec >> initialize [
 	super initialize.
 	
-	self tableLayoutProperties: TableLayoutProperties new
+	self tableLayoutProperties: TableLayoutProperties new;
+		horizontalResizing: #shrinkWrap;
+		verticalResizing: #shrinkWrap
 ]
 
 {
