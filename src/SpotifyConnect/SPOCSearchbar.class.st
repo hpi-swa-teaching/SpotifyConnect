@@ -256,16 +256,18 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 20:31'
+	#'squeak_changestamp' : 'TL 6/23/2024 15:38'
 }
 SPOCSearchbar >> search: aString [
 
 	| apiEndpoint |
-	apiEndpoint := SPOCApiSearch new
-		authorizer: self app auth;
-		yourself.
-	self input: aString;
-		results: (apiEndpoint search: (self sanitizeInput: aString) withFilter: self filter).
-	self app resultList updateResults: self results;
-		title: 'Your Results'
+	self app updatePlaybackState.
+	self disabled
+		ifFalse: [apiEndpoint := SPOCApiSearch new
+				authorizer: self app auth;
+				yourself.
+			self input: aString;
+				results: (apiEndpoint search: (self sanitizeInput: aString) withFilter: self filter).
+			self app resultList updateResults: self results;
+				title: 'Your Results']
 ]
