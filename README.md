@@ -34,6 +34,7 @@ Im Git Browser dieses Repository clonen oder die .sar durch Drag-and-Drop oder v
 ### App öffnen und anmelden
 Apps -> Spotify Connect
 
-Beim erstmaligen Login werden Cliend ID und Client Secret aus den Settings des Spotify Developer Dashbords in einem Popup abgefragt.
-
-Durch den Login-Button offnet sich ein Browser und leitet automatisch zur Anmeldeseite von Spotify. Nach erfolgreichem Anmelden kann die Spotify App in Squeak benutzt werden. Dabei ist sicherzustellen, dass eine Spotify-Gerät (also z.b. die Spotify-Desktop-App) aktiv ist. Dafür Spotify auf einem Gerät öffnen und einmal einen Song anspielen.
+- Beim erstmaligen Login werden Cliend ID und Client Secret aus den Settings des Spotify Developer Dashbords in Popups abgefragt.
+- Durch den Login-Button öffnet sich ein Browser und leitet automatisch zur Anmeldeseite von Spotify. Hier muss sich mit einem Spotify Premium Account angemeldet werden.
+- Dabei ist sicherzustellen, dass ein Spotify-Gerät des Accounts (also z.b. die Spotify-Desktop-App) aktiv ist (Dafür Spotify auf einem Gerät öffnen und einmal einen Song anspielen).
+- Nach erfolgreichem Anmelden und aktivieren eines Gerätes kann die Spotify App in Squeak benutzt werden. 
