@@ -2,40 +2,76 @@ Class {
 	#name : #SPOCUIComponent,
 	#superclass : #Morph,
 	#instVars : [
-		'app'
+		'app',
+		'disabled'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 5/27/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:00'
 }
 SPOCUIComponent >> app [
+
 	^ app
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 5/27/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:00'
 }
-SPOCUIComponent >> app: anObject [
-	app := anObject
+SPOCUIComponent >> app: aSPOCApp [
+
+	app := aSPOCApp
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 20:44'
+	#'squeak_changestamp' : 'TL 6/10/2024 17:59'
+}
+SPOCUIComponent >> disabled [
+
+	^ disabled
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 6/16/2024 18:05'
+}
+SPOCUIComponent >> disabled: aBoolean [
+
+	disabled := aBoolean
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 6/12/2024 02:52'
 }
 SPOCUIComponent >> extendFully [
-	self extent: 0@0.
+
+	self extent: 0 @ 0.
 	self extent: self fullBounds extent
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 19:48'
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 6/12/2024 03:08'
 }
 SPOCUIComponent >> initialize [
+
 	super initialize.
+	
+	self hResizing: #rigid; 
+		vResizing: #rigid;
+		disabled: true
+]
+
+{
+	#category : #actions,
+	#'squeak_changestamp' : 'TL 6/10/2024 18:29'
+}
+SPOCUIComponent >> updatePlaybackState: aState [
+
+	^ self subclassResponsibility
 ]

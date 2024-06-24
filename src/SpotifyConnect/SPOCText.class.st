@@ -1,18 +1,18 @@
 Class {
 	#name : #SPOCText,
 	#superclass : #TextMorph,
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {
-	#category : #'instance creation',
-	#'squeak_changestamp' : 'RK 5/18/2024 00:10'
+	#category : #constructor,
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCText class >> newAt: aPoint withText: aString [
+
 	^ SPOCText new
 		position: aPoint;
 		contents: aString;
-		backgroundColor: SPOCStyle spotifyGray;
 		textColor: SPOCStyle spotifyWhite;
 		yourself
 	
@@ -20,17 +20,83 @@ SPOCText class >> newAt: aPoint withText: aString [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 5/21/2024 23:40'
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
 SPOCText >> handlesMouseDown: anEvent [
+
+	^ false
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
+}
+SPOCText >> handlesMouseMove: anEvent [
+
+	^ false
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
+}
+SPOCText >> handlesMouseOver: anEvent [
+
 	^ false
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 21:13'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:53'
 }
 SPOCText >> initialize [
 	
-	super initialize
+	super initialize.
+
+	self textColor: SPOCStyle spotifyWhite
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
+}
+SPOCText >> mouseDown: anEvent [
+
+	^ nil
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
+}
+SPOCText >> mouseEnter: anEvent [
+
+	^ nil
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
+}
+SPOCText >> mouseLeave: anEvent [
+
+	^ nil
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
+}
+SPOCText >> mouseMove: anEvent [
+
+	^ nil
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
+}
+SPOCText >> mouseUp: anEvent [
+
+	^ nil
 ]

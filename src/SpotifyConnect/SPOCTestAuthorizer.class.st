@@ -8,64 +8,17 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 21:13'
+	#category : #setup,
+	#'squeak_changestamp' : 'VE 6/20/2024 19:50'
 }
 SPOCTestAuthorizer >> setUp [
+
 	authorizer := SPOCAuthorizer new.
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 21:04'
-}
-SPOCTestAuthorizer >> testAuthorisationUrl [
-	
-	| responseUrl targetUrl clipboardText | 
-	responseUrl := authorizer startAuthorization.
-	targetUrl := 'https://accounts.spotify.com/authorize',
-		'?response_type=code',
-		'&scope=', SPOCAuthorizer scope,
-		'&redirect_uri=', SPOCAuthorizer redirectUri,
-		'&state=', authorizer randomState,
-		'&client_id=', SPOCAuthorizer clientId. 
-	clipboardText := Clipboard default primitiveClipboardText.
-	
-	self assert: targetUrl equals: responseUrl.
-	self assert: targetUrl equals: clipboardText
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 19:00'
-}
-SPOCTestAuthorizer >> testCallbackEndpoint [
-	
-	| response |
-	authorizer startAuthorization.
-	response := WebClient httpGet: SPOCAuthorizer redirectUri.
-	self assert: (response code = 404) not
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 19:00'
-}
-SPOCTestAuthorizer >> testCallbackErrors [
-	
-	| response |
-	authorizer startAuthorization.
-	response := WebClient httpGet: (SPOCAuthorizer redirectUri, '?code=123').
-	self assert: response code = 400.
-	response := WebClient httpGet: (SPOCAuthorizer redirectUri, '?state=123').
-	self assert: response code = 400.
-	response := WebClient httpGet: (SPOCAuthorizer redirectUri, '?error=error').
-	self assert: response code = 500
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/28/2024 21:19'
+	#category : #testing,
+	#'squeak_changestamp' : 'VE 6/20/2024 19:49'
 }
 SPOCTestAuthorizer >> testOnAuthorizationSuccessCallbacks [
 	
@@ -73,12 +26,12 @@ SPOCTestAuthorizer >> testOnAuthorizationSuccessCallbacks [
 	tmp := 0.
 	authorizer registerSuccessCallback: [tmp := 1].
 	authorizer callSuccessCallbacks.
-	self assert: tmp = 1.
+	self assert: tmp = 1
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 21:48'
+	#category : #testing,
+	#'squeak_changestamp' : 'VE 6/20/2024 19:49'
 }
 SPOCTestAuthorizer >> testRandomState [
 	
@@ -91,10 +44,10 @@ SPOCTestAuthorizer >> testRandomState [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'OW 5/26/2024 19:05'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:17'
 }
 SPOCTestAuthorizer >> testResponseAsset [
 	
-	self assert: ((GitAssetLoader for: 'SpotifyConnect') loadString: 'assets/successResponse.html') notNil.
+	self assert: ((GitAssetLoader for: 'SpotifyConnect') loadString: 'assets/successResponse.html') notNil
 ]

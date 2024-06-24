@@ -4,33 +4,35 @@ Class {
 	#instVars : [
 		'label',
 		'content',
-		'anObject',
 		'contents'
 	],
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-UI'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/28/2024 13:28'
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:10'
 }
 SPOCBoxedText class >> defaultContent [
+
 	^ 'SPOCBoxedText'
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 20:09'
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:10'
 }
 SPOCBoxedText class >> height [
+
 	^ 32
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/27/2024 20:29'
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:10'
 }
 SPOCBoxedText class >> horizontalSpacing [
+
 	^ 10
 ]
 
@@ -48,46 +50,36 @@ SPOCBoxedText >> attachCenterBox [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:32'
+	#'squeak_changestamp' : 'VE 6/6/2024 20:37'
 }
 SPOCBoxedText >> attachLeftBorderCircle [
 	| tmp |
-	tmp := self borderCircleMorph.
+	tmp := self circleMorph.
 	tmp name: 'left'.
 	self addMorph: tmp.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:32'
+	#'squeak_changestamp' : 'VE 6/6/2024 20:37'
 }
 SPOCBoxedText >> attachRightBorderCircle [
 	| tmp |
-	tmp := self borderCircleMorph.
+	tmp := self circleMorph.
 	tmp name: 'right'.
 	self addMorph: tmp.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 21:18'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:55'
 }
 SPOCBoxedText >> attachText [
-	self label: SPOCPlainText new.
-	self label contents: 'SPOCBoxedText'.
-	self addMorph: self label.
-]
 
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:21'
-}
-SPOCBoxedText >> borderCircleMorph [
-	| circle |
-	circle := CircleMorph new.
-	circle extent: SPOCBoxedText height asPoint;
-		borderWidth: 0.
-	^ circle
+	self label: SPOCPlainText new.
+	self label contents: 'SPOCBoxedText';
+		color: SPOCStyle spotifyBlack.
+	self addMorph: self label.
 ]
 
 {
@@ -96,6 +88,18 @@ SPOCBoxedText >> borderCircleMorph [
 }
 SPOCBoxedText >> centerBox [
 	^ self submorphNamed: 'center'
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 6/6/2024 20:37'
+}
+SPOCBoxedText >> circleMorph [
+	| circle |
+	circle := CircleMorph new.
+	circle extent: SPOCBoxedText height asPoint;
+		borderWidth: 0.
+	^ circle
 ]
 
 {
@@ -111,32 +115,35 @@ SPOCBoxedText >> color: aColor [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:02'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:45'
 }
 SPOCBoxedText >> content [
+
 	^ content
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 13:27'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:45'
 }
 SPOCBoxedText >> contents [
-	^ contents
+
+	^ self label contents
 ]
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 5/28/2024 13:27'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:54'
 }
 SPOCBoxedText >> contents: aString [
+
 	self label contents: aString.
 	self updateAlignments.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/28/2024 13:28'
+	#'squeak_changestamp' : 'VE 6/10/2024 21:54'
 }
 SPOCBoxedText >> initialize [
 	super initialize.
@@ -146,38 +153,42 @@ SPOCBoxedText >> initialize [
 		attachCenterBox;
 		attachText;
 		contents: SPOCBoxedText defaultContent;
-		color: SPOCStyle spotifyWhite.
+		color: SPOCStyle spotifyWhite
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 21:01'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:46'
 }
 SPOCBoxedText >> label [
+
 	^ label
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 21:01'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:46'
 }
 SPOCBoxedText >> label: anObject [
+
 	label := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:15'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:46'
 }
 SPOCBoxedText >> leftBorderCircle [
+
 	^ self submorphNamed: 'left'
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/27/2024 20:15'
+	#'squeak_changestamp' : 'TL 6/23/2024 16:46'
 }
 SPOCBoxedText >> rightBorderCircle [
+
 	^ self submorphNamed: 'right'
 ]
 

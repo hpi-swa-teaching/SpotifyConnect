@@ -1,39 +1,43 @@
 Class {
 	#name : #SPOCApiDevices,
 	#superclass : #SPOCApiEndpoint,
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-API'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 21:01'
+	#category : #parameters,
+	#'squeak_changestamp' : 'TL 6/10/2024 03:41'
 }
 SPOCApiDevices >> endpoint [
+
 	^ 'v1/me/player/devices'
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 19:09'
+	#category : #parameters,
+	#'squeak_changestamp' : 'TL 6/10/2024 03:41'
 }
 SPOCApiDevices >> endpointMethod [
+
 	^ 'GET'
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 19:14'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'VK 6/3/2024 13:23'
 }
 SPOCApiDevices >> executeRequest: request withParams: aParameterDictionary [
+	
 	^ self client sendRequest: request
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 19:15'
+	#category : #response,
+	#'squeak_changestamp' : 'TL 6/10/2024 03:42'
 }
 SPOCApiDevices >> executeTest [
-	^'{
+
+	^ '{
 		  "devices": [
 		    {
 		      "id": "string",
@@ -46,32 +50,27 @@ SPOCApiDevices >> executeTest [
 		      "supports_volume": false
 		    }
 		  ]
-	}' readStream
+		}' readStream
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 5/25/2024 19:25'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/17/2024 20:17'
+}
+SPOCApiDevices >> getCurrentDevices [
+
+	^ self execute: Dictionary new
+]
+
+{
+	#category : #response,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:33'
 }
 SPOCApiDevices >> tinkerReponseContent: aContentStream [
 	
-	| content devices deviceItems |
+	| content devices |
 	content := Json readFrom: aContentStream readStream.
 	devices := OrderedCollection new.
-	deviceItems := content at: #devices.
-	deviceItems do: [ :deviceItem |
-		| device |
-		device := SPOCDevice new.
-		device
-			id: (deviceItem at: #id);
-			isActive: (deviceItem at: #is_active);
-			isPrivateSession: (deviceItem at: #is_private_session);
-			isRestricted: (deviceItem at: #is_restricted);
-			name: (deviceItem at: #name);
-			type: (deviceItem at: #type);
-			volume: (deviceItem at: #volume_percent);
-			supportsVolume: (deviceItem at: #supports_volume).
-		devices add: device 
-	].
+	(content at: #devices) do: [:aDevice | devices add: (self tinkerDevice: aDevice)].
 	^ devices
 ]
