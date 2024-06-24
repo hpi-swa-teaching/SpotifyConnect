@@ -2,53 +2,88 @@ Class {
 	#name : #SPOCTestUserLogin,
 	#superclass : #SPOCTestCaseWithAuth,
 	#instVars : [
-		'userLogin',
-		'app'
+		'app',
+		'userLogin'
 	],
 	#category : #'SpotifyConnect-Auth-Tests'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:43'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/24/2024 01:34'
 }
-SPOCTestUserLogin >> setUp [
+SPOCTestUserLogin >> app [
 
-	app := SPOCApp new.
-	app auth: self auth.
-	userLogin := SPOCUserLogin new app: app; yourself.
+	^ app
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:46'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/24/2024 01:34'
+}
+SPOCTestUserLogin >> app: anObject [
+
+	app := anObject
+]
+
+{
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/24/2024 03:21'
+}
+SPOCTestUserLogin >> setUp [
+
+	self app: (SPOCApp new auth: self auth);
+		userLogin: (SPOCUserLogin new app: self app)
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/24/2024 01:35'
 }
 SPOCTestUserLogin >> testChangingOnClickAction [
 	
 	| actionBefore actionNow |
-	actionBefore := userLogin button onClick.
-	userLogin toggleLogout.
-	actionNow := userLogin button onClick.
-	self assert: actionNow ~= actionBefore.
+	actionBefore := self userLogin button onClick.
+	self userLogin toggleLogout.
+	actionNow := self userLogin button onClick.
+	self assert: actionNow ~= actionBefore
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:48'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/24/2024 01:35'
 }
 SPOCTestUserLogin >> testToggleLogin [
 	
-	userLogin buttonLabel: 'something else'.
-	userLogin toggleLogin.
-	self assert: userLogin buttonLabel equals: 'Login'.
+	self userLogin buttonLabel: 'something else';
+		toggleLogin.
+	self assert: self userLogin buttonLabel equals: 'Login'
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:48'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/24/2024 01:36'
 }
 SPOCTestUserLogin >> testToggleLogout [
 	
-	userLogin toggleLogout.
-	self assert: userLogin buttonLabel equals: 'Logout'.
+	self userLogin toggleLogout.
+	self assert: self userLogin buttonLabel equals: 'Logout'
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/24/2024 01:34'
+}
+SPOCTestUserLogin >> userLogin [
+
+	^ userLogin
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 6/24/2024 01:34'
+}
+SPOCTestUserLogin >> userLogin: anObject [
+
+	userLogin := anObject
 ]

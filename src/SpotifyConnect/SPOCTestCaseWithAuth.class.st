@@ -45,13 +45,11 @@ SPOCTestCaseWithAuth >> auth [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/18/2024 23:24'
+	#'squeak_changestamp' : 'TL 6/24/2024 03:19'
 }
 SPOCTestCaseWithAuth >> getPlaybackState [
 
 	| apiEndpoint |
-	apiEndpoint := SPOCApiPlaybackState new
-		authorizer: self auth;
-		yourself.
+	apiEndpoint := SPOCApiPlaybackState new authorizer: self auth.
 	^ apiEndpoint getPlaybackState
 ]

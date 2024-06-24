@@ -6,11 +6,11 @@ Class {
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/10/2024 00:27'
+	#'squeak_changestamp' : 'TL 6/24/2024 03:18'
 }
 SPOCTestApiNext >> setUp [
 
-	self apiEndpoint: (SPOCApiNext new authorizer: self auth; yourself)
+	self apiEndpoint: (SPOCApiNext new authorizer: self auth)
 ]
 
 {
@@ -25,4 +25,18 @@ SPOCTestApiNext >> testApiNextExecute [
 		yourself.
 	res := self apiEndpoint execute: dict.	
 	self assert: (res response code = 204)
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/24/2024 02:08'
+}
+SPOCTestApiNext >> testSkipToNextOn [
+
+	| oldPlaybackState newPlaybackState |
+	oldPlaybackState := self getPlaybackState.
+	self apiEndpoint skipToNextOn: oldPlaybackState device id.
+	newPlaybackState := self getPlaybackState.
+	"self assert: newPlaybackState track id ~= oldPlaybackState track id."
+	self assert: newPlaybackState isPlaying
 ]

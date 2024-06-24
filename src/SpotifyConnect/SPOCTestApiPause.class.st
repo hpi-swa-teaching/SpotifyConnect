@@ -6,11 +6,11 @@ Class {
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/10/2024 00:28'
+	#'squeak_changestamp' : 'TL 6/24/2024 03:18'
 }
 SPOCTestApiPause >> setUp [
 
-	self apiEndpoint: (SPOCApiPause new authorizer: self auth; yourself)
+	self apiEndpoint: (SPOCApiPause new authorizer: self auth)
 ]
 
 {
@@ -28,4 +28,14 @@ SPOCTestApiPause >> testApiPauseExecute [
 	playbackState isPlaying
 		ifTrue: [self assert: (res response code = 204)]
 		ifFalse: [self assert: (res response code = 403)]
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/24/2024 01:53'
+}
+SPOCTestApiPause >> testPauseOn [
+
+	self apiEndpoint pauseOn: self getPlaybackState device id.
+	self assert: self getPlaybackState isPlaying not
 ]

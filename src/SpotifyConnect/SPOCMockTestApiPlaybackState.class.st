@@ -104,17 +104,16 @@ SPOCMockTestApiPlaybackState >> playbackState: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/12/2024 01:41'
+	#'squeak_changestamp' : 'TL 6/24/2024 02:48'
 }
 SPOCMockTestApiPlaybackState >> setUp [
 
-	self apiEndpoint: SPOCApiPlaybackState new;
+	self apiEndpoint: (SPOCApiPlaybackState new returnsTestContent: true);
 		setUpDevice;
 		setUpArtists;
 		setUpAlbum;
 		setUpTrack;
-		setUpPlaybackState.
-	self apiEndpoint returnsTestContent: true
+		setUpPlaybackState
 ]
 
 {
@@ -202,15 +201,12 @@ SPOCMockTestApiPlaybackState >> setUpTrack [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/12/2024 01:40'
+	#'squeak_changestamp' : 'TL 6/24/2024 03:06'
 }
 SPOCMockTestApiPlaybackState >> testMockApiPlaybackExecute [
 
-	| dict res |
-    	dict := Dictionary new
-		at: #additional_types put: 'track';
-		yourself.
-    	res := self apiEndpoint execute: dict.
+	| res |
+    	res := self apiEndpoint getPlaybackState.
 	self assert: (res equals: self playbackState)
 ]
 

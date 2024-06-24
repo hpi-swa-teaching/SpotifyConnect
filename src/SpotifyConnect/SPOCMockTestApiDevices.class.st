@@ -1,5 +1,5 @@
 Class {
-	#name : #SPOCMockTestApiDevice,
+	#name : #SPOCMockTestApiDevices,
 	#superclass : #TestCase,
 	#instVars : [
 		'apiEndpoint',
@@ -12,7 +12,7 @@ Class {
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/10/2024 04:55'
 }
-SPOCMockTestApiDevice >> apiEndpoint [
+SPOCMockTestApiDevices >> apiEndpoint [
 
 	^ apiEndpoint
 ]
@@ -21,7 +21,7 @@ SPOCMockTestApiDevice >> apiEndpoint [
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/10/2024 04:55'
 }
-SPOCMockTestApiDevice >> apiEndpoint: anObject [
+SPOCMockTestApiDevices >> apiEndpoint: anObject [
 
 	apiEndpoint := anObject
 ]
@@ -30,7 +30,7 @@ SPOCMockTestApiDevice >> apiEndpoint: anObject [
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/10/2024 04:55'
 }
-SPOCMockTestApiDevice >> device [
+SPOCMockTestApiDevices >> device [
 
 	^ device
 ]
@@ -39,18 +39,18 @@ SPOCMockTestApiDevice >> device [
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/10/2024 04:55'
 }
-SPOCMockTestApiDevice >> device: anObject [
+SPOCMockTestApiDevices >> device: anObject [
 
 	device := anObject
 ]
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/11/2024 11:55'
+	#'squeak_changestamp' : 'TL 6/24/2024 02:48'
 }
-SPOCMockTestApiDevice >> setUp [
+SPOCMockTestApiDevices >> setUp [
 
-	self apiEndpoint: SPOCApiDevices new;
+	self apiEndpoint: (SPOCApiDevices new returnsTestContent: true);
 		device: (SPOCDevice new
 			id: 'string';
 			name: 'Kitchen speaker';
@@ -58,19 +58,16 @@ SPOCMockTestApiDevice >> setUp [
 			type: 'computer';
 			volume: 59;
 			supportsVolume: false;
-			yourself).
-	self apiEndpoint returnsTestContent: true
+			yourself)
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:53'
+	#'squeak_changestamp' : 'TL 6/24/2024 03:07'
 }
-SPOCMockTestApiDevice >> testMockApiDeviceExecute [
+SPOCMockTestApiDevices >> testMockApiDeviceExecute [
 
-	| dict res resDevice |
-	dict := Dictionary new.
-	res := self apiEndpoint execute: dict.
-	resDevice := res first.
-	self assert: (self device equals: resDevice)
+	| res |
+	res := self apiEndpoint getCurrentDevices.
+	self assert: (res first equals: self device)
 ]

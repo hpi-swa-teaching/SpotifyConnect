@@ -5,10 +5,24 @@ Class {
 }
 
 {
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/24/2024 03:20'
+}
+SPOCTestApiPlaybackState >> setUp [
+
+	self apiEndpoint: (SPOCApiPlaybackState new authorizer: self auth)
+]
+
+{
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/11/2024 15:02'
+	#'squeak_changestamp' : 'TL 6/24/2024 03:23'
 }
 SPOCTestApiPlaybackState >> testApiPlaybackStateExecute [
 
-	self assert: (self getPlaybackState class = SPOCApiEndpointResult) not
+	| dict res |
+	dict := Dictionary new
+		at: #additional_types put: 'track';
+		yourself.
+	res := self apiEndpoint execute: dict.
+	self assert: res class ~= SPOCApiEndpointResult
 ]

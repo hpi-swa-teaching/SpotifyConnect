@@ -496,7 +496,7 @@ SPOCApiSearch >> executeTest [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 20:42'
+	#'squeak_changestamp' : 'TL 6/24/2024 03:16'
 }
 SPOCApiSearch >> search: aString withFilter: aFilter [
 

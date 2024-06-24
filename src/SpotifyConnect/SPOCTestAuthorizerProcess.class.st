@@ -5,7 +5,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #testing,
 	#'squeak_changestamp' : 'VE 6/20/2024 19:56'
 }
 SPOCTestAuthorizerProcess >> testAuthorizationUrl [
@@ -22,7 +22,7 @@ SPOCTestAuthorizerProcess >> testAuthorizationUrl [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #testing,
 	#'squeak_changestamp' : 'VE 6/20/2024 19:54'
 }
 SPOCTestAuthorizerProcess >> testCallbackEndpoint [
@@ -33,7 +33,7 @@ SPOCTestAuthorizerProcess >> testCallbackEndpoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #testing,
 	#'squeak_changestamp' : 'VE 6/20/2024 19:54'
 }
 SPOCTestAuthorizerProcess >> testCallbackErrors [
@@ -48,7 +48,7 @@ SPOCTestAuthorizerProcess >> testCallbackErrors [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #testing,
 	#'squeak_changestamp' : 'VE 6/20/2024 20:11'
 }
 SPOCTestAuthorizerProcess >> testStartAuthorization [

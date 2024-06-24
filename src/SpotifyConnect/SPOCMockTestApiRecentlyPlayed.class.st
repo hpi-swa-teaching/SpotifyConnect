@@ -55,11 +55,11 @@ SPOCMockTestApiRecentlyPlayed >> artists [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/12/2024 02:04'
+	#'squeak_changestamp' : 'TL 6/24/2024 02:48'
 }
 SPOCMockTestApiRecentlyPlayed >> setUp [
 
-	self apiEndpoint: SPOCApiRecentlyPlayed new;
+	self apiEndpoint: (SPOCApiRecentlyPlayed new returnsTestContent: true);
 		track: (SPOCTrack new
 			id: '45c4L5n0wh6KRv0SOf879S';
 			name: 'Morning Blue';
@@ -68,18 +68,17 @@ SPOCMockTestApiRecentlyPlayed >> setUp [
 			artists: self artists;
 			duration: 217;
 			trackNumber: 11;
-			yourself).
-	self apiEndpoint returnsTestContent: true
+			yourself)
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/12/2024 02:04'
+	#'squeak_changestamp' : 'TL 6/24/2024 03:04'
 }
 SPOCMockTestApiRecentlyPlayed >> testMockApiRecentlyPlayedExecute [
 
 	| res |
-	res := self apiEndpoint execute: (Dictionary new).
+	res := self apiEndpoint getRecentlyPlayed.
 	self assert: (res first equals: self track)
 ]
 

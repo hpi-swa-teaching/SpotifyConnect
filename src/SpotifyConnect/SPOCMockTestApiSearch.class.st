@@ -55,11 +55,11 @@ SPOCMockTestApiSearch >> artists [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/12/2024 02:05'
+	#'squeak_changestamp' : 'TL 6/24/2024 02:49'
 }
 SPOCMockTestApiSearch >> setUp [
 
-	self apiEndpoint: SPOCApiSearch new;
+	self apiEndpoint: (SPOCApiSearch new returnsTestContent: true);
 		track: (SPOCTrack new
 			id: '45c4L5n0wh6KRv0SOf879S';
 			name: 'Morning Blue';
@@ -68,18 +68,17 @@ SPOCMockTestApiSearch >> setUp [
 			artists: self artists;
 			duration: 217;
 			trackNumber: 11;
-			yourself).
-	self apiEndpoint returnsTestContent: true
+			yourself)
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/12/2024 02:06'
+	#'squeak_changestamp' : 'TL 6/24/2024 03:05'
 }
 SPOCMockTestApiSearch >> testMockApiSearchExecute [
 
 	| res |
-	res := self apiEndpoint execute: (Dictionary new).
+	res := self apiEndpoint search: 'Morning Blue' withFilter: 'track'.
 	self assert: (res first equals: self track)
 ]
 

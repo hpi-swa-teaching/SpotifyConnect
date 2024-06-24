@@ -6,11 +6,11 @@ Class {
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:44'
+	#'squeak_changestamp' : 'TL 6/24/2024 03:18'
 }
 SPOCTestApiPlay >> setUp [
 
-	self apiEndpoint: (SPOCApiPlay new authorizer: self auth; yourself)
+	self apiEndpoint: (SPOCApiPlay new authorizer: self auth)
 ]
 
 {
@@ -32,14 +32,13 @@ SPOCTestApiPlay >> testApiPlayExecute [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'MH 6/17/2024 11:38'
+	#'squeak_changestamp' : 'TL 6/24/2024 01:52'
 }
 SPOCTestApiPlay >> testApiPlayTrackExecute [
 
-	| dict res playbackState |
-	playbackState := self getPlaybackState.
+	| dict res |
 	dict := Dictionary new
-		at: #device_id put: playbackState device id;
+		at: #device_id put: self getPlaybackState device id;
 		at: #uris put: '"spotify:track:4PTG3Z6ehGkBFwjybzWkR8"';
 		yourself.
 	res := self apiEndpoint execute: dict.
@@ -48,14 +47,13 @@ SPOCTestApiPlay >> testApiPlayTrackExecute [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'MH 6/17/2024 11:38'
+	#'squeak_changestamp' : 'TL 6/24/2024 01:52'
 }
 SPOCTestApiPlay >> testApiPlayTrackwithAlbumExecute [
 
-	| dict res playbackState |
-	playbackState := self getPlaybackState.
+	| dict res |
 	dict := Dictionary new
-		at: #device_id put: playbackState device id;
+		at: #device_id put: self getPlaybackState device id;
 		at: #context_uri put: '"spotify:album:37i9dQZF1E4xipYPjRSrPX"';
 		at: #uris put: '"spotify:track:4PTG3Z6ehGkBFwjybzWkR8"';
 		yourself.
@@ -65,14 +63,13 @@ SPOCTestApiPlay >> testApiPlayTrackwithAlbumExecute [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'MH 6/17/2024 11:39'
+	#'squeak_changestamp' : 'TL 6/24/2024 01:52'
 }
 SPOCTestApiPlay >> testApiPlayTrackwithPlaylistExecute [
 
-	| dict res playbackState |
-	playbackState := self getPlaybackState.
+	| dict res |
 	dict := Dictionary new
-		at: #device_id put: playbackState device id;
+		at: #device_id put: self getPlaybackState device id;
 		at: #context_uri put: '"spotify:playlist:37i9dQZF1E4xipYPjRSrPX"';
 		at: #uris put: '"spotify:track:4PTG3Z6ehGkBFwjybzWkR8"';
 		yourself.

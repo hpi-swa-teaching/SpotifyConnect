@@ -5,38 +5,34 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/23/2024 18:40'
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/24/2024 03:21'
 }
 SPOCTestPlay >> setUp [
 
-	self apiEndpoint: (SPOCApiPlay new authorizer: self auth; yourself)
+	self apiEndpoint: (SPOCApiPlay new authorizer: self auth)
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/23/2024 23:58'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/24/2024 02:30'
 }
-SPOCTestPlay >> testApiPlayOn [
-
-	|playbackState instance|
-	playbackState := self getPlaybackState.
-	instance := apiEndpoint playOn: playbackState device id.
-	playbackState := self getPlaybackState.
-	self assert: playbackState isPlaying = true
-
+SPOCTestPlay >> testPlayOn [
+	
+	self apiEndpoint playOn: self getPlaybackState device id.
+	self assert: self getPlaybackState isPlaying
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'MH 6/24/2024 00:32'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/24/2024 02:30'
 }
-SPOCTestPlay >> testApiPlayTrack [
+SPOCTestPlay >> testPlayTrackOn [
 
-	|playbackState instance trackID|
+	| playbackState |
+	self apiEndpoint playTrack: '4PTG3Z6ehGkBFwjybzWkR8' on: self getPlaybackState device id.
 	playbackState := self getPlaybackState.
-	instance := apiEndpoint playTrack: '4PTG3Z6ehGkBFwjybzWkR8' on: playbackState device id.
-	playbackState := self getPlaybackState.
-	self assert: trackID = '4PTG3Z6ehGkBFwjybzWkR8'
+	self assert: playbackState track id = '4PTG3Z6ehGkBFwjybzWkR8'.
+	self assert: playbackState isPlaying
 
 ]
