@@ -113,15 +113,13 @@ SPOCSwitchDevice >> buildTypeText: aDevice [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 6/19/2024 15:52'
+	#'squeak_changestamp' : 'TL 6/24/2024 03:41'
 }
 SPOCSwitchDevice >> buttonClicked [
 
-	self app updatePlaybackState.
-	self disabled
-		ifFalse: [self isVisible
-			ifTrue: [self resultDisplay hide]
-			ifFalse: [self currentDevices]]
+	self isVisible
+		ifTrue: [self resultDisplay hide]
+		ifFalse: [self currentDevices]
 ]
 
 {
@@ -247,7 +245,7 @@ SPOCSwitchDevice >> resultDisplay: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 20:11'
+	#'squeak_changestamp' : 'TL 6/24/2024 03:50'
 }
 SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	
