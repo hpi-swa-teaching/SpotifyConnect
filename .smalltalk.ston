@@ -12,7 +12,3 @@ SmalltalkCISpec {
     #categories : [ 'SpotifyConnect-Tests', 'SpotifyConnect-Mock-Tests']
   }
 }
- : [ 'SpotifyConnect' ]
-    }
-  }
-}
