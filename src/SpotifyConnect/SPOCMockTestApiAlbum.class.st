@@ -58,12 +58,12 @@ SPOCMockTestApiAlbum >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/24/2024 03:08'
+	#'squeak_changestamp' : 'TL 6/24/2024 04:39'
 }
 SPOCMockTestApiAlbum >> testMockApiAlbumExecute [
 
 	| res |
-	res := self apiEndpoint execute: (Dictionary new).
+	res := self apiEndpoint execute: Dictionary new.
 	self assert: (res first equals: self track)
 ]
 

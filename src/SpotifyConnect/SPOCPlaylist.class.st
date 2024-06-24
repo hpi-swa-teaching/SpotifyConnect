@@ -9,27 +9,26 @@ Class {
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'RK 6/15/2024 18:15'
+	#'squeak_changestamp' : 'TL 6/24/2024 04:30'
 }
 SPOCPlaylist >> equals: aPlaylist [
 
 	^ (self id = aPlaylist id) 
 		& (self name = aPlaylist name)
+		& (self image equals: aPlaylist image)
+		& (self owner = aPlaylist owner)
 
 ]
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 6/16/2024 14:16'
+	#'squeak_changestamp' : 'TL 6/24/2024 05:18'
 }
 SPOCPlaylist >> onClick: anApp [
 
-	| apiEndpoint dict results |
-	dict := Dictionary new
-		at: #id put: self id;
-		yourself.
+	| apiEndpoint results |
 	apiEndpoint := SPOCApiPlaylist new authorizer: anApp auth.
-	results := (apiEndpoint execute: dict).
+	results := apiEndpoint getPlaylistWithID: self id.
 	anApp searchbar context: self id.
 	anApp resultList updateResults: results
 ]

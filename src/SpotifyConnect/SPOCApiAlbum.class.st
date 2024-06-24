@@ -158,6 +158,17 @@ SPOCApiAlbum >> executeTest [
 ]
 
 {
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/24/2024 05:21'
+}
+SPOCApiAlbum >> getAlbumWithID: aString [
+
+	^ self execute: (Dictionary new
+			at: #id put: aString;
+			yourself)
+]
+
+{
 	#category : #response,
 	#'squeak_changestamp' : 'RK 6/16/2024 14:06'
 }

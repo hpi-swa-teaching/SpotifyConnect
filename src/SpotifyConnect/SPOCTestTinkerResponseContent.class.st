@@ -7,6 +7,7 @@ Class {
 		'artist',
 		'device',
 		'playbackState',
+		'playlist',
 		'track'
 	],
 	#category : #'SpotifyConnect-Tests'
@@ -662,13 +663,13 @@ SPOCTestTinkerResponseContent >> playbackState: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/12/2024 01:41'
+	#'squeak_changestamp' : 'TL 6/24/2024 04:26'
 }
 SPOCTestTinkerResponseContent >> setUp [
 
 	self apiEndpoint: SPOCApiEndpoint new;
 		setUpDevice;
-		setUpArtists;
+		setUpArtist;
 		setUpAlbum;
 		setUpTrack;
 		setUpPlaybackState
@@ -692,9 +693,9 @@ SPOCTestTinkerResponseContent >> setUpAlbum [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/12/2024 01:41'
+	#'squeak_changestamp' : 'TL 6/24/2024 04:26'
 }
-SPOCTestTinkerResponseContent >> setUpArtists [
+SPOCTestTinkerResponseContent >> setUpArtist [
 
 	self artist: (SPOCArtist new
 			id: '1c3uso4iIeeX3P0bhKaQDq';

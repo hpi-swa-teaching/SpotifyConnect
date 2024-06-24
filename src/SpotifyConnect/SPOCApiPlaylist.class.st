@@ -32,7 +32,7 @@ SPOCApiPlaylist >> executeRequest: request withParams: aParameterDictionary [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'RK 6/16/2024 13:16'
+	#'squeak_changestamp' : 'TL 6/24/2024 05:26'
 }
 SPOCApiPlaylist >> executeTest [
 
@@ -1447,8 +1447,19 @@ SPOCApiPlaylist >> executeTest [
 ]
 
 {
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/24/2024 05:20'
+}
+SPOCApiPlaylist >> getPlaylistWithID: aString [
+
+	^ self execute: (Dictionary new
+			at: #id put: aString;
+			yourself)
+]
+
+{
 	#category : #response,
-	#'squeak_changestamp' : 'RK 6/16/2024 14:08'
+	#'squeak_changestamp' : 'TL 6/24/2024 05:32'
 }
 SPOCApiPlaylist >> tinkerReponseContent: aContentStream [
 	

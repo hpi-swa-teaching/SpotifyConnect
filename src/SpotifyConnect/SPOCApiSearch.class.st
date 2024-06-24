@@ -509,7 +509,7 @@ SPOCApiSearch >> search: aString withFilter: aFilter [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'RK 6/16/2024 14:15'
+	#'squeak_changestamp' : 'TL 6/24/2024 05:40'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	

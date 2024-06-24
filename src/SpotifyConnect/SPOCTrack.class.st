@@ -101,7 +101,7 @@ SPOCTrack >> equals: aTrack [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'VE 6/23/2024 20:52'
+	#'squeak_changestamp' : 'TL 6/24/2024 06:00'
 }
 SPOCTrack >> onClick: anApp [
 

@@ -104,13 +104,13 @@ SPOCMockTestApiPlaybackState >> playbackState: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/24/2024 02:48'
+	#'squeak_changestamp' : 'TL 6/24/2024 04:26'
 }
 SPOCMockTestApiPlaybackState >> setUp [
 
 	self apiEndpoint: (SPOCApiPlaybackState new returnsTestContent: true);
 		setUpDevice;
-		setUpArtists;
+		setUpArtist;
 		setUpAlbum;
 		setUpTrack;
 		setUpPlaybackState
@@ -133,9 +133,9 @@ SPOCMockTestApiPlaybackState >> setUpAlbum [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/12/2024 01:42'
+	#'squeak_changestamp' : 'TL 6/24/2024 04:26'
 }
-SPOCMockTestApiPlaybackState >> setUpArtists [
+SPOCMockTestApiPlaybackState >> setUpArtist [
 
 	self artists: {(SPOCArtist new
 			id: '1c3uso4iIeeX3P0bhKaQDq';

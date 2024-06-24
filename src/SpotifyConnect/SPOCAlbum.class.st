@@ -41,16 +41,13 @@ SPOCAlbum >> equals: anAlbum [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'TL 6/23/2024 17:17'
+	#'squeak_changestamp' : 'TL 6/24/2024 05:22'
 }
 SPOCAlbum >> onClick: anApp [
 
-	| apiEndpoint dict results |
-	dict := Dictionary new
-		at: #id put: self id;
-		yourself.
+	| apiEndpoint results |
 	apiEndpoint := SPOCApiAlbum new authorizer: anApp auth.
-	results := (apiEndpoint execute: dict).
+	results := apiEndpoint getAlbumWithID: self id.
 	results do: [ :aResult |
 		aResult artists: self artists;
 			image: self image;
