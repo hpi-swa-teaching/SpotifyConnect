@@ -40,7 +40,7 @@ Entweder im Git Browser dieses Repository clonen oder eine `.sar`-Datei via Drag
 
 ### App öffnen und Anmelden
 
-Unter ```Apps``` ist nun ```Spotify Connect``` verfügbar.
+Unter ```Apps``` ist nun ```Spotify Connect``` verfügbar und kann dort gestartet werden. Es ist wichtig, dass nur ein Squeak-Image geöffnet ist, wenn Spotify Connect verwendet werden will.
 
 Zum Benutzen der App in Squeak ist das Anmelden mit dem Spotify Account nötig, mit welchem auch die App im Spotify Developer Dashboard im ersten Schritt erstellt wurde. 
 
