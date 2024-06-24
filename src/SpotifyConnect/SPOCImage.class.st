@@ -1,59 +1,71 @@
 Class {
 	#name : #SPOCImage,
-	#superclass : #SPOCData,
+	#superclass : #ImageMorph,
 	#instVars : [
-		'url',
-		'height',
-		'width',
-		'morph'
+		'url'
 	],
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-UI'
 }
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:21'
+	#category : #constructor,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:14'
 }
-SPOCImage >> height [
-	^ height
+SPOCImage class >> newWithPath: aString [
+	
+	| form |
+	form := (GitAssetLoader for: SPOCStyle gitRepoName) loadForm: aString.
+	form := form scaledToSize: (SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin)).
+	^ SPOCImage new
+		image: form;
+		yourself
+]
+
+{
+	#category : #constructor,
+	#'squeak_changestamp' : 'TL 6/10/2024 05:14'
+}
+SPOCImage class >> newWithUrl: aString [
+	
+	^ SPOCImage new
+		url: aString;
+		image: (Form fromBinaryStream: (HTTPSocket httpGet: aString));
+		yourself
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/23/2024 16:28'
+}
+SPOCImage >> equals: anImage [
+
+	^ (self url = anImage url)
+]
+
+{
+	#category : #formatting,
+	#'squeak_changestamp' : 'RK 6/9/2024 00:08'
+}
+SPOCImage >> scaledTo: aNumber [
+	
+	url ifNil: [^ self].
+	^ SPOCImage new image: ((Form fromBinaryStream: (HTTPSocket httpGet: url)) scaledToSize: aNumber)
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:22'
-}
-SPOCImage >> height: aNumber [
-	height := aNumber
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:21'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:59'
 }
 SPOCImage >> url [
+
 	^ url
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:22'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:59'
 }
 SPOCImage >> url: aString [
+
 	url := aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:21'
-}
-SPOCImage >> width [
-	^ width
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:22'
-}
-SPOCImage >> width: aNumber [
-	width := aNumber
 ]

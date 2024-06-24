@@ -1,126 +1,25 @@
 Class {
 	#name : #SPOCArtist,
-	#superclass : #SPOCData,
-	#instVars : [
-		'id',
-		'name',
-		'followers',
-		'genres',
-		'href',
-		'image',
-		'popularity'
-	],
+	#superclass : #SPOCDataPiece,
 	#category : #SpotifyConnect
 }
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:18'
+	#category : #actions,
+	#'squeak_changestamp' : 'RK 6/7/2024 11:19'
 }
-SPOCArtist >> followers [
-	^ followers
+SPOCArtist >> clickAction [
+
+	^ ["To do: show artist page"]
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:19'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:10'
 }
-SPOCArtist >> followers: aNumber [
-	followers := aNumber
-]
+SPOCArtist >> equals: anArtist [
 
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:18'
-}
-SPOCArtist >> genres [
-	^ genres
-]
+	^ (self id = anArtist id) 
+		& (self name = anArtist name)
 
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:19'
-}
-SPOCArtist >> genres: aSet [
-	genres := aSet
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:18'
-}
-SPOCArtist >> href [
-	^ href
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:19'
-}
-SPOCArtist >> href: aString [
-	href := aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:18'
-}
-SPOCArtist >> id [
-	^ id
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:20'
-}
-SPOCArtist >> id: aString [
-	id := aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:18'
-}
-SPOCArtist >> image [
-	^ image
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:20'
-}
-SPOCArtist >> image: anImage [
-	image := anImage
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:18'
-}
-SPOCArtist >> name [
-	^ name
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:20'
-}
-SPOCArtist >> name: aString [
-	name := aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:18'
-}
-SPOCArtist >> popularity [
-	^ popularity
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:20'
-}
-SPOCArtist >> popularity: aNumber [
-	popularity := aNumber
 ]

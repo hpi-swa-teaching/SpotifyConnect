@@ -1,11 +1,11 @@
 Class {
 	#name : #SPOCApiSearch,
 	#superclass : #SPOCApiEndpoint,
-	#category : #SpotifyConnect
+	#category : #'SpotifyConnect-API'
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'RK 5/16/2024 19:01'
 }
 SPOCApiSearch >> endpoint [
@@ -13,7 +13,7 @@ SPOCApiSearch >> endpoint [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #parameters,
 	#'squeak_changestamp' : 'RK 5/16/2024 18:51'
 }
 SPOCApiSearch >> endpointMethod [
@@ -21,7 +21,7 @@ SPOCApiSearch >> endpointMethod [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #'api-call',
 	#'squeak_changestamp' : 'RK 5/16/2024 23:05'
 }
 SPOCApiSearch >> executeRequest: request withParams: aParameterDictionary [
@@ -31,7 +31,7 @@ SPOCApiSearch >> executeRequest: request withParams: aParameterDictionary [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #response,
 	#'squeak_changestamp' : 'RK 5/16/2024 19:05'
 }
 SPOCApiSearch >> executeTest [
@@ -495,44 +495,47 @@ SPOCApiSearch >> executeTest [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 5/17/2024 09:51'
+	#category : #'api-call',
+	#'squeak_changestamp' : 'TL 6/24/2024 03:16'
+}
+SPOCApiSearch >> search: aString withFilter: aFilter [
+
+	^ self execute: (Dictionary new
+			at: #input put: aString;
+			at: #type put: aFilter;
+			at: #limit put: SPOCStyle resultListLimit;
+			yourself)
+]
+
+{
+	#category : #response,
+	#'squeak_changestamp' : 'TL 6/24/2024 05:40'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
-	| content tracks trackItems |
+	| content results index |
 	content := Json readFrom: aContentStream readStream.
-	Transcript showln: content.
-	tracks := OrderedCollection new.
-	trackItems := (content at: #tracks) at: #items.
-	trackItems do: [ :trackItem |
-		| artists artistItems album albumItem track |
-		artists := OrderedCollection new.
-		artistItems := (trackItem at: #artists).
-		artistItems do: [ :artistItem |
-			| artist |
-			artist := SPOCArtist new.
-			artist
-				id: (artistItem at: #id);
-				name: (artistItem at: #name).
-			artists add: artist			
-		].
-		album := SPOCAlbum new.
-		albumItem := (trackItem at: #album).
-		album
-			id: (albumItem at: #id);
-			name: (albumItem at: #name).
-		track := SPOCTrack new.
-		track
-			id: (trackItem at: #id);
-			name: (trackItem at: #name);
-			artists: artists;
-			album: album;
-			duration: (trackItem at: #duration_ms) // 1000;
-			explicit: (trackItem at: #explicit);
-			popularity: (trackItem at: #popularity);
-			trackNumber: (trackItem at: #track_number).
-		tracks add: track
-	].
-	^ tracks
+	results := OrderedCollection new.
+	index := 0.
+	(content includesKey: 'tracks')
+		ifTrue: [((content at: #tracks) at: #items) do: [:aTrack |
+				| track |
+				track := (self tinkerTrack: aTrack) offset: index.
+				index := index + 1.
+				results add: track].
+			^ results].
+	(content includesKey: 'albums')
+		ifTrue: [((content at: #albums) at: #items) do: [ :anAlbum | 
+			| track |
+				track := (self tinkerAlbum: anAlbum) offset: index.
+				index := index + 1.
+				results add: track].
+			^ results].
+	(content includesKey: 'playlists')
+		ifTrue: [((content at: #playlists) at: #items) do: [ :aPlaylist | 
+			| track |
+				track := (self tinkerPlaylist: aPlaylist) offset: index.
+				index := index + 1.
+				results add: track].
+			^ results]
 ]

@@ -4,56 +4,50 @@ Class {
 	#instVars : [
 		'authorizer'
 	],
-	#category : #'SpotifyConnect-Tests'
+	#category : #'SpotifyConnect-Auth-Tests'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 18:50'
+	#category : #setup,
+	#'squeak_changestamp' : 'VE 6/20/2024 19:50'
 }
 SPOCTestAuthorizer >> setUp [
+
 	authorizer := SPOCAuthorizer new.
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 18:50'
+	#category : #testing,
+	#'squeak_changestamp' : 'VE 6/20/2024 19:49'
 }
-SPOCTestAuthorizer >> testCallbackEndpoint [
+SPOCTestAuthorizer >> testOnAuthorizationSuccessCallbacks [
 	
-	| response |
-	authorizer startAuthorization.
-	response := WebClient httpGet: SPOCAuthorizer redirectUri.
-	self assert: (response code = 404) not.
+	| tmp |
+	tmp := 0.
+	authorizer registerSuccessCallback: [tmp := 1].
+	authorizer callSuccessCallbacks.
+	self assert: tmp = 1
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 18:50'
-}
-SPOCTestAuthorizer >> testCallbackErrors [
-	
-	| response |
-	authorizer startAuthorization.
-	response := WebClient httpGet: (SPOCAuthorizer redirectUri, '?code=123').
-	self assert: response code = 400.
-	response := WebClient httpGet: (SPOCAuthorizer redirectUri, '?state=123').
-	self assert: response code = 400.
-	response := WebClient httpGet: (SPOCAuthorizer redirectUri, '?error=error').
-	self assert: response code = 500.
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 18:50'
+	#category : #testing,
+	#'squeak_changestamp' : 'VE 6/20/2024 19:49'
 }
 SPOCTestAuthorizer >> testRandomState [
 	
 	| lastRandomState |
-	self assert: authorizer randomState = nil.
 	authorizer nextRandomState.
 	self assert: authorizer randomState isString.
 	lastRandomState := authorizer randomState.
 	authorizer nextRandomState.
 	self assert: (lastRandomState = authorizer randomState) not
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/10/2024 23:17'
+}
+SPOCTestAuthorizer >> testResponseAsset [
+	
+	self assert: ((GitAssetLoader for: 'SpotifyConnect') loadString: 'assets/successResponse.html') notNil
 ]

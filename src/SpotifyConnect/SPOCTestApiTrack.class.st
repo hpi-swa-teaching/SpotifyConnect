@@ -1,47 +1,28 @@
 Class {
 	#name : #SPOCTestApiTrack,
-	#superclass : #SPOCTestApiEndpoint,
-	#category : #'SpotifyConnect-Tests'
+	#superclass : #SPOCTestCaseWithAuth,
+	#category : #'SpotifyConnect-Auth-Tests'
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 18:57'
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 6/24/2024 03:21'
 }
 SPOCTestApiTrack >> setUp [
-	apiEndpoint := SPOCApiTrack new.
-	apiEndpoint returnsTestContent: true.
+
+	self apiEndpoint: (SPOCApiTrack new authorizer: self auth)
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 18:08'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/24/2024 02:06'
 }
-SPOCTestApiTrack >> testExecute [
+SPOCTestApiTrack >> testApiTrackExecute [
+
 	| dict res |
-	dict := Dictionary new.
-	dict at: 'trackId' put: '11dFghVXANMlKmJXsNCbNl'.
-	res := apiEndpoint execute: dict.
-	
-	self assert: res class = JsonObject
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 18:57'
-}
-SPOCTestApiTrack >> testRefreshAccessTokenFails [
-	
-	| authorizer dict |
-	authorizer := SPOCAuthorizer new.
-	authorizer refreshToken: '123'.
-	authorizer accessToken: '123'.
-	
-	apiEndpoint authorizer: authorizer.
-	apiEndpoint returnsTestContent: false.
-	
-	dict := Dictionary new.
-	dict at: 'trackId' put: '11dFghVXANMlKmJXsNCbNl'.
-	self should: [apiEndpoint execute: dict] raise: Error.
-	
+	dict := Dictionary new
+		at: #trackId put: '4PTG3Z6ehGkBFwjybzWkR8';
+		yourself.
+	res := self apiEndpoint execute: dict.
+	self assert: res notNil
 ]

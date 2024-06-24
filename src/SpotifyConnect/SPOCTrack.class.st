@@ -1,42 +1,48 @@
 Class {
 	#name : #SPOCTrack,
-	#superclass : #Object,
+	#superclass : #SPOCDataPiece,
 	#instVars : [
-		'id',
-		'name'
+		'album',
+		'artists',
+		'duration',
+		'trackNumber'
 	],
 	#category : #SpotifyConnect
 }
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:55'
 }
 SPOCTrack >> album [
+
 	^ album
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:55'
 }
 SPOCTrack >> album: anAlbum [
+
 	album := anAlbum
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:55'
 }
 SPOCTrack >> artists [
+
 	^ artists
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:29'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
 }
 SPOCTrack >> artists: aOrderedCollection [
+
 	artists := aOrderedCollection
 ]
 
@@ -52,102 +58,84 @@ SPOCTrack >> duration [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:29'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
 }
 SPOCTrack >> duration: aNumber [
+
 	duration := aNumber
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/16/2024 23:45'
+	#category : #formatting,
+	#'squeak_changestamp' : 'TL 6/23/2024 14:57'
 }
 SPOCTrack >> durationAsFormattedTime [
 	"Converts milliseconds to 'mm:ss'"
 	
-	| min sec time |
-	min := duration // 60.
-	sec := duration \\ 60.
-	time := min asString, ':', sec asString.
+	| filler min sec time |
+	min := self duration // 60.
+	sec := self duration \\ 60.
+	sec < 10 
+		ifTrue: [filler := '0']
+		ifFalse: [filler := ''].
+	time := min asString, ':', filler, sec asString.
 	^ time
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/23/2024 17:19'
 }
-SPOCTrack >> explicit [
-	^ explicit
+SPOCTrack >> equals: aTrack [
+
+	^ (self id = aTrack id) 
+		& (self name = aTrack name) 
+		& (self image equals: aTrack image)
+		& (self album
+			ifNil: [aTrack album = nil]
+			ifNotNil: [self album equals: aTrack album])
+		& (self artistsEqual: aTrack artists)
+ 		& (self duration = aTrack duration)
+ 		& (self trackNumber = aTrack trackNumber)
+]
+
+{
+	#category : #actions,
+	#'squeak_changestamp' : 'TL 6/24/2024 06:00'
+}
+SPOCTrack >> onClick: anApp [
+
+	| filter context |
+	filter := anApp searchbar filter.
+	context := '"spotify:', filter, ':'.
+	filter = 'track' 
+			ifTrue: [SPOCApiPlay new 
+				authorizer: anApp auth;
+				playTrack: self id on: anApp player deviceID;
+				yourself].
+	(filter = 'album' or: filter = 'playlist') ifTrue: [context := context, anApp searchbar context].
+	context := context, '"'.
+	SPOCApiPlay new 
+		authorizer: anApp auth;
+		playTrack: self id withContext: context on: anApp player deviceID;
+		yourself.
+	anApp updatePlaybackState
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:29'
-}
-SPOCTrack >> explicit: aBoolean [
-	explicit := aBoolean
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/13/2024 17:08'
-}
-SPOCTrack >> id [
-	^ id
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/13/2024 17:08'
-}
-SPOCTrack >> id: anObject [
-	id := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/13/2024 17:08'
-}
-SPOCTrack >> name [
-	^ name
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/13/2024 17:08'
-}
-SPOCTrack >> name: anObject [
-	name := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
-}
-SPOCTrack >> popularity [
-	^ popularity
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:30'
-}
-SPOCTrack >> popularity: aNumber [
-	popularity := aNumber
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:28'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:57'
 }
 SPOCTrack >> trackNumber [
+
 	^ trackNumber
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:30'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:57'
 }
 SPOCTrack >> trackNumber: aNumber [
+
 	trackNumber := aNumber
 ]

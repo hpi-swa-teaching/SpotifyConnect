@@ -1,194 +1,75 @@
 Class {
 	#name : #SPOCAlbum,
-	#superclass : #SPOCData,
+	#superclass : #SPOCDataPiece,
 	#instVars : [
-		'id',
-		'name',
-		'albumType',
-		'totalTracks',
-		'image',
-		'releaseDate',
-		'releaseDatePrecision',
-		'type',
 		'artists',
-		'genres',
-		'popularity'
+		'totalTracks'
 	],
 	#category : #SpotifyConnect
 }
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:41'
-}
-SPOCAlbum >> albumType [
-	^ albumType
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:43'
-}
-SPOCAlbum >> albumType: aString [
-	albumType := aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:45'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:52'
 }
 SPOCAlbum >> artists [
+
 	^ artists
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:58'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:52'
 }
 SPOCAlbum >> artists: anOrderedCollection [
+
 	artists := anOrderedCollection
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:45'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 6/12/2024 01:20'
 }
-SPOCAlbum >> genres [
-	^ genres
+SPOCAlbum >> equals: anAlbum [
+
+	^ (self id = anAlbum id) 
+		& (self name = anAlbum name) 
+		& (self image equals: anAlbum image)
+ 		& (self artistsEqual: anAlbum artists)
+		& (self totalTracks = anAlbum totalTracks)
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'TL 6/24/2024 05:22'
+}
+SPOCAlbum >> onClick: anApp [
+
+	| apiEndpoint results |
+	apiEndpoint := SPOCApiAlbum new authorizer: anApp auth.
+	results := apiEndpoint getAlbumWithID: self id.
+	results do: [ :aResult |
+		aResult artists: self artists;
+			image: self image;
+			yourself].
+	anApp searchbar context: self id.
+	anApp resultList updateResults: results
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:45'
-}
-SPOCAlbum >> genres: anObject [
-	genres := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:42'
-}
-SPOCAlbum >> id [
-	^ id
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:53'
-}
-SPOCAlbum >> id: aString [
-	id := aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:14'
-}
-SPOCAlbum >> image [
-	^ image
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 16:15'
-}
-SPOCAlbum >> image: anImage [
-	image := anImage
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:42'
-}
-SPOCAlbum >> name [
-	^ name
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:55'
-}
-SPOCAlbum >> name: aString [
-	name := aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:46'
-}
-SPOCAlbum >> popularity [
-	^ popularity
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:46'
-}
-SPOCAlbum >> popularity: anObject [
-	popularity := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:44'
-}
-SPOCAlbum >> releaseDate [
-	^ releaseDate
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:56'
-}
-SPOCAlbum >> releaseDate: aString [
-	releaseDate := aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:44'
-}
-SPOCAlbum >> releaseDatePrecision [
-	^ releaseDatePrecision
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:56'
-}
-SPOCAlbum >> releaseDatePrecision: aString [
-	releaseDatePrecision := aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:41'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
 SPOCAlbum >> totalTracks [
+
 	^ totalTracks
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:47'
+	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
 SPOCAlbum >> totalTracks: aNumber [
+
 	totalTracks := aNumber
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:44'
-}
-SPOCAlbum >> type [
-	^ type
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 5/15/2024 14:57'
-}
-SPOCAlbum >> type: aString [
-	type := aString
 ]

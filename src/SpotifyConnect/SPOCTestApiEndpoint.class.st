@@ -8,18 +8,21 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 12:42'
+	#category : #setup,
+	#'squeak_changestamp' : 'VE 6/23/2024 18:22'
 }
 SPOCTestApiEndpoint >> setUp [
-	apiEndpoint := SPOCApiEndpoint new.
+
+	apiEndpoint := SPOCApiEndpoint new
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 5/15/2024 12:49'
+	#category : #testing,
+	#'squeak_changestamp' : 'VE 6/23/2024 18:23'
 }
 SPOCTestApiEndpoint >> testNoAuthenticator [
 	
-	self should: [apiEndpoint execute: (Dictionary new)] raise: Error.
+	| res |
+	res := apiEndpoint execute: (Dictionary new).
+	self assert: (res isKindOf: SPOCApiEndpointResult)
 ]
