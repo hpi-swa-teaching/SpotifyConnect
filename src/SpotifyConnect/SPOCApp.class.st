@@ -189,7 +189,7 @@ SPOCApp >> centerPanelContent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VK 6/19/2024 15:49'
+	#'squeak_changestamp' : 'VE 6/26/2024 13:59'
 }
 SPOCApp >> componentsForUpdatingPlaybackState [
 
@@ -225,11 +225,12 @@ SPOCApp >> devicePopUp [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/18/2024 23:24'
+	#'squeak_changestamp' : 'VE 6/26/2024 14:24'
 }
 SPOCApp >> getPlaybackState [
 
 	| apiEndpoint |
+	(Delay forSeconds: 0.6) wait.
 	apiEndpoint := SPOCApiPlaybackState new
 		authorizer: self auth;
 		yourself.
@@ -492,7 +493,7 @@ SPOCApp >> topPanelContent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/19/2024 01:26'
+	#'squeak_changestamp' : 'VE 6/26/2024 14:25'
 }
 SPOCApp >> updateComponentsWith: aState andDisabled: aBoolean [
 
