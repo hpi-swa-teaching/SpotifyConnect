@@ -87,15 +87,16 @@ SPOCVolumeSlider >> button: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/19/2024 00:24'
+	#'squeak_changestamp' : 'VE 6/26/2024 14:54'
 }
 SPOCVolumeSlider >> changeVolumeTo: aVolume [
-
+	
+	self volume: aVolume.
 	SPOCApiVolume new
 		authorizer: self app auth;
-		changeVolumeTo: aVolume on: self deviceID;
-		yourself.
-	self app updatePlaybackState
+		changeVolumeTo: aVolume on: self deviceID.
+	self slider value: self volume.
+	self updateSpeakerIcon
 ]
 
 {
@@ -209,7 +210,7 @@ SPOCVolumeSlider >> supportsVolume: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/19/2024 01:21'
+	#'squeak_changestamp' : 'VE 6/26/2024 14:54'
 }
 SPOCVolumeSlider >> switchSpeakerState [
 
@@ -218,8 +219,7 @@ SPOCVolumeSlider >> switchSpeakerState [
 			changeVolumeTo: self storeVolume]
 		ifFalse: [self storeVolume: self volume;
 			volume: 0;
-			changeVolumeTo: self volume].
-	self updateSpeakerIcon
+			changeVolumeTo: self volume]
 ]
 
 {
@@ -269,13 +269,14 @@ SPOCVolumeSlider >> volume: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/19/2024 00:46'
+	#'squeak_changestamp' : 'VE 6/26/2024 14:56'
 }
 SPOCVolumeSlider >> volumeClicked: aBlock [
 
-	self app updatePlaybackState.
+	"self app updatePlaybackState."
 	self disabled
 		ifFalse: [self supportsVolume
-				ifTrue: aBlock
-				ifFalse: [self app volumePopUp]]
+				ifTrue: [aBlock value]
+				ifFalse: [self app volumePopUp]].
+	self updateSpeakerIcon.
 ]
