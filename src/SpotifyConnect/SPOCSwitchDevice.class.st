@@ -183,7 +183,7 @@ SPOCSwitchDevice >> hideResults [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/17/2024 11:17'
+	#'squeak_changestamp' : 'VE 7/1/2024 14:06'
 }
 SPOCSwitchDevice >> initialize [
 
@@ -195,6 +195,7 @@ SPOCSwitchDevice >> initialize [
 		buildResultDisplay;
 		attachButton;
 		extendFully;
+		hResizing: #spaceFill;
 		yourself
 ]
 
