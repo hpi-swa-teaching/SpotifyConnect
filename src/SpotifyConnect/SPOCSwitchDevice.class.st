@@ -124,14 +124,15 @@ SPOCSwitchDevice >> buttonClicked [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 20:29'
+	#'squeak_changestamp' : 'VE 7/2/2024 18:55'
 }
 SPOCSwitchDevice >> currentDevices [
 
 	| apiEndpoint |
+	self isDisabled ifTrue: [self showPopUp. ^ self].
 	apiEndpoint := SPOCApiDevices new
-			authorizer: self app auth;
-			yourself.
+		authorizer: self app auth;
+		yourself.
 	self devices: (apiEndpoint getCurrentDevices).
 	self updateResultDisplay: self devices
 ]
@@ -246,22 +247,15 @@ SPOCSwitchDevice >> resultDisplay: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/24/2024 03:50'
+	#'squeak_changestamp' : 'VE 7/2/2024 19:05'
 }
 SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	
 	SPOCApiSwitchDevice new
 		authorizer: self app auth;
-		switchDeviceTo: aDevice;
-		yourself.
+		switchDeviceTo: aDevice.
+	self app updatePlaybackState.
 	self hideResults
-]
-
-{
-	#category : #updating,
-	#'squeak_changestamp' : 'VK 6/19/2024 15:51'
-}
-SPOCSwitchDevice >> updatePlaybackState: aState [
 ]
 
 {

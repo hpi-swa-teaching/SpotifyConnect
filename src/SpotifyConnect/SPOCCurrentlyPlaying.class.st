@@ -54,6 +54,24 @@ SPOCCurrentlyPlaying >> item: aSPOCResultListItem [
 ]
 
 {
+	#category : #updating,
+	#'squeak_changestamp' : 'VE 7/2/2024 18:28'
+}
+SPOCCurrentlyPlaying >> needsActiveDevice [
+	
+	^ true
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'VE 7/2/2024 18:40'
+}
+SPOCCurrentlyPlaying >> needsLogin [
+	
+	^ true
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/9/2024 11:47'
 }
@@ -73,11 +91,12 @@ SPOCCurrentlyPlaying >> track: aSPOCTrack [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/12/2024 03:11'
+	#'squeak_changestamp' : 'VE 7/2/2024 18:30'
 }
 SPOCCurrentlyPlaying >> updatePlaybackState: aState [
 
-	self disabled
+	super updatePlaybackState: aState.
+	self isDisabled
 		ifFalse: [self track: aState track.
 			self item changeItemTo: self track]
 ]

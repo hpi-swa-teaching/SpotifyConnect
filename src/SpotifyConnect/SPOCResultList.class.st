@@ -88,6 +88,25 @@ SPOCResultList >> items: anOrderedCollection [
 ]
 
 {
+	#category : #updating,
+	#'squeak_changestamp' : 'VE 7/2/2024 19:14'
+}
+SPOCResultList >> needsActiveDevice [
+	
+	^ true
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'VE 7/2/2024 19:14'
+}
+SPOCResultList >> onItemClicked: anItem [
+	
+	(self isDisabled and: (anItem dataPiece isKindOf: SPOCTrack)) ifTrue: [self showPopUp. ^ self].
+	anItem dataPiece onClick: self app
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:01'
 }
@@ -162,7 +181,7 @@ SPOCResultList >> titleMorph: aSPOCBoldText [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/24/2024 03:59'
+	#'squeak_changestamp' : 'VE 7/2/2024 19:08'
 }
 SPOCResultList >> updateItems [
 	
@@ -170,26 +189,11 @@ SPOCResultList >> updateItems [
 	self results do: [:aResult |
 		| item clickable |
 		item := SPOCResultListItem newWith: aResult.
-		clickable := SPOCClickable newUsing: item onClick: [:anEvent |
-			item dataPiece class = SPOCTrack
-				ifTrue: [self app updatePlaybackState.
-					self disabled
-						ifFalse: [item dataPiece onClick: self app.
-							self app updatePlaybackState]]
-				ifFalse: [item dataPiece onClick: self app]].
+		clickable := SPOCClickable newUsing: item onClick: [:anEvent | self onItemClicked: item].
 		clickable layoutPolicy: TableLayout new;
 			hResizing: #spaceFill;
 			vResizing: #shrinkWrap.
 		self items add: clickable]
-]
-
-{
-	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/12/2024 04:13'
-}
-SPOCResultList >> updatePlaybackState: aState [
-
-	
 ]
 
 {

@@ -189,11 +189,11 @@ SPOCApp >> centerPanelContent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 6/26/2024 13:59'
+	#'squeak_changestamp' : 'VE 7/2/2024 18:50'
 }
 SPOCApp >> componentsForUpdatingPlaybackState [
 
-	^ {currentlyPlaying. player. resultList. volumeSlider. recentlyPlayed. switchDevice}
+	^ {currentlyPlaying. player. resultList. volumeSlider. recentlyPlayed. switchDevice. searchbar. refresh}
 ]
 
 {
@@ -262,12 +262,40 @@ SPOCApp >> initialize [
 ]
 
 {
+	#category : #updating,
+	#'squeak_changestamp' : 'VE 7/2/2024 18:43'
+}
+SPOCApp >> isCurrentDeviceActive [
+
+	^ (self getPlaybackState class = SPOCApiEndpointResult) not
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'VE 7/2/2024 18:00'
+}
+SPOCApp >> isUserAuthorized [
+
+	^ self auth isAuthorized
+]
+
+{
 	#category : #'pop-ups',
 	#'squeak_changestamp' : 'TL 6/10/2024 19:30'
 }
 SPOCApp >> loginPopUp [
 
 	UIManager inform: 'Please log in!'
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'VE 7/2/2024 19:23'
+}
+SPOCApp >> logout [
+
+	self auth logout.
+	self componentsForUpdatingPlaybackState do: [:aComponent | aComponent disable]
 ]
 
 {
@@ -282,6 +310,16 @@ SPOCApp >> open [
 	a borderColor: SPOCStyle spotifyBlack.
 	a paneColor: SPOCStyle spotifyBlack.
 	^ a
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'VE 7/2/2024 18:04'
+}
+SPOCApp >> openPopUpFor: aUiComponent [
+
+	(self isUserAuthorized and: aUiComponent needsLogin) ifTrue: [self loginPopUp. ^ self].
+	(self isCurrentDeviceActive and: aUiComponent needsActiveDevice) ifTrue: [self devicePopUp. ^ self]
 ]
 
 {
@@ -446,13 +484,12 @@ SPOCApp >> setUpSwitchDevice [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/19/2024 01:26'
+	#'squeak_changestamp' : 'VE 7/2/2024 18:51'
 }
 SPOCApp >> setUpUserLogin [
 
 	self userLogin: (SPOCUserLogin new app: self).
-	self auth registerSuccessCallback: [self userLogin toggleLogout.
-		self updateComponentsWith: self getPlaybackState andDisabled: true]
+	self auth registerSuccessCallback: [self userLogin toggleLogout. self updatePlaybackState]
 
 
 ]
@@ -464,6 +501,16 @@ SPOCApp >> setUpUserLogin [
 SPOCApp >> setUpVolumeSlider [
 
 	self volumeSlider: (SPOCVolumeSlider new app: self)
+]
+
+{
+	#category : #'pop-ups',
+	#'squeak_changestamp' : 'VE 7/2/2024 18:40'
+}
+SPOCApp >> showPopUpFor: aUiComponent [
+	
+	(self isUserAuthorized not and: aUiComponent needsLogin) ifTrue: [self loginPopUp. ^ self].
+	(self isCurrentDeviceActive not and: aUiComponent needsActiveDevice) ifTrue: [self devicePopUp. ^ self]
 ]
 
 {
@@ -493,28 +540,26 @@ SPOCApp >> topPanelContent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 6/26/2024 14:25'
+	#'squeak_changestamp' : 'VE 7/2/2024 18:07'
 }
-SPOCApp >> updateComponentsWith: aState andDisabled: aBoolean [
+SPOCApp >> updateComponentsPlaybackState [
 
-	self componentsForUpdatingPlaybackState do: [:aComponent | 
-		aComponent disabled: aBoolean.
-		aComponent updatePlaybackState: aState]
+	| playbackState |
+	playbackState := self getPlaybackState.
+	self componentsForUpdatingPlaybackState do: [:aComponent |
+		aComponent updatePlaybackState: playbackState]
 ]
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/19/2024 01:26'
+	#'squeak_changestamp' : 'VE 7/2/2024 18:06'
 }
 SPOCApp >> updatePlaybackState [
 
 	| playbackState |
-	self auth isAuthorized
-		ifTrue: [playbackState := self getPlaybackState.
-			playbackState class = SPOCApiEndpointResult
-				ifTrue: [self devicePopUp]
-				ifFalse: [self updateComponentsWith: playbackState andDisabled: false]]
-		ifFalse: [self loginPopUp]
+	playbackState := self getPlaybackState.
+	self componentsForUpdatingPlaybackState do: [:aComponent |
+		aComponent updatePlaybackState: playbackState]
 ]
 
 {

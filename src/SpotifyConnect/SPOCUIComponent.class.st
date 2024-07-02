@@ -3,7 +3,7 @@ Class {
 	#superclass : #Morph,
 	#instVars : [
 		'app',
-		'disabled'
+		'isDisabled'
 	],
 	#category : #'SpotifyConnect-UI'
 }
@@ -28,20 +28,20 @@ SPOCUIComponent >> app: aSPOCApp [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 17:59'
+	#'squeak_changestamp' : 'VE 7/2/2024 18:09'
 }
-SPOCUIComponent >> disabled [
-
-	^ disabled
+SPOCUIComponent >> disable [
+	
+	self isDisabled: true
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/16/2024 18:05'
+	#'squeak_changestamp' : 'VE 7/2/2024 18:09'
 }
-SPOCUIComponent >> disabled: aBoolean [
-
-	disabled := aBoolean
+SPOCUIComponent >> enable [
+	
+	self isDisabled: false
 ]
 
 {
@@ -56,7 +56,7 @@ SPOCUIComponent >> extendFully [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/12/2024 03:08'
+	#'squeak_changestamp' : 'VE 7/2/2024 17:53'
 }
 SPOCUIComponent >> initialize [
 
@@ -64,14 +64,59 @@ SPOCUIComponent >> initialize [
 	
 	self hResizing: #rigid; 
 		vResizing: #rigid;
-		disabled: true
+		isDisabled: true
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 7/2/2024 17:53'
+}
+SPOCUIComponent >> isDisabled [
+
+	^ isDisabled
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 7/2/2024 17:53'
+}
+SPOCUIComponent >> isDisabled: aBoolean [
+
+	isDisabled := aBoolean
 ]
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 18:29'
+	#'squeak_changestamp' : 'VE 7/2/2024 17:55'
+}
+SPOCUIComponent >> needsActiveDevice [
+	^ false
+]
+
+{
+	#category : #actions,
+	#'squeak_changestamp' : 'VE 7/2/2024 17:54'
+}
+SPOCUIComponent >> needsLogin [
+
+	^ true
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 7/2/2024 18:35'
+}
+SPOCUIComponent >> showPopUp [
+
+	self app showPopUpFor: self
+]
+
+{
+	#category : #actions,
+	#'squeak_changestamp' : 'VE 7/2/2024 18:36'
 }
 SPOCUIComponent >> updatePlaybackState: aState [
 
-	^ self subclassResponsibility
+	self isDisabled: (((self needsLogin and: self app isUserAuthorized) or: self needsLogin not) and:
+		((self needsActiveDevice and: aState class ~= SPOCApiEndpointResult) or: self needsActiveDevice not)) not
 ]

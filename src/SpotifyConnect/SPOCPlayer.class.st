@@ -145,19 +145,17 @@ SPOCPlayer >> deviceID: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'VE 6/26/2024 14:36'
+	#'squeak_changestamp' : 'VE 7/2/2024 18:56'
 }
 SPOCPlayer >> executeButtonFunction: anIcon [
 	
-	self app updatePlaybackState.
-	self disabled
-		ifFalse: [(anIcon == self previousIcon)
-				ifTrue: [self skipToPrevious].
-			(anIcon == self playPauseIcon)
-				ifTrue: [self switchPlaybackState].
-			(anIcon == self nextIcon)
-				ifTrue: [self skipToNext]].
-	"self app updatePlaybackState."
+	self isDisabled ifTrue: [self showPopUp. ^ self].
+	(anIcon == self previousIcon)
+		ifTrue: [self skipToPrevious].
+	(anIcon == self playPauseIcon)
+		ifTrue: [self switchPlaybackState].
+	(anIcon == self nextIcon)
+		ifTrue: [self skipToNext]
 
 ]
 
@@ -197,6 +195,24 @@ SPOCPlayer >> isPlaying [
 SPOCPlayer >> isPlaying: anObject [
 
 	isPlaying := anObject
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 7/2/2024 18:41'
+}
+SPOCPlayer >> needsActiveDevice [
+	
+	^ true
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 7/2/2024 18:41'
+}
+SPOCPlayer >> needsLogin [
+	
+	^ true
 ]
 
 {
@@ -356,11 +372,12 @@ SPOCPlayer >> updatePlayPauseIcon [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/12/2024 03:12'
+	#'squeak_changestamp' : 'VE 7/2/2024 18:31'
 }
 SPOCPlayer >> updatePlaybackState: aState [
 
-	self disabled
+	super updatePlaybackState: aState.
+	self isDisabled
 		ifFalse: [self deviceID: aState device id;
 			isPlaying: aState isPlaying;
 			updatePlayPauseIcon]

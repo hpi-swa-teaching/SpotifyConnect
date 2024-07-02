@@ -156,7 +156,7 @@ SPOCSearchbar >> filter: aString [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/15/2024 17:04'
+	#'squeak_changestamp' : 'VE 7/2/2024 17:53'
 }
 SPOCSearchbar >> initialize [
 
@@ -166,7 +166,7 @@ SPOCSearchbar >> initialize [
 		items: OrderedCollection new;
 		results: OrderedCollection new;
 		buildSearchbar;
-		disabled: true;
+		isDisabled: true;
 		filter: 'track';
 		extendFully.
 	(self submorphNamed: 'track') wrappee color: SPOCStyle spotifyGreen
@@ -210,6 +210,16 @@ SPOCSearchbar >> items: anOrderedCollection [
 ]
 
 {
+	#category : #building,
+	#'squeak_changestamp' : 'VE 7/2/2024 18:46'
+}
+SPOCSearchbar >> needsLogin [
+	
+	^ true
+
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
 }
@@ -238,14 +248,16 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/24/2024 03:46'
+	#'squeak_changestamp' : 'VE 7/2/2024 18:57'
 }
 SPOCSearchbar >> search: aString [
 
 	| apiEndpoint |
+	self isDisabled ifTrue: [self showPopUp. ^ self].
 	apiEndpoint := SPOCApiSearch new authorizer: self app auth.
 	self input: aString;
 		results: (apiEndpoint search: (self sanitizeInput: aString) withFilter: self filter).
 	self app resultList updateResults: self results;
 		title: 'Your Results'
+		
 ]

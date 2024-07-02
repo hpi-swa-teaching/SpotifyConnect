@@ -19,7 +19,7 @@ SPOCRefresh class >> refreshIconPath [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/18/2024 23:51'
+	#'squeak_changestamp' : 'VE 7/2/2024 18:46'
 }
 SPOCRefresh >> attachButton [
 
@@ -28,7 +28,7 @@ SPOCRefresh >> attachButton [
 			 	yourself);
 		button: (SPOCClickable
 				newUsing: self icon
-				onClick: [:anEvent | self app updatePlaybackState]);
+				onClick: [:anEvent | self refresh]);
 		addMorph: self button
 ]
 
@@ -78,4 +78,33 @@ SPOCRefresh >> initialize [
 
 	self color: Color transparent;
 		attachButton
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 7/2/2024 18:44'
+}
+SPOCRefresh >> needsActiveDevice [
+	
+	^ false
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 7/2/2024 18:44'
+}
+SPOCRefresh >> needsLogin [
+	
+	^ true
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 7/2/2024 18:57'
+}
+SPOCRefresh >> refresh [
+
+	self isDisabled
+		ifTrue: [self showPopUp]
+		ifFalse: [self app updatePlaybackState]
 ]

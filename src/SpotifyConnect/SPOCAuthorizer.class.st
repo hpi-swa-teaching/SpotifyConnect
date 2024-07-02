@@ -4,13 +4,13 @@ Class {
 	#instVars : [
 		'randomState',
 		'accessToken',
-		'refreshToken',
 		'isAuthorized',
 		'successCallbacks'
 	],
 	#classVars : [
 		'ClientId',
-		'ClientSecret'
+		'ClientSecret',
+		'RefreshToken'
 	],
 	#category : #SpotifyConnect
 }
@@ -69,6 +69,24 @@ SPOCAuthorizer class >> redirectRoute [
 SPOCAuthorizer class >> redirectUri [
 
 	^ 'http://localhost:', self redirectPort asString, self redirectRoute
+]
+
+{
+	#category : #credentials,
+	#'squeak_changestamp' : 'VE 7/2/2024 19:38'
+}
+SPOCAuthorizer class >> refreshToken [
+
+	^ RefreshToken
+]
+
+{
+	#category : #credentials,
+	#'squeak_changestamp' : 'VE 7/2/2024 19:37'
+}
+SPOCAuthorizer class >> refreshToken: aToken [
+	
+	RefreshToken := aToken
 ]
 
 {
@@ -177,6 +195,15 @@ SPOCAuthorizer >> callback: aRequest [
 ]
 
 {
+	#category : #'api-call',
+	#'squeak_changestamp' : 'VE 7/2/2024 19:32'
+}
+SPOCAuthorizer >> canRefresh [
+	
+	^ self refreshToken isNil not.
+]
+
+{
 	#category : #initialization,
 	#'squeak_changestamp' : 'TL 6/10/2024 03:51'
 }
@@ -211,11 +238,12 @@ SPOCAuthorizer >> isAuthorized: aBoolean [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'VE 5/28/2024 21:37'
+	#'squeak_changestamp' : 'VE 7/2/2024 19:25'
 }
 SPOCAuthorizer >> logout [
 
-	self accessToken: nil
+	self accessToken: nil.
+	self isAuthorized: false
 ]
 
 {
@@ -229,13 +257,13 @@ SPOCAuthorizer >> nextRandomState [
 
 {
 	#category : #authorization,
-	#'squeak_changestamp' : 'VE 6/20/2024 15:01'
+	#'squeak_changestamp' : 'VE 7/2/2024 19:41'
 }
 SPOCAuthorizer >> openUrlIfPossible: aUrl in: aWebBrowser [
 	
 	aWebBrowser
 		ifNotNil: [WebBrowser default openOnUrl: aUrl]
-		ifNil: [UIManager inform: 'Open a web browser and paste: ', String cr, aUrl.].
+		ifNil: [UIManager inform: 'Paste this url (allready in your clipboard) to a web browser: ', String cr, String cr, aUrl.].
 ]
 
 {
@@ -272,7 +300,7 @@ SPOCAuthorizer >> randomString: aLength [
 
 {
 	#category : #authorization,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:52'
+	#'squeak_changestamp' : 'VE 7/2/2024 19:32'
 }
 SPOCAuthorizer >> refreshAccessToken [
 
@@ -281,7 +309,8 @@ SPOCAuthorizer >> refreshAccessToken [
 	content := self spotifyRefreshApiContent.
 	response := self requestSpotifyApiEndpoint: content.
 	response isSuccess
-		ifFalse: [^ self error: response status].
+		ifFalse: [self refreshToken: nil. 
+			self startAuthorization].
 	responseContent := Json readFrom: response content readStream.
 	self accessToken: (responseContent at: 'access_token').
 	self refreshToken: (responseContent at: 'refresh_token'
@@ -291,20 +320,20 @@ SPOCAuthorizer >> refreshAccessToken [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'OW 5/22/2024 18:36'
+	#'squeak_changestamp' : 'VE 7/2/2024 19:36'
 }
 SPOCAuthorizer >> refreshToken [
 
-	^ refreshToken
+	^ self class refreshToken
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'OW 5/22/2024 18:36'
+	#'squeak_changestamp' : 'VE 7/2/2024 19:37'
 }
 SPOCAuthorizer >> refreshToken: aToken [
 
-	refreshToken := aToken
+	self class refreshToken: aToken
 ]
 
 {
@@ -384,11 +413,14 @@ SPOCAuthorizer >> spotifyRefreshApiContent [
 
 {
 	#category : #authorization,
-	#'squeak_changestamp' : 'VE 6/20/2024 15:01'
+	#'squeak_changestamp' : 'VE 7/2/2024 19:34'
 }
 SPOCAuthorizer >> startAuthorization [
 
 	| url |
+	self canRefresh ifTrue: [self refreshAccessToken. 
+		self isAuthorized ifTrue: [self callSuccessCallbacks].
+		^ self].
 	self setupCallbackService.
 	url := self buildAuthorizationUrl.
 	Clipboard default primitiveClipboardText: url.	

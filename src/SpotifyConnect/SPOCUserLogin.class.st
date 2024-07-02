@@ -74,6 +74,24 @@ SPOCUserLogin >> initialize [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'VE 7/2/2024 19:12'
+}
+SPOCUserLogin >> needsActiveDevice [
+
+	^ false
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 7/2/2024 19:12'
+}
+SPOCUserLogin >> needsLogin [
+	
+	^ false
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/10/2024 04:34'
 }
 SPOCUserLogin >> text [
@@ -102,12 +120,12 @@ SPOCUserLogin >> toggleLogin [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:33'
+	#'squeak_changestamp' : 'VE 7/2/2024 19:22'
 }
 SPOCUserLogin >> toggleLogout [
 	
 	self buttonLabel: 'Logout'.
 	self button onClick: [:anEvent |
-			self app auth logout.
+			self app logout.
 			self toggleLogin]
 ]

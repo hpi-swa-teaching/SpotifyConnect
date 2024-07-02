@@ -155,6 +155,24 @@ SPOCVolumeSlider >> initialize [
 ]
 
 {
+	#category : #updating,
+	#'squeak_changestamp' : 'VE 7/2/2024 19:12'
+}
+SPOCVolumeSlider >> needsActiveDevice [
+	
+	^ true
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'VE 7/2/2024 19:12'
+}
+SPOCVolumeSlider >> needsLogin [
+	
+	^ true
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/10/2024 03:19'
 }
@@ -224,11 +242,12 @@ SPOCVolumeSlider >> switchSpeakerState [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/19/2024 01:22'
+	#'squeak_changestamp' : 'VE 7/2/2024 19:00'
 }
 SPOCVolumeSlider >> updatePlaybackState: aState [
 
-	self disabled
+	super updatePlaybackState: aState.
+	self isDisabled
 		ifFalse: [self volume = 0
 					ifFalse: [self storeVolume: self volume].
 			self deviceID: aState device id;
@@ -269,14 +288,13 @@ SPOCVolumeSlider >> volume: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'VE 6/26/2024 14:56'
+	#'squeak_changestamp' : 'VE 7/2/2024 19:03'
 }
 SPOCVolumeSlider >> volumeClicked: aBlock [
 
-	"self app updatePlaybackState."
-	self disabled
-		ifFalse: [self supportsVolume
-				ifTrue: [aBlock value]
-				ifFalse: [self app volumePopUp]].
+	self isDisabled ifTrue: [self showPopUp. ^ self].
+	self supportsVolume
+		ifTrue: aBlock
+		ifFalse: [self app volumePopUp. self slider value: self volume].
 	self updateSpeakerIcon.
 ]

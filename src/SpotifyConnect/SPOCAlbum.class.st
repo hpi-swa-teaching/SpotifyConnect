@@ -41,7 +41,7 @@ SPOCAlbum >> equals: anAlbum [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'VE 6/26/2024 17:26'
+	#'squeak_changestamp' : 'VE 7/2/2024 19:09'
 }
 SPOCAlbum >> onClick: anApp [
 
