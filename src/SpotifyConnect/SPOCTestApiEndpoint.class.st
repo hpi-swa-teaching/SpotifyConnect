@@ -1,10 +1,14 @@
+"
+Test the API endpoint.
+"
 Class {
 	#name : #SPOCTestApiEndpoint,
 	#superclass : #TestCase,
 	#instVars : [
 		'apiEndpoint'
 	],
-	#category : #'SpotifyConnect-Tests'
+	#category : #'SpotifyConnect-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:25'
 }
 
 {

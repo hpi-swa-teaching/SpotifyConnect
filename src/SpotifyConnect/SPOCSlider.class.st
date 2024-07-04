@@ -1,3 +1,6 @@
+"
+A slider to adjust a value in the UI.
+"
 Class {
 	#name : #SPOCSlider,
 	#superclass : #Morph,
@@ -7,7 +10,8 @@ Class {
 		'innerBarHoverColor',
 		'onValueChanged'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:30'
 }
 
 {

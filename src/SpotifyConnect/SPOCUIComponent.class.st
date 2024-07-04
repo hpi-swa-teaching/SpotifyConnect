@@ -1,3 +1,6 @@
+"
+Abstract class for all UI components.
+"
 Class {
 	#name : #SPOCUIComponent,
 	#superclass : #Morph,
@@ -5,7 +8,8 @@ Class {
 		'app',
 		'isDisabled'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:30'
 }
 
 {

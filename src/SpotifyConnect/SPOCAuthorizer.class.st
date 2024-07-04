@@ -1,3 +1,6 @@
+"
+I am responsibile for the OAuth2 authorization workflow.
+"
 Class {
 	#name : #SPOCAuthorizer,
 	#superclass : #Object,
@@ -12,7 +15,8 @@ Class {
 		'ClientSecret',
 		'RefreshToken'
 	],
-	#category : #SpotifyConnect
+	#category : #SpotifyConnect,
+	#'squeak_changestamp' : 'OW 7/4/2024 12:28'
 }
 
 {

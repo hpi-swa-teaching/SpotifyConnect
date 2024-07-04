@@ -1,3 +1,6 @@
+"
+I hold the result and the possible error of API requests.
+"
 Class {
 	#name : #SPOCApiEndpointResult,
 	#superclass : #Object,
@@ -6,7 +9,8 @@ Class {
 		'error',
 		'response'
 	],
-	#category : #'SpotifyConnect-Utils'
+	#category : #'SpotifyConnect-Utils',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:31'
 }
 
 {

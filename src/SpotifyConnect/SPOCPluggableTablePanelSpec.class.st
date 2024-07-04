@@ -1,10 +1,14 @@
+"
+A pluggable panel spec for the tool builder that uses the table layout.
+"
 Class {
 	#name : #SPOCPluggableTablePanelSpec,
 	#superclass : #PluggablePanelSpec,
 	#instVars : [
 		'tableLayoutProperties'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
 }
 
 {

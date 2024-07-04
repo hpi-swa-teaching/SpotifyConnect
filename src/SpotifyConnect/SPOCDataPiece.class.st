@@ -1,3 +1,6 @@
+"
+I am a superclass holding all pieces of data that Spotify Connect encounters.
+"
 Class {
 	#name : #SPOCDataPiece,
 	#superclass : #Object,
@@ -7,7 +10,8 @@ Class {
 		'name',
 		'offset'
 	],
-	#category : #SpotifyConnect
+	#category : #SpotifyConnect,
+	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
 }
 
 {

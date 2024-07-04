@@ -1,3 +1,6 @@
+"
+A text in a bounding box morph with rounded sides.
+"
 Class {
 	#name : #SPOCBoxedText,
 	#superclass : #Morph,
@@ -6,7 +9,8 @@ Class {
 		'content',
 		'contents'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
 }
 
 {

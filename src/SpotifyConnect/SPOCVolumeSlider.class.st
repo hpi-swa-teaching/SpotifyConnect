@@ -1,3 +1,6 @@
+"
+concrete class for the volume slider
+"
 Class {
 	#name : #SPOCVolumeSlider,
 	#superclass : #SPOCUIComponent,
@@ -10,7 +13,8 @@ Class {
 		'supportsVolume',
 		'volume'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:14'
 }
 
 {

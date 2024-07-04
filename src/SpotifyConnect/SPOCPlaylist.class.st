@@ -1,10 +1,14 @@
+"
+I represent a Spotify playlist
+"
 Class {
 	#name : #SPOCPlaylist,
 	#superclass : #SPOCDataPiece,
 	#instVars : [
 		'owner'
 	],
-	#category : #SpotifyConnect
+	#category : #SpotifyConnect,
+	#'squeak_changestamp' : 'OW 7/4/2024 11:53'
 }
 
 {

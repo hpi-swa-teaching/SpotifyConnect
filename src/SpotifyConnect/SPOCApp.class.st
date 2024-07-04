@@ -1,3 +1,6 @@
+"
+I build the Spotify Connect app window and hold all of its components.
+"
 Class {
 	#name : #SPOCApp,
 	#superclass : #Model,
@@ -13,7 +16,8 @@ Class {
 		'userLogin',
 		'volumeSlider'
 	],
-	#category : #SpotifyConnect
+	#category : #SpotifyConnect,
+	#'squeak_changestamp' : 'OW 7/4/2024 12:28'
 }
 
 {

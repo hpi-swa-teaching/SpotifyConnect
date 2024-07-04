@@ -1,7 +1,11 @@
+"
+Baseline class
+"
 Class {
 	#name : #BaselineOfSpotifyConnect,
 	#superclass : #BaselineOf,
-	#category : #BaselineOfSpotifyConnect
+	#category : #BaselineOfSpotifyConnect,
+	#'squeak_changestamp' : 'OW 7/4/2024 12:32'
 }
 
 {

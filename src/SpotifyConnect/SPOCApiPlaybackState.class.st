@@ -1,7 +1,11 @@
+"
+concrete API endpoint for the current playback state
+"
 Class {
 	#name : #SPOCApiPlaybackState,
 	#superclass : #SPOCApiEndpoint,
-	#category : #'SpotifyConnect-API'
+	#category : #'SpotifyConnect-API',
+	#'squeak_changestamp' : 'OW 7/4/2024 11:59'
 }
 
 {

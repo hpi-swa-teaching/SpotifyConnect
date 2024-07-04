@@ -1,10 +1,14 @@
+"
+I hold a valid authorizer so test can make real API calls.
+"
 Class {
 	#name : #SPOCAuthTestResource,
 	#superclass : #TestResource,
 	#instVars : [
 		'auth'
 	],
-	#category : #'SpotifyConnect-Auth-Tests'
+	#category : #'SpotifyConnect-Auth-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:19'
 }
 
 {

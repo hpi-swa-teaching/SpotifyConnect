@@ -1,7 +1,11 @@
+"
+concrete API endpoint for the history of played songs
+"
 Class {
 	#name : #SPOCApiRecentlyPlayed,
 	#superclass : #SPOCApiEndpoint,
-	#category : #'SpotifyConnect-API'
+	#category : #'SpotifyConnect-API',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:00'
 }
 
 {

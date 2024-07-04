@@ -1,3 +1,6 @@
+"
+concrete class for the device switching button
+"
 Class {
 	#name : #SPOCSwitchDevice,
 	#superclass : #SPOCUIComponent,
@@ -7,7 +10,8 @@ Class {
 		'itemBackground',
 		'resultDisplay'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:14'
 }
 
 {

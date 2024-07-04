@@ -1,3 +1,6 @@
+"
+A scrollable panel holding items to display.
+"
 Class {
 	#name : #SPOCScrollablePanel,
 	#superclass : #Morph,
@@ -7,7 +10,8 @@ Class {
 		'spec',
 		'panel'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:30'
 }
 
 {

@@ -1,7 +1,11 @@
+"
+A textmorph with plain text
+"
 Class {
 	#name : #SPOCPlainText,
 	#superclass : #SPOCText,
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:09'
 }
 
 {

@@ -1,3 +1,6 @@
+"
+I represent an album
+"
 Class {
 	#name : #SPOCAlbum,
 	#superclass : #SPOCDataPiece,
@@ -5,7 +8,8 @@ Class {
 		'artists',
 		'totalTracks'
 	],
-	#category : #SpotifyConnect
+	#category : #SpotifyConnect,
+	#'squeak_changestamp' : 'OW 7/4/2024 11:53'
 }
 
 {

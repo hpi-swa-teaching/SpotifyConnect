@@ -1,3 +1,6 @@
+"
+concrete class for the currently playing panel
+"
 Class {
 	#name : #SPOCCurrentlyPlaying,
 	#superclass : #SPOCUIComponent,
@@ -5,7 +8,8 @@ Class {
 		'track',
 		'item'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:10'
 }
 
 {

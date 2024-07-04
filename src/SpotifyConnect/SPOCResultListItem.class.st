@@ -1,3 +1,6 @@
+"
+An item containing information of the search results.
+"
 Class {
 	#name : #SPOCResultListItem,
 	#superclass : #Morph,
@@ -10,7 +13,8 @@ Class {
 		'tertiaryText',
 		'hasTertiaryText'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:30'
 }
 
 {

@@ -1,3 +1,6 @@
+"
+I represent a device that spotify can connect to.
+"
 Class {
 	#name : #SPOCDevice,
 	#superclass : #Object,
@@ -9,7 +12,8 @@ Class {
 		'type',
 		'volume'
 	],
-	#category : #SpotifyConnect
+	#category : #SpotifyConnect,
+	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
 }
 
 {

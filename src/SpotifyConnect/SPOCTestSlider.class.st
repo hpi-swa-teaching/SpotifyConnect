@@ -1,10 +1,14 @@
+"
+Test the slider and its actions.
+"
 Class {
 	#name : #SPOCTestSlider,
 	#superclass : #TestCase,
 	#instVars : [
 		'slider'
 	],
-	#category : #'SpotifyConnect-Tests'
+	#category : #'SpotifyConnect-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:27'
 }
 
 {

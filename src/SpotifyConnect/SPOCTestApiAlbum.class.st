@@ -1,7 +1,11 @@
+"
+Test the API request of an album.
+"
 Class {
 	#name : #SPOCTestApiAlbum,
 	#superclass : #SPOCTestCaseWithAuth,
-	#category : #'SpotifyConnect-Auth-Tests'
+	#category : #'SpotifyConnect-Auth-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:19'
 }
 
 {

@@ -1,3 +1,6 @@
+"
+A decorator to make an morphic UI component clickabe.
+"
 Class {
 	#name : #SPOCClickable,
 	#superclass : #Morph,
@@ -5,7 +8,8 @@ Class {
 		'wrappee',
 		'onClick'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
 }
 
 {

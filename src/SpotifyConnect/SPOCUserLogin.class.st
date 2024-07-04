@@ -1,3 +1,6 @@
+"
+concrete class for the login/logout button component
+"
 Class {
 	#name : #SPOCUserLogin,
 	#superclass : #SPOCUIComponent,
@@ -6,7 +9,8 @@ Class {
 		'button',
 		'buttonLabel'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:14'
 }
 
 {

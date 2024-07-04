@@ -1,10 +1,14 @@
+"
+Testcases that use the authorizer ressource
+"
 Class {
 	#name : #SPOCTestCaseWithAuth,
 	#superclass : #TestCase,
 	#instVars : [
 		'apiEndpoint'
 	],
-	#category : #'SpotifyConnect-Auth-Tests'
+	#category : #'SpotifyConnect-Auth-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:17'
 }
 
 {

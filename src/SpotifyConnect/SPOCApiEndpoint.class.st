@@ -1,3 +1,6 @@
+"
+I represent the abstract endpoint for the Spotify API.
+"
 Class {
 	#name : #SPOCApiEndpoint,
 	#superclass : #Object,
@@ -5,7 +8,8 @@ Class {
 		'authorizer',
 		'returnsTestContent'
 	],
-	#category : #'SpotifyConnect-API'
+	#category : #'SpotifyConnect-API',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
 }
 
 {

@@ -1,3 +1,6 @@
+"
+concrete class for the resultList 
+"
 Class {
 	#name : #SPOCResultList,
 	#superclass : #SPOCUIComponent,
@@ -8,7 +11,8 @@ Class {
 		'items',
 		'scrollablePanel'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:12'
 }
 
 {

@@ -1,3 +1,6 @@
+"
+I represent a track (song)
+"
 Class {
 	#name : #SPOCTrack,
 	#superclass : #SPOCDataPiece,
@@ -7,7 +10,8 @@ Class {
 		'duration',
 		'trackNumber'
 	],
-	#category : #SpotifyConnect
+	#category : #SpotifyConnect,
+	#'squeak_changestamp' : 'OW 7/4/2024 11:54'
 }
 
 {

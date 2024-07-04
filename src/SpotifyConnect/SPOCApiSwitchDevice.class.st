@@ -1,7 +1,11 @@
+"
+concrete API endpoint for switching the playing device
+"
 Class {
 	#name : #SPOCApiSwitchDevice,
 	#superclass : #SPOCApiEndpoint,
-	#category : #'SpotifyConnect-API'
+	#category : #'SpotifyConnect-API',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:01'
 }
 
 {

@@ -1,3 +1,6 @@
+"
+concrete class for the song history list
+"
 Class {
 	#name : #SPOCRecentlyPlayed,
 	#superclass : #SPOCUIComponent,
@@ -5,7 +8,8 @@ Class {
 		'tracks',
 		'trackItems'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:12'
 }
 
 {

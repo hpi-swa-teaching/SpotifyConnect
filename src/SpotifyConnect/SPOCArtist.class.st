@@ -1,7 +1,11 @@
+"
+I represent an artist
+"
 Class {
 	#name : #SPOCArtist,
 	#superclass : #SPOCDataPiece,
-	#category : #SpotifyConnect
+	#category : #SpotifyConnect,
+	#'squeak_changestamp' : 'OW 7/4/2024 11:53'
 }
 
 {

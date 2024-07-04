@@ -1,7 +1,11 @@
+"
+This class holds values for the style of the app.
+"
 Class {
 	#name : #SPOCStyle,
 	#superclass : #Object,
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:30'
 }
 
 {

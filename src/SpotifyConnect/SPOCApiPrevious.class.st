@@ -1,7 +1,11 @@
+"
+concrete API endpoint for skipping back to the previous song
+"
 Class {
 	#name : #SPOCApiPrevious,
 	#superclass : #SPOCApiEndpoint,
-	#category : #'SpotifyConnect-API'
+	#category : #'SpotifyConnect-API',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:00'
 }
 
 {

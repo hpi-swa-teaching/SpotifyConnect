@@ -1,3 +1,6 @@
+"
+I hold the current playback state of the spotify player.
+"
 Class {
 	#name : #SPOCPlaybackState,
 	#superclass : #Object,
@@ -7,7 +10,8 @@ Class {
 		'progress',
 		'track'
 	],
-	#category : #SpotifyConnect
+	#category : #SpotifyConnect,
+	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
 }
 
 {

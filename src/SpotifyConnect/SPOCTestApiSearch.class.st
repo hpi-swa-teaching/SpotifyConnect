@@ -1,7 +1,11 @@
+"
+Test the API request to search.
+"
 Class {
 	#name : #SPOCTestApiSearch,
 	#superclass : #SPOCTestCaseWithAuth,
-	#category : #'SpotifyConnect-Auth-Tests'
+	#category : #'SpotifyConnect-Auth-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:23'
 }
 
 {

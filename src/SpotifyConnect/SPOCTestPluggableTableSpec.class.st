@@ -1,3 +1,6 @@
+"
+Test correct laout with pluggable table spec.
+"
 Class {
 	#name : #SPOCTestPluggableTableSpec,
 	#superclass : #TestCase,
@@ -5,7 +8,8 @@ Class {
 		'widget',
 		'spec'
 	],
-	#category : #'SpotifyConnect-Tests'
+	#category : #'SpotifyConnect-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:27'
 }
 
 {

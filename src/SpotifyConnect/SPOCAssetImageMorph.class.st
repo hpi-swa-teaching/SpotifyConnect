@@ -1,7 +1,11 @@
+"
+A morph with an image from an asset.
+"
 Class {
 	#name : #SPOCAssetImageMorph,
 	#superclass : #ImageMorph,
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
 }
 
 {

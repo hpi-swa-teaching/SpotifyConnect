@@ -1,3 +1,6 @@
+"
+concrete class for the refresh button
+"
 Class {
 	#name : #SPOCRefresh,
 	#superclass : #SPOCUIComponent,
@@ -5,7 +8,8 @@ Class {
 		'button',
 		'icon'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:12'
 }
 
 {

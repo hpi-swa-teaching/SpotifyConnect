@@ -1,3 +1,6 @@
+"
+Test the API request of the current playback state with mock data.
+"
 Class {
 	#name : #SPOCMockTestApiPlaybackState,
 	#superclass : #TestCase,
@@ -9,7 +12,8 @@ Class {
 		'playbackState',
 		'track'
 	],
-	#category : #'SpotifyConnect-Mock-Tests'
+	#category : #'SpotifyConnect-Mock-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:24'
 }
 
 {

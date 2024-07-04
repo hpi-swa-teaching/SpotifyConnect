@@ -1,7 +1,11 @@
+"
+Test the API request of the current playback state.
+"
 Class {
 	#name : #SPOCTestApiPlaybackState,
 	#superclass : #SPOCTestCaseWithAuth,
-	#category : #'SpotifyConnect-Auth-Tests'
+	#category : #'SpotifyConnect-Auth-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:21'
 }
 
 {

@@ -1,3 +1,6 @@
+"
+Test the formatting of artits strings.
+"
 Class {
 	#name : #SPOCTestArtistsStringFormatting,
 	#superclass : #TestCase,
@@ -5,7 +8,8 @@ Class {
 		'album',
 		'artistsString'
 	],
-	#category : #'SpotifyConnect-Tests'
+	#category : #'SpotifyConnect-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:25'
 }
 
 {

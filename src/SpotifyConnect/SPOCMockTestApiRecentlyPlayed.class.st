@@ -1,3 +1,6 @@
+"
+Test the API request of recently played songs with mock data.
+"
 Class {
 	#name : #SPOCMockTestApiRecentlyPlayed,
 	#superclass : #TestCase,
@@ -5,7 +8,8 @@ Class {
 		'apiEndpoint',
 		'track'
 	],
-	#category : #'SpotifyConnect-Mock-Tests'
+	#category : #'SpotifyConnect-Mock-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:24'
 }
 
 {

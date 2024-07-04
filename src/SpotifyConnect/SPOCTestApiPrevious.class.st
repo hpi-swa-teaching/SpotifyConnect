@@ -1,7 +1,11 @@
+"
+Test the API request to skip to the previous song.
+"
 Class {
 	#name : #SPOCTestApiPrevious,
 	#superclass : #SPOCTestCaseWithAuth,
-	#category : #'SpotifyConnect-Auth-Tests'
+	#category : #'SpotifyConnect-Auth-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:22'
 }
 
 {

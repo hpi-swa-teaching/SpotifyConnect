@@ -1,7 +1,11 @@
+"
+concrete API endpoint for albums
+"
 Class {
 	#name : #SPOCApiAlbum,
 	#superclass : #SPOCApiEndpoint,
-	#category : #'SpotifyConnect-API'
+	#category : #'SpotifyConnect-API',
+	#'squeak_changestamp' : 'OW 7/4/2024 11:58'
 }
 
 {

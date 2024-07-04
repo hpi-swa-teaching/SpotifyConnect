@@ -1,7 +1,11 @@
+"
+concrete API endpoint for pausing the playback
+"
 Class {
 	#name : #SPOCApiPause,
 	#superclass : #SPOCApiEndpoint,
-	#category : #'SpotifyConnect-API'
+	#category : #'SpotifyConnect-API',
+	#'squeak_changestamp' : 'OW 7/4/2024 11:59'
 }
 
 {

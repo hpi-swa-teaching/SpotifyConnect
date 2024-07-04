@@ -1,10 +1,14 @@
+"
+Tests for logic of the authorizer.
+"
 Class {
 	#name : #SPOCTestAuthorizer,
 	#superclass : #TestCase,
 	#instVars : [
 		'authorizer'
 	],
-	#category : #'SpotifyConnect-Auth-Tests'
+	#category : #'SpotifyConnect-Auth-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:17'
 }
 
 {

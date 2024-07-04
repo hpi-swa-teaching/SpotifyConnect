@@ -1,7 +1,11 @@
+"
+concrete API endpoint for a single track
+"
 Class {
 	#name : #SPOCApiTrack,
 	#superclass : #SPOCApiEndpoint,
-	#category : #'SpotifyConnect-API'
+	#category : #'SpotifyConnect-API',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:01'
 }
 
 {

@@ -1,3 +1,6 @@
+"
+concrete class for the player consisting of play/pause and skip buttons
+"
 Class {
 	#name : #SPOCPlayer,
 	#superclass : #SPOCUIComponent,
@@ -9,7 +12,8 @@ Class {
 		'playPauseIcon',
 		'previousIcon'
 	],
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:11'
 }
 
 {

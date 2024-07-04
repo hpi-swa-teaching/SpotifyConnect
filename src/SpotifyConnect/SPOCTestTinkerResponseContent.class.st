@@ -1,3 +1,6 @@
+"
+Tests the tinker reponse method for API requests.
+"
 Class {
 	#name : #SPOCTestTinkerResponseContent,
 	#superclass : #TestCase,
@@ -10,7 +13,8 @@ Class {
 		'playlist',
 		'track'
 	],
-	#category : #'SpotifyConnect-Tests'
+	#category : #'SpotifyConnect-Tests',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:28'
 }
 
 {

@@ -1,7 +1,11 @@
+"
+A text in a bounding box morph with rounded sides and icon from an asset.
+"
 Class {
 	#name : #SPOCBoxedTextWithIcon,
 	#superclass : #SPOCBoxedText,
-	#category : #'SpotifyConnect-UI'
+	#category : #'SpotifyConnect-UI',
+	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
 }
 
 {
