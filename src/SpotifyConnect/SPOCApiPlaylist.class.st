@@ -26,11 +26,11 @@ SPOCApiPlaylist >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'RK 6/16/2024 13:35'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:20'
 }
 SPOCApiPlaylist >> executeRequest: request withParams: aParameterDictionary [
 
-	request rawUrl: (request rawUrl, (aParameterDictionary at: 'id'), '/tracks?limit=', SPOCStyle resultListLimit).
+	request rawUrl: (request rawUrl, (aParameterDictionary at: #id), '/tracks?limit=', SPOCStyle resultListLimit).
 	^ self client sendRequest: request
 ]
 

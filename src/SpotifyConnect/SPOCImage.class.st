@@ -48,12 +48,15 @@ SPOCImage >> equals: anImage [
 
 {
 	#category : #formatting,
-	#'squeak_changestamp' : 'RK 6/9/2024 00:08'
+	#'squeak_changestamp' : 'TL 7/7/2024 00:40'
 }
 SPOCImage >> scaledTo: aNumber [
 	
-	url ifNil: [^ self].
-	^ SPOCImage new image: ((Form fromBinaryStream: (HTTPSocket httpGet: url)) scaledToSize: aNumber)
+	self url
+		ifNil: [^ self].
+	^ SPOCImage new
+			image: ((Form fromBinaryStream: (HTTPSocket httpGet: self url))
+			scaledToSize: aNumber)
 ]
 
 {

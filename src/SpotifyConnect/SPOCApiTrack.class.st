@@ -28,11 +28,11 @@ SPOCApiTrack >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 03:44'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:19'
 }
 SPOCApiTrack >> executeRequest: request withParams: aParameterDictionary [
 
-	request rawUrl: (request rawUrl, (aParameterDictionary at: 'trackId')).
+	request rawUrl: (request rawUrl, (aParameterDictionary at: #trackId)).
 	^ self client sendRequest: request
 	
 ]

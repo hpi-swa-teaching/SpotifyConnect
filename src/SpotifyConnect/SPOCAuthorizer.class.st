@@ -182,15 +182,15 @@ SPOCAuthorizer >> callSuccessCallbacks [
 
 {
 	#category : #callback,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:52'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:18'
 }
 SPOCAuthorizer >> callback: aRequest [
 
 	| code state |
-	aRequest fields at: 'error' ifPresent: [aRequest send500Response: (aRequest fields at: 'error')].
-	code := aRequest fields at: 'code'
+	aRequest fields at: #error ifPresent: [aRequest send500Response: (aRequest fields at: #error)].
+	code := aRequest fields at: #code
 		ifAbsent: [aRequest send400Response].
-	state := aRequest fields at: 'state'
+	state := aRequest fields at: #state
 		ifAbsent: [aRequest send400Response].
 	state = self randomState
 		ifTrue: [self retreiveAccessTokenWithAccessCode: code.
@@ -304,7 +304,7 @@ SPOCAuthorizer >> randomString: aLength [
 
 {
 	#category : #authorization,
-	#'squeak_changestamp' : 'VE 7/2/2024 19:32'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:16'
 }
 SPOCAuthorizer >> refreshAccessToken [
 
@@ -316,8 +316,8 @@ SPOCAuthorizer >> refreshAccessToken [
 		ifFalse: [self refreshToken: nil. 
 			self startAuthorization].
 	responseContent := Json readFrom: response content readStream.
-	self accessToken: (responseContent at: 'access_token').
-	self refreshToken: (responseContent at: 'refresh_token'
+	self accessToken: (responseContent at: #access_token).
+	self refreshToken: (responseContent at: #refresh_token
 			ifAbsent: [self refreshToken]).
 	self isAuthorized: true
 ]
@@ -361,7 +361,7 @@ SPOCAuthorizer >> requestSpotifyApiEndpoint: aContentString [
 
 {
 	#category : #authorization,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:53'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:16'
 }
 SPOCAuthorizer >> retreiveAccessTokenWithAccessCode: anAccessCode [
 	
@@ -371,8 +371,8 @@ SPOCAuthorizer >> retreiveAccessTokenWithAccessCode: anAccessCode [
 	response isSuccess
 		ifFalse: [^self error: response status].
 	responseContent := Json readFrom: response content readStream.
- 	self accessToken: (responseContent at: 'access_token');
-		refreshToken: (responseContent at: 'refresh_token');
+ 	self accessToken: (responseContent at: #access_token);
+		refreshToken: (responseContent at: #refresh_token);
 		isAuthorized: true;
 		callSuccessCallbacks
 	

@@ -40,9 +40,10 @@ SPOCIcon class >> size [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/19/2024 00:19'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:11'
 }
 SPOCIcon >> attachButton [
+
 	self icon: SPOCAssetImageMorph new.
 	self addMorph: self icon.
 	self icon position: (self icon position + 8 asPoint)
@@ -90,9 +91,10 @@ SPOCIcon >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 5/27/2024 19:54'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:10'
 }
-SPOCIcon >> initializeStyle [	
+SPOCIcon >> initializeStyle [
+
 	self extent: SPOCIcon size asPoint; 
 		color: SPOCStyle spotifyWhite; 
 		borderWidth: 0

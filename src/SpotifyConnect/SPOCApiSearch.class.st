@@ -26,11 +26,11 @@ SPOCApiSearch >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'RK 5/16/2024 23:05'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:19'
 }
 SPOCApiSearch >> executeRequest: request withParams: aParameterDictionary [
 
-	request rawUrl: (request rawUrl, '?q=', (aParameterDictionary at: 'input'), '&type=', (aParameterDictionary at: 'type'), '&limit=', (aParameterDictionary at: 'limit')).
+	request rawUrl: (request rawUrl, '?q=', (aParameterDictionary at: #input), '&type=', (aParameterDictionary at: #type), '&limit=', (aParameterDictionary at: #limit)).
 	^ self client sendRequest: request
 ]
 
@@ -513,7 +513,7 @@ SPOCApiSearch >> search: aString withFilter: aFilter [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/24/2024 05:40'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:19'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
@@ -521,21 +521,21 @@ SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	content := Json readFrom: aContentStream readStream.
 	results := OrderedCollection new.
 	index := 0.
-	(content includesKey: 'tracks')
+	(content includesKey: #tracks)
 		ifTrue: [((content at: #tracks) at: #items) do: [:aTrack |
 				| track |
 				track := (self tinkerTrack: aTrack) offset: index.
 				index := index + 1.
 				results add: track].
 			^ results].
-	(content includesKey: 'albums')
+	(content includesKey: #albums)
 		ifTrue: [((content at: #albums) at: #items) do: [ :anAlbum | 
 			| track |
 				track := (self tinkerAlbum: anAlbum) offset: index.
 				index := index + 1.
 				results add: track].
 			^ results].
-	(content includesKey: 'playlists')
+	(content includesKey: #playlists)
 		ifTrue: [((content at: #playlists) at: #items) do: [ :aPlaylist | 
 			| track |
 				track := (self tinkerPlaylist: aPlaylist) offset: index.
