@@ -44,7 +44,7 @@ SPOCMockTestApiAlbum >> artists [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/23/2024 17:18'
+	#'squeak_changestamp' : 'TL 7/6/2024 23:58'
 }
 SPOCMockTestApiAlbum >> setUp [
 
@@ -52,8 +52,6 @@ SPOCMockTestApiAlbum >> setUp [
 		track: (SPOCTrack new
 			id: '2yLa0QULdQr0qAIvVwN6B5';
 			name: '...Ready For It?';
-			image: (SPOCImage newWithPath: '/assets/squeak-mouse.png');
-			album: nil;
 			artists: self artists;
 			duration: 208;
 			trackNumber: 1;
