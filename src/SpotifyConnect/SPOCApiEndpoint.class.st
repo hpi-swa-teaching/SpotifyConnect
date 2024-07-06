@@ -258,21 +258,23 @@ SPOCApiEndpoint >> tinkerRequest [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/11/2024 23:27'
+	#'squeak_changestamp' : 'TL 7/6/2024 23:48'
 }
 SPOCApiEndpoint >> tinkerTrack: aJson [
 
-	| album artists |
-	album := self tinkerAlbum: (aJson at: #album).
+	| album artists track |
 	artists := OrderedCollection new.
 	(aJson at: #artists) do: [:anArtist | artists add: (self tinkerArtist: anArtist)].
-	^ SPOCTrack new
-		id: (aJson at: #id);
-		name: (aJson at: #name);
-		image: album image;
-		album: album;
-		artists: artists;
-		duration: (aJson at: #duration_ms) // 1000;
-		trackNumber: (aJson at: #track_number);
-		yourself
+	track := (SPOCTrack new
+			id: (aJson at: #id);
+			name: (aJson at: #name);
+			artists: artists;
+			duration: (aJson at: #duration_ms) // 1000;
+			trackNumber: (aJson at: #track_number);
+			yourself).
+	(aJson includesKey: #album)
+		ifTrue: [album := self tinkerAlbum: (aJson at: #album).
+			track image: album image;
+				album: album].
+	^ track
 ]

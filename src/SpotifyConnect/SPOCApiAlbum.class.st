@@ -189,22 +189,3 @@ SPOCApiAlbum >> tinkerReponseContent: aContentStream [
 		tracks add: track].
 	^ tracks
 ]
-
-{
-	#category : #response,
-	#'squeak_changestamp' : 'RK 6/13/2024 23:49'
-}
-SPOCApiAlbum >> tinkerTrack: aJson [
-
-	| artists |
-	artists := OrderedCollection new.
-	(aJson at: #artists) do: [:anArtist | artists add: (self tinkerArtist: anArtist)].
-	^ SPOCTrack new
-		id: (aJson at: #id);
-		name: (aJson at: #name);
-		image: (SPOCImage newWithPath: '/assets/squeak-mouse.png');
-		artists: artists;
-		duration: (aJson at: #duration_ms) // 1000;
-		trackNumber: (aJson at: #track_number);
-		yourself
-]
