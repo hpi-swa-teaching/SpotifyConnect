@@ -30,12 +30,30 @@ SPOCApp class >> appName [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/7/2024 01:32'
+}
+SPOCApp class >> devicePopUpMessage [
+
+	^ 'Please activate your device!', String cr, 'Open your Spotify App and play music or use the ''Devices'' button to choose a device.'
+]
+
+{
 	#category : #initialization,
 	#'squeak_changestamp' : 'VE 6/20/2024 18:18'
 }
 SPOCApp class >> initialize [
 	
 	self registerOpenCommand
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/7/2024 01:44'
+}
+SPOCApp class >> loginPopUpMessage [
+
+	^ 'Please log in!'
 ]
 
 {
@@ -66,6 +84,15 @@ SPOCApp class >> registerOpenCommand [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/7/2024 01:51'
+}
+SPOCApp class >> volumePopUpMessage [
+
+	^ 'Your device does not support volume changes.'
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
 }
@@ -76,32 +103,33 @@ SPOCApp >> auth [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:52'
 }
-SPOCApp >> auth: anObject [
+SPOCApp >> auth: aSPOCAuthorizer [
 
-	auth := anObject
+	auth := aSPOCAuthorizer
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/10/2024 22:48'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:29'
 }
 SPOCApp >> bottomPanelContent [
 
-	^ {self currentlyPlaying. self player. self switchDevice. self volumeSlider.}
+	^ {self currentlyPlaying.
+		self player.
+		self switchDevice.
+		self volumeSlider}
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/10/2024 22:31'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:27'
 }
 SPOCApp >> buildBottomPanel: aBuilder [
 
-	^ SPOCPluggableTablePanelSpec new
-		model: self;
-		tableLayoutProperties: (TableLayoutProperties new
-			hResizing: #spaceFill;
+	^ SPOCPluggableTablePanelSpec new model: self;
+		tableLayoutProperties: (TableLayoutProperties new hResizing: #spaceFill;
 			vResizing: #shrinkWrap;
 			listDirection: #leftToRight;
 			listCentering: #justified;
@@ -111,46 +139,40 @@ SPOCApp >> buildBottomPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/10/2024 14:47'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:27'
 }
 SPOCApp >> buildCenterPanel: aBuilder [
 
-	^ SPOCPluggableTablePanelSpec new
-		model: self;
-		tableLayoutProperties: (TableLayoutProperties new
-			hResizing: #spaceFill;
+	^ SPOCPluggableTablePanelSpec new model: self;
+		tableLayoutProperties: (TableLayoutProperties new hResizing: #spaceFill;
 			vResizing: #spaceFill);
 		children: #centerPanelContent
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:48'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:29'
 }
 SPOCApp >> buildMainTable: aBuilder [
-	
-	^ SPOCPluggableTablePanelSpec new
-		model: self;
-		tableLayoutProperties: (TableLayoutProperties new
-			listDirection: #topToBottom;
+
+	^ SPOCPluggableTablePanelSpec new model: self;
+		tableLayoutProperties: (TableLayoutProperties new listDirection: #topToBottom;
 			cellInset: SPOCStyle defaultMargin;
 			hResizing: #spaceFill;
 			vResizing: #spaceFill);
 		children: {self buildTopPanel: aBuilder.
-			self buildCenterPanel: aBuilder.
+			self buildCenterPanel: aBuilder.			
 			self buildBottomPanel: aBuilder}
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/3/2024 10:29'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:28'
 }
 SPOCApp >> buildTopPanel: aBuilder [
-		
-	 ^ SPOCPluggableTablePanelSpec new
-		model: self;
-		tableLayoutProperties: (TableLayoutProperties new
-			hResizing: #spaceFill;
+
+	^ SPOCPluggableTablePanelSpec new model: self;
+		tableLayoutProperties: (TableLayoutProperties new hResizing: #spaceFill;
 			vResizing: #shrinkWrap;
 			listDirection: #leftToRight;
 			listCentering: #justified;
@@ -160,17 +182,16 @@ SPOCApp >> buildTopPanel: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/20/2024 18:22'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:29'
 }
 SPOCApp >> buildWindow: aBuilder [
 
-	^ aBuilder pluggableWindowSpec new 
-		model: self;
-		color: SPOCStyle spotifyBlack;
-		label: #windowTitle;
-		minimumExtent: SPOCApp minimumExtent;
-		children: {self buildMainTable: aBuilder};
-		yourself
+	^ aBuilder pluggableWindowSpec new model: self;
+		 color: SPOCStyle spotifyBlack;
+		 label: #windowTitle;
+		 minimumExtent: SPOCApp minimumExtent;
+		 children: {self buildMainTable: aBuilder};
+		 yourself
 ]
 
 {
@@ -193,11 +214,18 @@ SPOCApp >> centerPanelContent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:50'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:31'
 }
 SPOCApp >> componentsForUpdatingPlaybackState [
 
-	^ {currentlyPlaying. player. resultList. volumeSlider. recentlyPlayed. switchDevice. searchbar. refresh}
+	^ {self currentlyPlaying.
+		self player.
+		self recentlyPlayed.
+		self refresh.
+		self resultList.
+		self searchbar.
+		self switchDevice.
+		self volumeSlider}
 ]
 
 {
@@ -211,54 +239,44 @@ SPOCApp >> currentlyPlaying [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 12:17'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:53'
 }
-SPOCApp >> currentlyPlaying: anObject [
+SPOCApp >> currentlyPlaying: aSPOCCurrentlyPlaying [
 
-	currentlyPlaying := anObject
+	currentlyPlaying := aSPOCCurrentlyPlaying
 ]
 
 {
 	#category : #'pop-ups',
-	#'squeak_changestamp' : 'TL 6/18/2024 12:25'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:32'
 }
 SPOCApp >> devicePopUp [
 
-	UIManager inform: 'Please activate your device!', String cr, 'Open your Spotify App and play music or use the ''Devices'' button to choose a device.'
+	UIManager inform: self class devicePopUpMessage
 ]
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 6/26/2024 14:24'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:35'
 }
 SPOCApp >> getPlaybackState [
 
-	| apiEndpoint |
 	(Delay forSeconds: 0.6) wait.
-	apiEndpoint := SPOCApiPlaybackState new
-		authorizer: self auth;
-		yourself.
-	^ apiEndpoint getPlaybackState
+	^ (SPOCApiPlaybackState new authorizer: self auth) getPlaybackState
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/20/2024 18:18'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:40'
 }
 SPOCApp >> initialize [
 
 	super initialize.
 	
 	self auth: SPOCAuthorizer new; 
-		setUpUserLogin;
-		setUpCurrentlyPlaying;
-		setUpPlayer;
-		setUpRecentlyPlayed;
-		setUpRefresh;
-		setUpResultList;
-		setUpSearchbar;
-		setUpSwitchDevice;		
-		setUpVolumeSlider
+		setUpBottomPanelComponents;
+		setUpCenterPanelComponents;
+		setUpTopPanelComponents
 		
 		
 
@@ -267,9 +285,9 @@ SPOCApp >> initialize [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:43'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:44'
 }
-SPOCApp >> isCurrentDeviceActive [
+SPOCApp >> isDeviceActive [
 
 	^ (self getPlaybackState class = SPOCApiEndpointResult) not
 ]
@@ -285,11 +303,11 @@ SPOCApp >> isUserAuthorized [
 
 {
 	#category : #'pop-ups',
-	#'squeak_changestamp' : 'TL 6/10/2024 19:30'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:44'
 }
 SPOCApp >> loginPopUp [
 
-	UIManager inform: 'Please log in!'
+	UIManager inform: self class loginPopUpMessage
 ]
 
 {
@@ -317,16 +335,6 @@ SPOCApp >> open [
 ]
 
 {
-	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:04'
-}
-SPOCApp >> openPopUpFor: aUiComponent [
-
-	(self isUserAuthorized and: aUiComponent needsLogin) ifTrue: [self loginPopUp. ^ self].
-	(self isCurrentDeviceActive and: aUiComponent needsActiveDevice) ifTrue: [self devicePopUp. ^ self]
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
 }
@@ -337,36 +345,29 @@ SPOCApp >> player [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:49'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:53'
 }
-SPOCApp >> player: anObject [
+SPOCApp >> player: aSPOCPlayer [
 
-	player := anObject
-]
-
-{
-	#category : #ui,
-	#'squeak_changestamp' : 'TL 5/31/2024 17:32'
-}
-SPOCApp >> playerPanelContent [
-
-	^ {self player}
+	player := aSPOCPlayer
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 13:16'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:47'
 }
 SPOCApp >> recentlyPlayed [
+
 	^ recentlyPlayed
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 13:16'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:53'
 }
-SPOCApp >> recentlyPlayed: anObject [
-	recentlyPlayed := anObject
+SPOCApp >> recentlyPlayed: aSPOCRecentlyPlayed [
+
+	recentlyPlayed := aSPOCRecentlyPlayed
 ]
 
 {
@@ -380,11 +381,11 @@ SPOCApp >> refresh [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/18/2024 23:19'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:48'
 }
-SPOCApp >> refresh: anObject [
+SPOCApp >> refresh: aSPOCRefresh [
 
-	refresh := anObject
+	refresh := aSPOCRefresh
 ]
 
 {
@@ -421,6 +422,27 @@ SPOCApp >> searchbar [
 SPOCApp >> searchbar: aSPOCSearchbar [
 
 	searchbar := aSPOCSearchbar
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 7/7/2024 01:38'
+}
+SPOCApp >> setUpBottomPanelComponents [
+
+	self setUpCurrentlyPlaying;
+		setUpPlayer;
+		setUpSwitchDevice;
+		setUpVolumeSlider
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 7/7/2024 01:39'
+}
+SPOCApp >> setUpCenterPanelComponents [
+
+	self setUpResultList
 ]
 
 {
@@ -488,12 +510,25 @@ SPOCApp >> setUpSwitchDevice [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:51'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:37'
+}
+SPOCApp >> setUpTopPanelComponents [
+
+	self setUpRecentlyPlayed;
+		setUpRefresh;
+		setUpSearchbar;
+		setUpUserLogin
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 7/7/2024 01:48'
 }
 SPOCApp >> setUpUserLogin [
 
 	self userLogin: (SPOCUserLogin new app: self).
-	self auth registerSuccessCallback: [self userLogin toggleLogout. self updatePlaybackState]
+	self auth registerSuccessCallback: [self userLogin toggleLogout.
+		self updatePlaybackState]
 
 
 ]
@@ -509,61 +544,58 @@ SPOCApp >> setUpVolumeSlider [
 
 {
 	#category : #'pop-ups',
-	#'squeak_changestamp' : 'VE 7/2/2024 18:40'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:49'
 }
 SPOCApp >> showPopUpFor: aUiComponent [
 	
-	(self isUserAuthorized not and: aUiComponent needsLogin) ifTrue: [self loginPopUp. ^ self].
-	(self isCurrentDeviceActive not and: aUiComponent needsActiveDevice) ifTrue: [self devicePopUp. ^ self]
+	(self isUserAuthorized not and: aUiComponent needsLogin)
+		ifTrue: [self loginPopUp.
+			^ self].
+	(self isDeviceActive not and: aUiComponent needsActiveDevice)
+		ifTrue: [self devicePopUp.
+			^ self]
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 16:42'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:49'
 }
 SPOCApp >> switchDevice [
+
 	^ switchDevice
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VK 6/9/2024 16:42'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:50'
 }
-SPOCApp >> switchDevice: anObject [
-	switchDevice := anObject
+SPOCApp >> switchDevice: aSPOCSwitchDevice [
+
+	switchDevice := aSPOCSwitchDevice
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 6/18/2024 23:26'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:55'
 }
 SPOCApp >> topPanelContent [
 
-	^ { self searchbar. self recentlyPlayed. self refresh. self userLogin}
+	^ {self searchbar.
+		self recentlyPlayed.
+		self refresh.
+		self userLogin}
 ]
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:07'
-}
-SPOCApp >> updateComponentsPlaybackState [
-
-	| playbackState |
-	playbackState := self getPlaybackState.
-	self componentsForUpdatingPlaybackState do: [:aComponent |
-		aComponent updatePlaybackState: playbackState]
-]
-
-{
-	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:06'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:51'
 }
 SPOCApp >> updatePlaybackState [
 
 	| playbackState |
 	playbackState := self getPlaybackState.
-	self componentsForUpdatingPlaybackState do: [:aComponent |
-		aComponent updatePlaybackState: playbackState]
+	self componentsForUpdatingPlaybackState
+		do: [:aComponent | aComponent updatePlaybackState: playbackState]
 ]
 
 {
@@ -577,20 +609,20 @@ SPOCApp >> userLogin [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:50'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:51'
 }
-SPOCApp >> userLogin: anObject [
+SPOCApp >> userLogin: aSPOCUserLogin [
 
-	userLogin := anObject
+	userLogin := aSPOCUserLogin
 ]
 
 {
 	#category : #'pop-ups',
-	#'squeak_changestamp' : 'TL 6/12/2024 04:00'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:52'
 }
 SPOCApp >> volumePopUp [
 
-	UIManager inform: 'Your device does not support volume changes.'
+	UIManager inform: self class volumePopUpMessage
 ]
 
 {
@@ -604,11 +636,11 @@ SPOCApp >> volumeSlider [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 02:56'
+	#'squeak_changestamp' : 'TL 7/7/2024 01:52'
 }
-SPOCApp >> volumeSlider: anObject [
+SPOCApp >> volumeSlider: aSPOCVolumeSlider [
 
-	volumeSlider := anObject
+	volumeSlider := aSPOCVolumeSlider
 ]
 
 {
