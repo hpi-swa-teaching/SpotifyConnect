@@ -218,7 +218,7 @@ SPOCApiEndpoint >> tinkerPlaybackState: aJson [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'RK 7/7/2024 13:10'
+	#'squeak_changestamp' : 'RK 7/7/2024 16:55'
 }
 SPOCApiEndpoint >> tinkerPlaylist: aJson [
 

@@ -512,7 +512,7 @@ SPOCApiSearch >> search: aString withFilter: aFilter [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 7/7/2024 03:25'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:53'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
@@ -522,17 +522,17 @@ SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	index := 0.
 	(content includesKey: #tracks)
 		ifTrue: [((content at: #tracks) at: #items)
-				do: [:aTrack | results add: ((self tinkerTrack: aTrack) offset: index).
+				do: [:aTrack | results add: ((self tinkerTrack: aTrack) offset: index + 1).
 					index := index + 1].
 			^ results].
 	(content includesKey: #albums)
 		ifTrue: [((content at: #albums) at: #items)
-				do: [:anAlbum | results add: ((self tinkerAlbum: anAlbum) offset: index).
+				do: [:anAlbum | results add: ((self tinkerAlbum: anAlbum) offset: index + 1).
 					index := index + 1].
 			^ results].
 	(content includesKey: #playlists)
 		ifTrue: [((content at: #playlists) at: #items)
-				do: [:aPlaylist | results add: ((self tinkerPlaylist: aPlaylist) offset: index).
+				do: [:aPlaylist | results add: ((self tinkerPlaylist: aPlaylist) offset: index + 1).
 					index := index + 1].
 			^ results]
 ]

@@ -5,7 +5,8 @@ Class {
 	#name : #SPOCPlaylist,
 	#superclass : #SPOCDataPiece,
 	#instVars : [
-		'owner'
+		'owner',
+		'totalTracks'
 	],
 	#category : #SpotifyConnect,
 	#'squeak_changestamp' : 'OW 7/4/2024 11:53'
@@ -63,4 +64,22 @@ SPOCPlaylist >> owner: aString [
 SPOCPlaylist >> secondaryText [
 
 	^ self owner
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 7/7/2024 15:49'
+}
+SPOCPlaylist >> totalTracks [
+
+	^ totalTracks
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 7/7/2024 15:49'
+}
+SPOCPlaylist >> totalTracks: aNumber [
+
+	totalTracks := aNumber
 ]

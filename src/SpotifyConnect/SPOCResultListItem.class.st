@@ -107,7 +107,7 @@ SPOCResultListItem >> buildItem [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 7/7/2024 12:32'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:42'
 }
 SPOCResultListItem >> buildPrimaryText [
 
@@ -280,8 +280,11 @@ SPOCResultListItem >> tertiaryText: aSPOCText [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/5/2024 21:03'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:42'
 }
-SPOCResultListItem >> toggleTextColor [
-	"To do: If item gets selected, its texts should change color, e.g. to spotifyGreen"
+SPOCResultListItem >> togglePrimaryTextColor [
+
+	(self primaryText color = SPOCStyle spotifyGreen)
+		ifTrue: [self primaryText color: SPOCStyle spotifyWhite]
+		ifFalse: [self primaryText color: SPOCStyle spotifyGreen]
 ]

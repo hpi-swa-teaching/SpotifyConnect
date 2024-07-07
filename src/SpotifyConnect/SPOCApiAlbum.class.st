@@ -172,7 +172,7 @@ SPOCApiAlbum >> getAlbumWithID: aString [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 7/7/2024 03:05'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:53'
 }
 SPOCApiAlbum >> tinkerReponseContent: aContentStream [
 	
@@ -181,7 +181,7 @@ SPOCApiAlbum >> tinkerReponseContent: aContentStream [
 	tracks := OrderedCollection new.
 	index := 0.
 	(content at: #items) 
-		do: [:anItem | tracks add: ((self tinkerTrack: anItem) offset: index).
+		do: [:anItem | tracks add: ((self tinkerTrack: anItem) offset: index + 1).
 			index := index + 1].
 	^ tracks
 ]

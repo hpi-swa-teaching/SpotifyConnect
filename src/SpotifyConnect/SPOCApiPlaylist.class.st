@@ -1463,7 +1463,7 @@ SPOCApiPlaylist >> getPlaylistWithID: aString [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 7/7/2024 03:17'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:53'
 }
 SPOCApiPlaylist >> tinkerReponseContent: aContentStream [
 	
@@ -1472,7 +1472,7 @@ SPOCApiPlaylist >> tinkerReponseContent: aContentStream [
 	tracks := OrderedCollection new.
 	index := 0.
 	(content at: #items)
-		do: [:anItem | tracks add: ((self tinkerTrack: (anItem at: #track)) offset: index).
+		do: [:anItem | tracks add: ((self tinkerTrack: (anItem at: #track)) offset: index + 1).
 			index := index + 1].
 	^ tracks
 ]
