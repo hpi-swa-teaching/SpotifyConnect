@@ -16,26 +16,27 @@ Class {
 
 {
 	#category : #formatting,
-	#'squeak_changestamp' : 'TL 6/23/2024 14:57'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:26'
 }
 SPOCDataPiece >> artistsAsString [
 
 	| result |
 	result := ''.
-	self artists allButLastDo: [:anArtist | result := result, anArtist name, ', '].
-	result := result, self artists last name.
+	self artists
+		allButLastDo: [:anArtist | result := result , anArtist name , ', '].
+	result := result , self artists last name.
 	^ result
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/12/2024 01:29'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:27'
 }
 SPOCDataPiece >> artistsEqual: anArtistCollection [
 
-	self artists collect: [:anArtist | 
-		((anArtistCollection at: (self artists indexOf: anArtist)) equals: anArtist)
-			ifFalse: [^ false]].
+	self artists
+		collect: [:anArtist | ((anArtistCollection at: (self artists indexOf: anArtist)) equals: anArtist)
+				ifFalse: [^ false]].
 	^ true
 ]
 
@@ -105,11 +106,11 @@ SPOCDataPiece >> name: aString [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/16/2024 14:31'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:32'
 }
 SPOCDataPiece >> offset [
-
 	"Offset within a search result, album or playlist"
+	
 	^ offset
 ]
 

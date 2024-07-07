@@ -25,11 +25,11 @@ SPOCTrack >> album [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:55'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:32'
 }
-SPOCTrack >> album: anAlbum [
+SPOCTrack >> album: aSPOCAlbum [
 
-	album := anAlbum
+	album := aSPOCAlbum
 ]
 
 {
@@ -43,11 +43,11 @@ SPOCTrack >> artists [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/7/2024 10:56'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:32'
 }
-SPOCTrack >> artists: aOrderedCollection [
+SPOCTrack >> artists: anOrderedCollection [
 
-	artists := aOrderedCollection
+	artists := anOrderedCollection
 ]
 
 {

@@ -5,9 +5,9 @@ Class {
 	#name : #SPOCAuthorizer,
 	#superclass : #Object,
 	#instVars : [
-		'randomState',
 		'accessToken',
 		'isAuthorized',
+		'randomState',
 		'successCallbacks'
 	],
 	#classVars : [
@@ -20,23 +20,59 @@ Class {
 }
 
 {
-	#category : #credentials,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:58'
+	#category : #messages,
+	#'squeak_changestamp' : 'TL 7/7/2024 02:06'
 }
-SPOCAuthorizer class >> clientId [
+SPOCAuthorizer class >> authStateErrorMessage [
 
-   ^ ClientId
-		ifNil: [ClientId := UIManager default request: 'Please enter client id']
+	^ 'Error: There was an error regarding the auth state.'
 ]
 
 {
 	#category : #credentials,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:58'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:00'
+}
+SPOCAuthorizer class >> clientId [
+
+	^ ClientId
+		ifNil: [ClientId := UIManager default request: self clientIdMessage]
+]
+
+{
+	#category : #messages,
+	#'squeak_changestamp' : 'TL 7/7/2024 02:00'
+}
+SPOCAuthorizer class >> clientIdMessage [
+
+	^ 'Please enter client id'
+]
+
+{
+	#category : #credentials,
+	#'squeak_changestamp' : 'TL 7/7/2024 02:01'
 }
 SPOCAuthorizer class >> clientSecret [
 
    ^ ClientSecret
-		ifNil: [ClientSecret := UIManager default request: 'Please enter client secret']
+		ifNil: [ClientSecret := UIManager default request: self clientSecretMessage]
+]
+
+{
+	#category : #messages,
+	#'squeak_changestamp' : 'TL 7/7/2024 02:01'
+}
+SPOCAuthorizer class >> clientSecretMessage [
+
+	^ 'Please enter client secret'
+]
+
+{
+	#category : #messages,
+	#'squeak_changestamp' : 'TL 7/7/2024 02:18'
+}
+SPOCAuthorizer class >> pasteUrlToWebBrowserMessage [
+
+	^ 'Paste this url (already in your clipboard) to a web browser: ', String cr, String cr
 ]
 
 {
@@ -173,38 +209,37 @@ SPOCAuthorizer >> buildAuthorizationUrl [
 
 {
 	#category : #callback,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:50'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:03'
 }
 SPOCAuthorizer >> callSuccessCallbacks [
 
-	self successCallbacks do: [:aBlock | aBlock value]
+	self successCallbacks
+		do: [:aBlock | aBlock value]
 ]
 
 {
 	#category : #callback,
-	#'squeak_changestamp' : 'TL 7/7/2024 01:18'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:06'
 }
 SPOCAuthorizer >> callback: aRequest [
 
 	| code state |
 	aRequest fields at: #error ifPresent: [aRequest send500Response: (aRequest fields at: #error)].
-	code := aRequest fields at: #code
-		ifAbsent: [aRequest send400Response].
-	state := aRequest fields at: #state
-		ifAbsent: [aRequest send400Response].
+	code := aRequest fields at: #code ifAbsent: [aRequest send400Response].
+	state := aRequest fields at: #state ifAbsent: [aRequest send400Response].
 	state = self randomState
 		ifTrue: [self retreiveAccessTokenWithAccessCode: code.
 			aRequest send200Response: (SPOCAuthorizer successPage) contentType: 'text/html']
-		ifFalse: [aRequest send500Response: 'Error: There was an error regarding the auth state.']
+		ifFalse: [aRequest send500Response: self class authStateErrorMessage]
 ]
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 7/2/2024 19:32'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:15'
 }
 SPOCAuthorizer >> canRefresh [
 	
-	^ self refreshToken isNil not.
+	^ self refreshToken isNil not
 ]
 
 {
@@ -242,32 +277,32 @@ SPOCAuthorizer >> isAuthorized: aBoolean [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'VE 7/2/2024 19:25'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:16'
 }
 SPOCAuthorizer >> logout [
 
-	self accessToken: nil.
-	self isAuthorized: false
+	self accessToken: nil;
+		isAuthorized: false
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:51'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:17'
 }
 SPOCAuthorizer >> nextRandomState [
 
-	self randomState: (self randomString: SPOCAuthorizer randomStateStringLength)
+	self randomState: (self randomString: self class randomStateStringLength)
 ]
 
 {
 	#category : #authorization,
-	#'squeak_changestamp' : 'VE 7/2/2024 19:41'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:18'
 }
 SPOCAuthorizer >> openUrlIfPossible: aUrl in: aWebBrowser [
 	
 	aWebBrowser
 		ifNotNil: [WebBrowser default openOnUrl: aUrl]
-		ifNil: [UIManager inform: 'Paste this url (allready in your clipboard) to a web browser: ', String cr, String cr, aUrl.].
+		ifNil: [UIManager inform: self class pasteUrlToWebBrowserMessage, aUrl]
 ]
 
 {
@@ -281,30 +316,31 @@ SPOCAuthorizer >> randomState [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'OW 5/22/2024 18:38'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:19'
 }
 SPOCAuthorizer >> randomState: aState [
 
-	randomState := aState.
+	randomState := aState
 ]
 
 {
 	#category : #utilities,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:51'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:19'
 }
 SPOCAuthorizer >> randomString: aLength [
 
 	| chars index randomString |
     	chars := Character alphabet asArray.
     	randomString := String new: aLength.
-    	1 to: aLength do: [:i | index := (1 to: chars size) atRandom.
+    	1 to: aLength
+		do: [:i | index := (1 to: chars size) atRandom.
       randomString at: i put: (chars at: index)].
 	^ randomString
 ]
 
 {
 	#category : #authorization,
-	#'squeak_changestamp' : 'TL 7/7/2024 01:16'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:22'
 }
 SPOCAuthorizer >> refreshAccessToken [
 
@@ -316,10 +352,9 @@ SPOCAuthorizer >> refreshAccessToken [
 		ifFalse: [self refreshToken: nil. 
 			self startAuthorization].
 	responseContent := Json readFrom: response content readStream.
-	self accessToken: (responseContent at: #access_token).
-	self refreshToken: (responseContent at: #refresh_token
-			ifAbsent: [self refreshToken]).
-	self isAuthorized: true
+	self accessToken: (responseContent at: #access_token);
+		refreshToken: (responseContent at: #refresh_token ifAbsent: [self refreshToken]);
+		isAuthorized: true
 ]
 
 {
@@ -405,26 +440,28 @@ SPOCAuthorizer >> spotifyAccessApiContent: anAccessCode [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 6/4/2024 09:34'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:24'
 }
 SPOCAuthorizer >> spotifyRefreshApiContent [
 	
-	^ 'grant_type=refresh_token' ,
-		'&refresh_token=' , self refreshToken , 
-		'&client_id=' , SPOCAuthorizer clientId , 
-		'&client_secret=' , SPOCAuthorizer clientSecret
+	^ 'grant_type=refresh_token',
+		'&refresh_token=', self refreshToken, 
+		'&client_id=', SPOCAuthorizer clientId, 
+		'&client_secret=', SPOCAuthorizer clientSecret
 ]
 
 {
 	#category : #authorization,
-	#'squeak_changestamp' : 'VE 7/2/2024 19:34'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:24'
 }
 SPOCAuthorizer >> startAuthorization [
 
 	| url |
-	self canRefresh ifTrue: [self refreshAccessToken. 
-		self isAuthorized ifTrue: [self callSuccessCallbacks].
-		^ self].
+	self canRefresh
+		ifTrue: [self refreshAccessToken. 
+			self isAuthorized
+				ifTrue: [self callSuccessCallbacks].
+			^ self].
 	self setupCallbackService.
 	url := self buildAuthorizationUrl.
 	Clipboard default primitiveClipboardText: url.	

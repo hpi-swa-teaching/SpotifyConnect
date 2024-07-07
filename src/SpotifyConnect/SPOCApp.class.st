@@ -30,12 +30,13 @@ SPOCApp class >> appName [
 ]
 
 {
-	#category : #constants,
-	#'squeak_changestamp' : 'TL 7/7/2024 01:32'
+	#category : #messages,
+	#'squeak_changestamp' : 'TL 7/7/2024 02:03'
 }
 SPOCApp class >> devicePopUpMessage [
 
-	^ 'Please activate your device!', String cr, 'Open your Spotify App and play music or use the ''Devices'' button to choose a device.'
+	^ 'Please activate your device!', String cr,
+		'Open your Spotify App and play music or use the ''Devices'' button to choose a device.'
 ]
 
 {
@@ -48,7 +49,7 @@ SPOCApp class >> initialize [
 ]
 
 {
-	#category : #constants,
+	#category : #messages,
 	#'squeak_changestamp' : 'TL 7/7/2024 01:44'
 }
 SPOCApp class >> loginPopUpMessage [
@@ -84,7 +85,7 @@ SPOCApp class >> registerOpenCommand [
 ]
 
 {
-	#category : #constants,
+	#category : #messages,
 	#'squeak_changestamp' : 'TL 7/7/2024 01:51'
 }
 SPOCApp class >> volumePopUpMessage [

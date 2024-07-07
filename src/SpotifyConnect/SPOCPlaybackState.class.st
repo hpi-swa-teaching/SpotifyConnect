@@ -34,7 +34,7 @@ SPOCPlaybackState >> device: anObject [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/12/2024 01:25'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:37'
 }
 SPOCPlaybackState >> equals: aState [
 	

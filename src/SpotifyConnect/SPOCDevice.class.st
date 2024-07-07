@@ -59,11 +59,11 @@ SPOCDevice >> isActive [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:34'
 }
-SPOCDevice >> isActive: anObject [
+SPOCDevice >> isActive: aBoolean [
 
-	isActive := anObject
+	isActive := aBoolean
 ]
 
 {
@@ -95,11 +95,11 @@ SPOCDevice >> supportsVolume [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:56'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:35'
 }
-SPOCDevice >> supportsVolume: anObject [
+SPOCDevice >> supportsVolume: aBoolean [
 
-	supportsVolume := anObject
+	supportsVolume := aBoolean
 ]
 
 {
@@ -113,11 +113,11 @@ SPOCDevice >> type [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:57'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:35'
 }
-SPOCDevice >> type: anObject [
+SPOCDevice >> type: aString [
 
-	type := anObject
+	type := aString
 ]
 
 {
@@ -131,9 +131,9 @@ SPOCDevice >> volume [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:57'
+	#'squeak_changestamp' : 'TL 7/7/2024 02:35'
 }
-SPOCDevice >> volume: anObject [
+SPOCDevice >> volume: aNumber [
 
-	volume := anObject
+	volume := aNumber
 ]
