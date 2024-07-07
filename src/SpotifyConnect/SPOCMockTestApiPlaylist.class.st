@@ -13,6 +13,22 @@ Class {
 }
 
 {
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 7/7/2024 17:16'
+}
+SPOCMockTestApiPlaylist >> album [
+
+	^ SPOCAlbum new
+		id: '1NAmidJlEaVgA3MpcPFYGq';
+		name: 'Lover';
+		image: (SPOCImage newWithUrl: 'https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647');
+		artists: self artists;
+		totalTracks: 18;
+		hasTertiaryText: false;
+		yourself
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/24/2024 04:38'
 }
@@ -44,7 +60,7 @@ SPOCMockTestApiPlaylist >> artists [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'RK 7/7/2024 13:12'
+	#'squeak_changestamp' : 'TL 7/7/2024 17:16'
 }
 SPOCMockTestApiPlaylist >> setUp [
 
@@ -53,7 +69,7 @@ SPOCMockTestApiPlaylist >> setUp [
 			id: '214nt20w5wOxJnY462klLw';
 			name: 'Miss Americana & The Heartbreak Prince';
 			image: (SPOCImage newWithUrl: 'https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647');
-			album: nil;
+			album: self album;
 			artists: self artists;
 			duration: 234;
 			trackNumber: 7;
