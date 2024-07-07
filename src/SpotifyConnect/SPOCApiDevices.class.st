@@ -37,24 +37,13 @@ SPOCApiDevices >> executeRequest: request withParams: aParameterDictionary [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:42'
+	#'squeak_changestamp' : 'OW 7/7/2024 16:47'
 }
 SPOCApiDevices >> executeTest [
 
-	^ '{
-		  "devices": [
-		    {
-		      "id": "string",
-		      "is_active": false,
-		      "is_private_session": false,
-		      "is_restricted": false,
-		      "name": "Kitchen speaker",
-		      "type": "computer",
-		      "volume_percent": 59,
-		      "supports_volume": false
-		    }
-		  ]
-		}' readStream
+	^ self loadMockdataFromAsset: 'devicesResponse'
+
+	
 ]
 
 {
