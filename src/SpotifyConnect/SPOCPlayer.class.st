@@ -278,34 +278,6 @@ SPOCPlayer >> playPauseIcon: anObject [
 ]
 
 {
-	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 16:47'
-}
-SPOCPlayer >> playTrack: aString [
-
-	SPOCApiPlay new
-		authorizer: self app auth;
-		playTrack: aString on: self deviceID;
-		yourself.
-	self app updatePlaybackState
-
-]
-
-{
-	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 16:50'
-}
-SPOCPlayer >> playTrack: aString withContext: anotherString [
-
-	SPOCApiPlay new
-		authorizer: self app auth;
-		playTrack: aString withContext: anotherString on: self deviceID
-		yourself.
-	self app updatePlaybackState
-
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/3/2024 23:37'
 }
