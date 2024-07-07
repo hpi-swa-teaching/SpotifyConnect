@@ -34,12 +34,17 @@ SPOCSwitchDevice class >> itemTextPadding [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 6/19/2024 16:31'
+	#'squeak_changestamp' : 'VK 7/7/2024 14:30'
 }
 SPOCSwitchDevice >> attachButton [
 
-	| button |
-	button := SPOCBoxedTextWithIcon newWithText: ' Devices' withIcon: self class devicesIconPath.
+	| text button |
+	text := SPOCBoxedTextWithIcon newWithText: 'Devices' withIcon: self class devicesIconPath.
+	button := Morph new color: Color transparent;
+		addMorph: text;
+		yourself.
+	button extent: 0@0;
+		extent: button fullBounds extent.
 	self addMorph: (SPOCClickable newUsing: button onClick: [:anEvent | self buttonClicked])
 	
 ]

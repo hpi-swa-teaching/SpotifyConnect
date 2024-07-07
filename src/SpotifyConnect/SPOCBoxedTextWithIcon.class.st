@@ -10,12 +10,12 @@ Class {
 
 {
 	#category : #constructor,
-	#'squeak_changestamp' : 'VK 6/19/2024 16:21'
+	#'squeak_changestamp' : 'VK 7/7/2024 14:29'
 }
 SPOCBoxedTextWithIcon class >> newWithText: aString withIcon: anAssetPath [
 
 	| text |
-	text := SPOCBoxedTextWithIcon new contents: aString;
+	text := SPOCBoxedTextWithIcon new contents: (' ', aString);
 				position: SPOCStyle iconPadding @ 0;
 				withAssetPath: anAssetPath;
 				yourself.

@@ -50,12 +50,12 @@ SPOCRecentlyPlayed class >> trackLimit [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 6/19/2024 16:33'
+	#'squeak_changestamp' : 'VK 7/7/2024 14:30'
 }
 SPOCRecentlyPlayed >> buildButton [
 
 	| text button |
-	text := SPOCBoxedTextWithIcon newWithText: ' Recently Played' withIcon: self class recentlyPlayedIconPath.
+	text := SPOCBoxedTextWithIcon newWithText: 'Recently Played' withIcon: self class recentlyPlayedIconPath.
 	button := Morph new color: Color transparent;
 		addMorph: text;
 		yourself.
