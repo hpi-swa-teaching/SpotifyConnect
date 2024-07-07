@@ -68,13 +68,14 @@ SPOCApiDevices >> getCurrentDevices [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 23:33'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:06'
 }
 SPOCApiDevices >> tinkerReponseContent: aContentStream [
 	
 	| content devices |
 	content := Json readFrom: aContentStream readStream.
 	devices := OrderedCollection new.
-	(content at: #devices) do: [:aDevice | devices add: (self tinkerDevice: aDevice)].
+	(content at: #devices)
+		do: [:aDevice | devices add: (self tinkerDevice: aDevice)].
 	^ devices
 ]

@@ -514,25 +514,25 @@ SPOCApiRecentlyPlayed >> executeTest [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 20:37'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:19'
 }
 SPOCApiRecentlyPlayed >> getRecentlyPlayed [
 
-	^ self execute: (Dictionary new
-		at: #limit put: SPOCRecentlyPlayed trackLimit;
-		at: #before put: SPOCRecentlyPlayed beforeTimestamp;
-		yourself)
+	^ self execute: (Dictionary new at: #limit put: SPOCRecentlyPlayed trackLimit;
+			at: #before put: SPOCRecentlyPlayed beforeTimestamp;
+			yourself)
 ]
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 23:32'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:19'
 }
 SPOCApiRecentlyPlayed >> tinkerReponseContent: aContentStream [
 	
 	| content tracks |
 	content := Json readFrom: aContentStream readStream.
 	tracks := OrderedCollection new.
-	(content at: #items) do: [:anItem | tracks add: (self tinkerTrack: (anItem at: #track))].
+	(content at: #items)
+		do: [:anItem | tracks add: (self tinkerTrack: (anItem at: #track))].
 	^ tracks
 ]

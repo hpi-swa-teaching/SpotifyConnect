@@ -40,11 +40,9 @@ SPOCApiSwitchDevice >> executeRequest: request withParams: aParameterDictionary 
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 20:10'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:27'
 }
 SPOCApiSwitchDevice >> switchDeviceTo: aDevice [
 	
-	self execute: (Dictionary new
-			at: #device_id put: aDevice;
-			yourself)
+	self execute: (Dictionary new at: #device_id put: aDevice; yourself)
 ]

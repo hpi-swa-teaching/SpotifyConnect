@@ -10,12 +10,11 @@ Class {
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 20:06'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:29'
 }
 SPOCApiVolume >> changeVolumeTo: aVolume on: aDevice [
 
-	self execute: (Dictionary new
-			at: #volume_percent put: aVolume;
+	self execute: (Dictionary new at: #volume_percent put: aVolume;
 			at: #device_id put: aDevice;
 			yourself)
 ]

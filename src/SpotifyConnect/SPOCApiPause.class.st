@@ -39,13 +39,9 @@ SPOCApiPause >> executeRequest: request withParams: aParamDictionary [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 12:20'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:08'
 }
 SPOCApiPause >> pauseOn: aDevice [
 
-	| dict |
-	dict := Dictionary new
-		at: #device_id put: aDevice;
-		yourself.
-	self execute: dict
+	self execute: (Dictionary new at: #device_id put: aDevice; yourself)
 ]

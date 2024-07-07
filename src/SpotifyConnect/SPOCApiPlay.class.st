@@ -28,6 +28,15 @@ SPOCApiPlay >> buildDataWithTrack: aString [
 
 {
 	#category : #parameters,
+	#'squeak_changestamp' : 'TL 7/7/2024 03:14'
+}
+SPOCApiPlay >> buildUris: aString [
+
+	^ '"spotify:track:', aString, '"'
+]
+
+{
+	#category : #parameters,
 	#'squeak_changestamp' : 'MH 5/26/2024 15:41'
 }
 SPOCApiPlay >> endpoint [ 
@@ -46,7 +55,7 @@ SPOCApiPlay >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'MH 6/17/2024 11:41'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:12'
 }
 SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 
@@ -56,8 +65,8 @@ SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 		ifTrue: [data := ''].
 	(aParamDictionary size = 2)
 		ifTrue: [data := self buildDataWithTrack: (aParamDictionary at: #uris)]
-		ifFalse: [(aParamDictionary includesKey: 'context_uri')
-			ifTrue: [data:= self buildDataWithContext: (aParamDictionary at: #context_uri) andTrack: (aParamDictionary at: #uris)]].
+		ifFalse: [(aParamDictionary includesKey: #context_uri)
+				ifTrue: [data := self buildDataWithContext: (aParamDictionary at: #context_uri) andTrack: (aParamDictionary at: #uris)]].
 	request headerAt: 'Content-Length' put: data size.
 	(data size = 0)
 		ifTrue: [request headerAt: 'Content-Length' put: 0.
@@ -68,42 +77,32 @@ SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 12:14'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:09'
 }
 SPOCApiPlay >> playOn: aDevice [
 
-	| dict |
-	dict := Dictionary new
-		at: #device_id put: aDevice;
-		yourself.
-	self execute: dict
+	self execute: (Dictionary new at: #device_id put: aDevice; yourself)
 ]
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 12:18'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:20'
 }
 SPOCApiPlay >> playTrack: aString on: aDevice [
 
-	| dict |
-	dict := Dictionary new
-		at: #device_id put: aDevice;
-		at: #uris put: '"spotify:track:', aString, '"';
-		yourself.
-	self execute: dict
+	self execute: (Dictionary new at: #device_id put: aDevice;
+			at: #uris put: (self buildUris: aString);
+			yourself)
 ]
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/17/2024 12:19'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:20'
 }
 SPOCApiPlay >> playTrack: aString withContext: anotherString on: aDevice [
 
-	| dict |
-	dict := Dictionary new
-		at: #device_id put: aDevice;
-		at: #context_uri put: anotherString;
-		at: #uris put: '"spotify:track:', aString, '"';
-		yourself.
-	self execute: dict
+	self execute: (Dictionary new at: #device_id put: aDevice;
+			at: #context_uri put: anotherString;
+			at: #uris put: (self buildUris: aString);
+			yourself)
 ]

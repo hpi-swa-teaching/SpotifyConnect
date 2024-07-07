@@ -10,17 +10,19 @@ Class {
 
 {
 	#category : #parameters,
-	#'squeak_changestamp' : 'RK 6/16/2024 12:29'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:16'
 }
 SPOCApiPlaylist >> endpoint [
+
 	^ 'v1/playlists/'
 ]
 
 {
 	#category : #parameters,
-	#'squeak_changestamp' : 'RK 5/16/2024 18:51'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:16'
 }
 SPOCApiPlaylist >> endpointMethod [
+
 	^ 'GET'
 ]
 
@@ -1452,18 +1454,16 @@ SPOCApiPlaylist >> executeTest [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/24/2024 05:20'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:16'
 }
 SPOCApiPlaylist >> getPlaylistWithID: aString [
 
-	^ self execute: (Dictionary new
-			at: #id put: aString;
-			yourself)
+	^ self execute: (Dictionary new at: #id put: aString; yourself)
 ]
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/24/2024 05:32'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:17'
 }
 SPOCApiPlaylist >> tinkerReponseContent: aContentStream [
 	
@@ -1471,30 +1471,8 @@ SPOCApiPlaylist >> tinkerReponseContent: aContentStream [
 	content := Json readFrom: aContentStream readStream.
 	tracks := OrderedCollection new.
 	index := 0.
-	(content at: #items) do: [:anItem |
-		| track |
-		track := (self tinkerTrack: anItem) offset: index.
-		index := index + 1.
-		tracks add: track].
+	(content at: #items)
+		do: [:anItem | tracks add: ((self tinkerTrack: (anItem at: #track)) offset: index).
+			index := index + 1].
 	^ tracks
-]
-
-{
-	#category : #response,
-	#'squeak_changestamp' : 'RK 6/16/2024 12:51'
-}
-SPOCApiPlaylist >> tinkerTrack: aJson [
-
-	| track artists |
-	track := aJson at: #track. 
-	artists := OrderedCollection new.
-	(track at: #artists) do: [:anArtist | artists add: (self tinkerArtist: anArtist)].
-	^ SPOCTrack new
-		id: (track at: #id);
-		name: (track at: #name);
-		image: (SPOCImage newWithUrl: ((((track at: #album) at: #images) at: 1) at: #url));
-		artists: artists;
-		duration: (track at: #duration_ms) // 1000;
-		trackNumber: (track at: #track_number);
-		yourself
 ]

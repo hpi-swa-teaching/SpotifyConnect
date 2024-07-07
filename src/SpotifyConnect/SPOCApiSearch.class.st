@@ -500,12 +500,11 @@ SPOCApiSearch >> executeTest [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/24/2024 03:16'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:25'
 }
 SPOCApiSearch >> search: aString withFilter: aFilter [
 
-	^ self execute: (Dictionary new
-			at: #input put: aString;
+	^ self execute: (Dictionary new at: #input put: aString;
 			at: #type put: aFilter;
 			at: #limit put: SPOCStyle resultListLimit;
 			yourself)
@@ -513,7 +512,7 @@ SPOCApiSearch >> search: aString withFilter: aFilter [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 7/7/2024 01:19'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:25'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
@@ -522,24 +521,18 @@ SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	results := OrderedCollection new.
 	index := 0.
 	(content includesKey: #tracks)
-		ifTrue: [((content at: #tracks) at: #items) do: [:aTrack |
-				| track |
-				track := (self tinkerTrack: aTrack) offset: index.
-				index := index + 1.
-				results add: track].
+		ifTrue: [((content at: #tracks) at: #items)
+				do: [:aTrack | results add: ((self tinkerTrack: aTrack) offset: index).
+					index := index + 1].
 			^ results].
 	(content includesKey: #albums)
-		ifTrue: [((content at: #albums) at: #items) do: [ :anAlbum | 
-			| track |
-				track := (self tinkerAlbum: anAlbum) offset: index.
-				index := index + 1.
-				results add: track].
+		ifTrue: [((content at: #albums) at: #items)
+				do: [:anAlbum | results add: ((self tinkerAlbum: anAlbum) offset: index).
+					index := index + 1].
 			^ results].
 	(content includesKey: #playlists)
-		ifTrue: [((content at: #playlists) at: #items) do: [ :aPlaylist | 
-			| track |
-				track := (self tinkerPlaylist: aPlaylist) offset: index.
-				index := index + 1.
-				results add: track].
+		ifTrue: [((content at: #playlists) at: #items)
+				do: [:aPlaylist | results add: ((self tinkerPlaylist: aPlaylist) offset: index).
+					index := index + 1].
 			^ results]
 ]

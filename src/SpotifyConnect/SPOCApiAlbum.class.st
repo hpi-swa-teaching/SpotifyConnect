@@ -163,29 +163,25 @@ SPOCApiAlbum >> executeTest [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/24/2024 05:21'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:03'
 }
 SPOCApiAlbum >> getAlbumWithID: aString [
 
-	^ self execute: (Dictionary new
-			at: #id put: aString;
-			yourself)
+	^ self execute: (Dictionary new at: #id put: aString; yourself)
 ]
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'RK 6/16/2024 14:06'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:05'
 }
 SPOCApiAlbum >> tinkerReponseContent: aContentStream [
 	
-	| content tracks index|
+	| content index tracks |
 	content := Json readFrom: aContentStream readStream.
 	tracks := OrderedCollection new.
 	index := 0.
-	(content at: #items) do: [:anItem |
-		| track |
-		track := (self tinkerTrack: anItem) offset: index.
-		index := index + 1.
-		tracks add: track].
+	(content at: #items) 
+		do: [:anItem | tracks add: ((self tinkerTrack: anItem) offset: index).
+			index := index + 1].
 	^ tracks
 ]

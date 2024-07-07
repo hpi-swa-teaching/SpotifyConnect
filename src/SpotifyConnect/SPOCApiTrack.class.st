@@ -48,9 +48,12 @@ SPOCApiTrack >> executeTest [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:44'
+	#'squeak_changestamp' : 'TL 7/7/2024 03:28'
 }
 SPOCApiTrack >> tinkerReponseContent: aContentStream [
 
-	^ Json readFrom: aContentStream
+	| content |
+	content := Json readFrom: aContentStream readStream.
+	^ self tinkerTrack: content
+	
 ]
