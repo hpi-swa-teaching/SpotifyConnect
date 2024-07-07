@@ -22,6 +22,24 @@ SPOCApiEndpoint class >> apiHost [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'OW 7/7/2024 16:28'
+}
+SPOCApiEndpoint class >> gitRepoName [
+
+	^ 'SpotifyConnect'
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'OW 7/7/2024 16:37'
+}
+SPOCApiEndpoint class >> mockdataBasepath [
+
+	^ 'assets/mockdata/'
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/10/2024 03:37'
 }
@@ -114,6 +132,16 @@ SPOCApiEndpoint >> initialize [
 	super initialize.
 	
 	self returnsTestContent: false
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'OW 7/7/2024 16:41'
+}
+SPOCApiEndpoint >> loadMockdataFromAsset: anAsset [
+
+	^ ((GitAssetLoader for: self class gitRepoName)
+		loadPlaintext: self class mockdataBasepath , anAsset) readStream
 ]
 
 {
