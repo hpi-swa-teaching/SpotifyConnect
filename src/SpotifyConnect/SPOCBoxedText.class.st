@@ -146,6 +146,33 @@ SPOCBoxedText >> contents: aString [
 ]
 
 {
+	#category : #'event handling',
+	#'squeak_changestamp' : 'VK 7/7/2024 14:40'
+}
+SPOCBoxedText >> handlesMouseDown: anEvent [
+
+	^ false
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'VK 7/7/2024 14:41'
+}
+SPOCBoxedText >> handlesMouseMove: anEvent [
+
+	^ false
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'VK 7/7/2024 14:41'
+}
+SPOCBoxedText >> handlesMouseOver: anEvent [
+
+	^ false
+]
+
+{
 	#category : #initialization,
 	#'squeak_changestamp' : 'VE 6/10/2024 21:54'
 }
@@ -185,6 +212,51 @@ SPOCBoxedText >> label: anObject [
 SPOCBoxedText >> leftBorderCircle [
 
 	^ self submorphNamed: 'left'
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'VK 7/7/2024 14:42'
+}
+SPOCBoxedText >> mouseDown: anEvent [
+
+	^ nil
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'VK 7/7/2024 14:45'
+}
+SPOCBoxedText >> mouseEnter: anEvent [
+
+	^ nil
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'VK 7/7/2024 14:44'
+}
+SPOCBoxedText >> mouseLeave: anEvent [
+
+	^ nil
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'VK 7/7/2024 14:44'
+}
+SPOCBoxedText >> mouseMove: anEvent [
+
+	^ nil
+]
+
+{
+	#category : #'event handling',
+	#'squeak_changestamp' : 'VK 7/7/2024 14:42'
+}
+SPOCBoxedText >> mouseUp: anEvent [
+
+	^ nil
 ]
 
 {
