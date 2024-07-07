@@ -130,6 +130,24 @@ SPOCTrack >> onClick: anApp [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'RK 7/7/2024 12:34'
+}
+SPOCTrack >> secondaryText [
+
+	^ self artistsAsString
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 7/7/2024 12:42'
+}
+SPOCTrack >> tertiaryText [
+
+	^ self durationAsFormattedTime
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/7/2024 10:57'
 }
 SPOCTrack >> trackNumber [

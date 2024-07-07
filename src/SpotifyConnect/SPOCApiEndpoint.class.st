@@ -157,7 +157,7 @@ SPOCApiEndpoint >> returnsTestContent: aBoolean [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 7/7/2024 02:47'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:10'
 }
 SPOCApiEndpoint >> tinkerAlbum: aJson [
 
@@ -170,6 +170,7 @@ SPOCApiEndpoint >> tinkerAlbum: aJson [
 		image: (SPOCImage newWithUrl: (((aJson at: #images) first) at: #url));
 		artists: artists;
 		totalTracks: (aJson at: #total_tracks);
+		hasTertiaryText: false;
 		yourself
 ]
 
@@ -217,7 +218,7 @@ SPOCApiEndpoint >> tinkerPlaybackState: aJson [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 7/7/2024 02:47'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:10'
 }
 SPOCApiEndpoint >> tinkerPlaylist: aJson [
 
@@ -225,6 +226,7 @@ SPOCApiEndpoint >> tinkerPlaylist: aJson [
 		name: (aJson at: #name);
 		image: (SPOCImage newWithUrl: (((aJson at: #images) first) at: #url));
 		owner: ((aJson at: #owner) at: #display_name);
+		hasTertiaryText: false;
 		yourself
 ]
 
@@ -253,7 +255,7 @@ SPOCApiEndpoint >> tinkerRequest [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 7/7/2024 02:59'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:11'
 }
 SPOCApiEndpoint >> tinkerTrack: aJson [
 
@@ -266,6 +268,7 @@ SPOCApiEndpoint >> tinkerTrack: aJson [
 			artists: artists;
 			duration: (aJson at: #duration_ms) // 1000;
 			trackNumber: (aJson at: #track_number);
+			hasTertiaryText: true;
 			yourself.
 	(aJson includesKey: #album)
 		ifTrue: [album := self tinkerAlbum: (aJson at: #album).

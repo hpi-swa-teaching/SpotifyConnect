@@ -55,3 +55,12 @@ SPOCPlaylist >> owner: aString [
 
 	owner := aString
 ]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 7/7/2024 12:34'
+}
+SPOCPlaylist >> secondaryText [
+
+	^ self owner
+]

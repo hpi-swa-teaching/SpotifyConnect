@@ -8,7 +8,8 @@ Class {
 		'id',
 		'image',
 		'name',
-		'offset'
+		'offset',
+		'hasTertiaryText'
 	],
 	#category : #SpotifyConnect,
 	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
@@ -48,6 +49,24 @@ SPOCDataPiece >> equals: aDataModel [
 
 	^ self subclassResponsibility
 	
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 7/7/2024 13:07'
+}
+SPOCDataPiece >> hasTertiaryText [
+
+	^ hasTertiaryText
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 7/7/2024 13:05'
+}
+SPOCDataPiece >> hasTertiaryText: aBoolean [
+
+	hasTertiaryText := aBoolean
 ]
 
 {
@@ -130,4 +149,13 @@ SPOCDataPiece >> offset: aNumber [
 SPOCDataPiece >> onClick: anApp [
 
 	^ self subclassResponsibility
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'RK 7/7/2024 12:33'
+}
+SPOCDataPiece >> primaryText [
+
+	^ self name
 ]

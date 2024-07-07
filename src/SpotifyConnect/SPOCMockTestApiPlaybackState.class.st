@@ -122,7 +122,7 @@ SPOCMockTestApiPlaybackState >> setUp [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/12/2024 01:38'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:11'
 }
 SPOCMockTestApiPlaybackState >> setUpAlbum [
 
@@ -132,6 +132,7 @@ SPOCMockTestApiPlaybackState >> setUpAlbum [
 			image: (SPOCImage newWithUrl: 'https://i.scdn.co/image/ab67616d0000b27384464d902b1ebaf62775a6da');
 			artists: self artists;
 			totalTracks: 1;
+			hasTertiaryText: false;
 			yourself)
 ]
 
@@ -187,7 +188,7 @@ SPOCMockTestApiPlaybackState >> setUpPlaybackState [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/12/2024 01:39'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:11'
 }
 SPOCMockTestApiPlaybackState >> setUpTrack [
 
@@ -199,6 +200,7 @@ SPOCMockTestApiPlaybackState >> setUpTrack [
 			artists: self artists;
 			duration: 144;
 			trackNumber: 1;
+			hasTertiaryText: true;
 			yourself)
 	
 ]

@@ -63,6 +63,15 @@ SPOCAlbum >> onClick: anApp [
 
 {
 	#category : #accessing,
+	#'squeak_changestamp' : 'RK 7/7/2024 12:33'
+}
+SPOCAlbum >> secondaryText [
+
+	^ self artistsAsString
+]
+
+{
+	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/7/2024 10:53'
 }
 SPOCAlbum >> totalTracks [

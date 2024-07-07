@@ -44,7 +44,7 @@ SPOCMockTestApiPlaylist >> artists [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/24/2024 04:52'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:12'
 }
 SPOCMockTestApiPlaylist >> setUp [
 
@@ -57,6 +57,7 @@ SPOCMockTestApiPlaylist >> setUp [
 			artists: self artists;
 			duration: 234;
 			trackNumber: 7;
+			hasTertiaryText: true;
 			yourself).
 ]
 

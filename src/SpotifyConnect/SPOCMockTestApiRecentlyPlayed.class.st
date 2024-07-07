@@ -14,7 +14,7 @@ Class {
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/12/2024 01:56'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:12'
 }
 SPOCMockTestApiRecentlyPlayed >> album [
 
@@ -24,6 +24,7 @@ SPOCMockTestApiRecentlyPlayed >> album [
 		image: (SPOCImage newWithUrl: 'https://i.scdn.co/image/ab67616d0000b27384559fa763af6fb17d9f9683');
 		artists: self artists;
 		totalTracks: 14;
+		hasTertiaryText: false;
 		yourself
 ]
 
@@ -59,7 +60,7 @@ SPOCMockTestApiRecentlyPlayed >> artists [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/24/2024 02:48'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:12'
 }
 SPOCMockTestApiRecentlyPlayed >> setUp [
 
@@ -72,6 +73,7 @@ SPOCMockTestApiRecentlyPlayed >> setUp [
 			artists: self artists;
 			duration: 217;
 			trackNumber: 11;
+			hasTertiaryText: true;
 			yourself)
 ]
 

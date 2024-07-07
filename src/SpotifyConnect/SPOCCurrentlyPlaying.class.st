@@ -14,12 +14,12 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 21:59'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:05'
 }
 SPOCCurrentlyPlaying >> attachItem [
-		
-	self item: ((SPOCResultListItem newWith: self track) hasTertiaryText: false; 
-			yourself);
+	
+	self track hasTertiaryText: false.
+	self item: (SPOCResultListItem newWith: self track);
 		addMorph: self item
 ]
 
@@ -95,12 +95,13 @@ SPOCCurrentlyPlaying >> track: aSPOCTrack [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:30'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:15'
 }
 SPOCCurrentlyPlaying >> updatePlaybackState: aState [
 
 	super updatePlaybackState: aState.
 	self isDisabled
 		ifFalse: [self track: aState track.
+			self track hasTertiaryText: false.
 			self item changeItemTo: self track]
 ]

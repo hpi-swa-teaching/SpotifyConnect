@@ -80,7 +80,7 @@ SPOCTestArtistsStringFormatting >> setUp [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/23/2024 14:59'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:13'
 }
 SPOCTestArtistsStringFormatting >> setUpAlbum [
 
@@ -90,6 +90,7 @@ SPOCTestArtistsStringFormatting >> setUpAlbum [
 			image: (SPOCImage newWithUrl: 'https://i.scdn.co/image/ab67616d0000b27384464d902b1ebaf62775a6da');
 			artists: self artists;
 			totalTracks: 1;
+			hasTertiaryText: false;
 			yourself)
 ]
 

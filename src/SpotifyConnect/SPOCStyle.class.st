@@ -217,7 +217,7 @@ SPOCStyle class >> textHeight [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/16/2024 12:37'
+	#'squeak_changestamp' : 'RK 7/7/2024 13:13'
 }
 SPOCStyle class >> trackWelcome [
 
@@ -229,5 +229,6 @@ SPOCStyle class >> trackWelcome [
 		name: 'Welcome!';
 		artists: collection;
 		duration: 0;
+		hasTertiaryText: false;
 		yourself
 ]
