@@ -61,11 +61,11 @@ SPOCSwitchDevice class >> devicesPanelWidth [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'TL 7/8/2024 17:04'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:51'
 }
 SPOCSwitchDevice class >> itemTextPadding [
 
-	^ self class devicesPanelPadding * self class devicesPanelToItemRatio
+	^ self devicesPanelPadding * self devicesPanelToItemRatio
 ]
 
 {

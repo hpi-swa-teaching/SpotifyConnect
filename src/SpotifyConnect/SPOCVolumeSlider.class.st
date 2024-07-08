@@ -8,8 +8,8 @@ Class {
 		'button',
 		'deviceID',
 		'icon',
+		'isMuted',
 		'slider',
-		'storeVolume',
 		'supportsVolume',
 		'volume'
 	],
@@ -37,38 +37,30 @@ SPOCVolumeSlider class >> speakerMutedIconPath [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/19/2024 19:44'
+	#'squeak_changestamp' : 'TL 7/8/2024 18:15'
 }
 SPOCVolumeSlider >> attachButton [
 	
-	self icon: (SPOCIcon new
-			color: Color transparent;
+	self icon: (SPOCIcon new color: Color transparent;
 			iconAsset: self class speakerIconPath;
 			yourself);
-		button: (SPOCClickable
-				newUsing: self icon
-				onClick: [:anEvent | 
-					self volumeClicked: [self switchSpeakerState]]);
-		addMorph: (Morph new
-			color: Color transparent;
-			extent: 1 @ 20;
-			yourself);
+		button: (SPOCClickable newUsing: self icon
+				onClick: [:anEvent | self volumeClicked: [self switchMuteState]]);
+		addMorph: self spacerMorph;
 		addMorph: self button
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/19/2024 00:46'
+	#'squeak_changestamp' : 'TL 7/8/2024 18:59'
 }
 SPOCVolumeSlider >> attachSlider [
 
-	self slider: (SPOCSlider new
-			value: self volume;
+	self slider: (SPOCSlider new value: self volume;
 			length: 100;
-			onValueChanged: [:aValue | 
-				self volumeClicked: [self changeVolumeTo: aValue]];
-			yourself).
-	self addMorph: self slider
+			onValueChanged: [:aValue | self volumeClicked: [self changeVolumeTo: aValue]];
+			yourself);
+		addMorph: self slider
 ]
 
 {
@@ -91,16 +83,16 @@ SPOCVolumeSlider >> button: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 6/26/2024 14:54'
+	#'squeak_changestamp' : 'TL 7/8/2024 18:52'
 }
 SPOCVolumeSlider >> changeVolumeTo: aVolume [
 	
-	self volume: aVolume.
-	SPOCApiVolume new
-		authorizer: self app auth;
+	SPOCApiVolume new authorizer: self app auth;
 		changeVolumeTo: aVolume on: self deviceID.
-	self slider value: self volume.
-	self updateSpeakerIcon
+	aVolume = 0
+		ifTrue: [self mute]
+		ifFalse: [self unmute: aVolume].
+	self slider value: aVolume
 ]
 
 {
@@ -141,7 +133,7 @@ SPOCVolumeSlider >> icon: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/19/2024 00:47'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:32'
 }
 SPOCVolumeSlider >> initialize [
 
@@ -150,12 +142,39 @@ SPOCVolumeSlider >> initialize [
 	self color: Color transparent;
 		supportsVolume: false;
 		volume: 100;
-		storeVolume: self volume;
 		layoutPolicy: TableLayout new;
 		listDirection: #leftToRight;
 		attachSlider;
 		attachButton;
 		extendFully
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 7/8/2024 18:12'
+}
+SPOCVolumeSlider >> isMuted [
+
+	^ isMuted
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 7/8/2024 18:12'
+}
+SPOCVolumeSlider >> isMuted: anObject [
+
+	isMuted := anObject
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'TL 7/8/2024 18:22'
+}
+SPOCVolumeSlider >> mute [
+
+	self icon iconAsset: self class speakerMutedIconPath.
+	self isMuted: true
 ]
 
 {
@@ -195,21 +214,14 @@ SPOCVolumeSlider >> slider: anObject [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/19/2024 00:18'
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 7/8/2024 17:39'
 }
-SPOCVolumeSlider >> storeVolume [
+SPOCVolumeSlider >> spacerMorph [
 
-	^ storeVolume
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/19/2024 00:18'
-}
-SPOCVolumeSlider >> storeVolume: anObject [
-
-	storeVolume := anObject
+	^ Morph new color: Color transparent;
+		extent: 1 @ SPOCStyle defaultMargin;
+		yourself
 ]
 
 {
@@ -232,33 +244,42 @@ SPOCVolumeSlider >> supportsVolume: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'VE 6/26/2024 14:54'
+	#'squeak_changestamp' : 'TL 7/8/2024 18:57'
 }
-SPOCVolumeSlider >> switchSpeakerState [
+SPOCVolumeSlider >> switchMuteState [
 
-	self volume = 0
-		ifTrue: [self volume: self storeVolume;
-			changeVolumeTo: self storeVolume]
-		ifFalse: [self storeVolume: self volume;
-			volume: 0;
-			changeVolumeTo: self volume]
+	self isMuted
+		ifTrue: [self changeVolumeTo: self volume]
+		ifFalse: [self changeVolumeTo: 0]
 ]
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/2/2024 19:00'
+	#'squeak_changestamp' : 'TL 7/8/2024 18:50'
+}
+SPOCVolumeSlider >> unmute: aVolume [
+
+	self icon iconAsset: self class speakerIconPath.
+	self isMuted: false;
+		volume: aVolume
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'TL 7/8/2024 18:52'
 }
 SPOCVolumeSlider >> updatePlaybackState: aState [
 
+	| newVolume |
 	super updatePlaybackState: aState.
 	self isDisabled
-		ifFalse: [self volume = 0
-					ifFalse: [self storeVolume: self volume].
+		ifFalse: [newVolume := aState device volume.
+			newVolume = 0
+				ifTrue: [self mute]
+				ifFalse: [self unmute: newVolume].
 			self deviceID: aState device id;
-				supportsVolume: aState device supportsVolume;
-				volume: aState device volume;
-				updateSpeakerIcon.
-			self slider updateValue: self volume]
+				supportsVolume: aState device supportsVolume.
+			self slider updateValue: newVolume]
 ]
 
 {
@@ -292,13 +313,15 @@ SPOCVolumeSlider >> volume: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'VE 7/2/2024 19:03'
+	#'squeak_changestamp' : 'TL 7/8/2024 18:30'
 }
 SPOCVolumeSlider >> volumeClicked: aBlock [
 
-	self isDisabled ifTrue: [self showPopUp. ^ self].
+	self isDisabled
+		ifTrue: [self showPopUp.
+			^ self].
 	self supportsVolume
 		ifTrue: aBlock
-		ifFalse: [self app volumePopUp. self slider value: self volume].
-	self updateSpeakerIcon.
+		ifFalse: [self app volumePopUp.
+			self slider value: self volume]
 ]
