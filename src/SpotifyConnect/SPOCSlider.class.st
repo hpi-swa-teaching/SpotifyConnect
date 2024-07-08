@@ -75,14 +75,14 @@ SPOCSlider >> align [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/12/2024 03:32'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
 }
 SPOCSlider >> attachInnerBar [
 
 	self addMorph: (self circleMorph name: 'inner-right-circle';
 			eventHandler: self mouseEventHandler;
 			yourself);
-		addMorph: (Morph new extent: SPOCSlider defaultBarWidth @ SPOCSlider defaultBarHeight;
+		addMorph: (Morph new extent: self class defaultBarWidth @ self class defaultBarHeight;
 			 name: 'inner-bar';
 			 eventHandler: self mouseEventHandler;
 			 yourself)
@@ -90,11 +90,11 @@ SPOCSlider >> attachInnerBar [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/12/2024 03:32'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
 }
 SPOCSlider >> attachNob [
 
-	self addMorph: (self circleMorph extent: SPOCSlider defaultNobSize asPoint;
+	self addMorph: (self circleMorph extent: self class defaultNobSize asPoint;
 			 name: 'nob';
 			 eventHandler: self mouseEventHandler;
 			 hide;
@@ -103,7 +103,7 @@ SPOCSlider >> attachNob [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/12/2024 03:32'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
 }
 SPOCSlider >> attachOuterBar [
 
@@ -113,7 +113,7 @@ SPOCSlider >> attachOuterBar [
 		 addMorph: (self circleMorph name: 'outer-right-circle';
 			 eventHandler: self mouseEventHandler;
 			 yourself);
-		 addMorph: (Morph new extent: SPOCSlider defaultBarWidth @ SPOCSlider defaultBarHeight;
+		 addMorph: (Morph new extent: self class defaultBarWidth @ self class defaultBarHeight;
 			 eventHandler: self mouseEventHandler;
 			 name: 'outer-bar';
 			 yourself)
@@ -121,12 +121,12 @@ SPOCSlider >> attachOuterBar [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/12/2024 03:42'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
 }
 SPOCSlider >> circleMorph [
 
 	^ CircleMorph new
-		extent: SPOCSlider defaultBarHeight asPoint;
+		extent: self class defaultBarHeight asPoint;
 		borderWidth: 0;
 		yourself
 ]
@@ -306,7 +306,7 @@ SPOCSlider >> onMouseMove: anEvent [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'TL 6/12/2024 03:43'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:48'
 }
 SPOCSlider >> onMouseUp: anEvent [
 	
@@ -314,7 +314,8 @@ SPOCSlider >> onMouseUp: anEvent [
 	x := anEvent position x.
 	diff := x - self position x.
 	self updateValue: diff.
-	self onValueChanged ifNotNil: [self onValueChanged value: value]
+	self onValueChanged
+		ifNotNil: [self onValueChanged value: self value]
 ]
 
 {
@@ -440,12 +441,11 @@ SPOCSlider >> updateOuterBarLeftCircleColorIfNecessary: aColor [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'TL 6/12/2024 03:44'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:35'
 }
 SPOCSlider >> updateValue: aWidth [
 
-	value := ((aWidth * 100 // self length) min: 100 max: 0).
-	self value: value
+	self value: ((aWidth * 100 // self length) min: 100 max: 0)
 ]
 
 {

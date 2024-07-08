@@ -66,12 +66,11 @@ SPOCImage >> magnifyBy: aMagnification [
 
 {
 	#category : #formatting,
-	#'squeak_changestamp' : 'VE 7/8/2024 17:03'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
 }
 SPOCImage >> scaledTo: aNumber [
 	
-	^ SPOCImage new
-			image: (self image scaledToSize: aNumber)
+	^ self class new image: (self image scaledToSize: aNumber)
 ]
 
 {

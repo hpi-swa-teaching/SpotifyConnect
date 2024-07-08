@@ -73,22 +73,20 @@ SPOCApiPlay >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 7/7/2024 03:12'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:18'
 }
 SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 
 	| data |
+	data := ''.
 	request rawUrl: (request rawUrl, '?device_id=', (aParamDictionary at: #device_id)).
-	(aParamDictionary size = 1)
-		ifTrue: [data := ''].
 	(aParamDictionary size = 2)
 		ifTrue: [data := self buildDataWithTrack: (aParamDictionary at: #uris)]
 		ifFalse: [(aParamDictionary includesKey: #context_uri)
 				ifTrue: [data := self buildDataWithContext: (aParamDictionary at: #context_uri) andTrack: (aParamDictionary at: #uris)]].
 	request headerAt: 'Content-Length' put: data size.
 	(data size = 0)
-		ifTrue: [request headerAt: 'Content-Length' put: 0.
-			^ self client sendRequest: request]
+		ifTrue: [^ self client sendRequest: request]
 		ifFalse: [^ self client sendRequest: request content: data readStream size: data size]
 
 ]
@@ -121,18 +119,6 @@ SPOCApiPlay >> playTrack: aString withAlbum: anotherString on: aDevice [
 
 	self execute: (Dictionary new at: #device_id put: aDevice;
 			at: #context_uri put: (self buildContextAlbum: anotherString);
-			at: #uris put: (self buildUris: aString);
-			yourself)
-]
-
-{
-	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 7/7/2024 03:20'
-}
-SPOCApiPlay >> playTrack: aString withContext: anotherString on: aDevice [
-
-	self execute: (Dictionary new at: #device_id put: aDevice;
-			at: #context_uri put: anotherString;
 			at: #uris put: (self buildUris: aString);
 			yourself)
 ]

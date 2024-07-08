@@ -15,7 +15,7 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/8/2024 17:14'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:39'
 }
 SPOCUserLogin >> attachButton [
 
@@ -64,7 +64,7 @@ SPOCUserLogin >> buttonLabel: aString [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:32'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:39'
 }
 SPOCUserLogin >> initialize [
 

@@ -61,7 +61,7 @@ SPOCSearchbar >> attachButtons [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 7/8/2024 17:47'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:20'
 }
 SPOCSearchbar >> attachInputField [
 	
@@ -74,8 +74,7 @@ SPOCSearchbar >> attachInputField [
 		hScrollBarPolicy: #never;
 		vScrollBarPolicy: #never;
 		acceptOnCR: true;
-		setProperty: #indicateKeyboardFocus toValue: #never;
-		yourself.
+		setProperty: #indicateKeyboardFocus toValue: #never.
 	 self addMorph: textField
 ]
 
@@ -123,7 +122,7 @@ SPOCSearchbar >> buildCircle [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 7/8/2024 17:45'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:15'
 }
 SPOCSearchbar >> buildInputTextField [
 	
@@ -137,19 +136,20 @@ SPOCSearchbar >> buildInputTextField [
 		indicateUnacceptedChanges: false;
 		help: self class inputFieldHelp;
 		yourself.
-	^ builder build: spec.
+	^ builder build: spec
 ]
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'VE 7/8/2024 17:50'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:48'
 }
 SPOCSearchbar >> buttonClicked: aButton [
 	
 	self resetButtonColors.
 	aButton wrappee color: SPOCStyle spotifyGreen.
 	self filter: aButton externalName.
-	self input ifNotNil: [self search: self input]
+	self input
+		ifNotNil: [self search: self input]
 ]
 
 {
@@ -190,7 +190,7 @@ SPOCSearchbar >> filter: aString [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/8/2024 17:51'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:25'
 }
 SPOCSearchbar >> initialize [
 
@@ -201,7 +201,7 @@ SPOCSearchbar >> initialize [
 		results: OrderedCollection new;
 		attachSearchbar;
 		filter: 'track';
-		extendFully.
+		extendFully
 ]
 
 {
@@ -289,12 +289,14 @@ SPOCSearchbar >> sanitizeInput: aString [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 7/2/2024 18:57'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:26'
 }
 SPOCSearchbar >> search: aString [
 
 	| apiEndpoint |
-	self isDisabled ifTrue: [self showPopUp. ^ self].
+	self isDisabled
+		ifTrue: [self showPopUp.
+			^ self].
 	apiEndpoint := SPOCApiSearch new authorizer: self app auth.
 	self input: aString;
 		results: (apiEndpoint search: (self sanitizeInput: aString) withFilter: self filter).

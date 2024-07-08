@@ -31,9 +31,10 @@ SPOCBoldText >> contents: aString [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/10/2024 21:53'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:04'
 }
 SPOCBoldText >> initialize [
-	super initialize.
+
+	super initialize
 	
 ]

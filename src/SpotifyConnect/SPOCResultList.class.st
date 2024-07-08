@@ -28,19 +28,19 @@ SPOCResultList >> attachResultList [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:55'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:07'
 }
 SPOCResultList >> attachScrollablePanel [
 
-	self scrollablePanel: (SPOCScrollablePanel new
-			hResizing: #spaceFill;
-			vResizing: #spaceFill);
+	self scrollablePanel: (SPOCScrollablePanel new hResizing: #spaceFill;
+			vResizing: #spaceFill;
+			yourself);
 		addMorph: self scrollablePanel
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 22:34'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:32'
 }
 SPOCResultList >> buildTitle [
 	
@@ -49,7 +49,7 @@ SPOCResultList >> buildTitle [
 			hResizing: #spaceFill;
 			yourself);
 		title: 'Welcome!';
-		addMorph: (Morph new color: Color transparent; extent: 1@15; yourself);
+		addMorph: self spacerMorph;
 		addMorph: self titleMorph
 ]
 
@@ -102,11 +102,13 @@ SPOCResultList >> needsActiveDevice [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:46'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:00'
 }
 SPOCResultList >> onItemClicked: anItem [
 	
-	(self isDisabled and: (anItem dataPiece isKindOf: SPOCTrack)) ifTrue: [self showPopUp. ^ self].
+	(self isDisabled and: [anItem dataPiece class = SPOCTrack])
+		ifTrue: [self showPopUp.
+			^ self].
 	self resetHighlightColors.
 	anItem highlightPrimaryTextColor.
 	anItem dataPiece onClick: self app
@@ -159,11 +161,22 @@ SPOCResultList >> scrollablePanel: aSPOCScrollablePanel [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 7/7/2024 14:16'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:17'
 }
 SPOCResultList >> size [
 
-	^ items size
+	^ self items size
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 7/8/2024 19:32'
+}
+SPOCResultList >> spacerMorph [
+
+	^ Morph new color: Color transparent;
+		extent: 1 @ SPOCStyle defaultMargin;
+		yourself
 ]
 
 {
@@ -205,7 +218,7 @@ SPOCResultList >> titleMorph: aSPOCBoldText [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:31'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:24'
 }
 SPOCResultList >> updateItems [
 	
@@ -218,7 +231,7 @@ SPOCResultList >> updateItems [
 			hResizing: #spaceFill;
 			vResizing: #shrinkWrap.
 		self items add: clickable].
-	self app updatePlaybackState.
+	self app updatePlaybackState
 ]
 
 {
@@ -235,14 +248,13 @@ SPOCResultList >> updatePlaybackState: aPlaybackState [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 6/5/2024 01:08'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:20'
 }
 SPOCResultList >> updateResults: anOrderedCollection [
 	
 	self results: anOrderedCollection;
 		updateItems;
-		updateScrollablePanel;
-		yourself
+		updateScrollablePanel
 ]
 
 {

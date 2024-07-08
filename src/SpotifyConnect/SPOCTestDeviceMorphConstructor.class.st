@@ -50,7 +50,7 @@ SPOCTestDeviceMorphConstructor >> deviceMorph: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/23/2024 14:30'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:20'
 }
 SPOCTestDeviceMorphConstructor >> setUp [
 
@@ -60,8 +60,7 @@ SPOCTestDeviceMorphConstructor >> setUp [
 			isActive: true;
 			yourself);
 		deviceMorph: (SPOCSwitchDevice new 
-			buildResultMorphFrom: self device);
-		yourself
+			buildResultMorphFrom: self device)
 ]
 
 {

@@ -47,11 +47,11 @@ SPOCApiRecentlyPlayed >> executeTest [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 7/7/2024 03:19'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:45'
 }
 SPOCApiRecentlyPlayed >> getRecentlyPlayed [
 
-	^ self execute: (Dictionary new at: #limit put: SPOCRecentlyPlayed trackLimit;
+	^ self execute: (Dictionary new at: #limit put: SPOCStyle defaultRequestLimit;
 			at: #before put: SPOCRecentlyPlayed beforeTimestamp;
 			yourself)
 ]

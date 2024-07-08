@@ -125,7 +125,7 @@ SPOCApp >> bottomPanelContent [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 7/7/2024 01:27'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:06'
 }
 SPOCApp >> buildBottomPanel: aBuilder [
 
@@ -135,24 +135,26 @@ SPOCApp >> buildBottomPanel: aBuilder [
 			listDirection: #leftToRight;
 			listCentering: #justified;
 			wrapDirection: #bottomToTop);
-		children: #bottomPanelContent
+		children: #bottomPanelContent;
+		yourself
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 7/7/2024 01:27'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:06'
 }
 SPOCApp >> buildCenterPanel: aBuilder [
 
 	^ SPOCPluggableTablePanelSpec new model: self;
 		tableLayoutProperties: (TableLayoutProperties new hResizing: #spaceFill;
 			vResizing: #spaceFill);
-		children: #centerPanelContent
+		children: #centerPanelContent;
+		yourself
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 7/7/2024 01:29'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:06'
 }
 SPOCApp >> buildMainTable: aBuilder [
 
@@ -163,12 +165,13 @@ SPOCApp >> buildMainTable: aBuilder [
 			vResizing: #spaceFill);
 		children: {self buildTopPanel: aBuilder.
 			self buildCenterPanel: aBuilder.			
-			self buildBottomPanel: aBuilder}
+			self buildBottomPanel: aBuilder};
+		yourself
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 7/7/2024 01:28'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:06'
 }
 SPOCApp >> buildTopPanel: aBuilder [
 
@@ -178,19 +181,20 @@ SPOCApp >> buildTopPanel: aBuilder [
 			listDirection: #leftToRight;
 			listCentering: #justified;
 			cellPositioning: #topLeft);
-		children: #topPanelContent
+		children: #topPanelContent;
+		yourself
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 7/7/2024 01:29'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
 }
 SPOCApp >> buildWindow: aBuilder [
 
 	^ aBuilder pluggableWindowSpec new model: self;
 		 color: SPOCStyle spotifyBlack;
 		 label: #windowTitle;
-		 minimumExtent: SPOCApp minimumExtent;
+		 minimumExtent: self class minimumExtent;
 		 children: {self buildMainTable: aBuilder};
 		 yourself
 ]
@@ -544,14 +548,14 @@ SPOCApp >> setUpVolumeSlider [
 
 {
 	#category : #'pop-ups',
-	#'squeak_changestamp' : 'TL 7/7/2024 01:49'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:00'
 }
 SPOCApp >> showPopUpFor: aUiComponent [
 	
-	(self isUserAuthorized not and: aUiComponent needsLogin)
+	(self isUserAuthorized not and: [aUiComponent needsLogin])
 		ifTrue: [self loginPopUp.
 			^ self].
-	(self isDeviceActive not and: aUiComponent needsActiveDevice)
+	(self isDeviceActive not and: [aUiComponent needsActiveDevice])
 		ifTrue: [self devicePopUp.
 			^ self]
 ]
@@ -646,9 +650,9 @@ SPOCApp >> volumeSlider: aSPOCVolumeSlider [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 5/28/2024 14:57'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
 }
 SPOCApp >> windowTitle [
 
-	^ SPOCApp appName
+	^ self class appName
 ]

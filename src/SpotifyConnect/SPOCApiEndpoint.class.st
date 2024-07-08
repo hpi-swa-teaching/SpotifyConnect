@@ -77,11 +77,11 @@ SPOCApiEndpoint >> authorizer: aSPOCAuthorizer [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 03:37'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:09'
 }
 SPOCApiEndpoint >> client [
 
-	^ WebClient new initializeFromUrl: SPOCApiEndpoint apiHost
+	^ WebClient new initializeFromUrl: self class apiHost
 ]
 
 {
@@ -176,11 +176,11 @@ SPOCApiEndpoint >> refreshAccessTokenAndExecute: aParamDictionary [
 
 {
 	#category : #parameters,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:40'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:09'
 }
 SPOCApiEndpoint >> requestUri [
 
-	^ SPOCApiEndpoint apiHost, self endpoint
+	^ self class apiHost, self endpoint
 ]
 
 {

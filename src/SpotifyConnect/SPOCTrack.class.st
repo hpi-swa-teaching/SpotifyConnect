@@ -107,14 +107,13 @@ SPOCTrack >> equals: aTrack [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:10'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:28'
 }
 SPOCTrack >> onClick: anApp [
 
 	| filter endpoint|
 	filter := anApp searchbar filter.
-	endpoint := SPOCApiPlay new.
-	endpoint authorizer: anApp auth.
+	endpoint := SPOCApiPlay new authorizer: anApp auth.
 	filter = 'track' 
 			ifTrue: [endpoint playTrack: self id on: anApp player deviceID].
 	filter = 'album' 

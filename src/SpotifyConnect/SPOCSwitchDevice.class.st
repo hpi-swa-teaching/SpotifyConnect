@@ -91,7 +91,7 @@ SPOCSwitchDevice >> attachBackground [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 7/8/2024 17:24'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:39'
 }
 SPOCSwitchDevice >> attachButton [
 
@@ -115,12 +115,12 @@ SPOCSwitchDevice >> attachResultDisplay [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:54'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:12'
 }
 SPOCSwitchDevice >> buildNameText: aDevice [
 
 	| text |
-	text := SPOCBoldText newAt: (self itemBackground topLeft + SPOCSwitchDevice itemTextPadding) withText: aDevice name.
+	text := SPOCBoldText newAt: (self itemBackground topLeft + self class itemTextPadding) withText: aDevice name.
 	aDevice isActive
 		ifTrue: [text textColor: SPOCStyle spotifyGreen].
 	^ text
@@ -129,7 +129,7 @@ SPOCSwitchDevice >> buildNameText: aDevice [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:56'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:53'
 }
 SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 	
@@ -140,7 +140,7 @@ SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 		addMorph: (self buildTypeText: aDevice);
 		vResizing: #shrinkWrap; 
 		yourself.
-	deviceButton := SPOCClickable newUsing: resultMorph onClick: [:evt | self switchDeviceClicked: aDevice id].
+	deviceButton := SPOCClickable newUsing: resultMorph onClick: [:anEvent | self switchDeviceClicked: aDevice id].
 	deviceButton vResizing: #shrinkWrap.
 	^ deviceButton
 ]
@@ -231,7 +231,7 @@ SPOCSwitchDevice >> hideResults [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/8/2024 17:55'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:20'
 }
 SPOCSwitchDevice >> initialize [
 
@@ -243,8 +243,7 @@ SPOCSwitchDevice >> initialize [
 		attachResultDisplay;
 		attachButton;
 		extendFully;
-		hResizing: #spaceFill;
-		yourself
+		hResizing: #spaceFill
 ]
 
 {
@@ -294,12 +293,11 @@ SPOCSwitchDevice >> resultDisplay: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 7/2/2024 19:05'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:03'
 }
 SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 	
-	SPOCApiSwitchDevice new
-		authorizer: self app auth;
+	SPOCApiSwitchDevice new authorizer: self app auth;
 		switchDeviceTo: aDevice.
 	self app updatePlaybackState.
 	self hideResults

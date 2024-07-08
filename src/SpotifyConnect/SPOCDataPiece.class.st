@@ -16,15 +16,15 @@ Class {
 
 {
 	#category : #formatting,
-	#'squeak_changestamp' : 'TL 7/7/2024 02:26'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:12'
 }
 SPOCDataPiece >> artistsAsString [
 
 	| result |
 	result := ''.
 	self artists
-		allButLastDo: [:anArtist | result := result , anArtist name , ', '].
-	result := result , self artists last name.
+		allButLastDo: [:anArtist | result := result, anArtist name, ', '].
+	result := result, self artists last name.
 	^ result
 ]
 

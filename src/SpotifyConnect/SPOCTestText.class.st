@@ -34,13 +34,13 @@ SPOCTestText >> testConstructor [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:40'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:55'
 }
 SPOCTestText >> testMouseEventHandling [
 	
-	self assert: ((text handlesMouseOver: nil) = false).
-	self assert: ((text handlesMouseMove: nil) = false).
-	self assert: ((text handlesMouseDown: nil) = false).
+	self assert: ((text handlesMouseOver: nil) not).
+	self assert: ((text handlesMouseMove: nil) not).
+	self assert: ((text handlesMouseDown: nil) not).
 	self assert: ((text mouseDown: nil) = nil).
 	self assert: ((text mouseEnter: nil) = nil).
 	self assert: ((text mouseLeave: nil) = nil).

@@ -95,13 +95,14 @@ SPOCCurrentlyPlaying >> track: aSPOCTrack [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 7/7/2024 13:15'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:58'
 }
 SPOCCurrentlyPlaying >> updatePlaybackState: aState [
 
 	super updatePlaybackState: aState.
 	self isDisabled
-		ifFalse: [self track: aState track.
-			self track hasTertiaryText: false.
-			self item changeItemTo: self track]
+		ifTrue: [^ self].
+	self track: aState track.
+	self track hasTertiaryText: false.
+	self item changeItemTo: self track
 ]

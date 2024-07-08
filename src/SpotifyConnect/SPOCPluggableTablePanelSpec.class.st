@@ -26,7 +26,7 @@ SPOCPluggableTablePanelSpec class >> fullFrame [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/23/2024 18:12'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
 }
 SPOCPluggableTablePanelSpec >> buildWith: aBuilder [
 	
@@ -36,11 +36,12 @@ SPOCPluggableTablePanelSpec >> buildWith: aBuilder [
 	widget := aBuilder buildPluggablePanel: self.
 	widget layoutPolicy: TableLayout new;
 		layoutProperties: self tableLayoutProperties.
-	self frame ifNil: [self frame: SPOCPluggableTablePanelSpec fullFrame].
+	self frame
+		ifNil: [self frame: self class fullFrame].
 	aBuilder setFrame: self frame in: widget.
 	widget hResizing: hResizing;
 		 vResizing: vResizing.
-	^ widget.
+	^ widget
 ]
 
 {

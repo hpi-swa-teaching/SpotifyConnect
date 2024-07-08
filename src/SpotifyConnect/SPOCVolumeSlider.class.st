@@ -37,7 +37,7 @@ SPOCVolumeSlider class >> speakerMutedIconPath [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/8/2024 18:15'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:39'
 }
 SPOCVolumeSlider >> attachButton [
 	
@@ -133,7 +133,7 @@ SPOCVolumeSlider >> icon: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/8/2024 17:32'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:39'
 }
 SPOCVolumeSlider >> initialize [
 
@@ -266,31 +266,21 @@ SPOCVolumeSlider >> unmute: aVolume [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 7/8/2024 18:52'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:59'
 }
 SPOCVolumeSlider >> updatePlaybackState: aState [
 
 	| newVolume |
 	super updatePlaybackState: aState.
 	self isDisabled
-		ifFalse: [newVolume := aState device volume.
-			newVolume = 0
-				ifTrue: [self mute]
-				ifFalse: [self unmute: newVolume].
-			self deviceID: aState device id;
-				supportsVolume: aState device supportsVolume.
-			self slider updateValue: newVolume]
-]
-
-{
-	#category : #updating,
-	#'squeak_changestamp' : 'TL 6/19/2024 19:44'
-}
-SPOCVolumeSlider >> updateSpeakerIcon [
-
-	self volume = 0
-		ifTrue: [self icon iconAsset: self class speakerMutedIconPath]
-		ifFalse: [self icon iconAsset: self class speakerIconPath]
+		ifTrue: [^ self].
+	newVolume := aState device volume.
+	newVolume = 0
+		ifTrue: [self mute]
+		ifFalse: [self unmute: newVolume].
+	self deviceID: aState device id;
+		supportsVolume: aState device supportsVolume.
+	self slider updateValue: newVolume
 ]
 
 {

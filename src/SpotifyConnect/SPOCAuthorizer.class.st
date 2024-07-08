@@ -205,17 +205,17 @@ SPOCAuthorizer >> authorizeByRefresh [
 
 {
 	#category : #authorization,
-	#'squeak_changestamp' : 'VE 6/4/2024 09:30'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
 }
 SPOCAuthorizer >> buildAuthorizationUrl [
 	
 	self nextRandomState.
 	 ^ 'https://accounts.spotify.com/authorize',
 		'?response_type=code',
-		'&scope=', SPOCAuthorizer scope,
-		'&redirect_uri=', SPOCAuthorizer redirectUri,
+		'&scope=', self class scope,
+		'&redirect_uri=', self class redirectUri,
 		'&state=', self randomState,
-		'&client_id=', SPOCAuthorizer clientId
+		'&client_id=', self class clientId
 ]
 
 {
@@ -230,7 +230,7 @@ SPOCAuthorizer >> callSuccessCallbacks [
 
 {
 	#category : #callback,
-	#'squeak_changestamp' : 'TL 7/7/2024 02:06'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
 }
 SPOCAuthorizer >> callback: aRequest [
 
@@ -240,7 +240,7 @@ SPOCAuthorizer >> callback: aRequest [
 	state := aRequest fields at: #state ifAbsent: [aRequest send400Response].
 	state = self randomState
 		ifTrue: [self retreiveAccessTokenWithAccessCode: code.
-			aRequest send200Response: (SPOCAuthorizer successPage) contentType: 'text/html']
+			aRequest send200Response: (self class successPage) contentType: 'text/html']
 		ifFalse: [aRequest send500Response: self class authStateErrorMessage]
 ]
 
@@ -255,17 +255,17 @@ SPOCAuthorizer >> canRefresh [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:51'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
 }
 SPOCAuthorizer >> initialize [
 
 	super initialize.
 	
-	SPOCAuthorizer clientId.
-	SPOCAuthorizer clientSecret.
+	self class clientId.
+	self class clientSecret.
 	self isAuthorized: false;
 		successCallbacks: OrderedCollection new.
-	WebServer reset default listenOn: SPOCAuthorizer redirectPort
+	WebServer reset default listenOn: self class redirectPort
 ]
 
 {
@@ -397,11 +397,11 @@ SPOCAuthorizer >> registerSuccessCallback: aBlock [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 6/4/2024 09:36'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
 }
 SPOCAuthorizer >> requestSpotifyApiEndpoint: aContentString [
 	
-	^ WebClient httpPost: SPOCAuthorizer spotifyTokenApiUrl content: aContentString type: 'application/x-www-form-urlencoded'
+	^ WebClient httpPost: self class spotifyTokenApiUrl content: aContentString type: 'application/x-www-form-urlencoded'
 
 ]
 
@@ -427,38 +427,38 @@ SPOCAuthorizer >> retreiveAccessTokenWithAccessCode: anAccessCode [
 
 {
 	#category : #callback,
-	#'squeak_changestamp' : 'TL 6/10/2024 03:53'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
 }
 SPOCAuthorizer >> setupCallbackService [
 
-	WebServer default removeService: SPOCAuthorizer redirectRoute.
-	WebServer default addService: SPOCAuthorizer redirectRoute action: [:aRequest | self callback: aRequest]
+	WebServer default removeService: self class redirectRoute.
+	WebServer default addService: self class redirectRoute action: [:aRequest | self callback: aRequest]
 ]
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 6/4/2024 09:33'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
 }
 SPOCAuthorizer >> spotifyAccessApiContent: anAccessCode [
 
 	^ 'grant_type=authorization_code',
 		'&code=', anAccessCode, 
-		'&redirect_uri=', SPOCAuthorizer redirectUri,
-		'&client_id=', SPOCAuthorizer clientId,
-		'&client_secret=', SPOCAuthorizer clientSecret
+		'&redirect_uri=', self class redirectUri,
+		'&client_id=', self class clientId,
+		'&client_secret=', self class clientSecret
 
 ]
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 7/7/2024 02:24'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
 }
 SPOCAuthorizer >> spotifyRefreshApiContent [
 	
 	^ 'grant_type=refresh_token',
 		'&refresh_token=', self refreshToken, 
-		'&client_id=', SPOCAuthorizer clientId, 
-		'&client_secret=', SPOCAuthorizer clientSecret
+		'&client_id=', self class clientId, 
+		'&client_secret=', self class clientSecret
 ]
 
 {

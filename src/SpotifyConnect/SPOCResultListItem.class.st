@@ -87,12 +87,12 @@ SPOCResultListItem >> attachCenterBox [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:57'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:33'
 }
 SPOCResultListItem >> attachImage [
 
 	self image: (self dataPiece image scaledTo: self class resultListItemHeight - (2 * SPOCStyle defaultMargin));
-		addMorph: image
+		addMorph: self image
 
 ]
 

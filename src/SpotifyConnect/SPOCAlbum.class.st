@@ -45,7 +45,7 @@ SPOCAlbum >> equals: anAlbum [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'TL 7/7/2024 02:29'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:22'
 }
 SPOCAlbum >> onClick: anApp [
 
@@ -54,8 +54,7 @@ SPOCAlbum >> onClick: anApp [
 	results := apiEndpoint getAlbumWithID: self id.
 	results
 		do: [:aResult | aResult artists: self artists;
-				image: self image;
-				yourself].
+			image: self image].
 	anApp searchbar context: self id.
 	anApp resultList updateResults: results;
 		title: self name

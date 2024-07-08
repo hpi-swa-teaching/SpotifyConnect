@@ -19,13 +19,12 @@ SPOCTestApiRecentlyPlayed >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/24/2024 03:09'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:45'
 }
 SPOCTestApiRecentlyPlayed >> testApiRecentlyPlayedExecute [
 
 	| dict res |
-	dict := Dictionary new
-			at: #limit put: SPOCRecentlyPlayed trackLimit;
+	dict := Dictionary new at: #limit put: SPOCStyle defaultRequestLimit;
 			at: #before put: SPOCRecentlyPlayed beforeTimestamp;
 			yourself.
 	res := self apiEndpoint execute: dict.

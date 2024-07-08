@@ -14,15 +14,6 @@ Class {
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/1/2024 22:10'
-}
-SPOCRecentlyPlayed class >> afterTimestamp [
-
-	^ 1484811043508
-]
-
-{
-	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VK 6/9/2024 13:53'
 }
 SPOCRecentlyPlayed class >> beforeTimestamp [
@@ -40,17 +31,8 @@ SPOCRecentlyPlayed class >> recentlyPlayedIconPath [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VK 6/1/2024 22:08'
-}
-SPOCRecentlyPlayed class >> trackLimit [
-
-	^10
-]
-
-{
 	#category : #building,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:43'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:39'
 }
 SPOCRecentlyPlayed >> attachButton [
 
@@ -77,49 +59,51 @@ SPOCRecentlyPlayed >> getRecentlyPlayed [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:43'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:39'
 }
 SPOCRecentlyPlayed >> initialize [
 
 	super initialize.
 	
-	self 
-		color: Color transparent;
+	self color: Color transparent;
 		items: OrderedCollection new;
 		results: OrderedCollection new;
 		attachButton;
-		extendFully;
-		yourself
+		extendFully
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:16'
 }
 SPOCRecentlyPlayed >> items [
+
 	^ trackItems
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:16'
 }
 SPOCRecentlyPlayed >> items: anObject [
+
 	trackItems := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:16'
 }
 SPOCRecentlyPlayed >> results [
+
 	^ tracks
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:16'
 }
 SPOCRecentlyPlayed >> results: anObject [
+
 	tracks := anObject
 ]

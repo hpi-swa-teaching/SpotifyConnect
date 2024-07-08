@@ -91,11 +91,11 @@ SPOCBoxedText >> centerBox [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/8/2024 16:34'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
 }
 SPOCBoxedText >> circleMorph [
 
-	^ CircleMorph new extent: SPOCBoxedText height asPoint;
+	^ CircleMorph new extent: self class height asPoint;
 		borderWidth: 0;
 		yourself
 ]
@@ -111,15 +111,6 @@ SPOCBoxedText >> color: aColor [
 	self centerBox color: aColor.
 	self leftBorderCircle color: aColor.
 	self rightBorderCircle color: aColor
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/23/2024 16:45'
-}
-SPOCBoxedText >> content [
-
-	^ content
 ]
 
 {
@@ -170,7 +161,7 @@ SPOCBoxedText >> handlesMouseOver: anEvent [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/8/2024 16:35'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
 }
 SPOCBoxedText >> initialize [
 
@@ -180,7 +171,7 @@ SPOCBoxedText >> initialize [
 		attachRightBorderCircle; 
 		attachCenterBox;
 		attachText;
-		contents: SPOCBoxedText defaultContent;
+		contents: self class defaultContent;
 		color: SPOCStyle spotifyWhite
 ]
 
@@ -313,11 +304,11 @@ SPOCBoxedText >> updateLabelPosition [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/8/2024 16:48'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
 }
 SPOCBoxedText >> updateRightBorderCirclePosition [
 
-	self rightBorderCircle position: self topRight - (SPOCBoxedText height  @ 0)
+	self rightBorderCircle position: self topRight - (self class height  @ 0)
 	
 	
 ]

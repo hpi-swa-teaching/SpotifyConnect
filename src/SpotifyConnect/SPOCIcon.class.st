@@ -22,6 +22,15 @@ SPOCIcon class >> defaultAsset [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/8/2024 19:31'
+}
+SPOCIcon class >> defaultIconPadding [
+
+	^ 8 asPoint
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'TL 6/10/2024 05:11'
 }
 SPOCIcon class >> iconScaling [
@@ -40,13 +49,13 @@ SPOCIcon class >> size [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/8/2024 17:16'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:40'
 }
-SPOCIcon >> attachButton [
+SPOCIcon >> attachIcon [
 
 	self icon: SPOCImage new.
 	self addMorph: self icon.
-	self icon position: (self icon position + 8 asPoint)
+	self icon position: (self icon position + self class defaultIconPadding)
 ]
 
 {
@@ -69,34 +78,34 @@ SPOCIcon >> icon: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 7/8/2024 16:48'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
 }
 SPOCIcon >> iconAsset: anAssetPath [
 
 	self icon assetPath: anAssetPath;
-		magnifyBy: SPOCIcon iconScaling
+		magnifyBy: self class iconScaling
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/8/2024 16:44'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
 }
 SPOCIcon >> initialize [
 
 	super initialize.
 	
-	self attachButton; 
+	self attachIcon; 
 		initializeStyle;
-		iconAsset: SPOCIcon defaultAsset
+		iconAsset: self class defaultAsset
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/7/2024 01:10'
+	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
 }
 SPOCIcon >> initializeStyle [
 
-	self extent: SPOCIcon size asPoint; 
+	self extent: self class size asPoint; 
 		color: SPOCStyle spotifyWhite; 
 		borderWidth: 0
 ]
