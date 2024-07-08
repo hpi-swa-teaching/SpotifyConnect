@@ -79,6 +79,18 @@ SPOCSwitchDevice class >> textHeight [
 
 {
 	#category : #building,
+	#'squeak_changestamp' : 'VE 7/8/2024 18:56'
+}
+SPOCSwitchDevice >> attachBackground [
+
+	self itemBackground: RectangleMorph new.
+	self itemBackground color: SPOCStyle spotifyGray;
+		extent: (self class devicesPanelWidth @ (self class devicesPanelHeight * self class devicesPanelToItemRatio)).
+	^ self itemBackground
+]
+
+{
+	#category : #building,
 	#'squeak_changestamp' : 'VE 7/8/2024 17:24'
 }
 SPOCSwitchDevice >> attachButton [
@@ -103,18 +115,6 @@ SPOCSwitchDevice >> attachResultDisplay [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 7/8/2024 17:25'
-}
-SPOCSwitchDevice >> buildBackground [
-
-	self itemBackground: RectangleMorph new.
-	self itemBackground color: SPOCStyle spotifyGray;
-		extent: (self class devicesPanelWidth @ (self class devicesPanelHeight * self class devicesPanelToItemRatio)).
-	^ self itemBackground
-]
-
-{
-	#category : #building,
 	#'squeak_changestamp' : 'VK 6/10/2024 19:54'
 }
 SPOCSwitchDevice >> buildNameText: aDevice [
@@ -129,13 +129,13 @@ SPOCSwitchDevice >> buildNameText: aDevice [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 7/8/2024 17:26'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:56'
 }
 SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 	
 	| resultMorph deviceButton |
 	resultMorph := Morph new color: Color transparent;
-		addMorph: self buildBackground;
+		addMorph: self attachBackground;
 		addMorph: (self buildNameText: aDevice);
 		addMorph: (self buildTypeText: aDevice);
 		vResizing: #shrinkWrap; 

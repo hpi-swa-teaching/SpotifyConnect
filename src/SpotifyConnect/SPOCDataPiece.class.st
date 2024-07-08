@@ -8,7 +8,6 @@ Class {
 		'id',
 		'image',
 		'name',
-		'offset',
 		'hasTertiaryText'
 	],
 	#category : #SpotifyConnect,
@@ -121,25 +120,6 @@ SPOCDataPiece >> name [
 SPOCDataPiece >> name: aString [
 
 	name := aString
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 7/7/2024 02:32'
-}
-SPOCDataPiece >> offset [
-	"Offset within a search result, album or playlist"
-	
-	^ offset
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 6/16/2024 13:59'
-}
-SPOCDataPiece >> offset: aNumber [
-
-	offset := aNumber
 ]
 
 {

@@ -54,60 +54,48 @@ SPOCPlayer class >> previousIconPath [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 22:27'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:51'
 }
 SPOCPlayer >> attachButton: anIcon [
 
-	self button: (SPOCClickable
-				newUsing: anIcon
-				onClick: [:anEvent | self executeButtonFunction: anIcon]);
+	self button: (SPOCClickable newUsing: anIcon onClick: [:anEvent | self executeButtonFunction: anIcon]);
 		 addMorph: self button
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/18/2024 23:35'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:51'
 }
 SPOCPlayer >> attachNextButton [
 
-	self nextIcon: (SPOCIcon new
-				iconAsset: self class nextIconPath;
-				color: Color transparent;
-			 	yourself);		
-		attachButton: self nextIcon;
-	      addMorph: (Morph new
+	self nextIcon: (SPOCIcon new iconAsset: self class nextIconPath;
 			color: Color transparent;
-			extent: 15 @ self button height;
-			yourself)
+		 	yourself);		
+		attachButton: self nextIcon;
+	      addMorph: self spacerMorph.
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/18/2024 23:35'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:51'
 }
 SPOCPlayer >> attachPlayPauseButton [
 
-	self playPauseIcon: (SPOCIcon new
-				iconAsset: self class playIconPath;
-			 	yourself);		
+	self playPauseIcon: (SPOCIcon new iconAsset: self class playIconPath);		
 		attachButton: self playPauseIcon;
-		addMorph: (Morph new
-			color: Color transparent;
-			extent: 15 @ self button height;
-			yourself);
+		addMorph: self spacerMorph;
 		updatePlayPauseIcon
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/18/2024 23:36'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:51'
 }
 SPOCPlayer >> attachPreviousButton [
 
-	self previousIcon: (SPOCIcon new 
-				iconAsset: self class previousIconPath;
-				color: Color transparent;
-			 	yourself);		
+	self previousIcon: (SPOCIcon new iconAsset: self class previousIconPath;
+			color: Color transparent;
+		 	yourself);		
 		attachButton: self previousIcon
 ]
 
@@ -239,23 +227,21 @@ SPOCPlayer >> nextIcon: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 6/26/2024 14:41'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:48'
 }
 SPOCPlayer >> pause [
 
-	SPOCApiPause new
-		authorizer: self app auth;
+	SPOCApiPause new authorizer: self app auth;
 		pauseOn: self deviceID
 ]
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 6/26/2024 14:41'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:48'
 }
 SPOCPlayer >> play [
 
-	SPOCApiPlay new
-		authorizer: self app auth;
+	SPOCApiPlay new authorizer: self app auth;
 		playOn: self deviceID
 ]
 
@@ -297,28 +283,35 @@ SPOCPlayer >> previousIcon: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 7/8/2024 18:26'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:48'
 }
 SPOCPlayer >> skipToNext [
 
-	SPOCApiNext new
-		authorizer: self app auth;
-		skipToNextOn: self deviceID;
-		yourself.
+	SPOCApiNext new authorizer: self app auth;
+		skipToNextOn: self deviceID.
 	self app updatePlaybackState
 ]
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 7/8/2024 18:27'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:48'
 }
 SPOCPlayer >> skipToPrevious [
 
-	SPOCApiPrevious new
-		authorizer: self app auth;
-		skipToPreviousOn: self deviceID;
-		yourself.
+	SPOCApiPrevious new authorizer: self app auth;
+		skipToPreviousOn: self deviceID.
 	self app updatePlaybackState
+]
+
+{
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 7/8/2024 18:52'
+}
+SPOCPlayer >> spacerMorph [
+	
+	^ Morph new color: Color transparent;
+		extent: SPOCStyle defaultMargin @ self button height;
+		yourself
 ]
 
 {

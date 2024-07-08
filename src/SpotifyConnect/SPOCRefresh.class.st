@@ -23,16 +23,12 @@ SPOCRefresh class >> refreshIconPath [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:46'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:42'
 }
 SPOCRefresh >> attachButton [
 
-	self icon: (SPOCIcon new
-				iconAsset: self class refreshIconPath;
-			 	yourself);
-		button: (SPOCClickable
-				newUsing: self icon
-				onClick: [:anEvent | self refresh]);
+	self icon: (SPOCIcon new iconAsset: self class refreshIconPath);
+		button: (SPOCClickable newUsing: self icon onClick: [:anEvent | self refresh]);
 		addMorph: self button
 ]
 

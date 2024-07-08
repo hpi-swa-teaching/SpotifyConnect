@@ -17,20 +17,20 @@ Class {
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 18:11'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:55'
 }
-SPOCResultList >> buildResultList [
+SPOCResultList >> attachResultList [
 
-	self buildScrollablePanel;
+	self attachScrollablePanel;
 		buildTitle;
 		extendFully
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 19:09'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:55'
 }
-SPOCResultList >> buildScrollablePanel [
+SPOCResultList >> attachScrollablePanel [
 
 	self scrollablePanel: (SPOCScrollablePanel new
 			hResizing: #spaceFill;
@@ -55,7 +55,7 @@ SPOCResultList >> buildTitle [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:31'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:55'
 }
 SPOCResultList >> initialize [
 
@@ -70,7 +70,7 @@ SPOCResultList >> initialize [
 		wrapCentering: #topLeft;
 		vResizing: #spaceFill;
 		hResizing: #spaceFill;
-		buildResultList
+		attachResultList
 ]
 
 {
@@ -102,13 +102,23 @@ SPOCResultList >> needsActiveDevice [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:27'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:46'
 }
 SPOCResultList >> onItemClicked: anItem [
 	
 	(self isDisabled and: (anItem dataPiece isKindOf: SPOCTrack)) ifTrue: [self showPopUp. ^ self].
+	self resetHighlightColors.
 	anItem highlightPrimaryTextColor.
 	anItem dataPiece onClick: self app
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'VE 7/8/2024 18:47'
+}
+SPOCResultList >> resetHighlightColors [
+
+	self items do: [:anItem | anItem wrappee resetPrimaryTextColor].
 ]
 
 {
