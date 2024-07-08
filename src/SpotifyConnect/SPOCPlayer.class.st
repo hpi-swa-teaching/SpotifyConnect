@@ -297,7 +297,7 @@ SPOCPlayer >> previousIcon: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'RK 7/7/2024 14:20'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:26'
 }
 SPOCPlayer >> skipToNext [
 
@@ -305,13 +305,12 @@ SPOCPlayer >> skipToNext [
 		authorizer: self app auth;
 		skipToNextOn: self deviceID;
 		yourself.
-	self app resultList updateHighlightedTrackWithOffset: 1.
 	self app updatePlaybackState
 ]
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'RK 7/7/2024 14:20'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:27'
 }
 SPOCPlayer >> skipToPrevious [
 
@@ -319,7 +318,6 @@ SPOCPlayer >> skipToPrevious [
 		authorizer: self app auth;
 		skipToPreviousOn: self deviceID;
 		yourself.
-	self app resultList updateHighlightedTrackWithOffset: -1.
 	self app updatePlaybackState
 ]
 

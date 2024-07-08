@@ -188,6 +188,15 @@ SPOCResultListItem >> dataPiece: aDataPiece [
 ]
 
 {
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 7/8/2024 18:26'
+}
+SPOCResultListItem >> highlightPrimaryTextColor [
+
+	self primaryText color: SPOCStyle spotifyGreen
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:08'
 }
@@ -244,6 +253,15 @@ SPOCResultListItem >> primaryText: aSPOCText [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 7/8/2024 18:07'
+}
+SPOCResultListItem >> resetPrimaryTextColor [
+
+	self primaryText color: SPOCStyle spotifyWhite
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 6/10/2024 19:18'
 }
 SPOCResultListItem >> resizeTo: anExtent [
@@ -285,15 +303,4 @@ SPOCResultListItem >> tertiaryText [
 SPOCResultListItem >> tertiaryText: aSPOCText [
 
 	tertiaryText := aSPOCText
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 7/7/2024 13:42'
-}
-SPOCResultListItem >> togglePrimaryTextColor [
-
-	(self primaryText color = SPOCStyle spotifyGreen)
-		ifTrue: [self primaryText color: SPOCStyle spotifyWhite]
-		ifFalse: [self primaryText color: SPOCStyle spotifyGreen]
 ]

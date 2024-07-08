@@ -9,21 +9,11 @@ Class {
 		'titleMorph',
 		'results',
 		'items',
-		'scrollablePanel',
-		'playingOffset'
+		'scrollablePanel'
 	],
 	#category : #'SpotifyConnect-UI',
 	#'squeak_changestamp' : 'OW 7/4/2024 12:12'
 }
-
-{
-	#category : #updating,
-	#'squeak_changestamp' : 'RK 7/7/2024 15:36'
-}
-SPOCResultList >> addHighlightAt: aNumber [
-
-	(self items at: aNumber) wrappee togglePrimaryTextColor
-]
 
 {
 	#category : #building,
@@ -65,7 +55,7 @@ SPOCResultList >> buildTitle [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 7/7/2024 13:51'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:31'
 }
 SPOCResultList >> initialize [
 
@@ -74,7 +64,6 @@ SPOCResultList >> initialize [
 	self color: Color transparent;
 		results: OrderedCollection new;
 		items: OrderedCollection new;
-		playingOffset: -1;
 		layoutPolicy: TableLayout new;
 		listDirection: #topToBottom;
 		listCentering: #topLeft;
@@ -113,40 +102,13 @@ SPOCResultList >> needsActiveDevice [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 7/7/2024 14:06'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:27'
 }
 SPOCResultList >> onItemClicked: anItem [
 	
 	(self isDisabled and: (anItem dataPiece isKindOf: SPOCTrack)) ifTrue: [self showPopUp. ^ self].
-	self updateHighlightedTrackWithItem: anItem.
+	anItem highlightPrimaryTextColor.
 	anItem dataPiece onClick: self app
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 7/7/2024 13:47'
-}
-SPOCResultList >> playingOffset [
-
-	^ playingOffset
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'RK 7/7/2024 13:47'
-}
-SPOCResultList >> playingOffset: aNumber [
-
-	playingOffset := aNumber
-]
-
-{
-	#category : #updating,
-	#'squeak_changestamp' : 'RK 7/7/2024 14:47'
-}
-SPOCResultList >> removeHighlight [
-
-	(self items at: playingOffset) wrappee togglePrimaryTextColor
 ]
 
 {
@@ -233,43 +195,11 @@ SPOCResultList >> titleMorph: aSPOCBoldText [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'RK 7/7/2024 15:41'
-}
-SPOCResultList >> updateHighlightedTrackWithItem: anItem [
-	"This method is used when a track was clicked on"
-
-	((self playingOffset > 0) and: (self playingOffset <= self size))
-		ifTrue: [(self items at: playingOffset) wrappee togglePrimaryTextColor].
-	self playingOffset: anItem dataPiece offset.
-	anItem togglePrimaryTextColor
-]
-
-{
-	#category : #updating,
-	#'squeak_changestamp' : 'RK 7/7/2024 16:54'
-}
-SPOCResultList >> updateHighlightedTrackWithOffset: aNumber [
-	"This method is used when the currently playing track was changed by the player"
-	
-	| next |
-	(self app searchbar filter = 'track')
-		ifTrue: [^ self].
-	next := playingOffset + aNumber.
-	((self playingOffset > 0) and: (self playingOffset <= self size))
-		ifTrue: [self removeHighlight].
-	((next > 0) and: (next <= self size))
-		ifTrue: [self addHighlightAt: next].
-	self playingOffset: next
-]
-
-{
-	#category : #updating,
-	#'squeak_changestamp' : 'RK 7/7/2024 13:56'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:31'
 }
 SPOCResultList >> updateItems [
 	
 	self items isEmpty ifFalse: [self items removeAll].
-	self playingOffset: -1.
 	self results do: [:aResult |
 		| item clickable |
 		item := SPOCResultListItem newWith: aResult.
@@ -277,7 +207,20 @@ SPOCResultList >> updateItems [
 		clickable layoutPolicy: TableLayout new;
 			hResizing: #spaceFill;
 			vResizing: #shrinkWrap.
-		self items add: clickable]
+		self items add: clickable].
+	self app updatePlaybackState.
+]
+
+{
+	#category : #updating,
+	#'squeak_changestamp' : 'VE 7/8/2024 18:26'
+}
+SPOCResultList >> updatePlaybackState: aPlaybackState [
+	
+	super updatePlaybackState: aPlaybackState.
+	self items do: [:anItem | 
+		anItem wrappee resetPrimaryTextColor.
+		(anItem wrappee dataPiece id = aPlaybackState track id) ifTrue: [anItem wrappee highlightPrimaryTextColor]]
 ]
 
 {
