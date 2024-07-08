@@ -40,11 +40,11 @@ SPOCIcon class >> size [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/7/2024 01:11'
+	#'squeak_changestamp' : 'VE 7/8/2024 17:06'
 }
 SPOCIcon >> attachButton [
 
-	self icon: SPOCAssetImageMorph new.
+	self icon: SPOCImage new.
 	self addMorph: self icon.
 	self icon position: (self icon position + 8 asPoint)
 ]

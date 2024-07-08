@@ -7,27 +7,27 @@ Class {
 	#instVars : [
 		'url'
 	],
+	#classInstVars : [
+		'form'
+	],
 	#category : #'SpotifyConnect-UI',
 	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
 }
 
 {
 	#category : #constructor,
-	#'squeak_changestamp' : 'TL 6/10/2024 05:14'
+	#'squeak_changestamp' : 'VE 7/8/2024 17:01'
 }
 SPOCImage class >> newWithPath: aString [
 	
-	| form |
-	form := (GitAssetLoader for: SPOCStyle gitRepoName) loadForm: aString.
-	form := form scaledToSize: (SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin)).
 	^ SPOCImage new
-		image: form;
+		image: ((GitAssetLoader for: SPOCStyle gitRepoName) loadForm: aString);
 		yourself
 ]
 
 {
 	#category : #constructor,
-	#'squeak_changestamp' : 'TL 6/10/2024 05:14'
+	#'squeak_changestamp' : 'VE 7/8/2024 17:01'
 }
 SPOCImage class >> newWithUrl: aString [
 	
@@ -35,6 +35,16 @@ SPOCImage class >> newWithUrl: aString [
 		url: aString;
 		image: (Form fromBinaryStream: (HTTPSocket httpGet: aString));
 		yourself
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 7/8/2024 17:08'
+}
+SPOCImage >> assetPath: anAssetPath [
+
+	self image: ((GitAssetLoader for: SPOCStyle gitRepoName) loadAsset: anAssetPath).
+	self changed
 ]
 
 {
@@ -47,16 +57,22 @@ SPOCImage >> equals: anImage [
 ]
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'VE 7/8/2024 17:08'
+}
+SPOCImage >> magnifyBy: aMagnification [
+
+	self image: (self form magnifyBy: aMagnification)
+]
+
+{
 	#category : #formatting,
-	#'squeak_changestamp' : 'TL 7/7/2024 00:40'
+	#'squeak_changestamp' : 'VE 7/8/2024 17:03'
 }
 SPOCImage >> scaledTo: aNumber [
 	
-	self url
-		ifNil: [^ self].
 	^ SPOCImage new
-			image: ((Form fromBinaryStream: (HTTPSocket httpGet: self url))
-			scaledToSize: aNumber)
+			image: (self image scaledToSize: aNumber)
 ]
 
 {

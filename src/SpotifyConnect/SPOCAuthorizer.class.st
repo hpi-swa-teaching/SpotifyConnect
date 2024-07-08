@@ -194,6 +194,17 @@ SPOCAuthorizer >> accessToken: aToken [
 
 {
 	#category : #authorization,
+	#'squeak_changestamp' : 'VE 7/8/2024 16:17'
+}
+SPOCAuthorizer >> authorizeByRefresh [
+	
+	self refreshAccessToken. 
+	self isAuthorized
+		ifTrue: [self callSuccessCallbacks]
+]
+
+{
+	#category : #authorization,
 	#'squeak_changestamp' : 'VE 6/4/2024 09:30'
 }
 SPOCAuthorizer >> buildAuthorizationUrl [
@@ -325,7 +336,7 @@ SPOCAuthorizer >> randomState: aState [
 
 {
 	#category : #utilities,
-	#'squeak_changestamp' : 'TL 7/7/2024 02:19'
+	#'squeak_changestamp' : 'VE 7/8/2024 16:17'
 }
 SPOCAuthorizer >> randomString: aLength [
 
@@ -333,8 +344,8 @@ SPOCAuthorizer >> randomString: aLength [
     	chars := Character alphabet asArray.
     	randomString := String new: aLength.
     	1 to: aLength
-		do: [:i | index := (1 to: chars size) atRandom.
-      randomString at: i put: (chars at: index)].
+		do: [:anIndex | index := (1 to: chars size) atRandom.
+      		randomString at: anIndex put: (chars at: index)].
 	^ randomString
 ]
 
@@ -452,15 +463,13 @@ SPOCAuthorizer >> spotifyRefreshApiContent [
 
 {
 	#category : #authorization,
-	#'squeak_changestamp' : 'TL 7/7/2024 02:24'
+	#'squeak_changestamp' : 'VE 7/8/2024 16:16'
 }
 SPOCAuthorizer >> startAuthorization [
 
 	| url |
 	self canRefresh
-		ifTrue: [self refreshAccessToken. 
-			self isAuthorized
-				ifTrue: [self callSuccessCallbacks].
+		ifTrue: [self authorizeByRefresh.
 			^ self].
 	self setupCallbackService.
 	url := self buildAuthorizationUrl.
