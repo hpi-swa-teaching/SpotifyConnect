@@ -19,7 +19,7 @@ SPOCBoxedTextWithIcon class >> iconPadding [
 
 {
 	#category : #constructor,
-	#'squeak_changestamp' : 'TL 7/8/2024 17:38'
+	#'squeak_changestamp' : 'TL 7/8/2024 19:02'
 }
 SPOCBoxedTextWithIcon class >> newWithText: aString withIcon: anAssetPath [
 

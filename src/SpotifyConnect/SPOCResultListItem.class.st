@@ -19,13 +19,13 @@ Class {
 
 {
 	#category : #constructor,
-	#'squeak_changestamp' : 'RK 6/16/2024 14:35'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:56'
 }
 SPOCResultListItem class >> newWith: aDataPiece [
 
 	^ SPOCResultListItem new
 		dataPiece: aDataPiece;
-		buildItem;
+		attachItem;
 		yourself
 ]
 
@@ -58,9 +58,9 @@ SPOCResultListItem >> app: aSPOCApp [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 22:00'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:56'
 }
-SPOCResultListItem >> buildBackground [
+SPOCResultListItem >> attachBackground [
 
 	self color: SPOCStyle spotifyGray;
 		borderWidth: 1
@@ -68,57 +68,55 @@ SPOCResultListItem >> buildBackground [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 21:51'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:57'
 }
-SPOCResultListItem >> buildCenterBox [
+SPOCResultListItem >> attachCenterBox [
 
 	self addMorph: (Morph new name: 'center-box';
-			 color: Color transparent;
-			 layoutPolicy: TableLayout new;
-			 hResizing: #spaceFill;
-			 vResizing: #spaceFill;
-			 listDirection: #topToBottom;
-			 wrapDirection: #leftToRight;
-			 listCentering: #justified;
-			 wrapCentering: #justified;
-			 cellPositioning: #topLeft;
-			 yourself)
+		 color: Color transparent;
+		 layoutPolicy: TableLayout new;
+		 hResizing: #spaceFill;
+		 vResizing: #spaceFill;
+		 listDirection: #topToBottom;
+		 wrapDirection: #leftToRight;
+		 listCentering: #justified;
+		 wrapCentering: #justified;
+		 cellPositioning: #topLeft;
+		 yourself)
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'TL 7/8/2024 17:17'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:57'
 }
-SPOCResultListItem >> buildImage [
+SPOCResultListItem >> attachImage [
 
-	| image |
-	image := self dataPiece image scaledTo: self class resultListItemHeight - (2 * SPOCStyle defaultMargin).
-	self image: image;
+	self image: (self dataPiece image scaledTo: self class resultListItemHeight - (2 * SPOCStyle defaultMargin));
 		addMorph: image
 
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 6/10/2024 21:48'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:57'
 }
-SPOCResultListItem >> buildItem [
+SPOCResultListItem >> attachItem [
 
-	self buildBackground;	
-		buildTertiaryText;
-		buildCenterBox;
-		buildImage;
-		buildSecondaryText;
-		buildPrimaryText;
+	self attachBackground;	
+		attachTertiaryText;
+		attachCenterBox;
+		attachImage;
+		attachSecondaryText;
+		attachPrimaryText;
 		vResizing: #shrinkWrap;
 		hResizing: #spaceFill
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 7/7/2024 13:42'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:56'
 }
-SPOCResultListItem >> buildPrimaryText [
+SPOCResultListItem >> attachPrimaryText [
 
 	self primaryText: (SPOCBoldText new contents: self dataPiece primaryText).
 	self centerBox addMorph: self primaryText
@@ -126,9 +124,9 @@ SPOCResultListItem >> buildPrimaryText [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 7/7/2024 12:36'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:56'
 }
-SPOCResultListItem >> buildSecondaryText [
+SPOCResultListItem >> attachSecondaryText [
 
 	self secondaryText: (SPOCText new contents: self dataPiece secondaryText).
 	self centerBox addMorph: self secondaryText
@@ -136,13 +134,13 @@ SPOCResultListItem >> buildSecondaryText [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 7/7/2024 12:57'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:58'
 }
-SPOCResultListItem >> buildTertiaryText [
+SPOCResultListItem >> attachTertiaryText [
 
 	self dataPiece hasTertiaryText
-		ifTrue: [self tertiaryText: (SPOCText new contents: self dataPiece tertiaryText).
-		self addMorph: self tertiaryText]
+		ifTrue: [self tertiaryText: (SPOCText new contents: self dataPiece tertiaryText);
+			addMorph: self tertiaryText]
 ]
 
 {
@@ -156,13 +154,11 @@ SPOCResultListItem >> centerBox [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 7/8/2024 17:17'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:58'
 }
 SPOCResultListItem >> changeItemTo: aDataPiece [
 	
-	| form |
-	form := (aDataPiece image scaledTo: self class resultListItemHeight - (2 * SPOCStyle defaultMargin)) form.
-	self image image: form.
+	self image image: ((aDataPiece image scaledTo: self class resultListItemHeight - (2 * SPOCStyle defaultMargin)) form).
 	self primaryText contents: (aDataPiece primaryText asText addAttribute: TextEmphasis bold).
 	self secondaryText contents: (aDataPiece secondaryText).
 	aDataPiece hasTertiaryText
@@ -185,6 +181,15 @@ SPOCResultListItem >> dataPiece [
 SPOCResultListItem >> dataPiece: aDataPiece [
 
 	dataPiece := aDataPiece
+]
+
+{
+	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 7/8/2024 18:26'
+}
+SPOCResultListItem >> highlightPrimaryTextColor [
+
+	self primaryText color: SPOCStyle spotifyGreen
 ]
 
 {
@@ -244,6 +249,15 @@ SPOCResultListItem >> primaryText: aSPOCText [
 
 {
 	#category : #'as yet unclassified',
+	#'squeak_changestamp' : 'VE 7/8/2024 18:07'
+}
+SPOCResultListItem >> resetPrimaryTextColor [
+
+	self primaryText color: SPOCStyle spotifyWhite
+]
+
+{
+	#category : #'as yet unclassified',
 	#'squeak_changestamp' : 'VE 6/10/2024 19:18'
 }
 SPOCResultListItem >> resizeTo: anExtent [
@@ -285,15 +299,4 @@ SPOCResultListItem >> tertiaryText [
 SPOCResultListItem >> tertiaryText: aSPOCText [
 
 	tertiaryText := aSPOCText
-]
-
-{
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 7/7/2024 13:42'
-}
-SPOCResultListItem >> togglePrimaryTextColor [
-
-	(self primaryText color = SPOCStyle spotifyGreen)
-		ifTrue: [self primaryText color: SPOCStyle spotifyWhite]
-		ifFalse: [self primaryText color: SPOCStyle spotifyGreen]
 ]

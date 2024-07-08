@@ -70,7 +70,7 @@ SPOCApiSearch >> search: aString withFilter: aFilter [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'VE 7/8/2024 16:43'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:38'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
@@ -83,6 +83,5 @@ SPOCApiSearch >> tinkerReponseContent: aContentStream [
 		do: [:anAlbum | results add: (self tinkerAlbum: anAlbum)].
 	(self contentItemsAt: #playlists in: content)
 		do: [:aPlaylist | results add: (self tinkerPlaylist: aPlaylist)].
-	results withIndexDo: [:aDataPiece :anIndex | aDataPiece offset: anIndex].
 	^ results
 ]

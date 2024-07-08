@@ -50,18 +50,13 @@ SPOCRecentlyPlayed class >> trackLimit [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 7/7/2024 14:30'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:43'
 }
-SPOCRecentlyPlayed >> buildButton [
+SPOCRecentlyPlayed >> attachButton [
 
-	| text button |
+	| text |
 	text := SPOCBoxedTextWithIcon newWithText: 'Recently Played' withIcon: self class recentlyPlayedIconPath.
-	button := Morph new color: Color transparent;
-		addMorph: text;
-		yourself.
-	button extent: 0@0;
-		extent: button fullBounds extent.
-	self addMorph: (SPOCClickable newUsing: button onClick: [:anEvent | self getRecentlyPlayed])
+	self addMorph: (SPOCClickable newUsing: text onClick: [:anEvent | self getRecentlyPlayed])
 ]
 
 {
@@ -82,7 +77,7 @@ SPOCRecentlyPlayed >> getRecentlyPlayed [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/15/2024 16:41'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:43'
 }
 SPOCRecentlyPlayed >> initialize [
 
@@ -92,7 +87,7 @@ SPOCRecentlyPlayed >> initialize [
 		color: Color transparent;
 		items: OrderedCollection new;
 		results: OrderedCollection new;
-		buildButton;
+		attachButton;
 		extendFully;
 		yourself
 ]

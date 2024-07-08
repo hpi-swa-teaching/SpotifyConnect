@@ -588,12 +588,13 @@ SPOCApp >> topPanelContent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 7/7/2024 01:51'
+	#'squeak_changestamp' : 'VE 7/8/2024 18:17'
 }
 SPOCApp >> updatePlaybackState [
 
 	| playbackState |
 	playbackState := self getPlaybackState.
+	(playbackState class = SPOCApiEndpointResult) ifTrue: [^ self].
 	self componentsForUpdatingPlaybackState
 		do: [:aComponent | aComponent updatePlaybackState: playbackState]
 ]

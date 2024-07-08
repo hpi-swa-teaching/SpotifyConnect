@@ -18,6 +18,15 @@ Class {
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'VE 7/8/2024 17:46'
+}
+SPOCSearchbar class >> inputFieldHelp [
+	
+	^ 'Was möchtest du wiedergeben?'
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'TL 7/8/2024 17:13'
 }
 SPOCSearchbar class >> searchbarHeight [
@@ -35,36 +44,68 @@ SPOCSearchbar class >> searchbarWidth [
 ]
 
 {
-	#category : #building,
-	#'squeak_changestamp' : 'RK 6/14/2024 01:37'
+	#category : #initialization,
+	#'squeak_changestamp' : 'VE 7/8/2024 17:59'
 }
-SPOCSearchbar >> buildButtonWithText: aString at: aPosition [
+SPOCSearchbar >> attachButtons [
 
-	^ ((SPOCClickable
-		newUsing: (SPOCBoxedText new contents: aString)
-		onClick: [:anEvent | self buttonClicked: anEvent handler])
-		position: aPosition;
-		name: ((aString asLowercase) allButLast: 's' size);
-		yourself)
+	| trackButton albumsButton playlistsButton |
+	trackButton := self buildButtonWithText: 'Tracks' at: self bottomLeft name: 'track'.
+	trackButton wrappee color: SPOCStyle spotifyGreen.
+	albumsButton := self buildButtonWithText: 'Albums' at: (trackButton topRight + (SPOCStyle defaultMargin @ 0)) name: 'album'.
+	playlistsButton := self buildButtonWithText: 'Playlists' at: (albumsButton topRight + (SPOCStyle defaultMargin @ 0)) name: 'playlist'.
+	self addMorph: trackButton;
+		addMorph: albumsButton;
+		addMorph: playlistsButton
 ]
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/14/2024 01:32'
+	#'squeak_changestamp' : 'VE 7/8/2024 17:47'
 }
-SPOCSearchbar >> buildButtons [
-
-	| trackButton albumsButton playlistsButton |
-	trackButton := self buildButtonWithText: 'Tracks'
-		at: self bottomLeft.
-	albumsButton := self buildButtonWithText: 'Albums'
-		at: trackButton topRight + (SPOCStyle defaultMargin @ 0).
-	playlistsButton := self buildButtonWithText: 'Playlists'
-		at: albumsButton topRight + (SPOCStyle defaultMargin @ 0).
-	self addMorph: trackButton;
-		addMorph: albumsButton;
-		addMorph: playlistsButton;
+SPOCSearchbar >> attachInputField [
+	
+	| textField |
+	textField := self buildInputTextField.
+	textField extent: self class searchbarWidth @ self class searchbarHeight;
+		position: self topLeft + ((self class searchbarHeight / 2) @ 0);
+		color: SPOCStyle spotifyGray;
+		borderWidth: 0;
+		hScrollBarPolicy: #never;
+		vScrollBarPolicy: #never;
+		acceptOnCR: true;
+		setProperty: #indicateKeyboardFocus toValue: #never;
 		yourself.
+	 self addMorph: textField
+]
+
+{
+	#category : #building,
+	#'squeak_changestamp' : 'VE 7/8/2024 17:56'
+}
+SPOCSearchbar >> attachSearchbar [
+
+	| leftCircle rightCircle |
+	leftCircle := self buildCircle.
+	rightCircle := self buildCircle position: self topLeft + (self class searchbarWidth @ 0).
+	self addMorph: leftCircle;
+		addMorph: rightCircle;
+		attachInputField;
+		attachButtons
+]
+
+{
+	#category : #building,
+	#'squeak_changestamp' : 'VE 7/8/2024 17:38'
+}
+SPOCSearchbar >> buildButtonWithText: aString at: aPosition name: aName [
+
+	^ (SPOCClickable
+		newUsing: (SPOCBoxedText new contents: aString)
+		onClick: [:anEvent | self buttonClicked: anEvent handler])
+		position: aPosition;
+		name: aName;
+		yourself
 ]
 
 {
@@ -82,12 +123,11 @@ SPOCSearchbar >> buildCircle [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'TL 7/8/2024 17:12'
+	#'squeak_changestamp' : 'VE 7/8/2024 17:45'
 }
-SPOCSearchbar >> buildInputField [
-	"To do: specification irgendwie auslagern, damit Methode kürzer"
+SPOCSearchbar >> buildInputTextField [
 	
-	| builder spec textField |
+	| builder spec |
 	builder := ToolBuilder default.
 	spec := builder pluggableTextSpec new
 		model: self;
@@ -95,46 +135,18 @@ SPOCSearchbar >> buildInputField [
 		getText: #input;
 		setText: #search:;
 		indicateUnacceptedChanges: false;
-		help: 'Was möchtest du wiedergeben?';
+		help: self class inputFieldHelp;
 		yourself.
-	textField := builder build: spec.
-	textField extent: self class searchbarWidth @ self class searchbarHeight;
-		position: self topLeft + ((self class searchbarHeight / 2) @ 0);
-		color: SPOCStyle spotifyGray;
-		borderWidth: 0;
-		hScrollBarPolicy: #never;
-		vScrollBarPolicy: #never;
-		acceptOnCR: true;
-		setProperty: #indicateKeyboardFocus toValue: #never;
-		yourself.
-	 self addMorph: textField
-]
-
-{
-	#category : #building,
-	#'squeak_changestamp' : 'TL 7/8/2024 17:13'
-}
-SPOCSearchbar >> buildSearchbar [
-
-	| leftCircle rightCircle |
-	leftCircle := self buildCircle.
-	rightCircle := self buildCircle position: self topLeft + (self class searchbarWidth @ 0).
-	self addMorph: leftCircle;
-		addMorph: rightCircle;
-		buildInputField;
-		buildButtons;
-		yourself
+	^ builder build: spec.
 ]
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 6/23/2024 16:51'
+	#'squeak_changestamp' : 'VE 7/8/2024 17:50'
 }
 SPOCSearchbar >> buttonClicked: aButton [
 	
-	| names |
-	names := OrderedCollection withAll: #('track' 'album' 'playlist').
-	names do: [ :aName | (self submorphNamed: aName ) wrappee color: SPOCStyle spotifyWhite].	
+	self resetButtonColors.
 	aButton wrappee color: SPOCStyle spotifyGreen.
 	self filter: aButton externalName.
 	self input ifNotNil: [self search: self input]
@@ -178,7 +190,7 @@ SPOCSearchbar >> filter: aString [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/2/2024 17:53'
+	#'squeak_changestamp' : 'VE 7/8/2024 17:51'
 }
 SPOCSearchbar >> initialize [
 
@@ -187,11 +199,9 @@ SPOCSearchbar >> initialize [
 	self color: Color transparent;
 		items: OrderedCollection new;
 		results: OrderedCollection new;
-		buildSearchbar;
-		isDisabled: true;
+		attachSearchbar;
 		filter: 'track';
 		extendFully.
-	(self submorphNamed: 'track') wrappee color: SPOCStyle spotifyGreen
 ]
 
 {
@@ -239,6 +249,15 @@ SPOCSearchbar >> needsLogin [
 	
 	^ true
 
+]
+
+{
+	#category : #actions,
+	#'squeak_changestamp' : 'VE 7/8/2024 17:41'
+}
+SPOCSearchbar >> resetButtonColors [
+
+	#('track' 'album' 'playlist') do: [ :aName | (self submorphNamed: aName) wrappee color: SPOCStyle spotifyWhite]
 ]
 
 {
