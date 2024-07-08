@@ -40,7 +40,7 @@ SPOCIcon class >> size [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/7/2024 01:11'
+	#'squeak_changestamp' : 'TL 7/8/2024 16:48'
 }
 SPOCIcon >> attachButton [
 
@@ -69,24 +69,25 @@ SPOCIcon >> icon: anObject [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/23/2024 16:47'
+	#'squeak_changestamp' : 'TL 7/8/2024 16:48'
 }
 SPOCIcon >> iconAsset: anAssetPath [
 
-	self icon assetPath: anAssetPath.
-	self icon magnifyBy: SPOCIcon iconScaling
+	self icon assetPath: anAssetPath;
+		magnifyBy: SPOCIcon iconScaling
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/19/2024 00:19'
+	#'squeak_changestamp' : 'TL 7/8/2024 16:44'
 }
 SPOCIcon >> initialize [
+
 	super initialize.
 	
 	self attachButton; 
 		initializeStyle;
-		iconAsset: SPOCIcon defaultAsset.
+		iconAsset: SPOCIcon defaultAsset
 ]
 
 {

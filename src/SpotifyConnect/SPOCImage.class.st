@@ -27,12 +27,11 @@ SPOCImage class >> newWithPath: aString [
 
 {
 	#category : #constructor,
-	#'squeak_changestamp' : 'TL 6/10/2024 05:14'
+	#'squeak_changestamp' : 'TL 7/8/2024 16:49'
 }
 SPOCImage class >> newWithUrl: aString [
 	
-	^ SPOCImage new
-		url: aString;
+	^ SPOCImage new url: aString;
 		image: (Form fromBinaryStream: (HTTPSocket httpGet: aString));
 		yourself
 ]

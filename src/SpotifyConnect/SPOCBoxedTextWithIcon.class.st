@@ -9,26 +9,33 @@ Class {
 }
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/8/2024 17:09'
+}
+SPOCBoxedTextWithIcon class >> iconPadding [
+
+	^ 8
+]
+
+{
 	#category : #constructor,
-	#'squeak_changestamp' : 'VK 7/7/2024 14:29'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:09'
 }
 SPOCBoxedTextWithIcon class >> newWithText: aString withIcon: anAssetPath [
 
-	| text |
-	text := SPOCBoxedTextWithIcon new contents: (' ', aString);
-				position: SPOCStyle iconPadding @ 0;
-				withAssetPath: anAssetPath;
-				yourself.
-	^ text
+	^ SPOCBoxedTextWithIcon new contents: (' ', aString);
+		position: self class iconPadding @ 0;
+		withAssetPath: anAssetPath;
+		yourself
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VK 6/19/2024 16:23'
+	#'squeak_changestamp' : 'TL 7/8/2024 16:40'
 }
 SPOCBoxedTextWithIcon >> initialize [
 
-	super initialize.
+	super initialize
 ]
 
 {

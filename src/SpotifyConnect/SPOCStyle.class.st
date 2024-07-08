@@ -10,74 +10,11 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/10/2024 14:32'
-}
-SPOCStyle class >> currentlyPlayingWidth [
-
-	^ 600
-]
-
-{
-	#category : #constants,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
 }
 SPOCStyle class >> defaultMargin [
 
 	^ 10
-]
-
-{
-	#category : #'class variables',
-	#'squeak_changestamp' : 'VK 6/10/2024 11:43'
-}
-SPOCStyle class >> devicesPanelHeight [
-
-	^ 200
-]
-
-{
-	#category : #'class variables',
-	#'squeak_changestamp' : 'VK 6/10/2024 16:48'
-}
-SPOCStyle class >> devicesPanelLayer [
-
-	^ 1
-]
-
-{
-	#category : #'class variables',
-	#'squeak_changestamp' : 'VK 6/10/2024 11:46'
-}
-SPOCStyle class >> devicesPanelPadding [
-
-	^ 35
-]
-
-{
-	#category : #'class variables',
-	#'squeak_changestamp' : 'VK 6/10/2024 11:39'
-}
-SPOCStyle class >> devicesPanelToItemRatio [
-
-	^ 0.4
-]
-
-{
-	#category : #'class variables',
-	#'squeak_changestamp' : 'VK 6/10/2024 11:30'
-}
-SPOCStyle class >> devicesPanelWidth [
-
-	^ 300
-]
-
-{
-	#category : #'class variables',
-	#'squeak_changestamp' : 'VK 6/10/2024 11:55'
-}
-SPOCStyle class >> devicesTextPadding [
-
-	^ 8
 ]
 
 {
@@ -87,33 +24,6 @@ SPOCStyle class >> devicesTextPadding [
 SPOCStyle class >> gitRepoName [
 
 	^ 'SpotifyConnect'
-]
-
-{
-	#category : #'class variables',
-	#'squeak_changestamp' : 'VK 6/19/2024 16:07'
-}
-SPOCStyle class >> iconPadding [
-
-	^ 8
-]
-
-{
-	#category : #'class variables',
-	#'squeak_changestamp' : 'RK 6/9/2024 14:44'
-}
-SPOCStyle class >> recentlyPlayedPadding [
-
-	^ 8
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'VE 6/10/2024 14:47'
-}
-SPOCStyle class >> resultListHeight [
-
-	^ 350
 ]
 
 {
@@ -153,24 +63,6 @@ SPOCStyle class >> resultListWidth [
 ]
 
 {
-	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
-}
-SPOCStyle class >> searchbarHeight [
-
-	^ 32
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
-}
-SPOCStyle class >> searchbarWidth [
-
-	^ 600
-]
-
-{
 	#category : #colors,
 	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
 }
@@ -204,15 +96,6 @@ SPOCStyle class >> spotifyGreen [
 SPOCStyle class >> spotifyWhite [
 
 	^ Color white
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
-}
-SPOCStyle class >> textHeight [
-
-	^ 30
 ]
 
 {

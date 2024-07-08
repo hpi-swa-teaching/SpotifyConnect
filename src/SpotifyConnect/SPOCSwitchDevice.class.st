@@ -25,11 +25,56 @@ SPOCSwitchDevice class >> devicesIconPath [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:44'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:00'
+}
+SPOCSwitchDevice class >> devicesPanelHeight [
+
+	^ 200
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/8/2024 17:00'
+}
+SPOCSwitchDevice class >> devicesPanelPadding [
+
+	^ 35
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/8/2024 17:01'
+}
+SPOCSwitchDevice class >> devicesPanelToItemRatio [
+
+	^ 0.4
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/8/2024 17:01'
+}
+SPOCSwitchDevice class >> devicesPanelWidth [
+
+	^ 300
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/8/2024 17:04'
 }
 SPOCSwitchDevice class >> itemTextPadding [
 
-	^ SPOCStyle devicesPanelPadding * SPOCStyle devicesPanelToItemRatio
+	^ self class devicesPanelPadding * self class devicesPanelToItemRatio
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/8/2024 17:14'
+}
+SPOCSwitchDevice class >> textHeight [
+
+	^ 30
 ]
 
 {
@@ -51,13 +96,13 @@ SPOCSwitchDevice >> attachButton [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:53'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:02'
 }
 SPOCSwitchDevice >> buildBackground [
 
 	self itemBackground: RectangleMorph new.
 	self itemBackground color: SPOCStyle spotifyGray;
-		extent: (SPOCStyle devicesPanelWidth@(SPOCStyle devicesPanelHeight * SPOCStyle devicesPanelToItemRatio));
+		extent: (self class devicesPanelWidth @ (self class devicesPanelHeight * self class devicesPanelToItemRatio));
 		yourself.
 	^ self itemBackground
 ]
@@ -78,12 +123,12 @@ SPOCSwitchDevice >> buildNameText: aDevice [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 6/10/2024 16:59'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:07'
 }
 SPOCSwitchDevice >> buildResultDisplay [
 
-	self resultDisplay: (SPOCScrollablePanel newWithExtent: (SPOCStyle devicesPanelWidth@SPOCStyle devicesPanelHeight)).
-	self resultDisplay position: self position + (0@SPOCStyle devicesPanelPadding).
+	self resultDisplay: (SPOCScrollablePanel newWithExtent: (self class devicesPanelWidth @ self class devicesPanelHeight)).
+	self resultDisplay position: self position + (0 @ self class devicesPanelPadding).
 	self addMorph: self resultDisplay.
 	self hideResults
 ]
@@ -108,12 +153,12 @@ SPOCSwitchDevice >> buildResultMorphFrom: aDevice [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:54'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:14'
 }
 SPOCSwitchDevice >> buildTypeText: aDevice [
 
 	| text |
-	text := SPOCPlainText newAt: (self itemBackground bottomLeft + (SPOCSwitchDevice itemTextPadding @ ((SPOCSwitchDevice itemTextPadding + SPOCStyle textHeight) negated))) withText: aDevice type.
+	text := SPOCPlainText newAt: (self itemBackground bottomLeft + (self class itemTextPadding @ ((self class itemTextPadding + self class textHeight) negated))) withText: aDevice type.
 	aDevice isActive
 		ifTrue: [text textColor: SPOCStyle spotifyGreen].
 	^ text

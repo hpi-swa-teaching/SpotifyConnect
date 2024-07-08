@@ -15,32 +15,36 @@ Class {
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 6/3/2024 16:11'
+	#'squeak_changestamp' : 'TL 7/8/2024 16:26'
 }
 SPOCApiEndpointResult >> error [
+
 	^ error
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 6/3/2024 16:11'
+	#'squeak_changestamp' : 'TL 7/8/2024 16:26'
 }
 SPOCApiEndpointResult >> error: anObject [
+
 	error := anObject
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 6/3/2024 16:11'
+	#'squeak_changestamp' : 'TL 7/8/2024 16:26'
 }
 SPOCApiEndpointResult >> response [
+
 	^ response
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 6/3/2024 16:11'
+	#'squeak_changestamp' : 'TL 7/8/2024 16:26'
 }
 SPOCApiEndpointResult >> response: anObject [
+
 	response := anObject
 ]

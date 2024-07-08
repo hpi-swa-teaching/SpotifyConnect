@@ -17,6 +17,24 @@ Class {
 }
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/8/2024 17:13'
+}
+SPOCSearchbar class >> searchbarHeight [
+
+	^ 32
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/8/2024 17:13'
+}
+SPOCSearchbar class >> searchbarWidth [
+
+	^ 600
+]
+
+{
 	#category : #building,
 	#'squeak_changestamp' : 'RK 6/14/2024 01:37'
 }
@@ -51,12 +69,12 @@ SPOCSearchbar >> buildButtons [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:02'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:12'
 }
 SPOCSearchbar >> buildCircle [
 
 	^ CircleMorph new
-		extent: SPOCStyle searchbarHeight asPoint;
+		extent: self class searchbarHeight asPoint;
 		borderWidth: 0;
 		color: SPOCStyle spotifyGray;
 		yourself
@@ -64,7 +82,7 @@ SPOCSearchbar >> buildCircle [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/16/2024 13:01'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:12'
 }
 SPOCSearchbar >> buildInputField [
 	"To do: specification irgendwie auslagern, damit Methode kürzer"
@@ -80,8 +98,8 @@ SPOCSearchbar >> buildInputField [
 		help: 'Was möchtest du wiedergeben?';
 		yourself.
 	textField := builder build: spec.
-	textField extent: SPOCStyle searchbarWidth @ SPOCStyle searchbarHeight;
-		position: self topLeft + ((SPOCStyle searchbarHeight / 2) @ 0);
+	textField extent: self class searchbarWidth @ self class searchbarHeight;
+		position: self topLeft + ((self class searchbarHeight / 2) @ 0);
 		color: SPOCStyle spotifyGray;
 		borderWidth: 0;
 		hScrollBarPolicy: #never;
@@ -94,13 +112,13 @@ SPOCSearchbar >> buildInputField [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/14/2024 00:18'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:13'
 }
 SPOCSearchbar >> buildSearchbar [
 
 	| leftCircle rightCircle |
 	leftCircle := self buildCircle.
-	rightCircle := self buildCircle position: self topLeft + (SPOCStyle searchbarWidth @ 0).
+	rightCircle := self buildCircle position: self topLeft + (self class searchbarWidth @ 0).
 	self addMorph: leftCircle;
 		addMorph: rightCircle;
 		buildInputField;

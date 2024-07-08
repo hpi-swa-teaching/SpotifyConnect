@@ -14,16 +14,13 @@ Class {
 
 {
 	#category : #constructor,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
+	#'squeak_changestamp' : 'TL 7/8/2024 16:42'
 }
 SPOCClickable class >> newUsing: aWrappeeMorph onClick: aBlock [
 
-	| inst |
-	inst := self basicNew.
-	inst wrappee: aWrappeeMorph.
-	inst onClick: aBlock.
-	inst initialize.
-	^ inst
+	^ self basicNew wrappee: aWrappeeMorph;
+		onClick: aBlock;
+		initialize
 ]
 
 {
@@ -46,11 +43,12 @@ SPOCClickable >> handlesMouseOver: anEvent [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
+	#'squeak_changestamp' : 'TL 7/8/2024 16:43'
 }
 SPOCClickable >> initialize [
 
 	super initialize.
+	
 	self addMorph: self wrappee; 
 		extent: self wrappee extent; 
 		color: Color transparent
@@ -58,11 +56,11 @@ SPOCClickable >> initialize [
 
 {
 	#category : #'event handling',
-	#'squeak_changestamp' : 'RK 6/7/2024 11:07'
+	#'squeak_changestamp' : 'TL 7/8/2024 16:43'
 }
 SPOCClickable >> mouseDown: anEvent [
 
-	self onClick value: anEvent.
+	self onClick value: anEvent
 ]
 
 {
