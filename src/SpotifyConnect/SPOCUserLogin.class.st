@@ -15,11 +15,11 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:32'
+	#'squeak_changestamp' : 'VE 7/8/2024 17:14'
 }
 SPOCUserLogin >> attachButton [
 
-	self text: (SPOCBoxedText new contents: ''; yourself);
+	self text: (SPOCBoxedText new);
 		button: (SPOCClickable newUsing: self text onClick: [:anEvent | self app auth startAuthorization]);
 		addMorph: self button
 ]
@@ -53,7 +53,7 @@ SPOCUserLogin >> buttonLabel [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:33'
+	#'squeak_changestamp' : 'VE 7/8/2024 17:13'
 }
 SPOCUserLogin >> buttonLabel: aString [
 

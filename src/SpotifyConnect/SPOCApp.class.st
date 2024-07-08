@@ -323,16 +323,15 @@ SPOCApp >> logout [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'VE 6/20/2024 19:00'
+	#'squeak_changestamp' : 'VE 7/8/2024 16:39'
 }
 SPOCApp >> open [
 
-	| a |
-	a := ToolBuilder open: self.
-	a color: SPOCStyle spotifyBlack.
-	a borderColor: SPOCStyle spotifyBlack.
-	a paneColor: SPOCStyle spotifyBlack.
-	^ a
+	^ (ToolBuilder open: self)
+		color: SPOCStyle spotifyBlack;
+		borderColor: SPOCStyle spotifyBlack;
+		paneColor: SPOCStyle spotifyBlack;
+		yourself
 ]
 
 {

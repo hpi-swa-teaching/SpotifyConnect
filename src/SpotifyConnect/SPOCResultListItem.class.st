@@ -78,7 +78,7 @@ SPOCResultListItem >> buildCenterBox [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'RK 6/16/2024 14:31'
+	#'squeak_changestamp' : 'VE 7/8/2024 16:57'
 }
 SPOCResultListItem >> buildImage [
 

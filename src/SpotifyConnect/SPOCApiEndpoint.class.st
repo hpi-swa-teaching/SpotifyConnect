@@ -23,6 +23,15 @@ SPOCApiEndpoint class >> apiHost [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'VE 7/8/2024 16:21'
+}
+SPOCApiEndpoint class >> cannotRefreshErrorMessage [
+
+	^ 'Refreshing Access Token failed'
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'OW 7/7/2024 16:28'
 }
 SPOCApiEndpoint class >> gitRepoName [
@@ -37,6 +46,15 @@ SPOCApiEndpoint class >> gitRepoName [
 SPOCApiEndpoint class >> mockdataBasepath [
 
 	^ 'assets/mockdata/'
+]
+
+{
+	#category : #constants,
+	#'squeak_changestamp' : 'VE 7/8/2024 16:20'
+}
+SPOCApiEndpoint class >> noAuthorizerErrorMessage [
+	
+	^ 'Authorizer needed'
 ]
 
 {
@@ -86,7 +104,7 @@ SPOCApiEndpoint >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 7/7/2024 02:41'
+	#'squeak_changestamp' : 'VE 7/8/2024 16:21'
 }
 SPOCApiEndpoint >> execute: aParamDictionary [ 
 
@@ -94,7 +112,7 @@ SPOCApiEndpoint >> execute: aParamDictionary [
 	self returnsTestContent
 		ifTrue: [^ self tinkerReponseContent: self executeTest].
 	self authorizer
-		ifNil: [^ SPOCApiEndpointResult new error: 'Authorizer needed'].
+		ifNil: [^ SPOCApiEndpointResult new error: self class noAuthorizerErrorMessage].
 	response := self executeRequest: self tinkerRequest withParams: aParamDictionary.
 	response code = 401
 		ifTrue: [^ self refreshAccessTokenAndExecute: aParamDictionary].
@@ -146,14 +164,14 @@ SPOCApiEndpoint >> loadMockdataFromAsset: anAsset [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 7/7/2024 02:45'
+	#'squeak_changestamp' : 'VE 7/8/2024 16:21'
 }
 SPOCApiEndpoint >> refreshAccessTokenAndExecute: aParamDictionary [
 
 	self authorizer refreshAccessToken.
 	self authorizer isAuthorized
 		ifTrue: [^ self execute: aParamDictionary]
-		ifFalse: [^ SPOCApiEndpointResult new error: 'Access Token Refresh Failed']
+		ifFalse: [^ SPOCApiEndpointResult new error: self class cannotRefreshErrorMessage]
 ]
 
 {

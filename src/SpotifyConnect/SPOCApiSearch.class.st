@@ -9,6 +9,19 @@ Class {
 }
 
 {
+	#category : #response,
+	#'squeak_changestamp' : 'VE 7/8/2024 16:44'
+}
+SPOCApiSearch >> contentItemsAt: aSymbol in: aJsonContent [
+
+	(aJsonContent includesKey: aSymbol)
+		ifTrue: [^ (aJsonContent at: aSymbol) at: #items].
+	^ OrderedCollection new
+	
+	
+]
+
+{
 	#category : #parameters,
 	#'squeak_changestamp' : 'RK 5/16/2024 19:01'
 }
@@ -57,27 +70,19 @@ SPOCApiSearch >> search: aString withFilter: aFilter [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'RK 7/7/2024 13:53'
+	#'squeak_changestamp' : 'VE 7/8/2024 16:43'
 }
 SPOCApiSearch >> tinkerReponseContent: aContentStream [
 	
-	| content results index |
+	| content results |
 	content := Json readFrom: aContentStream readStream.
 	results := OrderedCollection new.
-	index := 0.
-	(content includesKey: #tracks)
-		ifTrue: [((content at: #tracks) at: #items)
-				do: [:aTrack | results add: ((self tinkerTrack: aTrack) offset: index + 1).
-					index := index + 1].
-			^ results].
-	(content includesKey: #albums)
-		ifTrue: [((content at: #albums) at: #items)
-				do: [:anAlbum | results add: ((self tinkerAlbum: anAlbum) offset: index + 1).
-					index := index + 1].
-			^ results].
-	(content includesKey: #playlists)
-		ifTrue: [((content at: #playlists) at: #items)
-				do: [:aPlaylist | results add: ((self tinkerPlaylist: aPlaylist) offset: index + 1).
-					index := index + 1].
-			^ results]
+	(self contentItemsAt: #tracks in: content)
+		do: [:aTrack | results add: (self tinkerTrack: aTrack)].
+	(self contentItemsAt: #albums in: content)
+		do: [:anAlbum | results add: (self tinkerAlbum: anAlbum)].
+	(self contentItemsAt: #playlists in: content)
+		do: [:aPlaylist | results add: (self tinkerPlaylist: aPlaylist)].
+	results withIndexDo: [:aDataPiece :anIndex | aDataPiece offset: anIndex].
+	^ results
 ]
