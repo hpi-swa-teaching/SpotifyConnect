@@ -19,7 +19,7 @@ SPOCTestApiSearch >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/24/2024 03:27'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:20'
 }
 SPOCTestApiSearch >> testApiSearchExecute [
 
@@ -27,7 +27,7 @@ SPOCTestApiSearch >> testApiSearchExecute [
 	dict := Dictionary new
 			at: #input put: 'Morning+Blue';
 			at: #type put: 'track';
-			at: #limit put: SPOCStyle resultListLimit;
+			at: #limit put: SPOCStyle defaultRequestLimit;
 			yourself.
 	res := self apiEndpoint execute: dict.
 	self assert: res class ~= SPOCApiEndpointResult

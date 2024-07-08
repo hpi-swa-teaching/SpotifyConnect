@@ -58,13 +58,13 @@ SPOCApiSearch >> executeTest [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 7/7/2024 03:25'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:20'
 }
 SPOCApiSearch >> search: aString withFilter: aFilter [
 
 	^ self execute: (Dictionary new at: #input put: aString;
 			at: #type put: aFilter;
-			at: #limit put: SPOCStyle resultListLimit;
+			at: #limit put: SPOCStyle defaultRequestLimit;
 			yourself)
 ]
 

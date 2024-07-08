@@ -19,47 +19,20 @@ SPOCStyle class >> defaultMargin [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/8/2024 23:35'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:20'
 }
-SPOCStyle class >> gitRepoName [
-
-	^ 'SpotifyConnect'
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
-}
-SPOCStyle class >> resultListItemHeight [
-
-	^ 96
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:10'
-}
-SPOCStyle class >> resultListItemPadding [
-
-	^ 95
-]
-
-{
-	#category : #constants,
-	#'squeak_changestamp' : 'VE 6/10/2024 14:20'
-}
-SPOCStyle class >> resultListLimit [
+SPOCStyle class >> defaultRequestLimit [
 
 	^ 10
 ]
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'VE 6/10/2024 14:45'
+	#'squeak_changestamp' : 'RK 6/8/2024 23:35'
 }
-SPOCStyle class >> resultListWidth [
+SPOCStyle class >> gitRepoName [
 
-	^ 1048
+	^ 'SpotifyConnect'
 ]
 
 {

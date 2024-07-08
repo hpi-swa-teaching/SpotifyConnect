@@ -30,6 +30,15 @@ SPOCResultListItem class >> newWith: aDataPiece [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/8/2024 17:18'
+}
+SPOCResultListItem class >> resultListItemHeight [
+
+	^ 96
+]
+
+{
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/7/2024 12:21'
 }
@@ -78,12 +87,12 @@ SPOCResultListItem >> buildCenterBox [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 7/8/2024 16:57'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:17'
 }
 SPOCResultListItem >> buildImage [
 
 	| image |
-	image := self dataPiece image scaledTo: SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin).
+	image := self dataPiece image scaledTo: self class resultListItemHeight - (2 * SPOCStyle defaultMargin).
 	self image: image;
 		addMorph: image
 
@@ -147,12 +156,12 @@ SPOCResultListItem >> centerBox [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 7/7/2024 12:55'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:17'
 }
 SPOCResultListItem >> changeItemTo: aDataPiece [
 	
 	| form |
-	form := (aDataPiece image scaledTo: SPOCStyle resultListItemHeight - (2 * SPOCStyle defaultMargin)) form.
+	form := (aDataPiece image scaledTo: self class resultListItemHeight - (2 * SPOCStyle defaultMargin)) form.
 	self image image: form.
 	self primaryText contents: (aDataPiece primaryText asText addAttribute: TextEmphasis bold).
 	self secondaryText contents: (aDataPiece secondaryText).

@@ -28,11 +28,11 @@ SPOCApiAlbum >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 7/7/2024 01:21'
+	#'squeak_changestamp' : 'TL 7/8/2024 17:20'
 }
 SPOCApiAlbum >> executeRequest: request withParams: aParameterDictionary [
 
-	request rawUrl: (request rawUrl, (aParameterDictionary at: #id), '/tracks?limit=', SPOCStyle resultListLimit).
+	request rawUrl: (request rawUrl, (aParameterDictionary at: #id), '/tracks?limit=', SPOCStyle defaultRequestLimit).
 	^ self client sendRequest: request
 ]
 
