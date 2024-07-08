@@ -9,7 +9,7 @@ Class {
 		'error',
 		'response'
 	],
-	#category : #'SpotifyConnect-Utils',
+	#category : #'SpotifyConnect-API',
 	#'squeak_changestamp' : 'OW 7/4/2024 12:31'
 }
 
