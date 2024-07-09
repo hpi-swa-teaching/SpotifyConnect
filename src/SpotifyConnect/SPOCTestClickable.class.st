@@ -30,12 +30,12 @@ SPOCTestClickable >> testClickableAction [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'VE 7/8/2024 19:24'
+	#'squeak_changestamp' : 'VE 7/9/2024 09:11'
 }
 SPOCTestClickable >> testClickableActionNotSet [
 
 	| clickable |
-	clickable := SPOCClickable new.
+	clickable := SPOCClickable newUsing: Morph new onClick: nil.
 	self should: [clickable mouseDown: nil] raise: Error
 ]
 
