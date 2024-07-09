@@ -10,6 +10,14 @@ Class {
 
 {
 	#category : #testing,
+	#'squeak_changestamp' : 'VE 7/9/2024 11:34'
+}
+SPOCTestAuthorizerProcess >> setUp [
+	
+]
+
+{
+	#category : #testing,
 	#'squeak_changestamp' : 'VE 6/20/2024 19:56'
 }
 SPOCTestAuthorizerProcess >> testAuthorizationUrl [
@@ -53,7 +61,7 @@ SPOCTestAuthorizerProcess >> testCallbackErrors [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 7/8/2024 20:13'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:35'
 }
 SPOCTestAuthorizerProcess >> testStartAuthorization [
 	

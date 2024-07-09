@@ -48,8 +48,9 @@ SPOCApiPrevious >> skipToPreviousOn: aDevice [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 7/9/2024 11:23'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:51'
 }
 SPOCApiPrevious >> tinkerReponseContent: aContentStream [
 	
+	^ SPOCApiEndpointResult new response: (WebResponse protocol: '' code: 204) 
 ]

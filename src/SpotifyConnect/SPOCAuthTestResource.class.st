@@ -31,10 +31,11 @@ SPOCAuthTestResource >> auth: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 6/10/2024 04:46'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:36'
 }
 SPOCAuthTestResource >> setUp [
 
+	SPOCAuthorizer refreshToken: nil.
 	self auth: SPOCAuthorizer new.
 	self auth startAuthorization.	
 	[self auth isAuthorized] 

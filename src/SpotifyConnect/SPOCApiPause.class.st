@@ -48,8 +48,9 @@ SPOCApiPause >> pauseOn: aDevice [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 7/9/2024 11:21'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:49'
 }
 SPOCApiPause >> tinkerReponseContent: aContentStream [
 	
+	^ SPOCApiEndpointResult new response: (WebResponse protocol: '' code: 204) 
 ]

@@ -33,7 +33,7 @@ SPOCTestApiPrevious >> testApiPreviousExecute [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/24/2024 02:09'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:32'
 }
 SPOCTestApiPrevious >> testSkipToPreviousOn [
 

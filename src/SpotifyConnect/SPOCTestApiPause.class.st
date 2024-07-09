@@ -19,19 +19,20 @@ SPOCTestApiPause >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/10/2024 23:12'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:50'
 }
 SPOCTestApiPause >> testApiPauseExecute [
 
-	| dict res playbackState |
+	| dict res playbackState code |
 	playbackState := self getPlaybackState.
 	dict := Dictionary new
 		at: #device_id put: playbackState device id;
 		yourself.
 	res := self apiEndpoint execute: dict.
+	code := res response code.
 	playbackState isPlaying
-		ifTrue: [self assert: (res response code = 204)]
-		ifFalse: [self assert: (res response code = 403)]
+		ifTrue: [self assert: (code = 204)]
+		ifFalse: [self assert: (code = 403)]
 ]
 
 {

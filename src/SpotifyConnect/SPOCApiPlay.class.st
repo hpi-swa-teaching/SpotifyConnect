@@ -137,7 +137,9 @@ SPOCApiPlay >> playTrack: aString withPlaylist: anotherString on: aDevice [
 
 {
 	#category : #parameters,
-	#'squeak_changestamp' : 'VE 7/9/2024 11:21'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:51'
 }
 SPOCApiPlay >> tinkerReponseContent: aContentStream [
+	
+	^ SPOCApiEndpointResult new response: (WebResponse protocol: '' code: 204) 
 ]
