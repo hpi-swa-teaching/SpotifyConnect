@@ -1,3 +1,6 @@
+"
+Test user Login Button field.
+"
 Class {
 	#name : #SPOCTestUserLogin,
 	#superclass : #SPOCTestCaseWithAuth,
@@ -5,7 +8,8 @@ Class {
 		'app',
 		'userLogin'
 	],
-	#category : #'SpotifyConnect-Auth-Tests'
+	#category : #'SpotifyConnect-Auth-Tests',
+	#'squeak_changestamp' : 'OW 7/9/2024 10:45'
 }
 
 {
