@@ -45,3 +45,10 @@ SPOCApiNext >> skipToNextOn: aDevice [
 
 	self execute: (Dictionary new at: #device_id put: aDevice; yourself)
 ]
+
+{
+	#category : #'api-call',
+	#'squeak_changestamp' : 'VE 7/9/2024 11:22'
+}
+SPOCApiNext >> tinkerReponseContent: aContentStream [
+]

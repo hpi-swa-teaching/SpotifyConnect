@@ -134,3 +134,10 @@ SPOCApiPlay >> playTrack: aString withPlaylist: anotherString on: aDevice [
 			at: #uris put: (self buildUris: aString);
 			yourself)
 ]
+
+{
+	#category : #parameters,
+	#'squeak_changestamp' : 'VE 7/9/2024 11:21'
+}
+SPOCApiPlay >> tinkerReponseContent: aContentStream [
+]
