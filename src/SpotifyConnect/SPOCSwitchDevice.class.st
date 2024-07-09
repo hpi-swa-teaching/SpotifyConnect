@@ -91,7 +91,7 @@ SPOCSwitchDevice >> attachBackground [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'TL 7/8/2024 19:39'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:09'
 }
 SPOCSwitchDevice >> attachButton [
 
@@ -231,7 +231,7 @@ SPOCSwitchDevice >> hideResults [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/9/2024 10:49'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:11'
 }
 SPOCSwitchDevice >> initialize [
 
@@ -242,9 +242,7 @@ SPOCSwitchDevice >> initialize [
 		devices: OrderedCollection new;
 		attachResultDisplay;
 		attachButton;
-		extendFully;
-		hResizing: #spaceFill;
-		listCentering: #center
+		extendFully
 ]
 
 {

@@ -70,14 +70,15 @@ SPOCRefresh >> icon: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/8/2024 19:39'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:12'
 }
 SPOCRefresh >> initialize [
 
 	super initialize.
 
 	self color: Color transparent;
-		attachButton
+		attachButton;
+		extendFully
 ]
 
 {
@@ -100,7 +101,7 @@ SPOCRefresh >> needsLogin [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:57'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:02'
 }
 SPOCRefresh >> refresh [
 

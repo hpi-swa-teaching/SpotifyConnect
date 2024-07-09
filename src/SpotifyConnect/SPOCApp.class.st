@@ -592,7 +592,7 @@ SPOCApp >> topPanelContent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/9/2024 10:39'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:05'
 }
 SPOCApp >> updatePlaybackState [
 

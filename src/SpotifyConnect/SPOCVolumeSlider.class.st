@@ -133,7 +133,7 @@ SPOCVolumeSlider >> icon: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/9/2024 10:48'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:13'
 }
 SPOCVolumeSlider >> initialize [
 

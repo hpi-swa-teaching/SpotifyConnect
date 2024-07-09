@@ -153,7 +153,7 @@ SPOCPlayer >> executeButtonFunction: anIcon [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/10/2024 22:29'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:13'
 }
 SPOCPlayer >> initialize [
 
