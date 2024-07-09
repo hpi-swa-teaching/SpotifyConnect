@@ -133,7 +133,7 @@ SPOCVolumeSlider >> icon: anObject [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/8/2024 19:39'
+	#'squeak_changestamp' : 'VE 7/9/2024 10:48'
 }
 SPOCVolumeSlider >> initialize [
 
@@ -143,9 +143,10 @@ SPOCVolumeSlider >> initialize [
 		supportsVolume: false;
 		volume: 100;
 		layoutPolicy: TableLayout new;
-		listDirection: #leftToRight;
-		attachSlider;
+		listDirection: #rightToLeft;
+		hResizing: #spaceFill;
 		attachButton;
+		attachSlider;
 		extendFully
 ]
 

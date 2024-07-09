@@ -109,7 +109,7 @@ SPOCUIComponent >> showPopUp [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 7/8/2024 20:02'
+	#'squeak_changestamp' : 'VE 7/9/2024 10:40'
 }
 SPOCUIComponent >> updatePlaybackState: aState [
 

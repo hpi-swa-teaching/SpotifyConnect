@@ -231,7 +231,7 @@ SPOCSwitchDevice >> hideResults [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/8/2024 20:20'
+	#'squeak_changestamp' : 'VE 7/9/2024 10:49'
 }
 SPOCSwitchDevice >> initialize [
 
@@ -243,7 +243,8 @@ SPOCSwitchDevice >> initialize [
 		attachResultDisplay;
 		attachButton;
 		extendFully;
-		hResizing: #spaceFill
+		hResizing: #spaceFill;
+		listCentering: #center
 ]
 
 {

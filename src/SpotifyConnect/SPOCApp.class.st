@@ -548,7 +548,7 @@ SPOCApp >> setUpVolumeSlider [
 
 {
 	#category : #'pop-ups',
-	#'squeak_changestamp' : 'TL 7/8/2024 20:00'
+	#'squeak_changestamp' : 'VE 7/9/2024 10:39'
 }
 SPOCApp >> showPopUpFor: aUiComponent [
 	
@@ -592,13 +592,12 @@ SPOCApp >> topPanelContent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:17'
+	#'squeak_changestamp' : 'VE 7/9/2024 10:39'
 }
 SPOCApp >> updatePlaybackState [
 
 	| playbackState |
 	playbackState := self getPlaybackState.
-	(playbackState class = SPOCApiEndpointResult) ifTrue: [^ self].
 	self componentsForUpdatingPlaybackState
 		do: [:aComponent | aComponent updatePlaybackState: playbackState]
 ]

@@ -236,11 +236,12 @@ SPOCResultList >> updateItems [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:26'
+	#'squeak_changestamp' : 'VE 7/9/2024 10:41'
 }
 SPOCResultList >> updatePlaybackState: aPlaybackState [
 	
 	super updatePlaybackState: aPlaybackState.
+	aPlaybackState class = SPOCApiEndpointResult ifTrue: [^ self].
 	self items do: [:anItem | 
 		anItem wrappee resetPrimaryTextColor.
 		(anItem wrappee dataPiece id = aPlaybackState track id) ifTrue: [anItem wrappee highlightPrimaryTextColor]]

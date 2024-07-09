@@ -203,51 +203,6 @@ SPOCBoxedText >> leftBorderCircle [
 ]
 
 {
-	#category : #'event handling',
-	#'squeak_changestamp' : 'VK 7/7/2024 14:42'
-}
-SPOCBoxedText >> mouseDown: anEvent [
-
-	^ nil
-]
-
-{
-	#category : #'event handling',
-	#'squeak_changestamp' : 'VK 7/7/2024 14:45'
-}
-SPOCBoxedText >> mouseEnter: anEvent [
-
-	^ nil
-]
-
-{
-	#category : #'event handling',
-	#'squeak_changestamp' : 'VK 7/7/2024 14:44'
-}
-SPOCBoxedText >> mouseLeave: anEvent [
-
-	^ nil
-]
-
-{
-	#category : #'event handling',
-	#'squeak_changestamp' : 'VK 7/7/2024 14:44'
-}
-SPOCBoxedText >> mouseMove: anEvent [
-
-	^ nil
-]
-
-{
-	#category : #'event handling',
-	#'squeak_changestamp' : 'VK 7/7/2024 14:42'
-}
-SPOCBoxedText >> mouseUp: anEvent [
-
-	^ nil
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/23/2024 16:46'
 }
