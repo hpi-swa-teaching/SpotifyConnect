@@ -137,17 +137,19 @@ SPOCPlayer >> deviceID: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:56'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:28'
 }
 SPOCPlayer >> executeButtonFunction: anIcon [
 	
-	self isDisabled ifTrue: [self showPopUp. ^ self].
+	self isDisabled ifTrue: [self showPopUp.
+		^ self].
 	(anIcon == self previousIcon)
 		ifTrue: [self skipToPrevious].
 	(anIcon == self playPauseIcon)
 		ifTrue: [self switchPlaybackState].
 	(anIcon == self nextIcon)
-		ifTrue: [self skipToNext]
+		ifTrue: [self skipToNext].
+	
 
 ]
 
@@ -283,7 +285,7 @@ SPOCPlayer >> previousIcon: anObject [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 7/8/2024 18:48'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:28'
 }
 SPOCPlayer >> skipToNext [
 
@@ -294,7 +296,7 @@ SPOCPlayer >> skipToNext [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 7/8/2024 18:48'
+	#'squeak_changestamp' : 'VE 7/9/2024 11:28'
 }
 SPOCPlayer >> skipToPrevious [
 
