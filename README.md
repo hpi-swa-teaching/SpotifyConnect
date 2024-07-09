@@ -15,7 +15,7 @@
 - Suchergebnisse mit Bild als Liste  ansehen
 - Liste der zuletzt wiedergegebenen Songs ansehen
 - Aktives Wiedergabegerät anzeigen und wechseln
-- Lautstärke ändern
+- Lautstärke ändern und Wiedergabe muten
 - Manuelles Aktualisieren des Interfaces
 - Anwendung über das Apps Menü in Squeak öffnen
 
@@ -69,4 +69,6 @@ Beim erstmaligen Login werden Cliend ID und Client Secret von jeweils einem Pop-
 
 Dann öffnet sich der Browser (außerhalb von Squeak) und leitet automatisch zur Anmeldeseite von Spotify. Nach erfolgreichem Anmelden und Aktivieren eines Gerätes kann Spotify Connect in Squeak benutzt werden.
 
+## Screenshot
 
+<p align="center"><img src="/assets/Screenshot.png" ></p>
