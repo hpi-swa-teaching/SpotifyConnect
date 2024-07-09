@@ -1,13 +1,23 @@
-# SpotifyConnect
+<p align="center"><img src="/assets/SpotifyConnectInSqueak.png" width="200"></p>
+
+# Spotify Connect
 
 [![CI](https://github.com/hpi-swa-teaching/SpotifyConnect/workflows/CI/badge.svg)](https://github.com/hpi-swa-teaching/SpotifyConnect/actions)
+![Squeakversion](https://img.shields.io/badge/Squeak%20Version-6.0-green)
+![Coverage](https://img.shields.io/badge/Coverage-84-green)
 
 ## Features
-- Login mit Spotify Konto
-- Suchen nach Songs, Albums und Playlists
-- Abspielen, Pausieren und Skippen
-- Aktuelles Wiedergabegerät wechseln
-- Lautstärke ändern
+- Anmelden mit einem Spotify Konto
+- Abspielen und Pausieren von Songs
+- Skippen zu vorherigem oder nächsten Song
+- Aktuell wiedergegebener Song wird mit Bild und Titel angezeigt
+- Suche nach Songs, Albums und Playlists filtern
+- Suchergebnisse mit Bild als Liste  ansehen
+- Liste der zuletzt wiedergegebenen Songs ansehen
+- Aktives Wiedergabegerät anzeigen und wechseln
+- Lautstärke ändern und Wiedergabe muten
+- Manuelles Aktualisieren des Interfaces
+- Anwendung über das Apps Menü in Squeak öffnen
 
 ## Voraussetzungen
 - Für die meisten Features erfordert Spotify einen Premium Account
@@ -59,4 +69,6 @@ Beim erstmaligen Login werden Cliend ID und Client Secret von jeweils einem Pop-
 
 Dann öffnet sich der Browser (außerhalb von Squeak) und leitet automatisch zur Anmeldeseite von Spotify. Nach erfolgreichem Anmelden und Aktivieren eines Gerätes kann Spotify Connect in Squeak benutzt werden.
 
+## Screenshot
 
+<p align="center"><img src="/assets/Screenshot.png" ></p>

@@ -1,7 +1,11 @@
+"
+Test Play API request.
+"
 Class {
 	#name : #SPOCTestPlay,
 	#superclass : #SPOCTestCaseWithAuth,
-	#category : #'SpotifyConnect-Auth-Tests'
+	#category : #'SpotifyConnect-Auth-Tests',
+	#'squeak_changestamp' : 'OW 7/9/2024 10:44'
 }
 
 {

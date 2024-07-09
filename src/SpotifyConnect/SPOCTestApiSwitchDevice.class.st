@@ -1,7 +1,11 @@
+"
+Test the API request to switch the active device.
+"
 Class {
 	#name : #SPOCTestApiSwitchDevice,
 	#superclass : #SPOCTestCaseWithAuth,
-	#category : #'SpotifyConnect-Auth-Tests'
+	#category : #'SpotifyConnect-Auth-Tests',
+	#'squeak_changestamp' : 'OW 7/9/2024 10:42'
 }
 
 {
