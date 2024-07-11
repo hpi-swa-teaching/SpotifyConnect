@@ -134,11 +134,11 @@ SPOCScrollablePanel >> spec: anObject [
 
 {
 	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'RK 6/9/2024 18:05'
+	#'squeak_changestamp' : 'TL 7/11/2024 14:28'
 }
 SPOCScrollablePanel >> updatePanel: anOrderedCollection [
 	
 	self items: anOrderedCollection.
-	panel scroller removeAllMorphs.
-	panel scroller addAllMorphs: items
+	self panel scroller removeAllMorphs;
+		addAllMorphs: self items
 ]

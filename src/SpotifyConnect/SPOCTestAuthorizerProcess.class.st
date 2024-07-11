@@ -10,14 +10,6 @@ Class {
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'VE 7/9/2024 11:34'
-}
-SPOCTestAuthorizerProcess >> setUp [
-	
-]
-
-{
-	#category : #testing,
 	#'squeak_changestamp' : 'VE 6/20/2024 19:56'
 }
 SPOCTestAuthorizerProcess >> testAuthorizationUrl [
@@ -61,11 +53,11 @@ SPOCTestAuthorizerProcess >> testCallbackErrors [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'VE 7/9/2024 11:35'
+	#'squeak_changestamp' : 'TL 7/11/2024 16:52'
 }
 SPOCTestAuthorizerProcess >> testStartAuthorization [
 	
 	| entryPoints |
 	entryPoints := WebServer default entryPoints.
-	self assert: ((entryPoints at: (SPOCAuthorizer redirectRoute)) ~= nil)
+	self assert: ((entryPoints at: (SPOCAuthorizer redirectRoute)) isNil not)
 ]

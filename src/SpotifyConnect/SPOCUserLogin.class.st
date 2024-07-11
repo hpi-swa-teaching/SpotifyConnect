@@ -80,15 +80,6 @@ SPOCUserLogin >> initialize [
 	#category : #accessing,
 	#'squeak_changestamp' : 'VE 7/2/2024 19:12'
 }
-SPOCUserLogin >> needsActiveDevice [
-
-	^ false
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'VE 7/2/2024 19:12'
-}
 SPOCUserLogin >> needsLogin [
 	
 	^ false

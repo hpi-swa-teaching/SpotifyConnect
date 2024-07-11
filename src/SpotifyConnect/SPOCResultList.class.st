@@ -218,19 +218,21 @@ SPOCResultList >> titleMorph: aSPOCBoldText [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 7/8/2024 19:24'
+	#'squeak_changestamp' : 'TL 7/11/2024 16:46'
 }
 SPOCResultList >> updateItems [
 	
-	self items isEmpty ifFalse: [self items removeAll].
-	self results do: [:aResult |
-		| item clickable |
-		item := SPOCResultListItem newWith: aResult.
-		clickable := SPOCClickable newUsing: item onClick: [:anEvent | self onItemClicked: item].
-		clickable layoutPolicy: TableLayout new;
-			hResizing: #spaceFill;
-			vResizing: #shrinkWrap.
-		self items add: clickable].
+	self items isEmpty
+		ifFalse: [self items removeAll].
+	self results
+		do: [:aResult | 
+			| item clickable |
+			item := SPOCResultListItem newWith: aResult.
+			clickable := (SPOCClickable newUsing: item onClick: [:anEvent | self onItemClicked: item])
+				layoutPolicy: TableLayout new;
+				hResizing: #spaceFill;
+				vResizing: #shrinkWrap.
+			self items add: clickable].
 	self app updatePlaybackState
 ]
 

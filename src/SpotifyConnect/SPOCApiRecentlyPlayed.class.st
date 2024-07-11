@@ -58,14 +58,12 @@ SPOCApiRecentlyPlayed >> getRecentlyPlayed [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'TL 7/7/2024 03:19'
+	#'squeak_changestamp' : 'TL 7/11/2024 15:13'
 }
 SPOCApiRecentlyPlayed >> tinkerReponseContent: aContentStream [
 	
-	| content tracks |
+	| content |
 	content := Json readFrom: aContentStream readStream.
-	tracks := OrderedCollection new.
-	(content at: #items)
-		do: [:anItem | tracks add: (self tinkerTrack: (anItem at: #track))].
-	^ tracks
+	^ (content at: #items)
+		collect: [:anItem | self tinkerTrack: (anItem at: #track)]
 ]

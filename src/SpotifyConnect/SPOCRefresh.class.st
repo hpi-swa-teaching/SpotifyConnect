@@ -83,24 +83,6 @@ SPOCRefresh >> initialize [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:44'
-}
-SPOCRefresh >> needsActiveDevice [
-	
-	^ false
-]
-
-{
-	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:44'
-}
-SPOCRefresh >> needsLogin [
-	
-	^ true
-]
-
-{
-	#category : #initialization,
 	#'squeak_changestamp' : 'VE 7/9/2024 11:02'
 }
 SPOCRefresh >> refresh [

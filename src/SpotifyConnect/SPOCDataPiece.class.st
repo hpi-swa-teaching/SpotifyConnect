@@ -30,12 +30,12 @@ SPOCDataPiece >> artistsAsString [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 7/7/2024 02:27'
+	#'squeak_changestamp' : 'TL 7/11/2024 16:49'
 }
 SPOCDataPiece >> artistsEqual: anArtistCollection [
 
 	self artists
-		collect: [:anArtist | ((anArtistCollection at: (self artists indexOf: anArtist)) equals: anArtist)
+		do: [:anArtist | ((anArtistCollection at: (self artists indexOf: anArtist)) equals: anArtist)
 				ifFalse: [^ false]].
 	^ true
 ]

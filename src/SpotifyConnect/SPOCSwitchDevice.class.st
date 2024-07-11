@@ -304,13 +304,12 @@ SPOCSwitchDevice >> switchDeviceClicked: aDevice [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VK 6/10/2024 19:50'
+	#'squeak_changestamp' : 'TL 7/11/2024 16:47'
 }
 SPOCSwitchDevice >> updateResultDisplay: anOrderedCollection [
 
-	self deviceItems removeAll.
-	anOrderedCollection do: [:device |
-		self deviceItems add: (self buildResultMorphFrom: device)].
-	self resultDisplay updatePanel: self deviceItems.
-	self resultDisplay show
+	self deviceItems: (anOrderedCollection
+			collect: [:aDevice | self buildResultMorphFrom: aDevice]).
+	self resultDisplay updatePanel: self deviceItems;
+		show
 ]

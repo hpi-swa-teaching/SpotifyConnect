@@ -203,14 +203,13 @@ SPOCApiEndpoint >> returnsTestContent: aBoolean [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'RK 7/7/2024 13:10'
+	#'squeak_changestamp' : 'TL 7/11/2024 15:11'
 }
 SPOCApiEndpoint >> tinkerAlbum: aJson [
 
 	| artists |
-	artists := OrderedCollection new.
-	(aJson at: #artists)
-		do: [:anArtist | artists add: (self tinkerArtist: anArtist)].
+	artists := (aJson at: #artists) 
+			collect: [:anArtist | self tinkerArtist: anArtist].
 	^ SPOCAlbum new id: (aJson at: #id);
 		name: (aJson at: #name);
 		image: (SPOCImage newWithUrl: (((aJson at: #images) first) at: #url));
@@ -301,14 +300,13 @@ SPOCApiEndpoint >> tinkerRequest [
 
 {
 	#category : #response,
-	#'squeak_changestamp' : 'RK 7/7/2024 13:11'
+	#'squeak_changestamp' : 'TL 7/11/2024 15:12'
 }
 SPOCApiEndpoint >> tinkerTrack: aJson [
 
 	| album artists track |
-	artists := OrderedCollection new.
-	(aJson at: #artists)
-		do: [:anArtist | artists add: (self tinkerArtist: anArtist)].
+	artists := (aJson at: #artists)
+			collect: [:anArtist | self tinkerArtist: anArtist].
 	track := SPOCTrack new id: (aJson at: #id);
 			name: (aJson at: #name);
 			artists: artists;

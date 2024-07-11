@@ -67,15 +67,6 @@ SPOCCurrentlyPlaying >> needsActiveDevice [
 ]
 
 {
-	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:40'
-}
-SPOCCurrentlyPlaying >> needsLogin [
-	
-	^ true
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/9/2024 11:47'
 }

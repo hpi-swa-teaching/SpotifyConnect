@@ -202,15 +202,6 @@ SPOCPlayer >> needsActiveDevice [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:41'
-}
-SPOCPlayer >> needsLogin [
-	
-	^ true
-]
-
-{
-	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/3/2024 23:37'
 }
 SPOCPlayer >> nextIcon [

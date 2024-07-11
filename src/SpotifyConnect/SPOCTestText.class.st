@@ -35,18 +35,18 @@ SPOCTestText >> testConstructor [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 7/11/2024 12:20'
+	#'squeak_changestamp' : 'TL 7/11/2024 16:52'
 }
 SPOCTestText >> testMouseEventHandling [
 	
 	self assert: (self text handlesMouseOver: nil) not.
 	self assert: (self text handlesMouseMove: nil) not.
 	self assert: (self text handlesMouseDown: nil) not.
-	self assert: (self text mouseDown: nil) = nil.
-	self assert: (self text mouseEnter: nil) = nil.
-	self assert: (self text mouseLeave: nil) = nil.
-	self assert: (self text mouseMove: nil) = nil.
-	self assert: (self text mouseUp: nil) = nil
+	self assert: (self text mouseDown: nil) isNil.
+	self assert: (self text mouseEnter: nil) isNil.
+	self assert: (self text mouseLeave: nil) isNil.
+	self assert: (self text mouseMove: nil) isNil.
+	self assert: (self text mouseUp: nil) isNil
 ]
 
 {

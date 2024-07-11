@@ -188,15 +188,6 @@ SPOCVolumeSlider >> needsActiveDevice [
 ]
 
 {
-	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/2/2024 19:12'
-}
-SPOCVolumeSlider >> needsLogin [
-	
-	^ true
-]
-
-{
 	#category : #accessing,
 	#'squeak_changestamp' : 'TL 6/10/2024 03:19'
 }
@@ -304,7 +295,7 @@ SPOCVolumeSlider >> volume: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'TL 7/8/2024 18:30'
+	#'squeak_changestamp' : 'TL 7/11/2024 16:57'
 }
 SPOCVolumeSlider >> volumeClicked: aBlock [
 

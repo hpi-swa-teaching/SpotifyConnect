@@ -241,16 +241,6 @@ SPOCSearchbar >> items: anOrderedCollection [
 ]
 
 {
-	#category : #building,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:46'
-}
-SPOCSearchbar >> needsLogin [
-	
-	^ true
-
-]
-
-{
 	#category : #actions,
 	#'squeak_changestamp' : 'VE 7/8/2024 17:41'
 }

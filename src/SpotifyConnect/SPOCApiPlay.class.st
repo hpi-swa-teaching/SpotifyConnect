@@ -73,7 +73,7 @@ SPOCApiPlay >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 7/8/2024 20:18'
+	#'squeak_changestamp' : 'TL 7/11/2024 16:51'
 }
 SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 
@@ -85,7 +85,7 @@ SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 		ifFalse: [(aParamDictionary includesKey: #context_uri)
 				ifTrue: [data := self buildDataWithContext: (aParamDictionary at: #context_uri) andTrack: (aParamDictionary at: #uris)]].
 	request headerAt: 'Content-Length' put: data size.
-	(data size = 0)
+	(data isEmpty)
 		ifTrue: [^ self client sendRequest: request]
 		ifFalse: [^ self client sendRequest: request content: data readStream size: data size]
 
