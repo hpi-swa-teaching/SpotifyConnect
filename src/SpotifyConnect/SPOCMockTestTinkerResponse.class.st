@@ -10,7 +10,6 @@ Class {
 		'artist',
 		'device',
 		'playbackState',
-		'playlist',
 		'track'
 	],
 	#category : #'SpotifyConnect-Mock-Tests',
