@@ -10,8 +10,7 @@ Class {
 		'image',
 		'primaryText',
 		'secondaryText',
-		'tertiaryText',
-		'hasTertiaryText'
+		'tertiaryText'
 	],
 	#category : #'SpotifyConnect-UI',
 	#'squeak_changestamp' : 'OW 7/4/2024 12:30'

@@ -5,12 +5,11 @@ Class {
 	#name : #SPOCSearchbar,
 	#superclass : #SPOCUIComponent,
 	#instVars : [
-		'inputField',
-		'input',
-		'results',
-		'items',
+		'context',
 		'filter',
-		'context'
+		'input',
+		'items',
+		'results'
 	],
 	#category : #'SpotifyConnect-UI',
 	#'squeak_changestamp' : 'OW 7/4/2024 12:14'

@@ -50,31 +50,29 @@ SPOCTestDeviceMorphConstructor >> deviceMorph: anObject [
 
 {
 	#category : #setup,
-	#'squeak_changestamp' : 'TL 7/8/2024 20:20'
+	#'squeak_changestamp' : 'TL 7/11/2024 12:33'
 }
 SPOCTestDeviceMorphConstructor >> setUp [
 
-	self device: (SPOCDevice new
-			type: 'Smart Fridge';
+	self device: (SPOCDevice new type: 'Smart Fridge';
 			name: 'Samsung Fridge';
 			isActive: true;
 			yourself);
-		deviceMorph: (SPOCSwitchDevice new 
-			buildResultMorphFrom: self device)
+		deviceMorph: (SPOCSwitchDevice new buildResultMorphFrom: self device)
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/23/2024 14:30'
+	#'squeak_changestamp' : 'TL 7/11/2024 12:31'
 }
 SPOCTestDeviceMorphConstructor >> testMorphClass [
 
-	self assert: (self deviceMorph class = SPOCClickable)
+	self assert: self deviceMorph class = SPOCClickable
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/23/2024 14:31'
+	#'squeak_changestamp' : 'TL 7/11/2024 12:32'
 }
 SPOCTestDeviceMorphConstructor >> testSubMorphs [
 
@@ -83,8 +81,8 @@ SPOCTestDeviceMorphConstructor >> testSubMorphs [
 	typeText := finishedMorph submorphs first.
 	nameText := finishedMorph submorphs at: 2.
 	background := finishedMorph submorphs at: 3.
-	self assert: (background color = SPOCStyle spotifyGray).
-	self assert: (nameText text = 'Samsung Fridge').
-	self assert: (typeText text = 'Smart Fridge').
-	self assert: (nameText textColor = SPOCStyle spotifyGreen)
+	self assert: typeText text = 'Smart Fridge'.
+	self assert: nameText text = 'Samsung Fridge'.
+	self assert: nameText textColor = SPOCStyle spotifyGreen.
+	self assert: background color = SPOCStyle spotifyGray
 ]

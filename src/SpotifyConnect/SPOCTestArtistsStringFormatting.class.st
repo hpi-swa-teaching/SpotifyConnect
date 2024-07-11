@@ -96,9 +96,9 @@ SPOCTestArtistsStringFormatting >> setUpAlbum [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/23/2024 15:11'
+	#'squeak_changestamp' : 'TL 7/11/2024 12:37'
 }
 SPOCTestArtistsStringFormatting >> testArtistsAsString [
 
-	self assert: (self album artistsAsString = self artistsString)
+	self assert: self album artistsAsString = self artistsString
 ]

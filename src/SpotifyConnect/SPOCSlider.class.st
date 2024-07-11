@@ -5,10 +5,10 @@ Class {
 	#name : #SPOCSlider,
 	#superclass : #Morph,
 	#instVars : [
-		'value',
 		'innerBarColor',
 		'innerBarHoverColor',
-		'onValueChanged'
+		'onValueChanged',
+		'value'
 	],
 	#category : #'SpotifyConnect-UI',
 	#'squeak_changestamp' : 'OW 7/4/2024 12:30'

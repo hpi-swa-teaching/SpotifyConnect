@@ -12,21 +12,39 @@ Class {
 }
 
 {
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 7/11/2024 12:38'
+}
+SPOCTestApiEndpoint >> apiEndpoint [
+
+	^ apiEndpoint
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 7/11/2024 12:38'
+}
+SPOCTestApiEndpoint >> apiEndpoint: anObject [
+
+	apiEndpoint := anObject
+]
+
+{
 	#category : #setup,
-	#'squeak_changestamp' : 'VE 6/23/2024 18:22'
+	#'squeak_changestamp' : 'TL 7/11/2024 12:38'
 }
 SPOCTestApiEndpoint >> setUp [
 
-	apiEndpoint := SPOCApiEndpoint new
+	self apiEndpoint: SPOCApiEndpoint new
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'VE 6/23/2024 18:23'
+	#'squeak_changestamp' : 'TL 7/11/2024 12:38'
 }
 SPOCTestApiEndpoint >> testNoAuthenticator [
 	
 	| res |
-	res := apiEndpoint execute: (Dictionary new).
-	self assert: (res isKindOf: SPOCApiEndpointResult)
+	res := self apiEndpoint execute: Dictionary new.
+	self assert: res class = SPOCApiEndpointResult
 ]

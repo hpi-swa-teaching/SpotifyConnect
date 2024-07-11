@@ -9,23 +9,16 @@ Class {
 }
 
 {
-	#category : #setup,
-	#'squeak_changestamp' : 'VE 5/27/2024 17:13'
-}
-SPOCTestClickable >> setUp [
-]
-
-{
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/10/2024 05:03'
+	#'squeak_changestamp' : 'TL 7/11/2024 12:37'
 }
 SPOCTestClickable >> testClickableAction [
 
-	| clickable tmp |
-	tmp := 0.
-	clickable := SPOCClickable newUsing: Morph new onClick: [:anEvent | tmp := 1].
+	| clickable value |
+	value := 0.
+	clickable := SPOCClickable newUsing: Morph new onClick: [:anEvent | value := 1].
 	clickable mouseDown: nil.
-	self assert: tmp = 1
+	self assert: value = 1
 ]
 
 {
@@ -41,12 +34,12 @@ SPOCTestClickable >> testClickableActionNotSet [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/10/2024 05:04'
+	#'squeak_changestamp' : 'TL 7/11/2024 12:36'
 }
 SPOCTestClickable >> testWrappeeSubmorph [
 
-	| clickable tmpMorph |
-	tmpMorph := Morph new.
-	clickable := SPOCClickable newUsing: tmpMorph onClick: nil.
-	self assert: (clickable submorphs includes: tmpMorph)
+	| clickable morph |
+	morph := Morph new.
+	clickable := SPOCClickable newUsing: morph onClick: nil.
+	self assert: (clickable submorphs includes: morph)
 ]

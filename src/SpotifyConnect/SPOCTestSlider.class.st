@@ -12,7 +12,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #testing,
 	#'squeak_changestamp' : 'VE 6/23/2024 17:55'
 }
 SPOCTestSlider >> mockMouseEventAt: aPosition [
@@ -22,96 +22,114 @@ SPOCTestSlider >> mockMouseEventAt: aPosition [
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/23/2024 17:55'
+	#category : #setup,
+	#'squeak_changestamp' : 'TL 7/11/2024 12:16'
 }
 SPOCTestSlider >> setUp [
 
-	slider := SPOCSlider new
+	self slider: SPOCSlider new
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:12'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 7/11/2024 12:16'
+}
+SPOCTestSlider >> slider [
+
+	^ slider
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 7/11/2024 12:16'
+}
+SPOCTestSlider >> slider: anObject [
+
+	slider := anObject
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 7/11/2024 12:21'
 }
 SPOCTestSlider >> testChangeValue [
 
-	slider value: 100.
-	self assert: slider value = 100
+	self slider value: 100.
+	self assert: self slider value = 100
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:13'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 7/11/2024 12:21'
 }
 SPOCTestSlider >> testHoverColorChange [
 
 	| color |
-	color := slider innerBar color.
-	slider onHoverStart.
-	self assert: color ~= slider innerBar color.
-	slider onHoverEnd.
-	self assert: color = slider innerBar color
+	color := self slider innerBar color.
+	self slider onHoverStart.
+	self assert: color ~= self slider innerBar color.
+	self slider onHoverEnd.
+	self assert: color = self slider innerBar color
 
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:12'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 7/11/2024 12:22'
 }
 SPOCTestSlider >> testInitialState [
 
-	self assert: slider value = 50
+	self assert: self slider value = 50
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:14'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 7/11/2024 12:23'
 }
 SPOCTestSlider >> testInnerBarCollor [
 
-	slider innerBarColor: Color yellow.
-	self assert: slider innerBar color equals: Color yellow.
-	slider innerBarHoverColor: Color blue.
-	self assert: slider innerBar color equals: Color yellow.
-	slider onHoverStart.
-	self assert: slider innerBar color equals: Color blue
+	self slider innerBarColor: Color yellow.
+	self assert: self slider innerBar color equals: Color yellow.
+	self slider innerBarHoverColor: Color blue.
+	self assert: self slider innerBar color equals: Color yellow.
+	self slider onHoverStart.
+	self assert: self slider innerBar color equals: Color blue
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/20/2024 20:13'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 7/11/2024 12:23'
 }
 SPOCTestSlider >> testLengthChange [
 	
 	| value |
-	value := slider value.
-	slider length: 200.
-	self assert: value = slider value
+	value := self slider value.
+	self slider length: 200.
+	self assert: value = self slider value
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/23/2024 17:56'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 7/11/2024 12:23'
 }
 SPOCTestSlider >> testMouseMove [
 
 	| value |
-	value := slider value.
-	slider onMouseMove: (self mockMouseEventAt: slider position x + 10 asPoint).
-	self assert: slider value ~= value
+	value := self slider value.
+	self slider onMouseMove: (self mockMouseEventAt: self slider position x + 10 asPoint).
+	self assert: self slider value ~= value
 ]
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'VE 6/23/2024 17:55'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 7/11/2024 12:25'
 }
 SPOCTestSlider >> testValueChangedEvent [
 
-	| tmp |
-	tmp := nil.
-	slider onValueChanged: [:aValue | tmp := aValue].
-	slider value: 100.
-	slider onMouseUp: (self mockMouseEventAt: 0 asPoint).
-	self assert: tmp = 0
+	| value |
+	value := nil.
+	self slider onValueChanged: [:aValue | value := aValue];
+		value: 100;
+		onMouseUp: (self mockMouseEventAt: 0 asPoint).
+	self assert: value = 0
 ]

@@ -5,7 +5,6 @@ Class {
 	#name : #SPOCApiEndpointResult,
 	#superclass : #Object,
 	#instVars : [
-		'code',
 		'error',
 		'response'
 	],

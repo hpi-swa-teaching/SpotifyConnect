@@ -5,9 +5,8 @@ Class {
 	#name : #SPOCBoxedText,
 	#superclass : #Morph,
 	#instVars : [
-		'label',
-		'content',
-		'contents'
+		'contents',
+		'label'
 	],
 	#category : #'SpotifyConnect-UI',
 	#'squeak_changestamp' : 'OW 7/4/2024 12:29'

@@ -5,8 +5,8 @@ Class {
 	#name : #SPOCClickable,
 	#superclass : #Morph,
 	#instVars : [
-		'wrappee',
-		'onClick'
+		'onClick',
+		'wrappee'
 	],
 	#category : #'SpotifyConnect-UI',
 	#'squeak_changestamp' : 'OW 7/4/2024 12:29'

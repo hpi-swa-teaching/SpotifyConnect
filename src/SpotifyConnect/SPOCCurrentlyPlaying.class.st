@@ -5,8 +5,8 @@ Class {
 	#name : #SPOCCurrentlyPlaying,
 	#superclass : #SPOCUIComponent,
 	#instVars : [
-		'track',
-		'item'
+		'item',
+		'track'
 	],
 	#category : #'SpotifyConnect-UI',
 	#'squeak_changestamp' : 'OW 7/4/2024 12:10'

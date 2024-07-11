@@ -5,8 +5,8 @@ Class {
 	#name : #SPOCScrollablePanel,
 	#superclass : #Morph,
 	#instVars : [
-		'items',
 		'builder',
+		'items',
 		'spec',
 		'panel'
 	],

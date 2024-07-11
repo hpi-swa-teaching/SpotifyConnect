@@ -5,11 +5,11 @@ Class {
 	#name : #SPOCResultList,
 	#superclass : #SPOCUIComponent,
 	#instVars : [
-		'title',
-		'titleMorph',
-		'results',
 		'items',
-		'scrollablePanel'
+		'results',
+		'scrollablePanel',
+		'title',
+		'titleMorph'
 	],
 	#category : #'SpotifyConnect-UI',
 	#'squeak_changestamp' : 'OW 7/4/2024 12:12'

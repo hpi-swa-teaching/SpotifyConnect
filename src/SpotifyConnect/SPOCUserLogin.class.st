@@ -5,9 +5,9 @@ Class {
 	#name : #SPOCUserLogin,
 	#superclass : #SPOCUIComponent,
 	#instVars : [
-		'text',
 		'button',
-		'buttonLabel'
+		'buttonLabel',
+		'text'
 	],
 	#category : #'SpotifyConnect-UI',
 	#'squeak_changestamp' : 'OW 7/4/2024 12:14'

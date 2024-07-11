@@ -5,10 +5,10 @@ Class {
 	#name : #SPOCDataPiece,
 	#superclass : #Object,
 	#instVars : [
+		'hasTertiaryText',
 		'id',
 		'image',
-		'name',
-		'hasTertiaryText'
+		'name'
 	],
 	#category : #SpotifyConnect,
 	#'squeak_changestamp' : 'OW 7/4/2024 12:29'

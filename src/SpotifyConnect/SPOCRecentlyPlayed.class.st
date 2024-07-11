@@ -5,8 +5,7 @@ Class {
 	#name : #SPOCRecentlyPlayed,
 	#superclass : #SPOCUIComponent,
 	#instVars : [
-		'tracks',
-		'trackItems'
+		'results'
 	],
 	#category : #'SpotifyConnect-UI',
 	#'squeak_changestamp' : 'OW 7/4/2024 12:12'
@@ -43,30 +42,29 @@ SPOCRecentlyPlayed >> attachButton [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'VE 7/2/2024 18:56'
+	#'squeak_changestamp' : 'TL 7/11/2024 12:03'
 }
 SPOCRecentlyPlayed >> getRecentlyPlayed [
 
 	| apiEndpoint |
-	self isDisabled ifTrue: [self showPopUp. ^ self].
-	apiEndpoint := SPOCApiRecentlyPlayed new
-		authorizer: self app auth;
-		yourself.
-	self results: (apiEndpoint getRecentlyPlayed).
+	self isDisabled
+		ifTrue: [self showPopUp.
+			^ self].
+	apiEndpoint := SPOCApiRecentlyPlayed new 	authorizer: self app auth.
+	self results: apiEndpoint getRecentlyPlayed.
 	self app resultList updateResults: self results;
 		title: 'Recently Played'
 ]
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/8/2024 19:39'
+	#'squeak_changestamp' : 'TL 7/11/2024 11:59'
 }
 SPOCRecentlyPlayed >> initialize [
 
 	super initialize.
 	
 	self color: Color transparent;
-		items: OrderedCollection new;
 		results: OrderedCollection new;
 		attachButton;
 		extendFully
@@ -74,36 +72,18 @@ SPOCRecentlyPlayed >> initialize [
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 7/8/2024 19:16'
-}
-SPOCRecentlyPlayed >> items [
-
-	^ trackItems
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 7/8/2024 19:16'
-}
-SPOCRecentlyPlayed >> items: anObject [
-
-	trackItems := anObject
-]
-
-{
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 7/8/2024 19:16'
+	#'squeak_changestamp' : 'TL 7/11/2024 12:02'
 }
 SPOCRecentlyPlayed >> results [
 
-	^ tracks
+	^ results
 ]
 
 {
 	#category : #accessing,
-	#'squeak_changestamp' : 'TL 7/8/2024 19:16'
+	#'squeak_changestamp' : 'TL 7/11/2024 12:02'
 }
 SPOCRecentlyPlayed >> results: anObject [
 
-	tracks := anObject
+	results := anObject
 ]
