@@ -540,13 +540,14 @@ SPOCApp >> setUpTopPanelComponents [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'TL 7/7/2024 01:48'
+	#'squeak_changestamp' : 'VE 7/11/2024 22:23'
 }
 SPOCApp >> setUpUserLogin [
 
 	self userLogin: (SPOCUserLogin new app: self).
 	self auth registerSuccessCallback: [self userLogin toggleLogout.
-		self updatePlaybackState]
+		self updatePlaybackState.
+		self showPopUpFor: self currentlyPlaying]
 
 
 ]
@@ -562,7 +563,7 @@ SPOCApp >> setUpVolumeSlider [
 
 {
 	#category : #'pop-ups',
-	#'squeak_changestamp' : 'VE 7/9/2024 10:39'
+	#'squeak_changestamp' : 'VE 7/11/2024 22:24'
 }
 SPOCApp >> showPopUpFor: aUiComponent [
 	

@@ -59,7 +59,7 @@ SPOCCurrentlyPlaying >> item: aSPOCResultListItem [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/2/2024 18:28'
+	#'squeak_changestamp' : 'VE 7/11/2024 22:21'
 }
 SPOCCurrentlyPlaying >> needsActiveDevice [
 	
@@ -86,13 +86,12 @@ SPOCCurrentlyPlaying >> track: aSPOCTrack [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/9/2024 11:06'
+	#'squeak_changestamp' : 'VE 7/11/2024 22:20'
 }
 SPOCCurrentlyPlaying >> updatePlaybackState: aState [
 
 	super updatePlaybackState: aState.
-	self isDisabled
-		ifTrue: [self showPopUp. ^ self].
+	self isDisabled ifTrue: [^ self].
 	self track: aState track.
 	self track hasTertiaryText: false.
 	self item changeItemTo: self track
