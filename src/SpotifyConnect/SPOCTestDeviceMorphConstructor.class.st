@@ -1,5 +1,5 @@
 "
-Tests decive mophs.
+Tests device morphs.
 "
 Class {
 	#name : #SPOCTestDeviceMorphConstructor,
@@ -9,7 +9,7 @@ Class {
 		'deviceMorph'
 	],
 	#category : #'SpotifyConnect-Tests',
-	#'squeak_changestamp' : 'OW 7/4/2024 12:26'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:32'
 }
 
 {
@@ -49,7 +49,7 @@ SPOCTestDeviceMorphConstructor >> deviceMorph: anObject [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 7/11/2024 12:33'
 }
 SPOCTestDeviceMorphConstructor >> setUp [

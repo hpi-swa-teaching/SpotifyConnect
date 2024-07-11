@@ -158,6 +158,15 @@ SPOCAuthorizer class >> scope [
 
 {
 	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/11/2024 17:57'
+}
+SPOCAuthorizer class >> spotifyTokenApiType [
+
+	^ 'application/x-www-form-urlencoded'
+]
+
+{
+	#category : #constants,
 	#'squeak_changestamp' : 'OW 5/22/2024 22:28'
 }
 SPOCAuthorizer class >> spotifyTokenApiUrl [
@@ -167,11 +176,11 @@ SPOCAuthorizer class >> spotifyTokenApiUrl [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'VE 6/4/2024 09:38'
+	#'squeak_changestamp' : 'TL 7/11/2024 20:08'
 }
 SPOCAuthorizer class >> successPage [
 		
-	^ (GitAssetLoader for: 'SpotifyConnect') loadString: 'assets/successResponse.html'
+	^ (GitAssetLoader for: SPOCApp gitRepoName) loadString: 'assets/successResponse.html'
 ]
 
 {
@@ -254,7 +263,7 @@ SPOCAuthorizer >> canRefresh [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
 }
 SPOCAuthorizer >> initialize [
@@ -297,7 +306,7 @@ SPOCAuthorizer >> logout [
 ]
 
 {
-	#category : #initialization,
+	#category : #authorization,
 	#'squeak_changestamp' : 'TL 7/7/2024 02:17'
 }
 SPOCAuthorizer >> nextRandomState [
@@ -397,11 +406,11 @@ SPOCAuthorizer >> registerSuccessCallback: aBlock [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
+	#'squeak_changestamp' : 'TL 7/11/2024 17:57'
 }
 SPOCAuthorizer >> requestSpotifyApiEndpoint: aContentString [
 	
-	^ WebClient httpPost: self class spotifyTokenApiUrl content: aContentString type: 'application/x-www-form-urlencoded'
+	^ WebClient httpPost: self class spotifyTokenApiUrl content: aContentString type: self class spotifyTokenApiType
 
 ]
 

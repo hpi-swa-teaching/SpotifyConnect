@@ -9,7 +9,7 @@ Class {
 }
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/10/2024 04:53'
 }
 SPOCTestTokens >> setUp [

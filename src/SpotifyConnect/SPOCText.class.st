@@ -1,21 +1,20 @@
 "
-A textmorph
+A textmorph.
 "
 Class {
 	#name : #SPOCText,
 	#superclass : #TextMorph,
 	#category : #'SpotifyConnect-UI',
-	#'squeak_changestamp' : 'OW 7/4/2024 12:09'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:31'
 }
 
 {
 	#category : #constructor,
-	#'squeak_changestamp' : 'RK 6/7/2024 11:11'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:31'
 }
 SPOCText class >> newAt: aPoint withText: aString [
 
-	^ SPOCText new
-		position: aPoint;
+	^ SPOCText new position: aPoint;
 		contents: aString;
 		textColor: SPOCStyle spotifyWhite;
 		yourself

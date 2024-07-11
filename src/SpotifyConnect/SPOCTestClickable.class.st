@@ -1,11 +1,11 @@
 "
-Test clickable decorator for UI components.
+Tests clickable decorator for UI components.
 "
 Class {
 	#name : #SPOCTestClickable,
 	#superclass : #TestCase,
 	#category : #'SpotifyConnect-Tests',
-	#'squeak_changestamp' : 'OW 7/4/2024 12:26'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:33'
 }
 
 {

@@ -40,6 +40,15 @@ SPOCApp class >> devicePopUpMessage [
 ]
 
 {
+	#category : #constants,
+	#'squeak_changestamp' : 'TL 7/11/2024 20:04'
+}
+SPOCApp class >> gitRepoName [
+
+	^ 'SpotifyConnect'
+]
+
+{
 	#category : #initialization,
 	#'squeak_changestamp' : 'VE 6/20/2024 18:18'
 }
@@ -125,36 +134,38 @@ SPOCApp >> bottomPanelContent [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 7/8/2024 20:06'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:53'
 }
-SPOCApp >> buildBottomPanel: aBuilder [
+SPOCApp >> buildBottomPanel: aBuilder [ 
 
 	^ SPOCPluggableTablePanelSpec new model: self;
-		tableLayoutProperties: (TableLayoutProperties new hResizing: #spaceFill;
-			vResizing: #shrinkWrap;
-			listDirection: #leftToRight;
-			listCentering: #justified;
-			wrapDirection: #bottomToTop);
-		children: #bottomPanelContent;
-		yourself
+		 tableLayoutProperties: (TableLayoutProperties new hResizing: #spaceFill;
+			 vResizing: #shrinkWrap;
+			 listDirection: #leftToRight;
+			 listCentering: #justified;
+			 wrapDirection: #bottomToTop;
+			 yourself);
+		 children: #bottomPanelContent;
+		 yourself
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 7/8/2024 20:06'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:01'
 }
 SPOCApp >> buildCenterPanel: aBuilder [
 
 	^ SPOCPluggableTablePanelSpec new model: self;
 		tableLayoutProperties: (TableLayoutProperties new hResizing: #spaceFill;
-			vResizing: #spaceFill);
+			vResizing: #spaceFill;
+			yourself);
 		children: #centerPanelContent;
 		yourself
 ]
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 7/8/2024 20:06'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:01'
 }
 SPOCApp >> buildMainTable: aBuilder [
 
@@ -162,7 +173,8 @@ SPOCApp >> buildMainTable: aBuilder [
 		tableLayoutProperties: (TableLayoutProperties new listDirection: #topToBottom;
 			cellInset: SPOCStyle defaultMargin;
 			hResizing: #spaceFill;
-			vResizing: #spaceFill);
+			vResizing: #spaceFill;
+			yourself);
 		children: {self buildTopPanel: aBuilder.
 			self buildCenterPanel: aBuilder.			
 			self buildBottomPanel: aBuilder};
@@ -171,7 +183,7 @@ SPOCApp >> buildMainTable: aBuilder [
 
 {
 	#category : #ui,
-	#'squeak_changestamp' : 'TL 7/8/2024 20:06'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:01'
 }
 SPOCApp >> buildTopPanel: aBuilder [
 
@@ -180,7 +192,8 @@ SPOCApp >> buildTopPanel: aBuilder [
 			vResizing: #shrinkWrap;
 			listDirection: #leftToRight;
 			listCentering: #justified;
-			cellPositioning: #topLeft);
+			cellPositioning: #topLeft;
+			yourself);
 		children: #topPanelContent;
 		yourself
 ]
@@ -271,7 +284,7 @@ SPOCApp >> getPlaybackState [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 7/7/2024 01:40'
 }
 SPOCApp >> initialize [
@@ -317,12 +330,13 @@ SPOCApp >> loginPopUp [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/2/2024 19:23'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:22'
 }
 SPOCApp >> logout [
 
 	self auth logout.
-	self componentsForUpdatingPlaybackState do: [:aComponent | aComponent disable]
+	self componentsForUpdatingPlaybackState
+		do: [:aComponent | aComponent disable]
 ]
 
 {
@@ -429,7 +443,7 @@ SPOCApp >> searchbar: aSPOCSearchbar [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 7/7/2024 01:38'
 }
 SPOCApp >> setUpBottomPanelComponents [
@@ -441,7 +455,7 @@ SPOCApp >> setUpBottomPanelComponents [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 7/7/2024 01:39'
 }
 SPOCApp >> setUpCenterPanelComponents [
@@ -450,7 +464,7 @@ SPOCApp >> setUpCenterPanelComponents [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 6/12/2024 02:54'
 }
 SPOCApp >> setUpCurrentlyPlaying [
@@ -459,7 +473,7 @@ SPOCApp >> setUpCurrentlyPlaying [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 6/12/2024 02:54'
 }
 SPOCApp >> setUpPlayer [
@@ -468,7 +482,7 @@ SPOCApp >> setUpPlayer [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 6/12/2024 02:54'
 }
 SPOCApp >> setUpRecentlyPlayed [
@@ -477,7 +491,7 @@ SPOCApp >> setUpRecentlyPlayed [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 6/18/2024 23:21'
 }
 SPOCApp >> setUpRefresh [
@@ -486,7 +500,7 @@ SPOCApp >> setUpRefresh [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'RK 6/7/2024 11:25'
 }
 SPOCApp >> setUpResultList [
@@ -495,7 +509,7 @@ SPOCApp >> setUpResultList [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 6/12/2024 02:58'
 }
 SPOCApp >> setUpSearchbar [
@@ -504,7 +518,7 @@ SPOCApp >> setUpSearchbar [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 6/10/2024 19:08'
 }
 SPOCApp >> setUpSwitchDevice [
@@ -513,7 +527,7 @@ SPOCApp >> setUpSwitchDevice [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 7/7/2024 01:37'
 }
 SPOCApp >> setUpTopPanelComponents [
@@ -525,7 +539,7 @@ SPOCApp >> setUpTopPanelComponents [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 7/7/2024 01:48'
 }
 SPOCApp >> setUpUserLogin [
@@ -538,7 +552,7 @@ SPOCApp >> setUpUserLogin [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 6/12/2024 02:54'
 }
 SPOCApp >> setUpVolumeSlider [
@@ -648,7 +662,7 @@ SPOCApp >> volumeSlider: aSPOCVolumeSlider [
 ]
 
 {
-	#category : #ui,
+	#category : #toolbuilder,
 	#'squeak_changestamp' : 'TL 7/8/2024 20:10'
 }
 SPOCApp >> windowTitle [

@@ -9,7 +9,7 @@ Class {
 }
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/24/2024 03:21'
 }
 SPOCTestPlay >> setUp [
@@ -43,12 +43,14 @@ SPOCTestPlay >> testPlayTrackOn [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'MH 7/7/2024 15:50'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:19'
 }
 SPOCTestPlay >> testPlayTrackWithContextOn [
 
 	| playbackState |
-	self apiEndpoint playTrack: '4PTG3Z6ehGkBFwjybzWkR8' withAlbum: '6eUW0wxWtzkFdaEFsTJto6' on: self getPlaybackState device id.
+	self apiEndpoint playTrack: '4PTG3Z6ehGkBFwjybzWkR8'
+			withAlbum: '6eUW0wxWtzkFdaEFsTJto6'
+			on: self getPlaybackState device id.
 	playbackState := self getPlaybackState.
 	self assert: playbackState track id = '4PTG3Z6ehGkBFwjybzWkR8'.
 	self assert: playbackState track album id = '6eUW0wxWtzkFdaEFsTJto6'.

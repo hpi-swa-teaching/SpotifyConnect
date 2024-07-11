@@ -22,7 +22,7 @@ SPOCTestSlider >> mockMouseEventAt: aPosition [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 7/11/2024 12:16'
 }
 SPOCTestSlider >> setUp [

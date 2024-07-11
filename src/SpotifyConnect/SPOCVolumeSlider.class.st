@@ -169,7 +169,7 @@ SPOCVolumeSlider >> isMuted: anObject [
 ]
 
 {
-	#category : #updating,
+	#category : #actions,
 	#'squeak_changestamp' : 'TL 7/8/2024 18:22'
 }
 SPOCVolumeSlider >> mute [
@@ -246,7 +246,7 @@ SPOCVolumeSlider >> switchMuteState [
 ]
 
 {
-	#category : #updating,
+	#category : #actions,
 	#'squeak_changestamp' : 'TL 7/8/2024 18:50'
 }
 SPOCVolumeSlider >> unmute: aVolume [

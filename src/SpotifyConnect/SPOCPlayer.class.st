@@ -54,11 +54,12 @@ SPOCPlayer class >> previousIconPath [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:51'
+	#'squeak_changestamp' : 'TL 7/11/2024 17:40'
 }
 SPOCPlayer >> attachButton: anIcon [
 
-	self button: (SPOCClickable newUsing: anIcon onClick: [:anEvent | self executeButtonFunction: anIcon]);
+	self button: (SPOCClickable newUsing: anIcon
+			onClick: [:anEvent | self executeButtonFunction: anIcon]);
 		 addMorph: self button
 ]
 
@@ -137,18 +138,19 @@ SPOCPlayer >> deviceID: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'VE 7/9/2024 11:28'
+	#'squeak_changestamp' : 'TL 7/11/2024 20:01'
 }
 SPOCPlayer >> executeButtonFunction: anIcon [
 	
-	self isDisabled ifTrue: [self showPopUp.
-		^ self].
+	self isDisabled
+		ifTrue: [self showPopUp.
+			^ self].
 	(anIcon == self previousIcon)
 		ifTrue: [self skipToPrevious].
 	(anIcon == self playPauseIcon)
 		ifTrue: [self switchPlaybackState].
 	(anIcon == self nextIcon)
-		ifTrue: [self skipToNext].
+		ifTrue: [self skipToNext]
 	
 
 ]
@@ -192,7 +194,7 @@ SPOCPlayer >> isPlaying: anObject [
 ]
 
 {
-	#category : #accessing,
+	#category : #updating,
 	#'squeak_changestamp' : 'VE 7/2/2024 18:41'
 }
 SPOCPlayer >> needsActiveDevice [

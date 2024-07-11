@@ -30,7 +30,7 @@ SPOCAuthTestResource >> auth: anObject [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'VE 7/9/2024 11:36'
 }
 SPOCAuthTestResource >> setUp [

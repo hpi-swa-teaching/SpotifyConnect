@@ -107,7 +107,7 @@ SPOCMockTestApiPlaybackState >> playbackState: anObject [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/24/2024 04:26'
 }
 SPOCMockTestApiPlaybackState >> setUp [
@@ -121,7 +121,7 @@ SPOCMockTestApiPlaybackState >> setUp [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'RK 7/7/2024 13:11'
 }
 SPOCMockTestApiPlaybackState >> setUpAlbum [
@@ -137,7 +137,7 @@ SPOCMockTestApiPlaybackState >> setUpAlbum [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/24/2024 04:26'
 }
 SPOCMockTestApiPlaybackState >> setUpArtist [
@@ -157,7 +157,7 @@ SPOCMockTestApiPlaybackState >> setUpArtist [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/12/2024 01:39'
 }
 SPOCMockTestApiPlaybackState >> setUpDevice [
@@ -173,7 +173,7 @@ SPOCMockTestApiPlaybackState >> setUpDevice [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/12/2024 01:39'
 }
 SPOCMockTestApiPlaybackState >> setUpPlaybackState [
@@ -187,7 +187,7 @@ SPOCMockTestApiPlaybackState >> setUpPlaybackState [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'RK 7/7/2024 13:11'
 }
 SPOCMockTestApiPlaybackState >> setUpTrack [

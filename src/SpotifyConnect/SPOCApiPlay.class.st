@@ -73,7 +73,7 @@ SPOCApiPlay >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 7/11/2024 16:51'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:14'
 }
 SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 
@@ -83,7 +83,8 @@ SPOCApiPlay >> executeRequest: request withParams: aParamDictionary [
 	(aParamDictionary size = 2)
 		ifTrue: [data := self buildDataWithTrack: (aParamDictionary at: #uris)]
 		ifFalse: [(aParamDictionary includesKey: #context_uri)
-				ifTrue: [data := self buildDataWithContext: (aParamDictionary at: #context_uri) andTrack: (aParamDictionary at: #uris)]].
+				ifTrue: [data := self buildDataWithContext: (aParamDictionary at: #context_uri)
+						andTrack: (aParamDictionary at: #uris)]].
 	request headerAt: 'Content-Length' put: data size.
 	(data isEmpty)
 		ifTrue: [^ self client sendRequest: request]
@@ -112,7 +113,7 @@ SPOCApiPlay >> playTrack: aString on: aDevice [
 ]
 
 {
-	#category : #parameters,
+	#category : #'api-call',
 	#'squeak_changestamp' : 'MH 7/7/2024 15:26'
 }
 SPOCApiPlay >> playTrack: aString withAlbum: anotherString on: aDevice [
@@ -124,7 +125,7 @@ SPOCApiPlay >> playTrack: aString withAlbum: anotherString on: aDevice [
 ]
 
 {
-	#category : #parameters,
+	#category : #'api-call',
 	#'squeak_changestamp' : 'MH 7/7/2024 15:27'
 }
 SPOCApiPlay >> playTrack: aString withPlaylist: anotherString on: aDevice [
@@ -136,7 +137,7 @@ SPOCApiPlay >> playTrack: aString withPlaylist: anotherString on: aDevice [
 ]
 
 {
-	#category : #parameters,
+	#category : #response,
 	#'squeak_changestamp' : 'VE 7/9/2024 11:51'
 }
 SPOCApiPlay >> tinkerReponseContent: aContentStream [

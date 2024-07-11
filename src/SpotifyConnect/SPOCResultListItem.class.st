@@ -18,12 +18,11 @@ Class {
 
 {
 	#category : #constructor,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:56'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:09'
 }
 SPOCResultListItem class >> newWith: aDataPiece [
 
-	^ SPOCResultListItem new
-		dataPiece: aDataPiece;
+	^ SPOCResultListItem new dataPiece: aDataPiece;
 		attachItem;
 		yourself
 ]
@@ -67,21 +66,21 @@ SPOCResultListItem >> attachBackground [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:57'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:09'
 }
 SPOCResultListItem >> attachCenterBox [
 
 	self addMorph: (Morph new name: 'center-box';
-		 color: Color transparent;
-		 layoutPolicy: TableLayout new;
-		 hResizing: #spaceFill;
-		 vResizing: #spaceFill;
-		 listDirection: #topToBottom;
-		 wrapDirection: #leftToRight;
-		 listCentering: #justified;
-		 wrapCentering: #justified;
-		 cellPositioning: #topLeft;
-		 yourself)
+			 color: Color transparent;
+			 layoutPolicy: TableLayout new;
+			 hResizing: #spaceFill;
+			 vResizing: #spaceFill;
+			 listDirection: #topToBottom;
+			 wrapDirection: #leftToRight;
+			 listCentering: #justified;
+			 wrapCentering: #justified;
+			 cellPositioning: #topLeft;
+			 yourself)
 ]
 
 {
@@ -133,17 +132,17 @@ SPOCResultListItem >> attachSecondaryText [
 
 {
 	#category : #building,
-	#'squeak_changestamp' : 'VE 7/8/2024 18:58'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:13'
 }
 SPOCResultListItem >> attachTertiaryText [
 
 	self dataPiece hasTertiaryText
 		ifTrue: [self tertiaryText: (SPOCText new contents: self dataPiece tertiaryText);
-			addMorph: self tertiaryText]
+				addMorph: self tertiaryText]
 ]
 
 {
-	#category : #building,
+	#category : #accessing,
 	#'squeak_changestamp' : 'VE 6/10/2024 21:34'
 }
 SPOCResultListItem >> centerBox [
@@ -152,7 +151,7 @@ SPOCResultListItem >> centerBox [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'VE 7/8/2024 18:58'
 }
 SPOCResultListItem >> changeItemTo: aDataPiece [
@@ -183,7 +182,7 @@ SPOCResultListItem >> dataPiece: aDataPiece [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'VE 7/8/2024 18:26'
 }
 SPOCResultListItem >> highlightPrimaryTextColor [
@@ -247,7 +246,7 @@ SPOCResultListItem >> primaryText: aSPOCText [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'VE 7/8/2024 18:07'
 }
 SPOCResultListItem >> resetPrimaryTextColor [
@@ -256,7 +255,7 @@ SPOCResultListItem >> resetPrimaryTextColor [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #actions,
 	#'squeak_changestamp' : 'VE 6/10/2024 19:18'
 }
 SPOCResultListItem >> resizeTo: anExtent [

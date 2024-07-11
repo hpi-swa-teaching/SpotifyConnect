@@ -1,5 +1,5 @@
 "
-Testcases that use the authorizer ressource
+Testcases that use the authorizer ressource.
 "
 Class {
 	#name : #SPOCTestCaseWithAuth,
@@ -8,7 +8,7 @@ Class {
 		'apiEndpoint'
 	],
 	#category : #'SpotifyConnect-Auth-Tests',
-	#'squeak_changestamp' : 'OW 7/4/2024 12:17'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:31'
 }
 
 {

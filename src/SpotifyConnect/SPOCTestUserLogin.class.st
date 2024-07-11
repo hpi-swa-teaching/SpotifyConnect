@@ -31,7 +31,7 @@ SPOCTestUserLogin >> app: anObject [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/24/2024 03:21'
 }
 SPOCTestUserLogin >> setUp [

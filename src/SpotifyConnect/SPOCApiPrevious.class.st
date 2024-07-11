@@ -47,7 +47,7 @@ SPOCApiPrevious >> skipToPreviousOn: aDevice [
 ]
 
 {
-	#category : #'api-call',
+	#category : #response,
 	#'squeak_changestamp' : 'VE 7/9/2024 11:51'
 }
 SPOCApiPrevious >> tinkerReponseContent: aContentStream [

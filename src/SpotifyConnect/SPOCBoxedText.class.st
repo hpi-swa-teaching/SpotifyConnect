@@ -5,7 +5,6 @@ Class {
 	#name : #SPOCBoxedText,
 	#superclass : #Morph,
 	#instVars : [
-		'contents',
 		'label'
 	],
 	#category : #'SpotifyConnect-UI',
@@ -69,13 +68,13 @@ SPOCBoxedText >> attachRightBorderCircle [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/8/2024 16:33'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:54'
 }
 SPOCBoxedText >> attachText [
 
-	self label: SPOCPlainText new.
-	self label contents: 'SPOCBoxedText';
-		color: SPOCStyle spotifyBlack.
+	self label: SPOCPlainText new;
+		contents: 'SPOCBoxedText'.
+	self label color: SPOCStyle spotifyBlack.
 	self addMorph: self label
 ]
 
@@ -100,7 +99,7 @@ SPOCBoxedText >> circleMorph [
 ]
 
 {
-	#category : #updating,
+	#category : #accessing,
 	#'squeak_changestamp' : 'TL 7/8/2024 17:16'
 }
 SPOCBoxedText >> color: aColor [
@@ -113,12 +112,14 @@ SPOCBoxedText >> color: aColor [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'TL 6/23/2024 16:45'
+	#category : #updating,
+	#'squeak_changestamp' : 'TL 7/11/2024 19:19'
 }
-SPOCBoxedText >> contents [
+SPOCBoxedText >> computeNewLabelPosition: aNumber [
 
-	^ self label contents
+	^ self class height + self class horizontalSpacing @ (self class height - aNumber) / 2
+	
+	
 ]
 
 {
@@ -225,12 +226,12 @@ SPOCBoxedText >> updateAlignments [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/8/2024 16:49'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:04'
 }
 SPOCBoxedText >> updateCenterBoxExtent [
 
-	self centerBox extent: (self label width + self class horizontalSpacing @ self class height).
-	self centerBox position: self topLeft + (self class height / 2 @ 0)
+	self centerBox extent: (self label width + self class horizontalSpacing @ self class height);
+		position: self topLeft + (self class height / 2 @ 0)
 	
 	
 ]
@@ -247,22 +248,22 @@ SPOCBoxedText >> updateExtent [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'VE 7/8/2024 16:50'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:19'
 }
 SPOCBoxedText >> updateLabelPosition [
 
-	self label position: self topLeft  + (self class height + self class horizontalSpacing @ (self class height - self label height) / 2)
+	self label position: self topLeft + (self computeNewLabelPosition: self label height)
 	
 	
 ]
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:05'
 }
 SPOCBoxedText >> updateRightBorderCirclePosition [
 
-	self rightBorderCircle position: self topRight - (self class height  @ 0)
+	self rightBorderCircle position: self topRight - (self class height @ 0)
 	
 	
 ]

@@ -4,44 +4,65 @@ Tests for logic of the authorizer.
 Class {
 	#name : #SPOCTestAuthorizer,
 	#superclass : #TestCase,
+	#instVars : [
+		'authorizer'
+	],
 	#category : #'SpotifyConnect-Auth-Tests',
 	#'squeak_changestamp' : 'OW 7/4/2024 12:17'
 }
 
 {
-	#category : #setup,
-	#'squeak_changestamp' : 'VE 6/20/2024 19:50'
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 7/11/2024 19:57'
+}
+SPOCTestAuthorizer >> authorizer [
+
+	^ authorizer
+]
+
+{
+	#category : #accessing,
+	#'squeak_changestamp' : 'TL 7/11/2024 19:57'
+}
+SPOCTestAuthorizer >> authorizer: anObject [
+
+	authorizer := anObject
+]
+
+{
+	#category : #running,
+	#'squeak_changestamp' : 'TL 7/11/2024 18:40'
 }
 SPOCTestAuthorizer >> setUp [
 
-	authorizer := SPOCAuthorizer new.
+	self authorizer: SPOCAuthorizer new
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'VE 6/20/2024 19:49'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:40'
 }
 SPOCTestAuthorizer >> testOnAuthorizationSuccessCallbacks [
 	
-	| tmp |
-	tmp := 0.
-	authorizer registerSuccessCallback: [tmp := 1].
-	authorizer callSuccessCallbacks.
-	self assert: tmp = 1
+	| value |
+	value := 0.
+	self authorizer registerSuccessCallback: [value := 1].
+	self authorizer callSuccessCallbacks.
+	self assert: value = 1
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'VE 6/20/2024 19:49'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:40'
 }
 SPOCTestAuthorizer >> testRandomState [
 	
 	| lastRandomState |
-	authorizer nextRandomState.
-	self assert: authorizer randomState isString.
-	lastRandomState := authorizer randomState.
-	authorizer nextRandomState.
-	self assert: (lastRandomState = authorizer randomState) not
+	self authorizer nextRandomState.
+	self assert: self authorizer randomState isString.
+	lastRandomState := self authorizer randomState.
+	self authorizer nextRandomState.
+	self assert: (lastRandomState = self authorizer randomState) not
 ]
 
 {

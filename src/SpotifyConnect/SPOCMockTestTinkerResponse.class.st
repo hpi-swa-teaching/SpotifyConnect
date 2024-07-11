@@ -1,5 +1,5 @@
 "
-Tests the tinker reponse method for API requests.
+Tests the tinker response method for API requests.
 "
 Class {
 	#name : #SPOCMockTestTinkerResponse,
@@ -14,7 +14,7 @@ Class {
 		'track'
 	],
 	#category : #'SpotifyConnect-Mock-Tests',
-	#'squeak_changestamp' : 'OW 7/4/2024 12:28'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:31'
 }
 
 {
@@ -72,7 +72,7 @@ SPOCMockTestTinkerResponse >> artist: anObject [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/12/2024 00:38'
 }
 SPOCMockTestTinkerResponse >> artists [
@@ -110,10 +110,10 @@ SPOCMockTestTinkerResponse >> device: anObject [
 ]
 
 {
-	#category : #mocks,
-	#'squeak_changestamp' : 'OW 7/8/2024 21:51'
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 7/11/2024 18:18'
 }
-SPOCMockTestTinkerResponse >> mockJSONPlaybackState [
+SPOCMockTestTinkerResponse >> mockJsonPlaybackState [
 
 	^ Json readFrom: (SPOCApiPlaybackState new loadMockdataFromAsset: 'playbackStateResponse')
 ]
@@ -137,7 +137,7 @@ SPOCMockTestTinkerResponse >> playbackState: anObject [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/24/2024 04:26'
 }
 SPOCMockTestTinkerResponse >> setUp [
@@ -152,7 +152,7 @@ SPOCMockTestTinkerResponse >> setUp [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'RK 7/7/2024 13:13'
 }
 SPOCMockTestTinkerResponse >> setUpAlbum [
@@ -168,7 +168,7 @@ SPOCMockTestTinkerResponse >> setUpAlbum [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/24/2024 04:26'
 }
 SPOCMockTestTinkerResponse >> setUpArtist [
@@ -181,7 +181,7 @@ SPOCMockTestTinkerResponse >> setUpArtist [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/11/2024 11:56'
 }
 SPOCMockTestTinkerResponse >> setUpDevice [
@@ -197,7 +197,7 @@ SPOCMockTestTinkerResponse >> setUpDevice [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/12/2024 01:29'
 }
 SPOCMockTestTinkerResponse >> setUpPlaybackState [
@@ -211,7 +211,7 @@ SPOCMockTestTinkerResponse >> setUpPlaybackState [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'RK 7/7/2024 13:13'
 }
 SPOCMockTestTinkerResponse >> setUpTrack [
@@ -231,56 +231,56 @@ SPOCMockTestTinkerResponse >> setUpTrack [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'OW 7/8/2024 21:51'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:18'
 }
 SPOCMockTestTinkerResponse >> testTinkerAlbum [
 
 	| res |
-	res := self apiEndpoint tinkerAlbum: ((self mockJSONPlaybackState at: #item) at: #album).
+	res := self apiEndpoint tinkerAlbum: ((self mockJsonPlaybackState at: #item) at: #album).
 	self assert: (res equals: self album)
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'OW 7/8/2024 21:51'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:18'
 }
 SPOCMockTestTinkerResponse >> testTinkerArtist [
 
 	| res |
-	res := self apiEndpoint tinkerArtist: (((self mockJSONPlaybackState at: #item) at: #artists) first).
+	res := self apiEndpoint tinkerArtist: (((self mockJsonPlaybackState at: #item) at: #artists) first).
 	self assert: (res equals: self artist)
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'OW 7/8/2024 21:51'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:18'
 }
 SPOCMockTestTinkerResponse >> testTinkerDevice [
 
 	| res |
-	res := self apiEndpoint tinkerDevice: (self mockJSONPlaybackState at: #device).
+	res := self apiEndpoint tinkerDevice: (self mockJsonPlaybackState at: #device).
 	self assert: (res equals: self device)
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'OW 7/8/2024 21:51'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:18'
 }
 SPOCMockTestTinkerResponse >> testTinkerPlaybackState [
 
 	| res |
-	res := self apiEndpoint tinkerPlaybackState: self mockJSONPlaybackState.
+	res := self apiEndpoint tinkerPlaybackState: self mockJsonPlaybackState.
 	self assert: (res equals: self playbackState)
 ]
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'OW 7/8/2024 21:51'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:18'
 }
 SPOCMockTestTinkerResponse >> testTinkerTrack [
 
 	| res |
-	res := self apiEndpoint tinkerTrack: (self mockJSONPlaybackState at: #item).
+	res := self apiEndpoint tinkerTrack: (self mockJsonPlaybackState at: #item).
 	self assert: (res equals: self track)
 ]
 

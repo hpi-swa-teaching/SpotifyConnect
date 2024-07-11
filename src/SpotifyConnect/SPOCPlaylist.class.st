@@ -1,5 +1,5 @@
 "
-I represent a Spotify playlist
+I represent a Spotify playlist.
 "
 Class {
 	#name : #SPOCPlaylist,
@@ -9,7 +9,7 @@ Class {
 		'totalTracks'
 	],
 	#category : #SpotifyConnect,
-	#'squeak_changestamp' : 'OW 7/4/2024 11:53'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:34'
 }
 
 {
@@ -26,7 +26,7 @@ SPOCPlaylist >> equals: aPlaylist [
 ]
 
 {
-	#category : #'event handling',
+	#category : #'event-handling',
 	#'squeak_changestamp' : 'VE 6/26/2024 17:27'
 }
 SPOCPlaylist >> onClick: anApp [

@@ -1,5 +1,5 @@
 "
-I represent a device that spotify can connect to.
+I represent a device that Spotify can connect to.
 "
 Class {
 	#name : #SPOCDevice,
@@ -13,7 +13,7 @@ Class {
 		'volume'
 	],
 	#category : #SpotifyConnect,
-	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:34'
 }
 
 {

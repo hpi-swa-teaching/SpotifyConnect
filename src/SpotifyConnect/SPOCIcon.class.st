@@ -48,7 +48,7 @@ SPOCIcon class >> size [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 7/8/2024 19:40'
 }
 SPOCIcon >> attachIcon [
@@ -77,7 +77,7 @@ SPOCIcon >> icon: anObject [
 ]
 
 {
-	#category : #accessing,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
 }
 SPOCIcon >> iconAsset: anAssetPath [
@@ -87,7 +87,7 @@ SPOCIcon >> iconAsset: anAssetPath [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
 }
 SPOCIcon >> initialize [
@@ -100,7 +100,7 @@ SPOCIcon >> initialize [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 7/8/2024 20:11'
 }
 SPOCIcon >> initializeStyle [

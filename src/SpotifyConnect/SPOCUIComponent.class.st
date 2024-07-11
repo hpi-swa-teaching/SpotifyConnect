@@ -81,7 +81,7 @@ SPOCUIComponent >> isDisabled: aBoolean [
 ]
 
 {
-	#category : #actions,
+	#category : #updating,
 	#'squeak_changestamp' : 'TL 7/8/2024 19:57'
 }
 SPOCUIComponent >> needsActiveDevice [
@@ -90,7 +90,7 @@ SPOCUIComponent >> needsActiveDevice [
 ]
 
 {
-	#category : #actions,
+	#category : #updating,
 	#'squeak_changestamp' : 'VE 7/2/2024 17:54'
 }
 SPOCUIComponent >> needsLogin [
@@ -108,11 +108,15 @@ SPOCUIComponent >> showPopUp [
 ]
 
 {
-	#category : #actions,
-	#'squeak_changestamp' : 'VE 7/9/2024 10:40'
+	#category : #updating,
+	#'squeak_changestamp' : 'TL 7/11/2024 17:45'
 }
 SPOCUIComponent >> updatePlaybackState: aState [
 
-	self isDisabled: (((self needsLogin and: [self app isUserAuthorized]) or: [self needsLogin not]) and:
-		[((self needsActiveDevice and: [aState class ~= SPOCApiEndpointResult]) or: [self needsActiveDevice not])]) not
+	self isDisabled: (((self needsLogin
+				and: [self app isUserAuthorized])
+			or: [self needsLogin not])
+		and: [(self needsActiveDevice
+				and: [aState class ~= SPOCApiEndpointResult])
+			or: [self needsActiveDevice not]]) not
 ]

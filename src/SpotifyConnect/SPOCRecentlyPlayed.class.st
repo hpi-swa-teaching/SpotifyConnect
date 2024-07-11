@@ -12,7 +12,7 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #time,
 	#'squeak_changestamp' : 'VK 6/9/2024 13:53'
 }
 SPOCRecentlyPlayed class >> beforeTimestamp [
@@ -21,7 +21,7 @@ SPOCRecentlyPlayed class >> beforeTimestamp [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #constants,
 	#'squeak_changestamp' : 'VK 6/19/2024 16:32'
 }
 SPOCRecentlyPlayed class >> recentlyPlayedIconPath [
@@ -30,14 +30,16 @@ SPOCRecentlyPlayed class >> recentlyPlayedIconPath [
 ]
 
 {
-	#category : #building,
-	#'squeak_changestamp' : 'TL 7/8/2024 19:39'
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 7/11/2024 17:40'
 }
 SPOCRecentlyPlayed >> attachButton [
 
 	| text |
-	text := SPOCBoxedTextWithIcon newWithText: 'Recently Played' withIcon: self class recentlyPlayedIconPath.
-	self addMorph: (SPOCClickable newUsing: text onClick: [:anEvent | self getRecentlyPlayed])
+	text := SPOCBoxedTextWithIcon newWithText: 'Recently Played'
+			withIcon: self class recentlyPlayedIconPath.
+	self addMorph: (SPOCClickable newUsing: text
+			onClick: [:anEvent | self getRecentlyPlayed])
 ]
 
 {

@@ -13,12 +13,11 @@ Class {
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'TL 6/10/2024 05:12'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:26'
 }
 SPOCPluggableTablePanelSpec class >> fullFrame [
 
-	^ LayoutFrame new
-		topFraction: 0;
+	^ LayoutFrame new topFraction: 0;
 		leftFraction: 0;
 		rightFraction: 1;
 		bottomFraction: 1
@@ -45,10 +44,11 @@ SPOCPluggableTablePanelSpec >> buildWith: aBuilder [
 ]
 
 {
-	#category : #initialization,
-	#'squeak_changestamp' : 'VE 6/23/2024 20:46'
+	#category : #'initialize-release',
+	#'squeak_changestamp' : 'TL 7/11/2024 18:08'
 }
 SPOCPluggableTablePanelSpec >> initialize [
+
 	super initialize.
 	
 	self tableLayoutProperties: TableLayoutProperties new;

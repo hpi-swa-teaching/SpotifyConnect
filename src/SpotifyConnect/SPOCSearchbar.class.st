@@ -44,22 +44,26 @@ SPOCSearchbar class >> searchbarWidth [
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'VE 7/8/2024 17:59'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:15'
 }
 SPOCSearchbar >> attachButtons [
 
 	| trackButton albumsButton playlistsButton |
 	trackButton := self buildButtonWithText: 'Tracks' at: self bottomLeft name: 'track'.
 	trackButton wrappee color: SPOCStyle spotifyGreen.
-	albumsButton := self buildButtonWithText: 'Albums' at: (trackButton topRight + (SPOCStyle defaultMargin @ 0)) name: 'album'.
-	playlistsButton := self buildButtonWithText: 'Playlists' at: (albumsButton topRight + (SPOCStyle defaultMargin @ 0)) name: 'playlist'.
+	albumsButton := self buildButtonWithText: 'Albums'
+			at: (trackButton topRight + (SPOCStyle defaultMargin @ 0))
+			name: 'album'.
+	playlistsButton := self buildButtonWithText: 'Playlists'
+			at: (albumsButton topRight + (SPOCStyle defaultMargin @ 0))
+			name: 'playlist'.
 	self addMorph: trackButton;
 		addMorph: albumsButton;
 		addMorph: playlistsButton
 ]
 
 {
-	#category : #building,
+	#category : #initialization,
 	#'squeak_changestamp' : 'TL 7/8/2024 20:20'
 }
 SPOCSearchbar >> attachInputField [
@@ -78,7 +82,7 @@ SPOCSearchbar >> attachInputField [
 ]
 
 {
-	#category : #building,
+	#category : #initialization,
 	#'squeak_changestamp' : 'VE 7/8/2024 17:56'
 }
 SPOCSearchbar >> attachSearchbar [
@@ -93,42 +97,39 @@ SPOCSearchbar >> attachSearchbar [
 ]
 
 {
-	#category : #building,
-	#'squeak_changestamp' : 'VE 7/8/2024 17:38'
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 7/11/2024 17:22'
 }
 SPOCSearchbar >> buildButtonWithText: aString at: aPosition name: aName [
 
-	^ (SPOCClickable
-		newUsing: (SPOCBoxedText new contents: aString)
-		onClick: [:anEvent | self buttonClicked: anEvent handler])
+	^ (SPOCClickable newUsing: (SPOCBoxedText new contents: aString)
+			onClick: [:anEvent | self buttonClicked: anEvent handler])
 		position: aPosition;
 		name: aName;
 		yourself
 ]
 
 {
-	#category : #building,
-	#'squeak_changestamp' : 'TL 7/8/2024 17:12'
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 7/11/2024 17:21'
 }
 SPOCSearchbar >> buildCircle [
 
-	^ CircleMorph new
-		extent: self class searchbarHeight asPoint;
+	^ CircleMorph new extent: self class searchbarHeight asPoint;
 		borderWidth: 0;
 		color: SPOCStyle spotifyGray;
 		yourself
 ]
 
 {
-	#category : #building,
-	#'squeak_changestamp' : 'TL 7/8/2024 19:15'
+	#category : #initialization,
+	#'squeak_changestamp' : 'TL 7/11/2024 17:22'
 }
 SPOCSearchbar >> buildInputTextField [
 	
 	| builder spec |
 	builder := ToolBuilder default.
-	spec := builder pluggableTextSpec new
-		model: self;
+	spec := builder pluggableTextSpec new model: self;
 		plainTextOnly: true;
 		getText: #input;
 		setText: #search:;
@@ -259,7 +260,7 @@ SPOCSearchbar >> results [
 ]
 
 {
-	#category : #initialization,
+	#category : #accessing,
 	#'squeak_changestamp' : 'RK 6/15/2024 16:42'
 }
 SPOCSearchbar >> results: anOrderedCollection [

@@ -1,5 +1,5 @@
 "
-A decorator to make an morphic UI component clickabe.
+A decorator to make an morphic UI component clickable.
 "
 Class {
 	#name : #SPOCClickable,
@@ -9,7 +9,7 @@ Class {
 		'wrappee'
 	],
 	#category : #'SpotifyConnect-UI',
-	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:29'
 }
 
 {

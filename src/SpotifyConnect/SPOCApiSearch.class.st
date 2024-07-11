@@ -39,11 +39,14 @@ SPOCApiSearch >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 7/7/2024 01:19'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:14'
 }
 SPOCApiSearch >> executeRequest: request withParams: aParameterDictionary [
 
-	request rawUrl: (request rawUrl, '?q=', (aParameterDictionary at: #input), '&type=', (aParameterDictionary at: #type), '&limit=', (aParameterDictionary at: #limit)).
+	request rawUrl: (request rawUrl,
+			'?q=', (aParameterDictionary at: #input),
+			'&type=', (aParameterDictionary at: #type),
+			'&limit=', (aParameterDictionary at: #limit)).
 	^ self client sendRequest: request
 ]
 

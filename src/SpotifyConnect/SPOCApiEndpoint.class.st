@@ -32,15 +32,6 @@ SPOCApiEndpoint class >> cannotRefreshErrorMessage [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'OW 7/7/2024 16:28'
-}
-SPOCApiEndpoint class >> gitRepoName [
-
-	^ 'SpotifyConnect'
-]
-
-{
-	#category : #constants,
 	#'squeak_changestamp' : 'OW 7/7/2024 16:37'
 }
 SPOCApiEndpoint class >> mockdataBasepath [
@@ -133,7 +124,7 @@ SPOCApiEndpoint >> executeRequest: request withParams: aParameterDictionary [
 ]
 
 {
-	#category : #'api-call',
+	#category : #response,
 	#'squeak_changestamp' : 'TL 6/10/2024 03:39'
 }
 SPOCApiEndpoint >> executeTest [
@@ -142,7 +133,7 @@ SPOCApiEndpoint >> executeTest [
 ]
 
 {
-	#category : #initialization,
+	#category : #'initialize-release',
 	#'squeak_changestamp' : 'TL 6/10/2024 03:39'
 }
 SPOCApiEndpoint >> initialize [
@@ -153,13 +144,13 @@ SPOCApiEndpoint >> initialize [
 ]
 
 {
-	#category : #accessing,
-	#'squeak_changestamp' : 'OW 7/7/2024 16:41'
+	#category : #response,
+	#'squeak_changestamp' : 'TL 7/11/2024 20:04'
 }
 SPOCApiEndpoint >> loadMockdataFromAsset: anAsset [
 
-	^ ((GitAssetLoader for: self class gitRepoName)
-		loadPlaintext: self class mockdataBasepath , anAsset) readStream
+	^ ((GitAssetLoader for: SPOCApp gitRepoName)
+		loadPlaintext: self class mockdataBasepath, anAsset) readStream
 ]
 
 {

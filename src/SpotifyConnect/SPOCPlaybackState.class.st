@@ -1,5 +1,5 @@
 "
-I hold the current playback state of the spotify player.
+I hold the current playback state of the Spotify player.
 "
 Class {
 	#name : #SPOCPlaybackState,
@@ -11,7 +11,7 @@ Class {
 		'track'
 	],
 	#category : #SpotifyConnect,
-	#'squeak_changestamp' : 'OW 7/4/2024 12:29'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:35'
 }
 
 {

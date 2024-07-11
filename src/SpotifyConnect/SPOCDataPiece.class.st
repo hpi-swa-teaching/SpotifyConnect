@@ -30,14 +30,12 @@ SPOCDataPiece >> artistsAsString [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 7/11/2024 16:49'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:40'
 }
 SPOCDataPiece >> artistsEqual: anArtistCollection [
 
-	self artists
-		do: [:anArtist | ((anArtistCollection at: (self artists indexOf: anArtist)) equals: anArtist)
-				ifFalse: [^ false]].
-	^ true
+	^ (self artists
+		allSatisfy: [:anArtist | ((anArtistCollection at: (self artists indexOf: anArtist)) equals: anArtist)])
 ]
 
 {
@@ -123,7 +121,7 @@ SPOCDataPiece >> name: aString [
 ]
 
 {
-	#category : #'event handling',
+	#category : #'event-handling',
 	#'squeak_changestamp' : 'RK 6/16/2024 12:10'
 }
 SPOCDataPiece >> onClick: anApp [

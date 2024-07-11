@@ -9,8 +9,8 @@ Class {
 }
 
 {
-	#category : #'as yet unclassified',
-	#'squeak_changestamp' : 'TL 7/8/2024 16:29'
+	#category : #baseline,
+	#'squeak_changestamp' : 'TL 7/11/2024 19:56'
 }
 BaselineOfSpotifyConnect >> baseline: spec [
 
@@ -22,8 +22,7 @@ BaselineOfSpotifyConnect >> baseline: spec [
 				baseline: 'Squot' with: [
 					spec repository: 'github://hpi-swa/Squot:mapper/src'].
                  spec
-                     package: 'SpotifyConnect' with: [spec requires: #('Squot')];
-                     yourself.
+                     package: 'SpotifyConnect' with: [spec requires: #('Squot')].
                  spec
                      group: 'default' with: #('SpotifyConnect');
                      group: 'tests' with: #('SpotifyConnect');

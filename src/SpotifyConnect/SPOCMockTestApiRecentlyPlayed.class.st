@@ -13,7 +13,7 @@ Class {
 }
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'RK 7/7/2024 13:12'
 }
 SPOCMockTestApiRecentlyPlayed >> album [
@@ -47,7 +47,7 @@ SPOCMockTestApiRecentlyPlayed >> apiEndpoint: anObject [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/12/2024 01:58'
 }
 SPOCMockTestApiRecentlyPlayed >> artists [
@@ -59,7 +59,7 @@ SPOCMockTestApiRecentlyPlayed >> artists [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'RK 7/7/2024 13:12'
 }
 SPOCMockTestApiRecentlyPlayed >> setUp [

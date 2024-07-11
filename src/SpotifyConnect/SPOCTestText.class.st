@@ -12,7 +12,7 @@ Class {
 }
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 7/11/2024 12:17'
 }
 SPOCTestText >> setUp [
@@ -22,15 +22,15 @@ SPOCTestText >> setUp [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 7/11/2024 12:19'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:03'
 }
 SPOCTestText >> testConstructor [
 	
-	| text |
-	text := SPOCText newAt: 0 asPoint withText: 'Hello World'.
-	self assert: text class = SPOCText.
-	self assert: text position equals: 0 asPoint.
-	self assert: text contents equals: 'Hello World'
+	| txt |
+	txt := SPOCText newAt: 0 asPoint withText: 'Hello World'.
+	self assert: txt class = SPOCText.
+	self assert: txt position equals: 0 asPoint.
+	self assert: txt contents equals: 'Hello World'
 ]
 
 {

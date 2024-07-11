@@ -28,7 +28,7 @@ SPOCScrollablePanel class >> newWithExtent: anExtent [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #initialization,
 	#'squeak_changestamp' : 'TL 7/8/2024 19:25'
 }
 SPOCScrollablePanel >> buildPanel [
@@ -133,7 +133,7 @@ SPOCScrollablePanel >> spec: anObject [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #updating,
 	#'squeak_changestamp' : 'TL 7/11/2024 14:28'
 }
 SPOCScrollablePanel >> updatePanel: anOrderedCollection [

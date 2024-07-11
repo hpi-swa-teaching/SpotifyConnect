@@ -39,11 +39,13 @@ SPOCApiVolume >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 6/10/2024 03:28'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:14'
 }
 SPOCApiVolume >> executeRequest: request withParams: aParameterDictionary [
 
-	request rawUrl: (request rawUrl, '?volume_percent=', (aParameterDictionary at: #volume_percent), '&device_id=', (aParameterDictionary at: #device_id));
+	request rawUrl: (request rawUrl,
+			'?volume_percent=', (aParameterDictionary at: #volume_percent),
+			'&device_id=', (aParameterDictionary at: #device_id));
 		headerAt: 'Content-Length' put: 0.
 	^ self client sendRequest: request
 ]

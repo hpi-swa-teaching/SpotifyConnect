@@ -27,15 +27,6 @@ SPOCStyle class >> defaultRequestLimit [
 ]
 
 {
-	#category : #constants,
-	#'squeak_changestamp' : 'RK 6/8/2024 23:35'
-}
-SPOCStyle class >> gitRepoName [
-
-	^ 'SpotifyConnect'
-]
-
-{
 	#category : #colors,
 	#'squeak_changestamp' : 'TL 7/8/2024 19:40'
 }
@@ -73,15 +64,14 @@ SPOCStyle class >> spotifyWhite [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'TL 7/8/2024 19:27'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:29'
 }
 SPOCStyle class >> trackWelcome [
 
 	| collection |
 	collection := OrderedCollection new add: (SPOCArtist new name: 'Spotify in Squeak');
 		yourself.
-	^ SPOCTrack new
-		image: (SPOCImage newWithPath: '/assets/squeak-mouse.png');
+	^ SPOCTrack new image: (SPOCImage newWithPath: '/assets/squeak-mouse.png');
 		name: 'Welcome!';
 		artists: collection;
 		duration: 0;

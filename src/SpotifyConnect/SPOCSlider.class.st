@@ -25,11 +25,11 @@ SPOCSlider class >> defaultBarHeight [
 
 {
 	#category : #constants,
-	#'squeak_changestamp' : 'VE 6/6/2024 21:15'
+	#'squeak_changestamp' : 'TL 7/11/2024 18:27'
 }
 SPOCSlider class >> defaultBarWidth [
 	
-	^ SPOCSlider defaultLength - SPOCSlider defaultBarHeight
+	^ self defaultLength - self defaultBarHeight
 ]
 
 {

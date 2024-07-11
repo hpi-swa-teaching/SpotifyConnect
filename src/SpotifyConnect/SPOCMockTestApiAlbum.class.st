@@ -31,7 +31,7 @@ SPOCMockTestApiAlbum >> apiEndpoint: anObject [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/23/2024 16:16'
 }
 SPOCMockTestApiAlbum >> artists [
@@ -43,7 +43,7 @@ SPOCMockTestApiAlbum >> artists [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 7/6/2024 23:58'
 }
 SPOCMockTestApiAlbum >> setUp [

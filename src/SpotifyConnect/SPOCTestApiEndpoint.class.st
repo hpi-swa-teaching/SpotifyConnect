@@ -30,7 +30,7 @@ SPOCTestApiEndpoint >> apiEndpoint: anObject [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 7/11/2024 12:38'
 }
 SPOCTestApiEndpoint >> setUp [

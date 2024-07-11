@@ -15,12 +15,13 @@ Class {
 
 {
 	#category : #initialization,
-	#'squeak_changestamp' : 'TL 7/8/2024 19:39'
+	#'squeak_changestamp' : 'TL 7/11/2024 17:38'
 }
 SPOCUserLogin >> attachButton [
 
-	self text: (SPOCBoxedText new);
-		button: (SPOCClickable newUsing: self text onClick: [:anEvent | self app auth startAuthorization]);
+	self text: SPOCBoxedText new;
+		button: (SPOCClickable newUsing: self text
+				onClick: [:anEvent | self app auth startAuthorization]);
 		addMorph: self button
 ]
 
@@ -77,7 +78,7 @@ SPOCUserLogin >> initialize [
 ]
 
 {
-	#category : #accessing,
+	#category : #updating,
 	#'squeak_changestamp' : 'VE 7/2/2024 19:12'
 }
 SPOCUserLogin >> needsLogin [
@@ -105,22 +106,23 @@ SPOCUserLogin >> text: anObject [
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'VE 5/28/2024 21:33'
+	#'squeak_changestamp' : 'TL 7/11/2024 17:41'
 }
 SPOCUserLogin >> toggleLogin [
 	
 	self buttonLabel: 'Login'.
-	self button onClick: [:anEvent | self app auth startAuthorization]
+	self button
+		onClick: [:anEvent | self app auth startAuthorization]
 ]
 
 {
 	#category : #actions,
-	#'squeak_changestamp' : 'VE 7/2/2024 19:22'
+	#'squeak_changestamp' : 'TL 7/11/2024 17:41'
 }
 SPOCUserLogin >> toggleLogout [
 	
 	self buttonLabel: 'Logout'.
-	self button onClick: [:anEvent |
-			self app logout.
+	self button
+		onClick: [:anEvent | self app logout.
 			self toggleLogin]
 ]

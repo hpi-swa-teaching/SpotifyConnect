@@ -39,7 +39,7 @@ SPOCBoxedTextWithIcon >> initialize [
 ]
 
 {
-	#category : #accessing,
+	#category : #initialization,
 	#'squeak_changestamp' : 'VK 6/19/2024 16:27'
 }
 SPOCBoxedTextWithIcon >> withAssetPath: anAssetPath [

@@ -1,5 +1,5 @@
 "
-Test correct laout with pluggable table spec.
+Tests correct layout with pluggable table spec.
 "
 Class {
 	#name : #SPOCTestPluggableTableSpec,
@@ -9,11 +9,11 @@ Class {
 		'widget'
 	],
 	#category : #'SpotifyConnect-Tests',
-	#'squeak_changestamp' : 'OW 7/4/2024 12:27'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:33'
 }
 
 {
-	#category : #'as yet unclassified',
+	#category : #running,
 	#'squeak_changestamp' : 'TL 7/11/2024 12:28'
 }
 SPOCTestPluggableTableSpec >> setUp [
@@ -41,7 +41,7 @@ SPOCTestPluggableTableSpec >> spec: anObject [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #testing,
 	#'squeak_changestamp' : 'TL 7/11/2024 12:28'
 }
 SPOCTestPluggableTableSpec >> testBuild [
@@ -50,7 +50,7 @@ SPOCTestPluggableTableSpec >> testBuild [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #testing,
 	#'squeak_changestamp' : 'TL 7/11/2024 12:30'
 }
 SPOCTestPluggableTableSpec >> testDefaultWidgetResizing [
@@ -60,7 +60,7 @@ SPOCTestPluggableTableSpec >> testDefaultWidgetResizing [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #testing,
 	#'squeak_changestamp' : 'TL 7/11/2024 12:29'
 }
 SPOCTestPluggableTableSpec >> testFullFrame [
@@ -75,7 +75,7 @@ SPOCTestPluggableTableSpec >> testFullFrame [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #testing,
 	#'squeak_changestamp' : 'TL 7/11/2024 12:29'
 }
 SPOCTestPluggableTableSpec >> testTableLayout [
@@ -84,7 +84,7 @@ SPOCTestPluggableTableSpec >> testTableLayout [
 ]
 
 {
-	#category : #'as yet unclassified',
+	#category : #testing,
 	#'squeak_changestamp' : 'TL 7/11/2024 12:35'
 }
 SPOCTestPluggableTableSpec >> testWidgetResizing [

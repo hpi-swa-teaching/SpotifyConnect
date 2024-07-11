@@ -28,11 +28,13 @@ SPOCApiRecentlyPlayed >> endpointMethod [
 
 {
 	#category : #'api-call',
-	#'squeak_changestamp' : 'TL 7/7/2024 01:20'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:13'
 }
 SPOCApiRecentlyPlayed >> executeRequest: request withParams: aParameterDictionary [
 
-	request rawUrl: (request rawUrl, '?limit=', (aParameterDictionary at: #limit), '&before=', (aParameterDictionary at: #before)).
+	request rawUrl: (request rawUrl,
+			'?limit=', (aParameterDictionary at: #limit),
+			'&before=', (aParameterDictionary at: #before)).
 	^ self client sendRequest: request
 ]
 

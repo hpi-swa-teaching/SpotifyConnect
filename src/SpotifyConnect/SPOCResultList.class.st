@@ -16,7 +16,7 @@ Class {
 }
 
 {
-	#category : #building,
+	#category : #initialization,
 	#'squeak_changestamp' : 'VE 7/8/2024 18:55'
 }
 SPOCResultList >> attachResultList [
@@ -27,7 +27,7 @@ SPOCResultList >> attachResultList [
 ]
 
 {
-	#category : #building,
+	#category : #initialization,
 	#'squeak_changestamp' : 'TL 7/8/2024 20:07'
 }
 SPOCResultList >> attachScrollablePanel [
@@ -39,7 +39,7 @@ SPOCResultList >> attachScrollablePanel [
 ]
 
 {
-	#category : #building,
+	#category : #initialization,
 	#'squeak_changestamp' : 'TL 7/8/2024 19:32'
 }
 SPOCResultList >> buildTitle [
@@ -218,7 +218,7 @@ SPOCResultList >> titleMorph: aSPOCBoldText [
 
 {
 	#category : #updating,
-	#'squeak_changestamp' : 'TL 7/11/2024 16:46'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:53'
 }
 SPOCResultList >> updateItems [
 	
@@ -228,10 +228,12 @@ SPOCResultList >> updateItems [
 		do: [:aResult | 
 			| item clickable |
 			item := SPOCResultListItem newWith: aResult.
-			clickable := (SPOCClickable newUsing: item onClick: [:anEvent | self onItemClicked: item])
+			clickable := (SPOCClickable newUsing: item
+					onClick: [:anEvent | self onItemClicked: item])
 				layoutPolicy: TableLayout new;
 				hResizing: #spaceFill;
-				vResizing: #shrinkWrap.
+				vResizing: #shrinkWrap;
+				yourself.
 			self items add: clickable].
 	self app updatePlaybackState
 ]

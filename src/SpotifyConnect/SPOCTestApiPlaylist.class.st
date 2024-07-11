@@ -9,7 +9,7 @@ Class {
 }
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/24/2024 04:53'
 }
 SPOCTestApiPlaylist >> setUp [

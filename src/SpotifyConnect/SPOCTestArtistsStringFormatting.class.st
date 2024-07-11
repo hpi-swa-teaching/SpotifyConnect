@@ -1,5 +1,5 @@
 "
-Test the formatting of artits strings.
+Tests the formatting of artist strings.
 "
 Class {
 	#name : #SPOCTestArtistsStringFormatting,
@@ -9,7 +9,7 @@ Class {
 		'artistsString'
 	],
 	#category : #'SpotifyConnect-Tests',
-	#'squeak_changestamp' : 'OW 7/4/2024 12:25'
+	#'squeak_changestamp' : 'TL 7/11/2024 19:33'
 }
 
 {
@@ -31,7 +31,7 @@ SPOCTestArtistsStringFormatting >> album: anObject [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/23/2024 14:51'
 }
 SPOCTestArtistsStringFormatting >> artists [
@@ -69,7 +69,7 @@ SPOCTestArtistsStringFormatting >> artistsString: anObject [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'TL 6/23/2024 14:59'
 }
 SPOCTestArtistsStringFormatting >> setUp [
@@ -79,7 +79,7 @@ SPOCTestArtistsStringFormatting >> setUp [
 ]
 
 {
-	#category : #setup,
+	#category : #running,
 	#'squeak_changestamp' : 'RK 7/7/2024 13:13'
 }
 SPOCTestArtistsStringFormatting >> setUpAlbum [
