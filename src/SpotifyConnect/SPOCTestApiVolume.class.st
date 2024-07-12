@@ -37,7 +37,7 @@ SPOCTestApiVolume >> testApiVolumeExecute [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/24/2024 02:41'
+	#'squeak_changestamp' : 'TL 7/12/2024 16:27'
 }
 SPOCTestApiVolume >> testChangeVolumeTo [
 
@@ -46,6 +46,7 @@ SPOCTestApiVolume >> testChangeVolumeTo [
 	device supportsVolume
 		ifTrue: [newVolume := 70.
 			self apiEndpoint changeVolumeTo: newVolume on: device id.
+			(Delay forSeconds: 0.6) wait.
 			self assert: self getPlaybackState device volume = newVolume]
 		ifFalse: [self assert: true]
 ]

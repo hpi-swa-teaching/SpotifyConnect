@@ -33,13 +33,14 @@ SPOCTestApiPrevious >> testApiPreviousExecute [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'VE 7/9/2024 11:32'
+	#'squeak_changestamp' : 'TL 7/12/2024 16:26'
 }
 SPOCTestApiPrevious >> testSkipToPreviousOn [
 
 	| oldPlaybackState newPlaybackState |
 	oldPlaybackState := self getPlaybackState.
 	self apiEndpoint skipToPreviousOn: oldPlaybackState device id.
+	(Delay forSeconds: 0.6) wait.
 	newPlaybackState := self getPlaybackState.
 	self assert: newPlaybackState track id ~= oldPlaybackState track id.
 	self assert: newPlaybackState isPlaying

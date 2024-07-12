@@ -29,12 +29,13 @@ SPOCTestPlay >> testPlayOn [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/24/2024 02:30'
+	#'squeak_changestamp' : 'TL 7/12/2024 16:28'
 }
 SPOCTestPlay >> testPlayTrackOn [
 
 	| playbackState |
 	self apiEndpoint playTrack: '4PTG3Z6ehGkBFwjybzWkR8' on: self getPlaybackState device id.
+	(Delay forSeconds: 0.6) wait.
 	playbackState := self getPlaybackState.
 	self assert: playbackState track id = '4PTG3Z6ehGkBFwjybzWkR8'.
 	self assert: playbackState isPlaying
