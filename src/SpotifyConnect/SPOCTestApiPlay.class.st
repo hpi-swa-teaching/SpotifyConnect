@@ -80,3 +80,36 @@ SPOCTestApiPlay >> testApiPlayTrackwithPlaylistExecute [
 	res := self apiEndpoint execute: dict.
 	self assert: res response code = 204
 ]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 7/12/2024 16:40'
+}
+SPOCTestApiPlay >> testPlayTrackOn [
+
+	| playbackState |
+	self apiEndpoint playTrack: '4PTG3Z6ehGkBFwjybzWkR8' on: self getPlaybackState device id.
+	(Delay forSeconds: 0.6) wait.
+	playbackState := self getPlaybackState.
+	self assert: playbackState track id = '4PTG3Z6ehGkBFwjybzWkR8'.
+	self assert: playbackState isPlaying
+
+]
+
+{
+	#category : #testing,
+	#'squeak_changestamp' : 'TL 7/12/2024 16:41'
+}
+SPOCTestApiPlay >> testPlayTrackWithAlbumOn [
+
+	| playbackState |
+	self apiEndpoint playTrack: '4PTG3Z6ehGkBFwjybzWkR8'
+			withAlbum: '6eUW0wxWtzkFdaEFsTJto6'
+			on: self getPlaybackState device id.
+	(Delay forSeconds: 0.6) wait.
+	playbackState := self getPlaybackState.
+	self assert: playbackState track id = '4PTG3Z6ehGkBFwjybzWkR8'.
+	self assert: playbackState track album id = '6eUW0wxWtzkFdaEFsTJto6'.
+	self assert: playbackState isPlaying
+
+]

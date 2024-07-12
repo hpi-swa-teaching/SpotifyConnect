@@ -10,7 +10,7 @@ Class {
 
 {
 	#category : #running,
-	#'squeak_changestamp' : 'TL 6/24/2024 03:21'
+	#'squeak_changestamp' : 'TL 7/12/2024 16:45'
 }
 SPOCTestApiPrevious >> setUp [
 

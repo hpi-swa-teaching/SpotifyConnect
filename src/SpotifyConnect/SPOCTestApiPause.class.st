@@ -37,10 +37,11 @@ SPOCTestApiPause >> testApiPauseExecute [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/24/2024 01:53'
+	#'squeak_changestamp' : 'TL 7/12/2024 16:39'
 }
 SPOCTestApiPause >> testPauseOn [
 
 	self apiEndpoint pauseOn: self getPlaybackState device id.
+	(Delay forSeconds: 0.6) wait.
 	self assert: self getPlaybackState isPlaying not
 ]

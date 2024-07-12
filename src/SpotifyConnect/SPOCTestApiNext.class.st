@@ -10,7 +10,7 @@ Class {
 
 {
 	#category : #running,
-	#'squeak_changestamp' : 'TL 7/12/2024 16:18'
+	#'squeak_changestamp' : 'TL 7/12/2024 16:45'
 }
 SPOCTestApiNext >> setUp [
 
@@ -33,14 +33,15 @@ SPOCTestApiNext >> testApiNextExecute [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/24/2024 02:08'
+	#'squeak_changestamp' : 'TL 7/12/2024 16:35'
 }
 SPOCTestApiNext >> testSkipToNextOn [
 
 	| oldPlaybackState newPlaybackState |
 	oldPlaybackState := self getPlaybackState.
 	self apiEndpoint skipToNextOn: oldPlaybackState device id.
+	(Delay forSeconds: 0.6) wait.
 	newPlaybackState := self getPlaybackState.
-	"self assert: newPlaybackState track id ~= oldPlaybackState track id."
+	self assert: newPlaybackState track id ~= oldPlaybackState track id.
 	self assert: newPlaybackState isPlaying
 ]

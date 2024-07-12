@@ -33,12 +33,13 @@ SPOCTestApiSwitchDevice >> testApiSwitchDeviceExecute [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'TL 6/24/2024 02:05'
+	#'squeak_changestamp' : 'TL 7/12/2024 16:39'
 }
 SPOCTestApiSwitchDevice >> testSwitchDeviceTo [
 
 	| newDeviceID |
 	newDeviceID := self getPlaybackState device id.
 	self apiEndpoint switchDeviceTo: newDeviceID.
+	(Delay forSeconds: 0.6) wait.
 	self assert: self getPlaybackState device id = newDeviceID
 ]
