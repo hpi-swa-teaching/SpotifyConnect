@@ -540,14 +540,14 @@ SPOCApp >> setUpTopPanelComponents [
 
 {
 	#category : #'initialize-release',
-	#'squeak_changestamp' : 'VE 7/11/2024 22:23'
+	#'squeak_changestamp' : 'TL 7/12/2024 15:57'
 }
 SPOCApp >> setUpUserLogin [
 
 	self userLogin: (SPOCUserLogin new app: self).
 	self auth registerSuccessCallback: [self userLogin toggleLogout.
 		self updatePlaybackState.
-		self showPopUpFor: self currentlyPlaying]
+		self showPopUpFor: self userLogin]
 
 
 ]
