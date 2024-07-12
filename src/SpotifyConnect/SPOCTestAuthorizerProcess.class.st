@@ -53,12 +53,12 @@ SPOCTestAuthorizerProcess >> testCallbackErrors [
 
 {
 	#category : #testing,
-	#'squeak_changestamp' : 'VE 7/11/2024 22:26'
+	#'squeak_changestamp' : 'TL 7/12/2024 16:02'
 }
 SPOCTestAuthorizerProcess >> testStartAuthorization [
 	
-	| entryPoints |
-	self auth setupCallbackService. 
-	entryPoints := WebServer default entryPoints.
-	self assert: ((entryPoints at: (SPOCAuthorizer redirectRoute)) isNil not)
+	| entrypoints |
+	self auth setupCallbackService.
+	entrypoints := WebServer default instVarNamed: 'entryPoints'.
+	self assert: ((entrypoints at: (SPOCAuthorizer redirectRoute)) isNil not)
 ]
