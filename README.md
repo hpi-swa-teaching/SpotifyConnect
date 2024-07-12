@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/hpi-swa-teaching/SpotifyConnect/workflows/CI/badge.svg)](https://github.com/hpi-swa-teaching/SpotifyConnect/actions)
 ![Squeakversion](https://img.shields.io/badge/Squeak%20Version-6.0-green)
-![Coverage](https://img.shields.io/badge/Coverage-84-green)
+![Coverage](https://img.shields.io/badge/Coverage-82-green)
 
 ## Features
 - Anmelden mit einem Spotify Konto
@@ -20,8 +20,9 @@
 - Anwendung über das Apps Menü in Squeak öffnen
 
 ## Voraussetzungen
-- Für die meisten Features erfordert Spotify einen Premium Account
-- Es muss sichergestellt sein, dass ein Spotify-Gerät des Accounts aktiv ist, da Spotify-Connect eine Wiedergabe steuert jedoch nicht selber die Musik streamt. Dafür kann Spotify auf Desktop, Mobiltelefon, o.Ä. geöffnet und einen Track angespielt werden.
+- Für die meisten Features erfordert Spotify einen Premium Account.
+- Es muss ein Spotify Developer Account angelegt werden, wie in der Setup Anleitung beschrieben.
+- Es muss sichergestellt sein, dass ein Spotify-Gerät des Accounts aktiv ist, da Spotify-Connect eine Wiedergabe steuert jedoch nicht selber die Musik streamt. Dafür kann Spotify auf Desktop, Mobiltelefon, o.Ä. geöffnet werden. Anschließend kann dort auch einen Track angespielt werden oder in der Squeak App unter `Devices` eins ausgewählt werden.
 
 ## Setup Anleitung
 ### Spotify Developer Account anlegen
@@ -52,12 +53,12 @@ MCHttpRepository
   password: ''
 ```
 
-Neues Repository ```ExternalWebBrowser``` auswählen und ```Open``` klicken. Die neuste Version wählen und ```Load```.
+Neues Repository ```ExternalWebBrowser``` auswählen (sollte bereits vorausgewählt sein) und ```Open``` klicken. Die neuste Version wählen und ```Load```.
 
-**Wichtig**: Squeak Image neustarten!
+**Wichtig**: Squeak Image neustarten (schließen und neu öffnen)!
 
 ### Projekt clonen oder `.sar`-Datei installieren
-Entweder im Git Browser dieses Repository clonen oder eine `.sar`-Datei via Drag-and-Drop oder mittels `Tools` und `File List` installieren.
+Entweder über den Git Browser dieses Repository clonen oder eine `.sar`-Datei via Drag-and-Drop oder mittels `Tools` und `File List` installieren.
 
 ### App öffnen und Anmelden
 
